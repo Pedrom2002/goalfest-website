@@ -1,6 +1,80 @@
 {
-  "site": {
-    "title": "Fanzone Lisboa 2026",
-    "description": "O maior fanzone do Mundial 2026 em Lisboa"
+  "nav": {
+    "jogos": "Jogos",
+    "venue": "Local",
+    "galeria": "Galeria",
+    "faq": "FAQ",
+    "bilhetes": "Bilhetes"
+  },
+  "hero": {
+    "subtitle": "Lisboa · Mundial 2026",
+    "cta_tickets": "Reservar Lugar",
+    "cta_matches": "Ver Jogos",
+    "countdown_days": "Dias",
+    "countdown_hours": "Horas",
+    "countdown_minutes": "Min",
+    "countdown_seconds": "Seg"
+  },
+  "jogos": {
+    "title": "Calendário de Jogos",
+    "filter_all": "Todos",
+    "filter_grupos": "Grupos",
+    "filter_eliminatorias": "Eliminatórias",
+    "filter_portugal": "Portugal",
+    "live_badge": "AO VIVO",
+    "phase_grupo": "Fase de Grupos",
+    "phase_oitavos": "Oitavos de Final",
+    "phase_quartos": "Quartos de Final",
+    "phase_meias": "Meias-Finais",
+    "phase_final": "Final"
+  },
+  "venue": {
+    "title": "O Local",
+    "address_label": "Morada",
+    "address": "Parque das Nações, Lisboa",
+    "capacity_label": "Capacidade",
+    "capacity": "500 adeptos",
+    "includes_label": "Incluído",
+    "includes": ["Ecrãs gigantes", "Food trucks", "Bar", "Zonas cobertas"],
+    "transport_title": "Transportes",
+    "transport": "Metro linha vermelha — Estação Oriente. Autocarros 728 e 759.",
+    "parking_title": "Estacionamento",
+    "parking": "Parque de estacionamento Vasco da Gama (5 min a pé).",
+    "access_title": "Acessibilidade",
+    "access": "Espaço totalmente acessível. Zonas reservadas para mobilidade reduzida.",
+    "hours_title": "Horários",
+    "hours": "Portas abrem 1h antes de cada jogo."
+  },
+  "galeria": {
+    "title": "Galeria"
+  },
+  "sponsors": {
+    "title": "Patrocinadores",
+    "principal_label": "Patrocinador Principal",
+    "partners_label": "Parceiros"
+  },
+  "footer": {
+    "copyright": "© 2026 Fanzone Lisboa. Todos os direitos reservados."
+  },
+  "bilhetes": {
+    "title": "Reservar Lugar",
+    "subtitle": "Garante o teu lugar na maior fanzone de Lisboa",
+    "name_label": "Nome completo",
+    "email_label": "Email",
+    "quantity_label": "Número de bilhetes",
+    "matches_label": "Jogo(s) pretendido(s)",
+    "message_label": "Mensagem (opcional)",
+    "submit": "Reservar",
+    "submitting": "A enviar...",
+    "success_title": "Reserva recebida!",
+    "success_msg": "Receberás uma confirmação por email em breve."
+  },
+  "faq": {
+    "title": "Perguntas Frequentes",
+    "category_entradas": "Entradas",
+    "category_local": "Local",
+    "category_comida": "Comida & Bebida",
+    "category_regras": "Regras",
+    "category_acessibilidade": "Acessibilidade"
   }
 }

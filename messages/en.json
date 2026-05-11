@@ -1,6 +1,80 @@
 {
-  "site": {
-    "title": "Fanzone Lisboa 2026",
-    "description": "The biggest World Cup 2026 fanzone in Lisbon"
+  "nav": {
+    "jogos": "Matches",
+    "venue": "Venue",
+    "galeria": "Gallery",
+    "faq": "FAQ",
+    "bilhetes": "Tickets"
+  },
+  "hero": {
+    "subtitle": "Lisbon · World Cup 2026",
+    "cta_tickets": "Reserve a Spot",
+    "cta_matches": "See Matches",
+    "countdown_days": "Days",
+    "countdown_hours": "Hours",
+    "countdown_minutes": "Min",
+    "countdown_seconds": "Sec"
+  },
+  "jogos": {
+    "title": "Match Schedule",
+    "filter_all": "All",
+    "filter_grupos": "Groups",
+    "filter_eliminatorias": "Knockouts",
+    "filter_portugal": "Portugal",
+    "live_badge": "LIVE",
+    "phase_grupo": "Group Stage",
+    "phase_oitavos": "Round of 16",
+    "phase_quartos": "Quarter-Finals",
+    "phase_meias": "Semi-Finals",
+    "phase_final": "Final"
+  },
+  "venue": {
+    "title": "The Venue",
+    "address_label": "Address",
+    "address": "Parque das Nações, Lisbon",
+    "capacity_label": "Capacity",
+    "capacity": "500 fans",
+    "includes_label": "Included",
+    "includes": ["Giant screens", "Food trucks", "Bar", "Covered areas"],
+    "transport_title": "Transport",
+    "transport": "Red metro line — Oriente Station. Buses 728 and 759.",
+    "parking_title": "Parking",
+    "parking": "Vasco da Gama car park (5 min walk).",
+    "access_title": "Accessibility",
+    "access": "Fully accessible venue. Reserved areas for reduced mobility.",
+    "hours_title": "Hours",
+    "hours": "Doors open 1h before each match."
+  },
+  "galeria": {
+    "title": "Gallery"
+  },
+  "sponsors": {
+    "title": "Sponsors",
+    "principal_label": "Main Sponsor",
+    "partners_label": "Partners"
+  },
+  "footer": {
+    "copyright": "© 2026 Fanzone Lisboa. All rights reserved."
+  },
+  "bilhetes": {
+    "title": "Reserve a Spot",
+    "subtitle": "Secure your place at Lisbon's biggest fanzone",
+    "name_label": "Full name",
+    "email_label": "Email",
+    "quantity_label": "Number of tickets",
+    "matches_label": "Match(es) you want to attend",
+    "message_label": "Message (optional)",
+    "submit": "Reserve",
+    "submitting": "Sending...",
+    "success_title": "Reservation received!",
+    "success_msg": "You will receive a confirmation email shortly."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "category_entradas": "Tickets",
+    "category_local": "Venue",
+    "category_comida": "Food & Drink",
+    "category_regras": "Rules",
+    "category_acessibilidade": "Accessibility"
   }
 }
