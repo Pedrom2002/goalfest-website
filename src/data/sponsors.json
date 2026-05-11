@@ -1,0 +1,10 @@
+{
+  "principal": [
+    { "id": "s1", "name": "Patrocinador Principal", "logo": null }
+  ],
+  "parceiros": [
+    { "id": "s2", "name": "Parceiro A", "logo": null },
+    { "id": "s3", "name": "Parceiro B", "logo": null },
+    { "id": "s4", "name": "Parceiro C", "logo": null }
+  ]
+}

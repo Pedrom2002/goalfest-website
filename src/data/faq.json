@@ -1,0 +1,74 @@
+[
+  {
+    "category": "entradas",
+    "categoryEn": "tickets",
+    "items": [
+      {
+        "q": "Como posso reservar um lugar?",
+        "qEn": "How do I reserve a spot?",
+        "a": "Preenche o formulário na página Bilhetes. Receberás uma confirmação por email.",
+        "aEn": "Fill out the form on the Tickets page. You will receive a confirmation by email."
+      },
+      {
+        "q": "A entrada é gratuita?",
+        "qEn": "Is entry free?",
+        "a": "A entrada é livre mas a reserva é obrigatória para garantir lugar.",
+        "aEn": "Entry is free but reservation is required to guarantee your spot."
+      }
+    ]
+  },
+  {
+    "category": "local",
+    "categoryEn": "venue",
+    "items": [
+      {
+        "q": "Onde fica a Fanzone?",
+        "qEn": "Where is the Fanzone?",
+        "a": "No Parque das Nações, Lisboa. Morada exacta a confirmar.",
+        "aEn": "At Parque das Nações, Lisbon. Exact address to be confirmed."
+      },
+      {
+        "q": "Que transportes posso usar?",
+        "qEn": "What transport can I use?",
+        "a": "Metro linha vermelha, estação Oriente. Autocarros 728 e 759.",
+        "aEn": "Red metro line, Oriente station. Buses 728 and 759."
+      }
+    ]
+  },
+  {
+    "category": "comida",
+    "categoryEn": "food",
+    "items": [
+      {
+        "q": "Há comida e bebida disponível?",
+        "qEn": "Is food and drink available?",
+        "a": "Sim, existem food trucks e bar no local durante todos os jogos.",
+        "aEn": "Yes, there are food trucks and a bar on site during all matches."
+      }
+    ]
+  },
+  {
+    "category": "regras",
+    "categoryEn": "rules",
+    "items": [
+      {
+        "q": "Posso entrar com crianças?",
+        "qEn": "Can I bring children?",
+        "a": "Sim, crianças são bem-vindas. Menores de 16 anos devem ser acompanhados.",
+        "aEn": "Yes, children are welcome. Under 16s must be accompanied by an adult."
+      }
+    ]
+  },
+  {
+    "category": "acessibilidade",
+    "categoryEn": "accessibility",
+    "items": [
+      {
+        "q": "O espaço é acessível a cadeiras de rodas?",
+        "qEn": "Is the venue wheelchair accessible?",
+        "a": "Sim, o espaço tem zonas reservadas e rampas de acesso.",
+        "aEn": "Yes, the venue has reserved areas and access ramps."
+      }
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "m1",
+    "home": { "name": "Portugal", "nameEn": "Portugal", "flag": "🇵🇹" },
+    "away": { "name": "Brasil", "nameEn": "Brazil", "flag": "🇧🇷" },
+    "date": "2026-06-17T19:00:00",
+    "phase": "grupo",
+    "status": "upcoming"
+  },
+  {
+    "id": "m2",
+    "home": { "name": "Espanha", "nameEn": "Spain", "flag": "🇪🇸" },
+    "away": { "name": "França", "nameEn": "France", "flag": "🇫🇷" },
+    "date": "2026-06-20T16:00:00",
+    "phase": "grupo",
+    "status": "upcoming"
+  },
+  {
+    "id": "m3",
+    "home": { "name": "Argentina", "nameEn": "Argentina", "flag": "🇦🇷" },
+    "away": { "name": "Alemanha", "nameEn": "Germany", "flag": "🇩🇪" },
+    "date": "2026-06-22T19:00:00",
+    "phase": "grupo",
+    "status": "upcoming"
+  },
+  {
+    "id": "m4",
+    "home": { "name": "Portugal", "nameEn": "Portugal", "flag": "🇵🇹" },
+    "away": { "name": "Inglaterra", "nameEn": "England", "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
+    "date": "2026-06-25T19:00:00",
+    "phase": "grupo",
+    "status": "upcoming"
+  },
+  {
+    "id": "m5",
+    "home": { "name": "TBD", "nameEn": "TBD", "flag": "🏆" },
+    "away": { "name": "TBD", "nameEn": "TBD", "flag": "🏆" },
+    "date": "2026-07-04T19:00:00",
+    "phase": "oitavos",
+    "status": "upcoming"
+  },
+  {
+    "id": "m6",
+    "home": { "name": "TBD", "nameEn": "TBD", "flag": "🏆" },
+    "away": { "name": "TBD", "nameEn": "TBD", "flag": "🏆" },
+    "date": "2026-07-14T19:00:00",
+    "phase": "final",
+    "status": "upcoming"
+  }
+]
