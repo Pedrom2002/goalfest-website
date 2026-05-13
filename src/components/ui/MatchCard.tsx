@@ -1,4 +1,7 @@
+'use client'
+
 import { useTranslations, useLocale } from 'next-intl'
+import { useState, useEffect } from 'react'
 import type { Match } from '@/types'
 import { formatMatchDate } from '@/lib/utils'
 
@@ -15,10 +18,12 @@ export default function MatchCard({ match }: { match: Match }) {
   const locale = useLocale()
   const isLive = match.status === 'live'
   const isFinished = match.status === 'finished'
+  const [dateStr, setDateStr] = useState('')
+  useEffect(() => setDateStr(formatMatchDate(match.date, locale)), [match.date, locale])
 
   return (
     <div
-      className={`bg-bg-surface border border-white/10 rounded-xl p-5 flex flex-col gap-4 transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(255,215,0,0.15)] hover:border-gold/30 ${
+      className={`bg-bg-surface border border-white/14 rounded-xl p-5 flex flex-col gap-4 transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(0,200,81,0.25)] hover:border-green-pt/50 ${
         isFinished ? 'opacity-50' : ''
       }`}
     >
@@ -49,7 +54,7 @@ export default function MatchCard({ match }: { match: Match }) {
       </div>
 
       <p className="text-text-muted text-xs text-center">
-        {formatMatchDate(match.date, locale)}
+        {dateStr}
       </p>
     </div>
   )

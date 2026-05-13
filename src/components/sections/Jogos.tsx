@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import type { Match } from '@/types'
 import MatchCard from '@/components/ui/MatchCard'
 
@@ -35,7 +35,8 @@ export default function Jogos({ matches }: { matches: Match[] }) {
   const filtered = applyFilter(matches, active)
 
   return (
-    <section id="jogos" className="py-24 px-4 max-w-7xl mx-auto">
+    <section id="jogos" className="relative py-24 px-4" style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,200,81,0.07) 0%, transparent 60%)' }}>
+      <div className="max-w-7xl mx-auto">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -51,29 +52,40 @@ export default function Jogos({ matches }: { matches: Match[] }) {
           <button
             key={f}
             onClick={() => setActive(f)}
-            className={`px-5 py-2 rounded-full text-sm font-semibold uppercase tracking-wide transition-all duration-200 ${
+            className={`relative px-5 py-2 rounded-full text-sm font-semibold uppercase tracking-wide transition-colors duration-200 ${
               active === f
-                ? 'bg-gold text-bg-primary'
+                ? 'text-bg-primary'
                 : 'bg-bg-surface text-text-muted hover:text-gold border border-white/10'
             }`}
           >
-            {t(filterKeys[f])}
+            {active === f && (
+              <motion.span
+                layoutId="filter-pill"
+                className="absolute inset-0 bg-green-pt rounded-full"
+                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+              />
+            )}
+            <span className="relative z-10">{t(filterKeys[f])}</span>
           </button>
         ))}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filtered.map((match, i) => (
-          <motion.div
-            key={match.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-          >
-            <MatchCard match={match} />
-          </motion.div>
-        ))}
+        <AnimatePresence mode="popLayout">
+          {filtered.map((match, i) => (
+            <motion.div
+              key={match.id}
+              layout
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.35, delay: i * 0.06 }}
+            >
+              <MatchCard match={match} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
       </div>
     </section>
   )

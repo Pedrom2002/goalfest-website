@@ -4,14 +4,16 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
+import BackgroundFX from '@/components/ui/BackgroundFX'
 import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald' })
 
 export const metadata: Metadata = {
-  title: 'Fanzone Lisboa 2026',
+  title: 'Goalfest Lisboa 2026',
   description: 'A maior fanzone de Lisboa para o Mundial 2026',
+  viewport: 'width=device-width, initial-scale=1',
 }
 
 export function generateStaticParams() {
@@ -34,6 +36,7 @@ export default async function LocaleLayout({
     <html lang={locale} className={`${inter.variable} ${oswald.variable}`}>
       <body className="bg-bg-primary text-text-primary antialiased">
         <NextIntlClientProvider messages={messages}>
+          <BackgroundFX />
           {children}
         </NextIntlClientProvider>
       </body>

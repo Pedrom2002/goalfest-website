@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-primary: #0d0d0d;
-  --color-bg-surface: #1a1a1a;
+  --color-bg-primary: #0a0a0a;
+  --color-bg-surface: #141a14;
   --color-gold: #FFD700;
   --color-red-pt: #C8102E;
-  --color-green-pt: #006600;
-  --color-text-primary: #F5F5F5;
-  --color-text-muted: #9CA3AF;
+  --color-green-pt: #00c851;
+  --color-text-primary: #F7FFF7;
+  --color-text-muted: #a8d4a8;
 
   --font-sans: var(--font-inter), sans-serif;
   --font-display: var(--font-oswald), sans-serif;
@@ -15,6 +15,12 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  background: linear-gradient(160deg, #0a0a0a 0%, #0a0a0a 35%, #0f2a0f 65%, #1a4a1a 100%);
+  background-attachment: fixed;
 }
 
 * {

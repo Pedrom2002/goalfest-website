@@ -35,7 +35,7 @@ function FlipUnit({ value, label }: { value: number; label: string }) {
             animate={{ rotateX: 0, opacity: 1 }}
             exit={{ rotateX: 90, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-0 flex items-center justify-center bg-bg-surface border border-gold/20 rounded-lg font-display text-3xl md:text-5xl font-bold text-gold"
+            className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg font-display text-3xl md:text-5xl font-bold text-green-pt"
           >
             {display}
           </motion.div>
@@ -48,21 +48,33 @@ function FlipUnit({ value, label }: { value: number; label: string }) {
 
 export default function CountdownTimer() {
   const t = useTranslations('hero')
-  const [time, setTime] = useState<TimeLeft>(calcTimeLeft())
+  const [time, setTime] = useState<TimeLeft | null>(null)
 
   useEffect(() => {
+    setTime(calcTimeLeft())
     const id = setInterval(() => setTime(calcTimeLeft()), 1000)
     return () => clearInterval(id)
   }, [])
 
+  if (!time) return (
+    <div className="flex items-center gap-4 md:gap-6">
+      {['--', '--', '--', '--'].map((v, i) => (
+        <div key={i} className="flex flex-col items-center gap-1">
+          <div className="w-16 h-20 md:w-24 md:h-28 flex items-center justify-center bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg font-display text-3xl md:text-5xl font-bold text-gold">{v}</div>
+          {i < 3 && <span />}
+        </div>
+      ))}
+    </div>
+  )
+
   return (
     <div className="flex items-center gap-4 md:gap-6">
       <FlipUnit value={time.days} label={t('countdown_days')} />
-      <span className="text-gold text-3xl font-bold mb-4">:</span>
+      <span className="text-green-pt text-3xl font-bold mb-4">:</span>
       <FlipUnit value={time.hours} label={t('countdown_hours')} />
-      <span className="text-gold text-3xl font-bold mb-4">:</span>
+      <span className="text-green-pt text-3xl font-bold mb-4">:</span>
       <FlipUnit value={time.minutes} label={t('countdown_minutes')} />
-      <span className="text-gold text-3xl font-bold mb-4">:</span>
+      <span className="text-green-pt text-3xl font-bold mb-4">:</span>
       <FlipUnit value={time.seconds} label={t('countdown_seconds')} />
     </div>
   )

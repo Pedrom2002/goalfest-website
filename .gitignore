@@ -44,5 +44,11 @@ next-env.d.ts
 # claude code
 .claude/
 
+# playwright mcp artifacts
+.playwright-mcp/
+goalfest-compare.png
+
 # superpowers
 .superpowers/
+
+.vercel

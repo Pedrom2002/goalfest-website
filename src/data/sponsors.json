@@ -1,10 +1,11 @@
 {
   "principal": [
-    { "id": "s1", "name": "Patrocinador Principal", "logo": null }
+    { "id": "s1", "name": "ActivoBank", "logo": "/patrocinadores/logo_activobank.svg", "url": "https://www.activobank.pt" },
+    { "id": "s2", "name": "Bolt", "logo": "/patrocinadores/Bolt_logo.png", "url": "https://bolt.eu" },
+    { "id": "s3", "name": "Carris", "logo": "/patrocinadores/Carris_Logo_PNG.png", "url": "https://www.carris.pt" }
   ],
   "parceiros": [
-    { "id": "s2", "name": "Parceiro A", "logo": null },
-    { "id": "s3", "name": "Parceiro B", "logo": null },
-    { "id": "s4", "name": "Parceiro C", "logo": null }
+    { "id": "p1", "name": "Junta de Freguesia dos Olivais", "logo": "/parceiros/juntaolivais.png", "url": "https://www.jf-olivais.pt" },
+    { "id": "p2", "name": "Lisboa", "logo": "/parceiros/Marca Lisboa_Horizontal_branco.png", "url": "https://www.lisboa.pt" }
   ]
 }

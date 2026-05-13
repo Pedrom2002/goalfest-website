@@ -33,6 +33,7 @@ export interface Sponsor {
   id: string
   name: string
   logo: string | null
+  url?: string
 }
 
 export interface SponsorsData {

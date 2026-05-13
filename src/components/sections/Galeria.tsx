@@ -45,13 +45,47 @@ export default function Galeria() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
+            whileHover="hover"
             className="relative group cursor-pointer rounded-xl overflow-hidden"
             onClick={() => setLightboxIndex(i)}
           >
-            <Image src={photo.src} alt={photo.alt} width={600} height={400} className="w-full object-cover" />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-200 flex items-center justify-center">
-              <span className="text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200">&#10138;</span>
-            </div>
+            <motion.div
+              variants={{ hover: { scale: 1.05 } }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+              className="w-full"
+            >
+              <Image src={photo.src} alt={photo.alt} width={600} height={400} className="w-full object-cover" />
+            </motion.div>
+
+            {/* Overlay */}
+            <motion.div
+              variants={{ hover: { opacity: 1 } }}
+              initial={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center gap-2"
+            >
+              {/* Expand icon with bounce */}
+              <motion.div
+                variants={{ hover: { scale: 1, opacity: 1 } }}
+                initial={{ scale: 0, opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center"
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M1 1h5M1 1v5M15 1h-5M15 1v5M1 15h5M1 15v-5M15 15h-5M15 15v-5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+              </motion.div>
+
+              {/* Caption slides up */}
+              <motion.p
+                variants={{ hover: { y: 0, opacity: 1 } }}
+                initial={{ y: 12, opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="text-white text-xs uppercase tracking-widest text-center px-4"
+              >
+                {photo.alt}
+              </motion.p>
+            </motion.div>
           </motion.div>
         ))}
       </Masonry>

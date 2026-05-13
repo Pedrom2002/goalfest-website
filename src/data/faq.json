@@ -4,16 +4,22 @@
     "categoryEn": "tickets",
     "items": [
       {
-        "q": "Como posso reservar um lugar?",
-        "qEn": "How do I reserve a spot?",
-        "a": "Preenche o formulário na página Bilhetes. Receberás uma confirmação por email.",
-        "aEn": "Fill out the form on the Tickets page. You will receive a confirmation by email."
-      },
-      {
         "q": "A entrada é gratuita?",
         "qEn": "Is entry free?",
-        "a": "A entrada é livre mas a reserva é obrigatória para garantir lugar.",
-        "aEn": "Entry is free but reservation is required to guarantee your spot."
+        "a": "A entrada no recinto é totalmente gratuita — qualquer pessoa pode assistir aos jogos no ecrã gigante. Existe ainda o Golden Circle, uma zona reservada com vista privilegiada para o ecrã gigante e acesso ao restaurante gourmet do Chef José Avillez, com entrada paga.",
+        "aEn": "Entry to the venue is completely free — everyone can watch the matches on the giant screen. There is also the Golden Circle, a reserved area with a privileged view of the giant screen and access to Chef José Avillez's gourmet restaurant, with paid entry."
+      },
+      {
+        "q": "O que é o Golden Circle?",
+        "qEn": "What is the Golden Circle?",
+        "a": "O Golden Circle é uma zona reservada com vista privilegiada para o ecrã gigante. Inclui acesso ao restaurante gourmet do Chef José Avillez. A entrada é paga e os lugares são limitados.",
+        "aEn": "The Golden Circle is a reserved area with a privileged view of the giant screen. It includes access to Chef José Avillez's gourmet restaurant. Entry is paid and places are limited."
+      },
+      {
+        "q": "Como posso reservar o Golden Circle?",
+        "qEn": "How do I book the Golden Circle?",
+        "a": "Preenche o formulário na página de Bilhetes. Receberás uma confirmação por email com todos os detalhes.",
+        "aEn": "Fill out the form on the Tickets page. You will receive a confirmation email with all the details."
       }
     ]
   },
@@ -24,14 +30,20 @@
       {
         "q": "Onde fica a Fanzone?",
         "qEn": "Where is the Fanzone?",
-        "a": "No Parque das Nações, Lisboa. Morada exacta a confirmar.",
-        "aEn": "At Parque das Nações, Lisbon. Exact address to be confirmed."
+        "a": "No Vale do Silêncio, Olivais, Lisboa. Av. Cidade de Lourenço Marques, junto à estação de metro Olivais (Linha Vermelha).",
+        "aEn": "At Vale do Silêncio, Olivais, Lisbon. Av. Cidade de Lourenço Marques, next to Olivais metro station (Red Line)."
+      },
+      {
+        "q": "Qual o horário de funcionamento?",
+        "qEn": "What are the opening hours?",
+        "a": "O recinto está aberto das 10h00 às 02h00. Os jogos são transmitidos ao vivo conforme o calendário do Mundial 2026.",
+        "aEn": "The venue is open from 10:00 to 02:00. Matches are broadcast live according to the 2026 World Cup schedule."
       },
       {
         "q": "Que transportes posso usar?",
         "qEn": "What transport can I use?",
-        "a": "Metro linha vermelha, estação Oriente. Autocarros 728 e 759.",
-        "aEn": "Red metro line, Oriente station. Buses 728 and 759."
+        "a": "Metro Linha Vermelha: estação Olivais (1 min a pé do recinto). Comboio: estação Oriente (CP e Fertagus), depois autocarro ou 15 min a pé. Autocarros Carris: linhas 731, 744, 750, 759 e 781 com paragem junto ao parque.",
+        "aEn": "Red Line metro: Olivais station (1 min walk to venue). Train: Oriente station (CP and Fertagus), then bus or 15 min walk. Carris buses: lines 731, 744, 750, 759 and 781 with a stop next to the park."
       }
     ]
   },
@@ -42,8 +54,8 @@
       {
         "q": "Há comida e bebida disponível?",
         "qEn": "Is food and drink available?",
-        "a": "Sim, existem food trucks e bar no local durante todos os jogos.",
-        "aEn": "Yes, there are food trucks and a bar on site during all matches."
+        "a": "Sim, existem food trucks e bar no recinto durante todo o evento. O Golden Circle tem acesso exclusivo ao restaurante gourmet do Chef José Avillez.",
+        "aEn": "Yes, there are food trucks and a bar on site throughout the event. The Golden Circle has exclusive access to Chef José Avillez's gourmet restaurant."
       }
     ]
   },
@@ -54,8 +66,8 @@
       {
         "q": "Posso entrar com crianças?",
         "qEn": "Can I bring children?",
-        "a": "Sim, crianças são bem-vindas. Menores de 16 anos devem ser acompanhados.",
-        "aEn": "Yes, children are welcome. Under 16s must be accompanied by an adult."
+        "a": "Sim, crianças são bem-vindas no recinto geral. O evento conta com uma Zona Kids dedicada, com atividades e entretenimento pensados especialmente para os mais novos.",
+        "aEn": "Yes, children are welcome in the general area. The event features a dedicated Kids Zone, with activities and entertainment designed especially for younger guests."
       }
     ]
   },
@@ -66,8 +78,8 @@
       {
         "q": "O espaço é acessível a cadeiras de rodas?",
         "qEn": "Is the venue wheelchair accessible?",
-        "a": "Sim, o espaço tem zonas reservadas e rampas de acesso.",
-        "aEn": "Yes, the venue has reserved areas and access ramps."
+        "a": "Sim, o recinto tem rampas de acesso para pessoas com mobilidade reduzida.",
+        "aEn": "Yes, the venue has reserved areas and access ramps for people with reduced mobility."
       }
     ]
   }
