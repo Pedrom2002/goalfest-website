@@ -1,9 +1,34 @@
+import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import FaqAccordion from '@/components/ui/FaqAccordion'
 import faqData from '@/data/faq.json'
 import type { FaqCategory } from '@/types'
+
+const BASE_URL = 'https://goalfest.pt'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const isPt = locale === 'pt'
+
+  return {
+    title: isPt ? 'FAQ' : 'FAQ',
+    description: isPt
+      ? 'Respostas às perguntas frequentes sobre o Goalfest: entradas, local, comida, regras e acessibilidade.'
+      : 'Answers to frequently asked questions about Goalfest: tickets, venue, food, rules and accessibility.',
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/faq`,
+    },
+    openGraph: {
+      url: `${BASE_URL}/${locale}/faq`,
+    },
+  }
+}
 
 const categoryTitleKeys: Record<string, string> = {
   entradas: 'category_entradas',
@@ -23,8 +48,27 @@ export default async function FaqPage({
   const t = await getTranslations('faq')
   const categories = faqData as FaqCategory[]
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: categories.flatMap((cat) =>
+      cat.items.map((item) => ({
+        '@type': 'Question',
+        name: locale === 'pt' ? item.q : item.qEn,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: locale === 'pt' ? item.a : item.aEn,
+        },
+      }))
+    ),
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <Navbar />
       <main className="min-h-screen pt-24 pb-16 px-4 max-w-3xl mx-auto">
         <h1 className="font-display text-5xl font-black text-gold uppercase tracking-wide mb-16 text-center">
