@@ -2,15 +2,11 @@ import type { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
-// import Jogos from '@/components/sections/Jogos'
 import Venue from '@/components/sections/Venue'
-// import Galeria from '@/components/sections/Galeria'
 import Sponsors from '@/components/sections/Sponsors'
 import WhatIsGoalfest from '@/components/sections/WhatIsGoalfest'
 import FaqSection from '@/components/sections/FaqSection'
-// import matchesData from '@/data/matches.json'
 import sponsorsData from '@/data/sponsors.json'
-// import type { Match, SponsorsData } from '@/types'
 import type { SponsorsData } from '@/types'
 
 const BASE_URL = 'https://goalfest.pt'
@@ -97,10 +93,6 @@ export default function LandingPage() {
         <Divider />
         <Venue />
         <Divider />
-        {/* <Jogos matches={matches} /> */}
-        {/* <Divider /> */}
-        {/* <Galeria /> */}
-        {/* <Divider /> */}
         <Sponsors data={sponsors} />
         <Divider />
         <FaqSection />
