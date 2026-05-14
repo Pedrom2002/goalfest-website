@@ -2,40 +2,43 @@
 
 import { motion } from 'framer-motion'
 import { useLocale } from 'next-intl'
+import Link from 'next/link'
 
 const FEATURES = {
   pt: [
-    { title: 'Jogos do Mundial', body: 'Todos os jogos da FIFA World Cup 2026 transmitidos ao vivo num ecrã gigante de alta definição.' },
-    { title: 'Concertos', body: 'Atuações ao vivo de grandes nomes da música portuguesa nos dias de jogo.' },
-    { title: 'Zona Gaming', body: 'Consolas disponíveis para jogar e competir com amigos.' },
-    { title: 'Campos de Futebol', body: 'Campos de futebol 5vs5 disponíveis para jogar entre amigos antes e depois dos jogos.' },
+    { title: 'Jogos do Mundial', body: '64 jogos da FIFA World Cup 2026 transmitidos ao vivo num ecrã gigante de alta definição.' },
+    { title: 'Concertos', body: 'Atuações ao vivo de grandes nomes da música portuguesa e internacional nos dias de jogo.' },
+    { title: 'Zona Gaming', body: 'Consolas disponíveis para todos. Participa nas competições e mostra quem é o melhor.' },
+    { title: 'Football Park', body: 'Competições e torneios de futebol 5vs5 para todos os escalões, com prémios para os melhores.' },
     { title: 'Zona Kids', body: 'Espaço dedicado às crianças com atividades, animação e entretenimento para os mais novos.' },
-    { title: 'Restauração', body: 'Food trucks, bar e o restaurante gourmet do Chef José Avillez no Golden Circle.' },
+    { title: 'Food Court', body: 'Food trucks, bar e restaurante gourmet para todos os gostos.' },
+    { title: 'Fun Activities', body: 'Roda gigante com vista sobre o recinto e parede de escalada para os mais aventureiros. Diversão para toda a família.' },
+    { title: 'Golden Circle', body: 'Área paga com acesso exclusivo à zona reservada mais próxima do ecrã gigante, com bar exclusivo. A melhor vista garantida.' },
+    { title: 'VIP Lounge', body: 'Lounge exclusivo por convite. Um espaço reservado para viver o evento de forma única e privilegiada.' },
   ],
   en: [
-    { title: 'World Cup Matches', body: 'All FIFA World Cup 2026 matches broadcast live on a giant high-definition screen.' },
-    { title: 'Concerts', body: 'Live performances by major Portuguese music artists on match days.' },
-    { title: 'Gaming Zone', body: 'Consoles available to play and compete with friends.' },
-    { title: 'Football Pitches', body: '5-a-side football pitches available to play with friends before and after matches.' },
+    { title: 'World Cup Matches', body: '64 FIFA World Cup 2026 matches broadcast live on a giant high-definition screen.' },
+    { title: 'Concerts', body: 'Live performances by major Portuguese and international music artists on match days.' },
+    { title: 'Gaming Zone', body: 'Consoles available for everyone. Join the competitions and prove who\'s the best.' },
+    { title: 'Football Park', body: '5-a-side competitions and tournaments for all age groups, with prizes for the winners.' },
     { title: 'Kids Zone', body: 'A dedicated space for children with activities, entertainment and fun for the little ones.' },
-    { title: 'Food & Drink', body: 'Food trucks, bar and Chef José Avillez\'s gourmet restaurant in the Golden Circle.' },
+    { title: 'Food Court', body: 'Food trucks, bar and a gourmet restaurant for every taste.' },
+    { title: 'Fun Activities', body: 'Ferris wheel overlooking the venue and a climbing wall for the more adventurous. Fun for the whole family.' },
+    { title: 'Golden Circle', body: 'Paid access to the exclusive reserved area closest to the giant screen, with an exclusive bar. The best view, guaranteed.' },
+    { title: 'VIP Lounge', body: 'Invite-only exclusive lounge. A private space to experience the event in a truly privileged way.' },
   ],
 }
 
 const STATS = {
   pt: [
-    { value: '1,4ha', label: 'de recinto' },
     { value: '64', label: 'jogos transmitidos' },
     { value: '+10', label: 'concertos' },
     { value: '10h–02h', label: 'horário diário' },
-    { value: '100%', label: 'entrada gratuita' },
   ],
   en: [
-    { value: '1.4ha', label: 'venue size' },
     { value: '64', label: 'matches broadcast' },
     { value: '+10', label: 'concerts' },
     { value: '10am–2am', label: 'daily hours' },
-    { value: '100%', label: 'free entry' },
   ],
 }
 
@@ -43,12 +46,12 @@ const COPY = {
   pt: {
     tag: 'O Evento',
     title: <>O que é o <span className="text-green-pt">Goalfest</span>?</>,
-    desc: 'Mais do que uma Fanzone. O Goalfest é o maior evento de celebração do Mundial 2026 em Portugal, um espaço de 1,4 hectares no coração de Lisboa onde o futebol, a música e a cultura se encontram.',
+    desc: 'Mais do que uma Fanzone. O Goalfest é o maior evento de celebração do Mundial 2026 em Portugal, um parque no coração de Lisboa onde o futebol, a música e a cultura se encontram.',
   },
   en: {
     tag: 'The Event',
     title: <>What is <span className="text-green-pt">Goalfest</span>?</>,
-    desc: 'More than a Fanzone. Goalfest is Portugal\'s biggest FIFA World Cup 2026 celebration event, a 1.4-hectare space in the heart of Lisbon where football, music and culture come together.',
+    desc: 'More than a Fanzone. Goalfest is Portugal\'s biggest FIFA World Cup 2026 celebration event, a park in the heart of Lisbon where football, music and culture come together.',
   },
 }
 
@@ -115,6 +118,11 @@ export default function WhatIsGoalfest() {
               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-pt/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl" />
               <h3 className="text-text-primary font-semibold text-sm uppercase tracking-wider mb-2">{f.title}</h3>
               <p className="text-text-muted text-sm leading-relaxed">{f.body}</p>
+              {(f.title === 'Jogos do Mundial' || f.title === 'World Cup Matches') && (
+                <Link href={`/${locale}/jogos`} className="inline-block mt-3 text-green-pt text-xs font-semibold hover:underline uppercase tracking-widest">
+                  {locale === 'pt' ? 'Ver programação ↗' : 'View schedule ↗'}
+                </Link>
+              )}
             </motion.div>
           ))}
         </div>

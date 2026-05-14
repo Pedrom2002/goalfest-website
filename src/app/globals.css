@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-primary: #0a0a0a;
-  --color-bg-surface: #141a14;
+  --color-bg-primary: #0d1a0d;
+  --color-bg-surface: #163216;
   --color-gold: #FFD700;
   --color-red-pt: #C8102E;
-  --color-green-pt: #00c851;
+  --color-green-pt: #5ea63b;
   --color-text-primary: #F7FFF7;
   --color-text-muted: #a8d4a8;
 
   --font-sans: var(--font-inter), sans-serif;
   --font-display: var(--font-oswald), sans-serif;
+  --font-nav: var(--font-orbitron), sans-serif;
 }
 
 html {
@@ -19,10 +20,27 @@ html {
 
 body {
   overflow-x: hidden;
-  background: linear-gradient(160deg, #0a0a0a 0%, #0a0a0a 35%, #0f2a0f 65%, #1a4a1a 100%);
+  background: linear-gradient(160deg, #0d1a0d 0%, #112411 35%, #163216 65%, #1d4a1d 100%);
   background-attachment: fixed;
 }
 
 * {
   box-sizing: border-box;
+}
+
+@keyframes particleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}
+
+@keyframes beamPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.85; }
+}
+
+@keyframes eqBar {
+  0%, 100% { transform: scaleY(0.3); }
+  25% { transform: scaleY(1); }
+  50% { transform: scaleY(0.5); }
+  75% { transform: scaleY(0.8); }
 }

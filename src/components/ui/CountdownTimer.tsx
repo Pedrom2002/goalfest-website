@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState, useRef } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 
 const TARGET = new Date('2026-06-11T15:00:00Z')
@@ -23,23 +23,29 @@ function calcTimeLeft(): TimeLeft {
   }
 }
 
-function FlipUnit({ value, label }: { value: number; label: string }) {
+function FlipUnit({ value, label, animate: doAnimate }: { value: number; label: string; animate?: boolean }) {
   const display = String(value).padStart(2, '0')
   return (
     <div className="flex flex-col items-center gap-1">
       <div className="relative w-16 h-20 md:w-24 md:h-28">
-        <AnimatePresence mode="popLayout">
-          <motion.div
-            key={display}
-            initial={{ rotateX: -90, opacity: 0 }}
-            animate={{ rotateX: 0, opacity: 1 }}
-            exit={{ rotateX: 90, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg font-display text-3xl md:text-5xl font-bold text-green-pt"
-          >
+        {doAnimate ? (
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={display}
+              initial={{ rotateX: -70, opacity: 0, scale: 0.95 }}
+              animate={{ rotateX: 0, opacity: 1, scale: 1 }}
+              exit={{ rotateX: 70, opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg font-display text-3xl md:text-5xl font-bold text-green-pt"
+            >
+              {display}
+            </motion.div>
+          </AnimatePresence>
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg font-display text-3xl md:text-5xl font-bold text-green-pt tabular-nums">
             {display}
-          </motion.div>
-        </AnimatePresence>
+          </div>
+        )}
       </div>
       <span className="text-text-muted text-xs uppercase tracking-widest">{label}</span>
     </div>
@@ -60,8 +66,7 @@ export default function CountdownTimer() {
     <div className="flex items-center gap-4 md:gap-6">
       {['--', '--', '--', '--'].map((v, i) => (
         <div key={i} className="flex flex-col items-center gap-1">
-          <div className="w-16 h-20 md:w-24 md:h-28 flex items-center justify-center bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg font-display text-3xl md:text-5xl font-bold text-gold">{v}</div>
-          {i < 3 && <span />}
+          <div className="w-16 h-20 md:w-24 md:h-28 flex items-center justify-center bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg font-display text-3xl md:text-5xl font-bold text-green-pt">{v}</div>
         </div>
       ))}
     </div>
@@ -69,13 +74,13 @@ export default function CountdownTimer() {
 
   return (
     <div className="flex items-center gap-4 md:gap-6">
-      <FlipUnit value={time.days} label={t('countdown_days')} />
+      <FlipUnit value={time.days} label={t('countdown_days')} animate={false} />
       <span className="text-green-pt text-3xl font-bold mb-4">:</span>
-      <FlipUnit value={time.hours} label={t('countdown_hours')} />
+      <FlipUnit value={time.hours} label={t('countdown_hours')} animate={false} />
       <span className="text-green-pt text-3xl font-bold mb-4">:</span>
-      <FlipUnit value={time.minutes} label={t('countdown_minutes')} />
+      <FlipUnit value={time.minutes} label={t('countdown_minutes')} animate />
       <span className="text-green-pt text-3xl font-bold mb-4">:</span>
-      <FlipUnit value={time.seconds} label={t('countdown_seconds')} />
+      <FlipUnit value={time.seconds} label={t('countdown_seconds')} animate />
     </div>
   )
 }

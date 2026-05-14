@@ -3,21 +3,21 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-const PARTICLES = Array.from({ length: 60 }, (_, i) => ({
+const PARTICLES = Array.from({ length: 45 }, (_, i) => ({
   x: Math.random() * 100,
   y: Math.random() * 100,
   size: Math.random() * 3 + 0.8,
   duration: 5 + Math.random() * 8,
   delay: Math.random() * 6,
-  color: i % 3 === 0 ? '#FFD700' : i % 3 === 1 ? '#00c851' : '#ffffff',
+  color: i % 3 === 0 ? '#FFD700' : i % 3 === 1 ? '#5ea63b' : '#ffffff',
   opacity: 0.25 + Math.random() * 0.35,
 }))
 
 const BEAMS = [
-  { x: '10%', rotate: -30, color: 'rgba(0,200,81,0.18)', duration: 9, delay: 0 },
-  { x: '35%', rotate: -10, color: 'rgba(255,215,0,0.12)', duration: 11, delay: 2 },
-  { x: '65%', rotate: 10,  color: 'rgba(0,200,81,0.15)', duration: 10, delay: 1 },
-  { x: '88%', rotate: 30,  color: 'rgba(255,215,0,0.12)', duration: 12, delay: 3 },
+  { x: '10%', rotate: -30, color: 'rgba(94,166,59,0.18)', duration: 9,  delay: 0 },
+  { x: '35%', rotate: -10, color: 'rgba(255,215,0,0.12)',  duration: 11, delay: 2 },
+  { x: '65%', rotate: 10,  color: 'rgba(94,166,59,0.15)',  duration: 10, delay: 1 },
+  { x: '88%', rotate: 30,  color: 'rgba(255,215,0,0.12)',  duration: 12, delay: 3 },
 ]
 
 export default function BackgroundFX() {
@@ -27,7 +27,6 @@ export default function BackgroundFX() {
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden>
-      {/* Sweeping stadium beams */}
       {BEAMS.map((b, i) => (
         <motion.div
           key={i}
@@ -47,9 +46,8 @@ export default function BackgroundFX() {
         />
       ))}
 
-      {/* Floating particles */}
       {PARTICLES.map((p, i) => (
-        <motion.div
+        <div
           key={i}
           style={{
             position: 'absolute',
@@ -60,22 +58,11 @@ export default function BackgroundFX() {
             borderRadius: '50%',
             background: p.color,
             opacity: p.opacity,
+            willChange: 'transform',
+            animation: `particleFloat ${p.duration}s ${p.delay}s ease-in-out infinite`,
           }}
-          animate={{ y: [0, -35, 0], opacity: [p.opacity, p.opacity * 3, p.opacity] }}
-          transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: 'easeInOut' }}
         />
       ))}
-
-      {/* Grass glow at bottom */}
-      <div style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: 200,
-        background: 'linear-gradient(to top, rgba(0,180,60,0.18) 0%, transparent 100%)',
-        pointerEvents: 'none',
-      }} />
     </div>
   )
 }

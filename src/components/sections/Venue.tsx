@@ -78,16 +78,13 @@ export default function Venue() {
           src="/01_Sofia_ConcertoValeSilencio_0609_16x9.jpg"
           alt="Vale do Silêncio"
           fill
+          sizes="100vw"
           className="object-cover object-center"
           priority
         />
         {/* Dark overlay */}
         <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to bottom, rgba(36,53,36,0.10) 0%, rgba(36,53,36,0.38) 60%, rgba(36,53,36,1) 100%)'
-        }} />
-        {/* Green edge glow */}
-        <div className="absolute bottom-0 left-0 right-0 h-40" style={{
-          background: 'linear-gradient(to top, rgba(0,200,81,0.08) 0%, transparent 100%)'
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.60) 60%, rgba(13,26,13,1) 100%)'
         }} />
 
         {/* Title overlay */}
@@ -97,7 +94,7 @@ export default function Venue() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-green-pt text-sm uppercase tracking-[0.4em] mb-3"
+            className="text-green-pt text-sm uppercase tracking-[0.4em] mb-3 drop-shadow-lg font-semibold"
           >
             {copy.tag}
           </motion.p>
@@ -115,7 +112,7 @@ export default function Venue() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-text-muted text-lg mt-4 max-w-xl"
+            className="text-white/80 text-lg mt-4 max-w-xl drop-shadow-md font-medium"
           >
             {copy.sub}
           </motion.p>
@@ -130,16 +127,13 @@ export default function Venue() {
           muted
           loop
           playsInline
+          preload="none"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ objectPosition: '5% 70%', transform: 'scaleX(-1)' }}
           src="/136530-764417335.mp4"
         />
         <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to bottom, rgba(36,53,36,1) 0%, rgba(36,53,36,0.52) 30%, rgba(36,53,36,0.52) 70%, rgba(36,53,36,1) 100%)'
-        }} />
-        <div className="absolute inset-0" style={{
-          background: 'rgba(0,40,15,0.28)',
-          mixBlendMode: 'multiply'
+          background: 'linear-gradient(to bottom, rgba(13,26,13,1) 0%, rgba(0,0,0,0.78) 20%, rgba(0,0,0,0.78) 80%, rgba(13,26,13,1) 100%)'
         }} />
 
       {/* Info section */}
@@ -158,8 +152,8 @@ export default function Venue() {
             <p className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium">{copy.how}</p>
             <span className="h-px w-12 bg-green-pt/40" />
           </div>
-          <p className="text-text-primary text-xl md:text-2xl font-bold mb-1">{copy.title}</p>
-          <p className="text-text-muted text-sm">{copy.addr}</p>
+          <p className="text-white text-xl md:text-2xl font-bold mb-1">{copy.title}</p>
+          <p className="text-white/70 text-sm">{copy.addr}</p>
           <a
             href="https://maps.google.com/?q=38.7659217,-9.1187136"
             target="_blank"
@@ -208,6 +202,23 @@ export default function Venue() {
             </motion.div>
           ))}
         </div>
+
+        {/* Entrances note */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-6 flex items-center gap-3 rounded-2xl border border-green-pt/20 bg-green-pt/5 px-5 py-4"
+        >
+          <span className="text-green-pt text-lg shrink-0">↔</span>
+          <p className="text-text-muted text-sm leading-relaxed">
+            {locale === 'pt'
+              ? <><span className="text-text-primary font-semibold">Duas entradas disponíveis</span> — podes entrar pelo lado esquerdo ou pelo lado direito do recinto. Ambas dão acesso completo ao espaço.</>
+              : <><span className="text-text-primary font-semibold">Two entrances available</span> — you can enter from the left side or the right side of the venue. Both give full access to the space.</>
+            }
+          </p>
+        </motion.div>
 
         {/* 3D Model */}
         <motion.div

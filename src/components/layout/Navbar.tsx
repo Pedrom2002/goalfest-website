@@ -21,7 +21,7 @@ export default function Navbar() {
       setScrolled(window.scrollY > 40)
       setPastHero(window.scrollY > window.innerHeight * 0.3)
     }
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
@@ -51,7 +51,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-bg-primary/97 backdrop-blur-md shadow-lg border-b border-green-pt/25' : 'bg-transparent'
+        scrolled ? 'bg-bg-primary/97 backdrop-blur-md shadow-lg border-b border-green-pt/25' : 'bg-black/20 backdrop-blur-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
@@ -64,10 +64,9 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="relative group text-text-muted hover:text-gold transition-colors duration-200 text-sm font-medium uppercase tracking-wide"
+              className="text-text-muted hover:text-gold transition-colors duration-200 text-[13px] font-medium uppercase tracking-wide" style={{ fontFamily: 'var(--font-orbitron)' }}
             >
               {link.label}
-              <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-green-pt group-hover:w-full transition-all duration-300" />
             </Link>
           ))}
           {/* <Link
@@ -78,7 +77,7 @@ export default function Navbar() {
           </Link> */}
           <button
             onClick={switchLocale}
-            className="text-text-muted hover:text-gold text-sm font-medium border border-text-muted/30 px-2 py-1 rounded hover:border-gold transition-colors"
+            className="text-text-muted hover:text-gold text-[12px] font-medium border border-text-muted/30 px-2 py-1 rounded hover:border-gold transition-colors" style={{ fontFamily: 'var(--font-orbitron)' }}
           >
             {otherLocale.toUpperCase()}
           </button>

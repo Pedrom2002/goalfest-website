@@ -44,6 +44,12 @@
         "qEn": "What transport can I use?",
         "a": "Metro Linha Vermelha: estação Olivais (1 min a pé do recinto). Comboio: estação Oriente (CP e Fertagus), depois autocarro ou 15 min a pé. Autocarros Carris: linhas 731, 744, 750, 759 e 781 com paragem junto ao parque.",
         "aEn": "Red Line metro: Olivais station (1 min walk to venue). Train: Oriente station (CP and Fertagus), then bus or 15 min walk. Carris buses: lines 731, 744, 750, 759 and 781 with a stop next to the park."
+      },
+      {
+        "q": "Por onde posso entrar no recinto?",
+        "qEn": "Where are the venue entrances?",
+        "a": "O recinto tem duas entradas: uma do lado esquerdo e outra do lado direito. Podes entrar por qualquer uma delas — ambas dão acesso ao recinto principal.",
+        "aEn": "The venue has two entrances: one on the left side and one on the right side. You can enter through either — both give full access to the main venue."
       }
     ]
   },
@@ -66,8 +72,14 @@
       {
         "q": "Posso entrar com crianças?",
         "qEn": "Can I bring children?",
-        "a": "Sim, crianças são bem-vindas no recinto geral. O evento conta com uma Zona Kids dedicada, com atividades e entretenimento pensados especialmente para os mais novos.",
+        "a": "Sim, crianças são bem-vindas no recinto. O evento conta com uma Zona Kids dedicada, com atividades e entretenimento pensados especialmente para os mais novos.",
         "aEn": "Yes, children are welcome in the general area. The event features a dedicated Kids Zone, with activities and entertainment designed especially for younger guests."
+      },
+      {
+        "q": "Posso entrar com animais?",
+        "qEn": "Can I bring animals?",
+        "a": "Infelizmente não são permitidos animais no recinto.",
+        "aEn": "Unfortunately, animals are not permitted in the venue."
       }
     ]
   },
