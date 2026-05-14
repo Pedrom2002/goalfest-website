@@ -13,7 +13,8 @@
     "countdown_days": "Dias",
     "countdown_hours": "Horas",
     "countdown_minutes": "Min",
-    "countdown_seconds": "Seg"
+    "countdown_seconds": "Seg",
+    "countdown_live": "Evento em curso!"
   },
   "jogos": {
     "title": "Calendário de Jogos",

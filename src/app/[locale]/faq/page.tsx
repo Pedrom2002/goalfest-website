@@ -78,7 +78,9 @@ export default async function FaqPage({
           {categories.map((cat) => (
             <div key={cat.category}>
               <h2 className="text-text-muted text-xs uppercase tracking-widest mb-4 border-b border-white/10 pb-2">
-                {t(categoryTitleKeys[cat.category] as any)}
+                {categoryTitleKeys[cat.category]
+                  ? t(categoryTitleKeys[cat.category] as any)
+                  : (locale === 'pt' ? cat.category : cat.categoryEn)}
               </h2>
               <FaqAccordion
                 items={cat.items.map((item) => ({

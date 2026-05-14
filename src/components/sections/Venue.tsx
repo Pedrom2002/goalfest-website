@@ -1,10 +1,24 @@
 'use client'
 
+import { Component, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { useRef, useEffect } from 'react'
 import { useLocale } from 'next-intl'
+
+class ModelErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false }
+  static getDerivedStateFromError() { return { failed: true } }
+  render() {
+    if (this.state.failed) return (
+      <div className="w-full h-full flex items-center justify-center text-text-muted text-xs uppercase tracking-widest">
+        Modelo 3D indisponível
+      </div>
+    )
+    return this.props.children
+  }
+}
 
 const VenueModel = dynamic(() => import('@/components/ui/VenueModel'), { ssr: false })
 
@@ -234,7 +248,9 @@ export default function Venue() {
             <span className="h-px w-12 bg-green-pt/40" />
           </div>
           <div className="w-full h-[240px] md:h-[340px] rounded-2xl overflow-hidden border border-white/8 bg-bg-surface shadow-[0_0_60px_rgba(0,200,81,0.05)]">
-            <VenueModel />
+            <ModelErrorBoundary>
+              <VenueModel />
+            </ModelErrorBoundary>
           </div>
           <p className="text-text-muted/60 text-xs text-center mt-4 tracking-wide">{copy.drag}</p>
         </motion.div>

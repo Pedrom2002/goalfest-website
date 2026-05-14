@@ -39,6 +39,7 @@ export default function Navbar() {
     segments[1] = otherLocale
     const hash = typeof window !== 'undefined' ? window.location.hash : ''
     router.push(segments.join('/') + hash)
+    setMenuOpen(false)
   }
 
   const navLinks = [

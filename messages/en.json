@@ -13,7 +13,8 @@
     "countdown_days": "Days",
     "countdown_hours": "Hours",
     "countdown_minutes": "Min",
-    "countdown_seconds": "Sec"
+    "countdown_seconds": "Sec",
+    "countdown_live": "Event is live!"
   },
   "jogos": {
     "title": "Match Schedule",

@@ -26,8 +26,7 @@ export default function TicketsForm({ matches }: { matches: Match[] }) {
 
     const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID
     if (!formspreeId) {
-      // No Formspree ID configured — simulate success for dev
-      setTimeout(() => setStatus('success'), 1000)
+      setStatus('error')
       return
     }
 
@@ -67,6 +66,7 @@ export default function TicketsForm({ matches }: { matches: Match[] }) {
               <input
                 name="name"
                 required
+                maxLength={100}
                 className="bg-bg-surface border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-gold transition-colors"
               />
             </div>
@@ -118,6 +118,7 @@ export default function TicketsForm({ matches }: { matches: Match[] }) {
               <textarea
                 name="message"
                 rows={3}
+                maxLength={500}
                 className="bg-bg-surface border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-gold transition-colors resize-none"
               />
             </div>

@@ -1,4 +1,6 @@
 export function formatMatchDate(isoDate: string, locale: string): string {
+  const date = new Date(isoDate)
+  if (isNaN(date.getTime())) return ''
   return new Intl.DateTimeFormat(locale === 'pt' ? 'pt-PT' : 'en-GB', {
     weekday: 'short',
     day: 'numeric',
@@ -6,5 +8,5 @@ export function formatMatchDate(isoDate: string, locale: string): string {
     hour: '2-digit',
     minute: '2-digit',
     timeZone: 'Europe/Lisbon',
-  }).format(new Date(isoDate))
+  }).format(date)
 }

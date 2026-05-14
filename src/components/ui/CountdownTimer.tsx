@@ -36,7 +36,7 @@ function FlipUnit({ value, label, animate: doAnimate }: { value: number; label: 
 
 export default function CountdownTimer() {
   const t = useTranslations('hero')
-  const [time, setTime] = useState<TimeLeft | null>(null)
+  const [time, setTime] = useState<TimeLeft | 'started' | null>(null)
 
   useEffect(() => {
     setTime(calcTimeLeft())
@@ -51,6 +51,13 @@ export default function CountdownTimer() {
           <div className="w-16 h-20 md:w-24 md:h-28 flex items-center justify-center bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg font-display text-3xl md:text-5xl font-bold text-green-pt">{v}</div>
         </div>
       ))}
+    </div>
+  )
+
+  if (time === 'started') return (
+    <div className="flex items-center justify-center px-6 py-3 bg-green-pt/10 border border-green-pt/40 rounded-full">
+      <span className="w-2 h-2 rounded-full bg-green-pt animate-pulse mr-3" />
+      <span className="text-green-pt font-bold uppercase tracking-widest text-sm">{t('countdown_live')}</span>
     </div>
   )
 
