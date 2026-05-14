@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
@@ -13,6 +14,36 @@ import sponsorsData from '@/data/sponsors.json'
 // import type { Match, SponsorsData } from '@/types'
 import type { SponsorsData } from '@/types'
 
+const BASE_URL = 'https://goalfest.pt'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const isPt = locale === 'pt'
+
+  return {
+    title: isPt
+      ? 'Goalfest Lisboa | Fanzone Oficial do Mundial 2026'
+      : 'Goalfest Lisbon | Official FIFA World Cup 2026 Fanzone',
+    description: isPt
+      ? 'A maior fanzone de Lisboa para o Mundial 2026. Ecrãs gigantes, food trucks e bar no Parque das Nações. 11 Jun - 19 Jul 2026.'
+      : 'The biggest fanzone in Lisbon for the 2026 FIFA World Cup. Giant screens, food trucks and bar at Parque das Nações. 11 Jun - 19 Jul 2026.',
+    alternates: {
+      canonical: `${BASE_URL}/${locale}`,
+    },
+    openGraph: {
+      title: isPt ? 'Goalfest Lisboa — Fanzone Oficial do Mundial 2026' : 'Goalfest Lisbon — Official FIFA World Cup 2026 Fanzone',
+      description: isPt
+        ? 'A maior fanzone de Lisboa para o Mundial 2026.'
+        : 'The biggest fanzone in Lisbon for the 2026 World Cup.',
+      url: `${BASE_URL}/${locale}`,
+    },
+  }
+}
+
 function Divider() {
   return (
     <div className="flex items-center gap-4 px-8 md:px-24 opacity-30">
@@ -26,8 +57,39 @@ function Divider() {
 export default function LandingPage() {
   const sponsors = sponsorsData as SponsorsData
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: 'Goalfest Lisboa',
+    description: 'Fanzone oficial do Mundial 2026 em Lisboa',
+    startDate: '2026-06-11',
+    endDate: '2026-07-19',
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    location: {
+      '@type': 'Place',
+      name: 'Parque das Nações',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Parque das Nações',
+        addressLocality: 'Lisboa',
+        addressCountry: 'PT',
+      },
+    },
+    organizer: {
+      '@type': 'Organization',
+      name: 'QUIC NATION',
+      url: 'https://goalfest.pt',
+    },
+    url: 'https://goalfest.pt',
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <BackgroundFX />
       <Navbar />
       <main className="relative z-10">
@@ -45,7 +107,7 @@ export default function LandingPage() {
         <Divider />
         <FaqSection />
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </>
   )
 }
