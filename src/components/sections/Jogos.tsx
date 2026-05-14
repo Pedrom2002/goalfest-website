@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useTranslations, useLocale } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Match } from '@/types'
 import MatchCard from '@/components/ui/MatchCard'
@@ -17,7 +17,6 @@ const filterKeys: Record<Filter, string> = {
 
 export default function Jogos({ matches }: { matches: Match[] }) {
   const t = useTranslations('jogos')
-  const locale = useLocale()
   const [active, setActive] = useState<Filter>('all')
   const filtered = applyFilter(matches, active)
 

@@ -79,6 +79,7 @@ export default async function FaqPage({
             <div key={cat.category}>
               <h2 className="text-text-muted text-xs uppercase tracking-widest mb-4 border-b border-white/10 pb-2">
                 {categoryTitleKeys[cat.category]
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   ? t(categoryTitleKeys[cat.category] as any)
                   : (locale === 'pt' ? cat.category : cat.categoryEn)}
               </h2>

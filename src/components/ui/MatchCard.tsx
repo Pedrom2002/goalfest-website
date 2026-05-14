@@ -19,6 +19,7 @@ export default function MatchCard({ match }: { match: Match }) {
   const isLive = match.status === 'live'
   const isFinished = match.status === 'finished'
   const [dateStr, setDateStr] = useState('')
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setDateStr(formatMatchDate(match.date, locale)), [match.date, locale])
 
   return (

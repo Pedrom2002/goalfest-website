@@ -44,10 +44,10 @@ export async function generateMetadata({
       siteName: 'Goalfest Lisboa',
       images: [
         {
-          url: '/Design%20sem%20nome(3).png',
-          width: 360,
-          height: 360,
-          alt: 'Goalfest Lisboa',
+          url: '/01_Sofia_ConcertoValeSilencio_0609_16x9.jpg',
+          width: 1600,
+          height: 900,
+          alt: 'Goalfest Lisboa - Fanzone Oficial Mundial 2026',
         },
       ],
     },

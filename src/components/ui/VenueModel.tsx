@@ -10,16 +10,6 @@ function Model() {
   return <primitive object={scene} scale={1} position={[0, -1, 0]} />
 }
 
-function Fallback() {
-  return (
-    <div className="w-full h-full flex items-center justify-center bg-bg-surface/50">
-      <div className="flex flex-col items-center gap-3">
-        <div className="w-10 h-10 border-2 border-green-pt/40 border-t-green-pt rounded-full animate-spin" />
-        <p className="text-text-muted text-xs uppercase tracking-widest">A carregar modelo 3D...</p>
-      </div>
-    </div>
-  )
-}
 
 export default function VenueModel() {
   const ref = useRef<HTMLDivElement>(null)

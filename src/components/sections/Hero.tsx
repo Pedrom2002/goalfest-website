@@ -1,7 +1,6 @@
 'use client'
 
-import { useTranslations, useLocale } from 'next-intl'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
@@ -19,6 +18,7 @@ const EQ_BARS = [
 
 function EqualizerBars() {
   const [mounted, setMounted] = useState(false)
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), [])
   if (!mounted) return null
 
@@ -43,7 +43,6 @@ function EqualizerBars() {
 
 export default function Hero() {
   const t = useTranslations('hero')
-  const locale = useLocale()
 
   return (
     <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-20">

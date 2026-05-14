@@ -39,6 +39,7 @@ export default function CountdownTimer() {
   const [time, setTime] = useState<TimeLeft | 'started' | null>(null)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTime(calcTimeLeft())
     const id = setInterval(() => setTime(calcTimeLeft()), 1000)
     return () => clearInterval(id)
