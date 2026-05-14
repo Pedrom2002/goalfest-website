@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
-import BackgroundFX from '@/components/ui/BackgroundFX'
 // import Jogos from '@/components/sections/Jogos'
 import Venue from '@/components/sections/Venue'
 // import Galeria from '@/components/sections/Galeria'
@@ -90,7 +89,6 @@ export default function LandingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BackgroundFX />
       <Navbar />
       <main className="relative z-10">
         <Hero />

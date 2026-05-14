@@ -44,7 +44,7 @@ export async function generateMetadata({
       siteName: 'Goalfest Lisboa',
       images: [
         {
-          url: '/Design sem nome(3).png',
+          url: '/Design%20sem%20nome(3).png',
           width: 360,
           height: 360,
           alt: 'Goalfest Lisboa',

@@ -17,7 +17,7 @@ export async function generateMetadata({
   const isPt = locale === 'pt'
 
   return {
-    title: isPt ? 'FAQ' : 'FAQ',
+    title: 'FAQ',
     description: isPt
       ? 'Respostas às perguntas frequentes sobre o Goalfest: entradas, local, comida, regras e acessibilidade.'
       : 'Answers to frequently asked questions about Goalfest: tickets, venue, food, rules and accessibility.',
