@@ -9,6 +9,7 @@ import Footer from '@/components/layout/Footer'
 import { SCHEDULE } from '@/data/schedule'
 import { TEAM_FLAG } from '@/data/teamFlags'
 import * as Flags from 'country-flag-icons/react/3x2'
+import { phaseOf, phaseLabel as getPhaseLabelForLocale } from '@/lib/matchPhase'
 
 type FlagCode = keyof typeof Flags
 
@@ -25,20 +26,8 @@ export default function JogosPage() {
   const isPt = locale === 'pt'
   const [filter, setFilter] = useState<'all' | 'group' | 'knockout'>('all')
 
-  const phaseOf = (date: string) => {
-    const d = new Date(date).getTime()
-    if (d <= new Date('2026-06-27').getTime()) return 'group'
-    return 'knockout'
-  }
-
-  const phaseLabel = (date: string) => {
-    const d = new Date(date).getTime()
-    if (d <= new Date('2026-06-27').getTime()) return isPt ? 'Fase de Grupos' : 'Group Stage'
-    if (d <= new Date('2026-07-07').getTime()) return isPt ? 'Oitavos de Final' : 'Round of 16'
-    if (d <= new Date('2026-07-11').getTime()) return isPt ? 'Quartos de Final' : 'Quarter-Finals'
-    if (d <= new Date('2026-07-15').getTime()) return isPt ? 'Meias-Finais' : 'Semi-Finals'
-    return isPt ? 'Final' : 'Final'
-  }
+  const phaseLabel = (date: string) =>
+    getPhaseLabelForLocale(date, isPt ? 'pt' : 'en')
 
   const filtered = SCHEDULE.filter(d => filter === 'all' || phaseOf(d.date) === filter)
 

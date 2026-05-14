@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Masonry from 'react-masonry-css'
 import PhotoLightbox from '@/components/ui/PhotoLightbox'
+import { galleryNext, galleryPrev } from '@/lib/galleryNav'
 
 const PHOTOS = [
   { src: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800', alt: 'Adeptos no estádio' },
@@ -22,8 +23,8 @@ export default function Galeria() {
   const t = useTranslations('galeria')
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
-  const prev = () => setLightboxIndex((i) => (i !== null ? (i - 1 + PHOTOS.length) % PHOTOS.length : null))
-  const next = () => setLightboxIndex((i) => (i !== null ? (i + 1) % PHOTOS.length : null))
+  const prev = () => setLightboxIndex((i) => (i !== null ? galleryPrev(i, PHOTOS.length) : null))
+  const next = () => setLightboxIndex((i) => (i !== null ? galleryNext(i, PHOTOS.length) : null))
 
   return (
     <section id="galeria" className="py-24 px-4 max-w-7xl mx-auto">

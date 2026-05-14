@@ -5,8 +5,7 @@ import { useTranslations, useLocale } from 'next-intl'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Match } from '@/types'
 import MatchCard from '@/components/ui/MatchCard'
-
-type Filter = 'all' | 'grupos' | 'eliminatorias' | 'portugal'
+import { applyFilter, type Filter } from '@/lib/matchFilters'
 
 const filters: Filter[] = ['all', 'grupos', 'eliminatorias', 'portugal']
 const filterKeys: Record<Filter, string> = {
@@ -14,18 +13,6 @@ const filterKeys: Record<Filter, string> = {
   grupos: 'filter_grupos',
   eliminatorias: 'filter_eliminatorias',
   portugal: 'filter_portugal',
-}
-
-function applyFilter(matches: Match[], filter: Filter): Match[] {
-  if (filter === 'all') return matches
-  if (filter === 'grupos') return matches.filter((m) => m.phase === 'grupo')
-  if (filter === 'eliminatorias') return matches.filter((m) => m.phase !== 'grupo')
-  if (filter === 'portugal') {
-    return matches.filter(
-      (m) => m.home.nameEn === 'Portugal' || m.away.nameEn === 'Portugal'
-    )
-  }
-  return matches
 }
 
 export default function Jogos({ matches }: { matches: Match[] }) {

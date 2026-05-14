@@ -1,27 +1,9 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
-
-const TARGET = new Date('2026-06-11T15:00:00Z')
-
-interface TimeLeft {
-  days: number
-  hours: number
-  minutes: number
-  seconds: number
-}
-
-function calcTimeLeft(): TimeLeft {
-  const diff = Math.max(0, TARGET.getTime() - Date.now())
-  return {
-    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((diff / 1000 / 60) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
-  }
-}
+import { calcTimeLeft, type TimeLeft } from '@/lib/countdown'
 
 function FlipUnit({ value, label, animate: doAnimate }: { value: number; label: string; animate?: boolean }) {
   const display = String(value).padStart(2, '0')

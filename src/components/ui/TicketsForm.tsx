@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from 'next-intl'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Match } from '@/types'
 import { formatMatchDate } from '@/lib/utils'
+import { toggleMatch as toggle } from '@/lib/ticketSelection'
 
 export default function TicketsForm({ matches }: { matches: Match[] }) {
   const t = useTranslations('bilhetes')
@@ -13,9 +14,7 @@ export default function TicketsForm({ matches }: { matches: Match[] }) {
   const [selectedMatches, setSelectedMatches] = useState<string[]>([])
 
   const toggleMatch = (id: string) => {
-    setSelectedMatches((prev) =>
-      prev.includes(id) ? prev.filter((m) => m !== id) : [...prev, id]
-    )
+    setSelectedMatches((prev) => toggle(prev, id))
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
