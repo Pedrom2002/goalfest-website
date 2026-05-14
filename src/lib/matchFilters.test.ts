@@ -3,7 +3,6 @@ import { applyFilter } from './matchFilters'
 import type { Match } from '@/types'
 
 const makeMatch = (overrides: Partial<Match> & { id: string }): Match => ({
-  id: overrides.id,
   home: { name: 'França', nameEn: 'France', flag: '🇫🇷' },
   away: { name: 'Brasil', nameEn: 'Brazil', flag: '🇧🇷' },
   date: '2026-06-16T19:00:00Z',

@@ -32,7 +32,7 @@ describe('formatMatchDate', () => {
     expect(june).not.toBe(july)
   })
 
-  it('throws a RangeError when the date string is invalid', () => {
-    expect(() => formatMatchDate('not-a-date', 'pt')).toThrow(RangeError)
+  it('returns empty string for invalid date input', () => {
+    expect(formatMatchDate('not-a-date', 'pt')).toBe('')
   })
 })
