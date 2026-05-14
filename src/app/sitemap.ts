@@ -5,6 +5,7 @@ const LOCALES = ['pt', 'en'] as const
 
 const routes = [
   { path: '', priority: 1.0, changeFrequency: 'weekly' as const },
+  { path: '/jogos', priority: 0.9, changeFrequency: 'weekly' as const },
   { path: '/faq', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/bilhetes', priority: 0.8, changeFrequency: 'weekly' as const },
 ]
