@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useLocale } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import Link from 'next/link'
 import { SCHEDULE } from '@/data/schedule'
 import { TEAM_FLAG } from '@/data/teamFlags'
@@ -20,11 +20,17 @@ function Flag({ team }: { team: string }) {
 }
 
 export default function JogosSchedule() {
+  const t = useTranslations('jogos')
   const locale = useLocale()
-  const isPt = locale === 'pt'
   const [filter, setFilter] = useState<'all' | 'group' | 'knockout'>('all')
 
   const filtered = SCHEDULE.filter(d => filter === 'all' || phaseOf(d.date) === filter)
+
+  const FILTERS = [
+    { key: 'all',      label: t('filter_all') },
+    { key: 'group',    label: t('filter_grupos') },
+    { key: 'knockout', label: t('filter_eliminatorias') },
+  ] as const
 
   return (
     <main className="min-h-screen pt-24 pb-20 px-4 max-w-4xl mx-auto">
@@ -38,15 +44,15 @@ export default function JogosSchedule() {
         <div className="flex items-center gap-3 justify-center mb-4">
           <span className="h-px w-12 bg-green-pt/40" />
           <p className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium">
-            {isPt ? 'Programação' : 'Schedule'}
+            {t('subtitle')}
           </p>
           <span className="h-px w-12 bg-green-pt/40" />
         </div>
         <h1 className="font-display text-4xl sm:text-6xl font-black text-text-primary uppercase tracking-wide mb-3">
-          {isPt ? 'Jogos Transmitidos' : 'Broadcast Matches'}
+          {t('heading')}
         </h1>
         <p className="text-text-muted text-sm">
-          {isPt ? '+50 jogos ao vivo · FIFA World Cup 2026' : '+50 matches live · FIFA World Cup 2026'}
+          {t('count')}
         </p>
       </motion.div>
 
@@ -56,11 +62,7 @@ export default function JogosSchedule() {
         transition={{ duration: 0.4, delay: 0.2 }}
         className="flex justify-center gap-2 mb-8"
       >
-        {[
-          { key: 'all',      labelPt: 'Todos',          labelEn: 'All' },
-          { key: 'group',    labelPt: 'Fase de Grupos', labelEn: 'Group Stage' },
-          { key: 'knockout', labelPt: 'Eliminatórias',  labelEn: 'Knockout' },
-        ].map(f => (
+        {FILTERS.map(f => (
           <button
             key={f.key}
             onClick={() => setFilter(f.key as typeof filter)}
@@ -70,7 +72,7 @@ export default function JogosSchedule() {
                 : 'border border-white/15 text-text-muted hover:border-green-pt/40 hover:text-green-pt'
             }`}
           >
-            {isPt ? f.labelPt : f.labelEn}
+            {f.label}
           </button>
         ))}
       </motion.div>
@@ -87,7 +89,7 @@ export default function JogosSchedule() {
             <div className="flex items-center gap-3 px-5 py-3 border-b border-white/8 bg-white/3">
               <span className="font-display text-green-pt font-black text-lg">{day.displayDate}</span>
               <span className="h-3 w-px bg-white/20" />
-              <span className="text-text-muted/60 text-xs uppercase tracking-widest">{phaseLabel(day.date, isPt ? 'pt' : 'en')}</span>
+              <span className="text-text-muted/60 text-xs uppercase tracking-widest">{phaseLabel(day.date, locale === 'pt' ? 'pt' : 'en')}</span>
             </div>
 
             <div className="divide-y divide-white/5">
@@ -96,7 +98,7 @@ export default function JogosSchedule() {
                   <span className="text-green-pt font-mono text-xs font-bold w-12 shrink-0 tabular-nums">{m.time}</span>
                   {m.home === 'TBA' ? (
                     <span className="text-text-muted/40 text-xs italic tracking-widest uppercase">
-                      {isPt ? 'A definir' : 'TBA'}
+                      {t('tba')}
                     </span>
                   ) : (
                     <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -125,7 +127,7 @@ export default function JogosSchedule() {
         className="text-center mt-10"
       >
         <Link href={`/${locale}`} className="text-text-muted/50 text-xs uppercase tracking-widest hover:text-green-pt transition-colors">
-          ← {isPt ? 'Voltar ao início' : 'Back to home'}
+          ← {t('back')}
         </Link>
       </motion.div>
     </main>

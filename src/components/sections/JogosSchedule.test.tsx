@@ -19,8 +19,19 @@ vi.mock('next/link', () => ({
   ),
 }))
 
+const PT_JOGOS: Record<string, string> = {
+  subtitle: 'Programação',
+  heading: 'Jogos Transmitidos',
+  count: '+50 jogos ao vivo · FIFA World Cup 2026',
+  tba: 'A definir',
+  back: 'Voltar ao início',
+  filter_all: 'Todos',
+  filter_grupos: 'Fase de Grupos',
+  filter_eliminatorias: 'Eliminatórias',
+}
+
 vi.mock('next-intl', () => ({
-  useTranslations: () => (key: string) => key,
+  useTranslations: (_ns?: string) => (key: string) => PT_JOGOS[key] ?? key,
   useLocale: () => 'pt',
 }))
 
