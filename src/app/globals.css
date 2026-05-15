@@ -34,8 +34,8 @@ body {
 }
 
 @keyframes beamPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.85; }
+  0%, 100% { opacity: 0.3; transform: scaleX(1); }
+  50%       { opacity: 0.85; transform: scaleX(2); }
 }
 
 @keyframes eqBar {
@@ -43,4 +43,10 @@ body {
   25% { transform: scaleY(1); }
   50% { transform: scaleY(0.5); }
   75% { transform: scaleY(0.8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle, .beam {
+    animation: none !important;
+  }
 }
