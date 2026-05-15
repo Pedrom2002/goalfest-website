@@ -3,6 +3,7 @@ import { Inter, Oswald, Orbitron } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { headers } from 'next/headers'
 import { routing } from '@/i18n/routing'
 import BackgroundFXClient from '@/components/ui/BackgroundFXClient'
 import '../globals.css'
@@ -72,10 +73,10 @@ export default async function LocaleLayout({
   if (!routing.locales.includes(locale as 'pt' | 'en')) notFound()
   setRequestLocale(locale)
   const messages = await getMessages()
-
+  const nonce = (await headers()).get('x-nonce') ?? ''
   return (
     <html lang={locale} className={`${inter.variable} ${oswald.variable} ${orbitron.variable}`}>
-      <body className="bg-bg-primary text-text-primary antialiased">
+      <body className="bg-bg-primary text-text-primary antialiased" data-nonce={nonce}>
         <NextIntlClientProvider messages={messages}>
           <BackgroundFXClient />
           {children}
