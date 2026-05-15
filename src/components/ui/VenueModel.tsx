@@ -26,7 +26,7 @@ export default function VenueModel() {
         <directionalLight position={[5, 10, 5]} intensity={1} />
         <Suspense fallback={null}>
           <Model />
-          <Environment preset="night" />
+          <Environment files="https://phwtscjrqihtamdy.public.blob.vercel-storage.com/dikhololo_night_1k-vGG7SXP7RXLTzq0N3QZhB7bbKouvol.hdr" />
           <ContactShadows position={[0, -1.5, 0]} opacity={0.4} scale={10} blur={2} />
         </Suspense>
         <OrbitControls
