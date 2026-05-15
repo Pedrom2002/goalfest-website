@@ -1,5 +1,5 @@
 import createIntlMiddleware from 'next-intl/middleware'
-import { NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 import { routing } from '@/i18n/routing'
 
 const intlMiddleware = createIntlMiddleware(routing)
@@ -44,18 +44,19 @@ export default async function middleware(request: NextRequest) {
   const nonce = generateNonce()
   const csp = buildCsp(nonce)
 
-  // Forward nonce on the request so RSC layout can read it via headers().
+  // Build request headers with nonce so RSC layout can read it via headers().
+  // NextResponse.next({ request: { headers } }) is the documented forwarding pattern.
   // Do NOT set x-nonce on the response — exposing it to the browser defeats the nonce.
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('x-nonce', nonce)
 
-  // Run next-intl middleware with the modified request headers
-  const modifiedRequest = new NextRequest(request, { headers: requestHeaders })
-  const intlResponse = intlMiddleware(modifiedRequest)
+  // Run next-intl middleware; pass modified request so it propagates downstream.
+  const intlResponse = intlMiddleware(
+    new Request(request, { headers: requestHeaders }) as NextRequest
+  )
 
   const response = intlResponse ?? NextResponse.next({ request: { headers: requestHeaders } })
   response.headers.set('Content-Security-Policy', csp)
-  // x-nonce is intentionally NOT set on the response
 
   return response
 }
