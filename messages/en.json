@@ -3,12 +3,10 @@
     "goalfest": "The Event",
     "venue": "Venue",
     "sponsors": "Sponsors",
-    "faq": "FAQ",
-    "bilhetes": "Tickets"
+    "faq": "FAQ"
   },
   "hero": {
     "subtitle": "Lisbon · World Cup 2026",
-    "cta_tickets": "Reserve a Spot",
     "cta_matches": "See Matches",
     "countdown_days": "Days",
     "countdown_hours": "Hours",
@@ -56,19 +54,6 @@
   },
   "footer": {
     "copyright": "© 2026 Fanzone Lisboa. All rights reserved."
-  },
-  "bilhetes": {
-    "title": "Reserve a Spot",
-    "subtitle": "Secure your place at Lisbon's biggest fanzone",
-    "name_label": "Full name",
-    "email_label": "Email",
-    "quantity_label": "Number of tickets",
-    "matches_label": "Match(es) you want to attend",
-    "message_label": "Message (optional)",
-    "submit": "Reserve",
-    "submitting": "Sending...",
-    "success_title": "Reservation received!",
-    "success_msg": "You will receive a confirmation email shortly."
   },
   "notFound": {
     "heading": "Page not found",

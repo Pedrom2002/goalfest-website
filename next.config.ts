@@ -17,7 +17,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' https: data: blob:",
       "font-src 'self' https://fonts.gstatic.com",
-      "connect-src 'self' https://api.mapbox.com https://events.mapbox.com https://formspree.io",
+      "connect-src 'self' https://api.mapbox.com https://events.mapbox.com",
       "worker-src blob:",
       "frame-ancestors 'none'",
     ].join('; '),

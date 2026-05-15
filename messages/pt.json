@@ -3,12 +3,10 @@
     "goalfest": "O Evento",
     "venue": "Local",
     "sponsors": "Patrocinadores",
-    "faq": "FAQ",
-    "bilhetes": "Bilhetes"
+    "faq": "FAQ"
   },
   "hero": {
     "subtitle": "Lisboa · Mundial 2026",
-    "cta_tickets": "Reservar Lugar",
     "cta_matches": "Ver Jogos",
     "countdown_days": "Dias",
     "countdown_hours": "Horas",
@@ -56,19 +54,6 @@
   },
   "footer": {
     "copyright": "© 2026 Fanzone Lisboa. Todos os direitos reservados."
-  },
-  "bilhetes": {
-    "title": "Reservar Lugar",
-    "subtitle": "Garante o teu lugar na maior fanzone de Lisboa",
-    "name_label": "Nome completo",
-    "email_label": "Email",
-    "quantity_label": "Número de bilhetes",
-    "matches_label": "Jogo(s) pretendido(s)",
-    "message_label": "Mensagem (opcional)",
-    "submit": "Reservar",
-    "submitting": "A enviar...",
-    "success_title": "Reserva recebida!",
-    "success_msg": "Receberás uma confirmação por email em breve."
   },
   "notFound": {
     "heading": "Página não encontrada",

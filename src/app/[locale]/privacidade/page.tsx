@@ -65,7 +65,7 @@ export default async function PrivacidadePage({
               {isPt ? '1. Informações Recolhidas' : '1. Information Collected'}
             </h2>
             <ul className="space-y-2 list-disc list-inside">
-              <li><strong className="text-text-primary">{isPt ? 'Dados de contacto:' : 'Contact data:'}</strong> {isPt ? 'Ao submeter o formulário de pedido de bilhetes, recolhemos nome, endereço de e-mail e número de telefone.' : 'When submitting the ticket request form, we collect your name, email address and phone number.'}</li>
+              <li><strong className="text-text-primary">{isPt ? 'Dados de contacto:' : 'Contact data:'}</strong> {isPt ? 'Quando nos contacta por email, recolhemos nome e endereço de e-mail.' : 'When you contact us by email, we collect your name and email address.'}</li>
               <li><strong className="text-text-primary">{isPt ? 'Preferências:' : 'Preferences:'}</strong> {isPt ? 'Podemos recolher informações sobre as suas preferências para personalizar a experiência no site.' : 'We may collect information about your preferences to personalise your experience on the site.'}</li>
               <li><strong className="text-text-primary">{isPt ? 'Comunicações:' : 'Communications:'}</strong> {isPt ? 'Registamos comunicações com o nosso site, incluindo mensagens de suporte e feedback.' : 'We record communications with our site, including support messages and feedback.'}</li>
             </ul>
@@ -97,7 +97,7 @@ export default async function PrivacidadePage({
               {isPt ? '4. Partilha de Informações' : '4. Sharing of Information'}
             </h2>
             <ul className="space-y-2 list-disc list-inside">
-              <li>{isPt ? 'Podemos partilhar informações com terceiros de confiança, como processadores de formulários (Formspree), estritamente para fornecimento de serviços essenciais ao funcionamento do site.' : 'We may share information with trusted third parties, such as form processors (Formspree), strictly for the provision of services essential to the operation of the site.'}</li>
+              <li>{isPt ? 'Podemos partilhar informações com terceiros de confiança estritamente para fornecimento de serviços essenciais ao funcionamento do site.' : 'We may share information with trusted third parties strictly for the provision of services essential to the operation of the site.'}</li>
               <li>{isPt ? 'Em certas circunstâncias, podemos ser obrigados a divulgar informações em conformidade com a legislação aplicável.' : 'In certain circumstances, we may be required to disclose information in accordance with applicable legislation.'}</li>
             </ul>
           </section>

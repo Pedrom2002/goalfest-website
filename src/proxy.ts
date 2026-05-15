@@ -27,7 +27,7 @@ export default function middleware(request: NextRequest) {
     `worker-src blob:`,
     `frame-ancestors 'none'`,
     `base-uri 'self'`,
-    `form-action 'self' https://formspree.io`,
+    `form-action 'self'`,
   ].join('; ')
 
   response.headers.set('Content-Security-Policy', csp)
