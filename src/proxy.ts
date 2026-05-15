@@ -33,9 +33,7 @@ export default function middleware(request: NextRequest) {
   requestHeaders.set('x-nonce', nonce)
   requestHeaders.set('Content-Security-Policy', csp)
 
-  const intlResponse = intlMiddleware(
-    new Request(request, { headers: requestHeaders })
-  )
+  const intlResponse = intlMiddleware(request)
 
   const response = NextResponse.next({
     request: { headers: requestHeaders },
