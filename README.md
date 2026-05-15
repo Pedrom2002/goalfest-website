@@ -11,7 +11,6 @@ Live at: **[goalfest.pt](https://goalfest.pt)**
 - Countdown timer to tournament start
 - Interactive 3D venue model (Three.js / React Three Fiber)
 - Mapbox-powered venue map
-- Ticket inquiry form via Formspree
 - Sponsor showcase
 - FAQ section
 
@@ -26,7 +25,6 @@ Live at: **[goalfest.pt](https://goalfest.pt)**
 | 3D | Three.js + React Three Fiber |
 | Maps | Mapbox GL + react-map-gl |
 | i18n | next-intl (PT + EN) |
-| Forms | Formspree |
 | Tests | Vitest + jsdom |
 | Deploy | Vercel |
 
@@ -54,7 +52,6 @@ Fill in `.env.local`:
 | Variable | Required | Description |
 |---|---|---|
 | `NEXT_PUBLIC_MAPBOX_TOKEN` | Yes | Mapbox public token from [mapbox.com](https://mapbox.com) (free tier works) |
-| `NEXT_PUBLIC_FORMSPREE_ID` | Yes | Formspree form ID from [formspree.io](https://formspree.io) (free tier works) |
 
 ### Run
 
@@ -76,16 +73,16 @@ src/
   components/
     layout/         # Navbar, Footer
     sections/       # Page sections (Hero, Venue, JogosSchedule, FAQ, ...)
-    ui/             # Reusable UI components (TicketsForm, CountdownTimer, ...)
+    ui/             # Reusable UI components (CountdownTimer, FaqAccordion, MatchCard, ...)
   data/             # Static data (schedule, matches, faq, sponsors)
   i18n/             # next-intl routing and request config
-  lib/              # Pure utility functions (countdown, matchFilters, ticketSelection, ...)
+  lib/              # Pure utility functions (countdown, matchFilters, matchPhase, ...)
   types/            # Shared TypeScript types
 ```
 
 ## Testing
 
-Tests live alongside the code they test (`*.test.ts`). All tests are pure-function unit tests covering the `lib/` and `data/` modules. Coverage thresholds are enforced (80% lines/functions/statements, 75% branches).
+Tests cover `src/lib/`, `src/data/`, and key UI components (FaqAccordion, MatchCard, PhotoLightbox, JogosSchedule). Coverage thresholds are enforced (70% lines/functions/statements, 65% branches) and run in CI.
 
 ```bash
 npm run test             # run all tests
@@ -95,7 +92,7 @@ npm run test:coverage    # coverage report (html + terminal)
 
 ## Deployment
 
-Deployed on Vercel. Pushes to `master` trigger automatic deployments. Set the environment variables in the Vercel project settings — they are not needed at build time for static pages but are required at runtime for the map and contact form.
+Deployed on Vercel. Pushes to `master` trigger automatic deployments. Set the environment variables in the Vercel project settings — `NEXT_PUBLIC_MAPBOX_TOKEN` is required at runtime for the interactive map.
 
 ## Security
 
