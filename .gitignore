@@ -48,9 +48,6 @@ next-env.d.ts
 .playwright-mcp/
 goalfest-compare.png
 
-# large binary assets - not tracked in git (host on CDN or Git LFS)
-public/*.mp4
-public/*.glb
 
 # superpowers
 .superpowers/
