@@ -48,10 +48,9 @@ next-env.d.ts
 .playwright-mcp/
 goalfest-compare.png
 
-# large binary assets (use Git LFS — see .gitattributes)
+# large binary assets - not tracked in git (host on CDN or Git LFS)
 public/*.mp4
 public/*.glb
-!public/venue_compressed.glb
 
 # superpowers
 .superpowers/

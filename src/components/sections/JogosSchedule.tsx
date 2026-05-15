@@ -46,7 +46,7 @@ export default function JogosSchedule() {
           {isPt ? 'Jogos Transmitidos' : 'Broadcast Matches'}
         </h1>
         <p className="text-text-muted text-sm">
-          {isPt ? '64 jogos ao vivo · FIFA World Cup 2026' : '64 matches live · FIFA World Cup 2026'}
+          {isPt ? '+50 jogos ao vivo · FIFA World Cup 2026' : '+50 matches live · FIFA World Cup 2026'}
         </p>
       </motion.div>
 

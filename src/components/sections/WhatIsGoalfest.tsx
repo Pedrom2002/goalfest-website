@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const FEATURES = {
   pt: [
-    { title: 'Jogos do Mundial', body: '64 jogos da FIFA World Cup 2026 transmitidos ao vivo num ecrã gigante de alta definição.' },
+    { title: 'Jogos do Mundial', body: '+50 jogos da FIFA World Cup 2026 transmitidos ao vivo num ecrã gigante de alta definição.' },
     { title: 'Concertos', body: 'Atuações ao vivo de grandes nomes da música portuguesa e internacional nos dias de jogo.' },
     { title: 'Zona Gaming', body: 'Consolas disponíveis para todos. Participa nas competições e mostra quem é o melhor.' },
     { title: 'Football Park', body: 'Competições e torneios de futebol 5vs5 para todos os escalões, com prémios para os melhores.' },
@@ -17,7 +17,7 @@ const FEATURES = {
     { title: 'VIP Lounge', body: 'Lounge exclusivo por convite. Um espaço reservado para viver o evento de forma única e privilegiada.' },
   ],
   en: [
-    { title: 'World Cup Matches', body: '64 FIFA World Cup 2026 matches broadcast live on a giant high-definition screen.' },
+    { title: 'World Cup Matches', body: '+50 FIFA World Cup 2026 matches broadcast live on a giant high-definition screen.' },
     { title: 'Concerts', body: 'Live performances by major Portuguese and international music artists on match days.' },
     { title: 'Gaming Zone', body: 'Consoles available for everyone. Join the competitions and prove who\'s the best.' },
     { title: 'Football Park', body: '5-a-side competitions and tournaments for all age groups, with prizes for the winners.' },
@@ -31,12 +31,12 @@ const FEATURES = {
 
 const STATS = {
   pt: [
-    { value: '64', label: 'jogos transmitidos' },
+    { value: '+50', label: 'jogos transmitidos' },
     { value: '+10', label: 'concertos' },
     { value: '10h–02h', label: 'horário diário' },
   ],
   en: [
-    { value: '64', label: 'matches broadcast' },
+    { value: '+50', label: 'matches broadcast' },
     { value: '+10', label: 'concerts' },
     { value: '10am–2am', label: 'daily hours' },
   ],

@@ -17,8 +17,8 @@ export async function generateMetadata({
   return {
     title: isPt ? 'Jogos Transmitidos' : 'Broadcast Matches',
     description: isPt
-      ? '64 jogos da FIFA World Cup 2026 transmitidos ao vivo no Goalfest Lisboa. Consulta a programação completa.'
-      : '64 FIFA World Cup 2026 matches broadcast live at Goalfest Lisboa. View the full schedule.',
+      ? '+50 jogos da FIFA World Cup 2026 transmitidos ao vivo no Goalfest Lisboa. Consulta a programação completa.'
+      : '+50 FIFA World Cup 2026 matches broadcast live at Goalfest Lisboa. View the full schedule.',
     alternates: {
       canonical: `${BASE_URL}/${locale}/jogos`,
     },
