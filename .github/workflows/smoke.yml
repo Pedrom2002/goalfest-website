@@ -30,10 +30,10 @@ jobs:
           echo "Jogos: $STATUS"
           [ "$STATUS" -eq 200 ]
 
-      - name: Health check - Bilhetes page
+      - name: Health check - FAQ page
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ github.event.inputs.url }}/pt/bilhetes")
-          echo "Bilhetes: $STATUS"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ github.event.inputs.url }}/pt/faq")
+          echo "FAQ: $STATUS"
           [ "$STATUS" -eq 200 ]
 
       - name: Check security headers
