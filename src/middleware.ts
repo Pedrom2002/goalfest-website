@@ -18,9 +18,11 @@ const MAPBOX_HOSTS = 'https://*.mapbox.com https://*.mapbox.net https://api.mapb
 function buildCsp(nonce: string): string {
   const isProd = process.env.NODE_ENV === 'production'
 
+  // In production: strict-dynamic propagates nonce to dynamically loaded scripts.
+  // In dev: unsafe-eval needed for HMR; nonce-only (no unsafe-inline) keeps dev/prod parity.
   const scriptSrc = isProd
     ? `'self' 'nonce-${nonce}' 'strict-dynamic'`
-    : `'self' 'nonce-${nonce}' 'unsafe-inline' 'unsafe-eval'`
+    : `'self' 'nonce-${nonce}' 'unsafe-eval'`
 
   return [
     "default-src 'self'",
@@ -29,8 +31,9 @@ function buildCsp(nonce: string): string {
     `font-src 'self' https://fonts.gstatic.com`,
     `img-src 'self' data: blob: https://images.unsplash.com https://plus.unsplash.com ${VERCEL_BLOB_HOST}`,
     `media-src 'self' blob: ${VERCEL_BLOB_HOST}`,
-    `connect-src 'self' ${VERCEL_BLOB_HOST} ${MAPBOX_HOSTS} https://events.mapbox.com blob:`,
+    `connect-src 'self' ${VERCEL_BLOB_HOST} ${MAPBOX_HOSTS} blob:`,
     `worker-src 'self' blob:`,
+    `form-action 'self'`,
     `frame-ancestors 'none'`,
     `base-uri 'self'`,
     `object-src 'none'`,
@@ -41,11 +44,18 @@ export default async function middleware(request: NextRequest) {
   const nonce = generateNonce()
   const csp = buildCsp(nonce)
 
-  const intlResponse = intlMiddleware(request)
-  const response = intlResponse ?? NextResponse.next()
+  // Forward nonce on the request so RSC layout can read it via headers().
+  // Do NOT set x-nonce on the response — exposing it to the browser defeats the nonce.
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-nonce', nonce)
 
+  // Run next-intl middleware with the modified request headers
+  const modifiedRequest = new NextRequest(request, { headers: requestHeaders })
+  const intlResponse = intlMiddleware(modifiedRequest)
+
+  const response = intlResponse ?? NextResponse.next({ request: { headers: requestHeaders } })
   response.headers.set('Content-Security-Policy', csp)
-  response.headers.set('x-nonce', nonce)
+  // x-nonce is intentionally NOT set on the response
 
   return response
 }
