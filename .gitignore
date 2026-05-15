@@ -55,5 +55,7 @@ public/*.glb
 
 # superpowers
 .superpowers/
+docs/superpowers/
+scripts/
 
 .vercel
