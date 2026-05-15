@@ -15,8 +15,7 @@ describe('GET /api/health', () => {
   it('returns a ts ISO string', async () => {
     const res = await GET()
     const body = await res.json()
-    expect(typeof body.ts).toBe('string')
-    expect(() => new Date(body.ts)).not.toThrow()
+    expect(new Date(body.ts).toISOString()).toBe(body.ts)
   })
 
   it('sets Cache-Control: no-store', async () => {
