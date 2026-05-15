@@ -8,4 +8,8 @@ const motion = new Proxy({} as Record<string, React.FC<React.HTMLAttributes<HTML
 
 const AnimatePresence = ({ children }: { children?: React.ReactNode }) => <>{children}</>
 
-export { motion, AnimatePresence }
+const useInView = () => true
+const useAnimation = () => ({ start: () => {}, stop: () => {} })
+const useMotionValue = (initial: number) => ({ get: () => initial, set: () => {} })
+
+export { motion, AnimatePresence, useInView, useAnimation, useMotionValue }
