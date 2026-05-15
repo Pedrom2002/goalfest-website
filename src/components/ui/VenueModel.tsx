@@ -6,7 +6,7 @@ import { OrbitControls, useGLTF, Environment, ContactShadows } from '@react-thre
 import { useInView } from 'framer-motion'
 
 function Model() {
-  const { scene } = useGLTF('/venue_compressed.glb')
+  const { scene } = useGLTF('https://phwtscjrqihtamdy.public.blob.vercel-storage.com/venue_compressed-9HTTABhm50vbgKbJVaEvcchAdzZYd3.glb')
   return <primitive object={scene} scale={1} position={[0, -1, 0]} />
 }
 

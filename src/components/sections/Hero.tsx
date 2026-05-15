@@ -49,7 +49,7 @@ export default function Hero() {
           playsInline
           preload="metadata"
           className="absolute inset-0 w-full h-full object-cover"
-          src="/122965-726547934.mp4"
+          src="https://phwtscjrqihtamdy.public.blob.vercel-storage.com/122965-726547934-fGrPQAr0RXA9c69k7WRaFODMAmxUK9.mp4"
         />
       </div>
 
