@@ -4,7 +4,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
-import BackgroundFX from '@/components/ui/BackgroundFX'
+import BackgroundFXClient from '@/components/ui/BackgroundFXClient'
 import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
@@ -77,7 +77,7 @@ export default async function LocaleLayout({
     <html lang={locale} className={`${inter.variable} ${oswald.variable} ${orbitron.variable}`}>
       <body className="bg-bg-primary text-text-primary antialiased">
         <NextIntlClientProvider messages={messages}>
-          <BackgroundFX />
+          <BackgroundFXClient />
           {children}
         </NextIntlClientProvider>
       </body>

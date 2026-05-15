@@ -1,17 +1,17 @@
-export interface Match {
+export interface BroadcastMatch {
   time: string
   home: string
   away: string
 }
 
-export interface DaySchedule {
-  date: string       // e.g. "2026-06-11"
-  displayDate: string // e.g. "11 Jun"
-  matches: Match[]
+export interface BroadcastDay {
+  date: string
+  displayDate: string
+  matches: BroadcastMatch[]
   artists: string[]
 }
 
-export const SCHEDULE: DaySchedule[] = [
+export const SCHEDULE: BroadcastDay[] = [
   { date: '2026-06-11', displayDate: '11 Jun', matches: [{ time: '20H', home: 'México', away: 'África do Sul' }], artists: ['Jorge Guerreiro'] },
   { date: '2026-06-12', displayDate: '12 Jun', matches: [{ time: '20H', home: 'Canadá', away: 'Bósnia' }], artists: ['Primeira Companhia'] },
   { date: '2026-06-13', displayDate: '13 Jun', matches: [{ time: '22H', home: 'Catar', away: 'Suíça' }, { time: '23H', home: 'Brasil', away: 'Marrocos' }], artists: ['Bruna Lennon'] },

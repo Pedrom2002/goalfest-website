@@ -1,9 +1,7 @@
 'use client'
 
 import { useTranslations, useLocale } from 'next-intl'
-import { useState, useEffect } from 'react'
 import type { Match } from '@/types'
-import { formatMatchDate } from '@/lib/utils'
 
 const phaseKeys: Record<string, string> = {
   grupo: 'phase_grupo',
@@ -13,14 +11,11 @@ const phaseKeys: Record<string, string> = {
   final: 'phase_final',
 }
 
-export default function MatchCard({ match }: { match: Match }) {
+export default function MatchCard({ match, dateStr }: { match: Match; dateStr: string }) {
   const t = useTranslations('jogos')
   const locale = useLocale()
   const isLive = match.status === 'live'
   const isFinished = match.status === 'finished'
-  const [dateStr, setDateStr] = useState('')
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => setDateStr(formatMatchDate(match.date, locale)), [match.date, locale])
 
   return (
     <div

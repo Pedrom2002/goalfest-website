@@ -34,14 +34,6 @@ export default function Navbar() {
     setMenuOpen(false)
   }
 
-  const switchLocaleKeepMenu = () => {
-    const segments = pathname.split('/')
-    segments[1] = otherLocale
-    const hash = typeof window !== 'undefined' ? window.location.hash : ''
-    router.push(segments.join('/') + hash)
-    setMenuOpen(false)
-  }
-
   const navLinks = [
     { href: `/${locale}/#goalfest`, label: t('goalfest') },
     { href: `/${locale}/#venue`, label: t('venue') },
@@ -70,12 +62,6 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          {/* <Link
-            href={`/${locale}/bilhetes`}
-            className="bg-red-pt text-white px-4 py-2 rounded text-sm font-semibold uppercase tracking-wide hover:bg-red-pt/80 transition-colors"
-          >
-            {t('bilhetes')}
-          </Link> */}
           <button
             onClick={switchLocale}
             className="text-text-muted hover:text-gold text-[12px] font-medium border border-text-muted/30 px-2 py-1 rounded hover:border-gold transition-colors" style={{ fontFamily: 'var(--font-orbitron)' }}
@@ -151,7 +137,7 @@ export default function Navbar() {
               {/* Bottom: locale switch */}
               <div className="px-6 py-6 border-t border-white/10">
                 <button
-                  onClick={switchLocaleKeepMenu}
+                  onClick={switchLocale}
                   className="w-full flex items-center justify-center gap-2 py-2.5 border border-white/20 rounded-lg text-text-muted hover:text-white hover:border-white/40 text-sm font-medium transition-colors"
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" className="w-4 h-4">

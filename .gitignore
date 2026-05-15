@@ -48,6 +48,11 @@ next-env.d.ts
 .playwright-mcp/
 goalfest-compare.png
 
+# large binary assets (use Git LFS — see .gitattributes)
+public/*.mp4
+public/*.glb
+!public/venue_compressed.glb
+
 # superpowers
 .superpowers/
 

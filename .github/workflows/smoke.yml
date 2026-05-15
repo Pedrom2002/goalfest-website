@@ -1,0 +1,45 @@
+name: Smoke Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'Base URL to smoke-test (e.g. https://goalfest.pt)'
+        required: true
+        default: 'https://goalfest.pt'
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Health check - PT root
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ github.event.inputs.url }}/pt")
+          echo "PT root: $STATUS"
+          [ "$STATUS" -eq 200 ]
+
+      - name: Health check - EN root
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ github.event.inputs.url }}/en")
+          echo "EN root: $STATUS"
+          [ "$STATUS" -eq 200 ]
+
+      - name: Health check - Jogos page
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ github.event.inputs.url }}/pt/jogos")
+          echo "Jogos: $STATUS"
+          [ "$STATUS" -eq 200 ]
+
+      - name: Health check - Bilhetes page
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ github.event.inputs.url }}/pt/bilhetes")
+          echo "Bilhetes: $STATUS"
+          [ "$STATUS" -eq 200 ]
+
+      - name: Check security headers
+        run: |
+          HEADERS=$(curl -s -I "${{ github.event.inputs.url }}/pt")
+          echo "$HEADERS"
+          echo "$HEADERS" | grep -i "strict-transport-security" || (echo "Missing HSTS" && exit 1)
+          echo "$HEADERS" | grep -i "x-frame-options" || (echo "Missing X-Frame-Options" && exit 1)
+          echo "$HEADERS" | grep -i "x-content-type-options" || (echo "Missing X-Content-Type-Options" && exit 1)

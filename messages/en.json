@@ -70,6 +70,16 @@
     "success_title": "Reservation received!",
     "success_msg": "You will receive a confirmation email shortly."
   },
+  "notFound": {
+    "heading": "Page not found",
+    "body": "The page you are looking for does not exist or has been removed.",
+    "back": "Back to home"
+  },
+  "error": {
+    "heading": "Something went wrong",
+    "body": "An unexpected error occurred. Please try again.",
+    "retry": "Try again"
+  },
   "faq": {
     "title": "Frequently Asked Questions",
     "category_entradas": "Tickets",

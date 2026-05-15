@@ -1,29 +1,24 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Masonry from 'react-masonry-css'
 import PhotoLightbox from '@/components/ui/PhotoLightbox'
-
-const PHOTOS = [
-  { src: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800', alt: 'Adeptos no estádio' },
-  { src: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800', alt: 'Bola de futebol' },
-  { src: 'https://images.unsplash.com/photo-1551958219-acbc608f2099?w=800', alt: 'Ecrã gigante fanzone' },
-  { src: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800', alt: 'Adeptos portugueses' },
-  { src: 'https://images.unsplash.com/photo-1487466365202-1afdb86c764e?w=800', alt: 'Lisboa ao pôr do sol' },
-  { src: 'https://images.unsplash.com/photo-1540747913346-19212a32a168?w=800', alt: 'Celebração golo' },
-]
+import galleryData from '@/data/gallery.json'
 
 const breakpoints = { default: 3, 1024: 2, 640: 1 }
 
 export default function Galeria() {
   const t = useTranslations('galeria')
+  const locale = useLocale()
+  const photos = galleryData.map((p) => ({ src: p.src, alt: locale === 'en' ? p.altEn : p.alt }))
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
-  const prev = useCallback(() => setLightboxIndex((i) => (i !== null ? (i - 1 + PHOTOS.length) % PHOTOS.length : null)), [])
-  const next = useCallback(() => setLightboxIndex((i) => (i !== null ? (i + 1) % PHOTOS.length : null)), [])
+  const total = galleryData.length
+  const prev = useCallback(() => setLightboxIndex((i) => (i !== null ? (i - 1 + total) % total : null)), [total])
+  const next = useCallback(() => setLightboxIndex((i) => (i !== null ? (i + 1) % total : null)), [total])
   const close = useCallback(() => setLightboxIndex(null), [])
 
   return (
@@ -39,7 +34,7 @@ export default function Galeria() {
       </motion.h2>
 
       <Masonry breakpointCols={breakpoints} className="flex gap-4" columnClassName="flex flex-col gap-4">
-        {PHOTOS.map((photo, i) => (
+        {photos.map((photo, i) => (
           <motion.div
             key={photo.src}
             initial={{ opacity: 0, scale: 0.95 }}
@@ -92,7 +87,7 @@ export default function Galeria() {
       </Masonry>
 
       <PhotoLightbox
-        photos={PHOTOS}
+        photos={photos}
         index={lightboxIndex}
         onClose={close}
         onPrev={prev}

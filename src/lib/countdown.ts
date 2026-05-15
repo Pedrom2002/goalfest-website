@@ -7,8 +7,9 @@ export interface TimeLeft {
   seconds: number
 }
 
-export function calcTimeLeft(): TimeLeft {
-  const diff = Math.max(0, TARGET.getTime() - Date.now())
+export function calcTimeLeft(): TimeLeft | 'started' {
+  const diff = TARGET.getTime() - Date.now()
+  if (diff <= 0) return 'started'
   return {
     days: Math.floor(diff / (1000 * 60 * 60 * 24)),
     hours: Math.floor((diff / (1000 * 60 * 60)) % 24),

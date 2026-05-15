@@ -34,6 +34,7 @@ export interface Sponsor {
   name: string
   logo: string | null
   url?: string
+  logoScale?: number
 }
 
 export interface SponsorsData {

@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const PARTICLES = Array.from({ length: 45 }, (_, i) => ({
@@ -21,11 +20,6 @@ const BEAMS = [
 ]
 
 export default function BackgroundFX() {
-  const [mounted, setMounted] = useState(false)
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => setMounted(true), [])
-  if (!mounted) return null
-
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden>
       {BEAMS.map((b, i) => (

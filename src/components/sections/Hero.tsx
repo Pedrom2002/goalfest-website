@@ -3,7 +3,6 @@
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
 import CountdownTimer from '@/components/ui/CountdownTimer'
 
 const EQ_BARS = [
@@ -17,11 +16,6 @@ const EQ_BARS = [
 ]
 
 function EqualizerBars() {
-  const [mounted, setMounted] = useState(false)
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => setMounted(true), [])
-  if (!mounted) return null
-
   return (
     <div className="flex items-end gap-1 h-8" aria-hidden>
       {EQ_BARS.map((b, i) => (
@@ -111,29 +105,6 @@ export default function Hero() {
           <EqualizerBars />
         </motion.div>
 
-        {/* <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4"
-        >
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
-            <Link
-              href={`/${locale}/bilhetes`}
-              className="block bg-red-pt hover:bg-red-pt/80 text-white font-bold px-8 py-3 rounded uppercase tracking-wide transition-all duration-200 shadow-[0_0_20px_rgba(200,16,46,0.3)] hover:shadow-[0_0_30px_rgba(200,16,46,0.5)]"
-            >
-              {t('cta_tickets')}
-            </Link>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
-            <a
-              href="#jogos"
-              className="block border border-green-pt text-green-pt hover:bg-green-pt hover:text-bg-primary font-bold px-8 py-3 rounded uppercase tracking-wide transition-all duration-200 shadow-[0_0_20px_rgba(0,200,81,0.2)] hover:shadow-[0_0_30px_rgba(0,200,81,0.4)]"
-            >
-              {t('cta_matches')}
-            </a>
-          </motion.div>
-        </motion.div> */}
       </div>
 
       {/* Scroll indicator */}

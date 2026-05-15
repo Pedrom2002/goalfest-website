@@ -6,6 +6,7 @@ import { useLocale } from 'next-intl'
 import Link from 'next/link'
 import { SCHEDULE } from '@/data/schedule'
 import { TEAM_FLAG } from '@/data/teamFlags'
+import { phaseOf, phaseLabel } from '@/lib/matchPhase'
 import * as Flags from 'country-flag-icons/react/3x2'
 
 type FlagCode = keyof typeof Flags
@@ -22,16 +23,6 @@ export default function JogosSchedule() {
   const locale = useLocale()
   const isPt = locale === 'pt'
   const [filter, setFilter] = useState<'all' | 'group' | 'knockout'>('all')
-
-  const phaseOf = (date: string) => date <= '2026-06-27' ? 'group' : 'knockout'
-
-  const phaseLabel = (date: string) => {
-    if (date <= '2026-06-27') return isPt ? 'Fase de Grupos' : 'Group Stage'
-    if (date <= '2026-07-07') return isPt ? 'Oitavos de Final' : 'Round of 16'
-    if (date <= '2026-07-11') return isPt ? 'Quartos de Final' : 'Quarter-Finals'
-    if (date <= '2026-07-15') return isPt ? 'Meias-Finais' : 'Semi-Finals'
-    return 'Final'
-  }
 
   const filtered = SCHEDULE.filter(d => filter === 'all' || phaseOf(d.date) === filter)
 
@@ -96,7 +87,7 @@ export default function JogosSchedule() {
             <div className="flex items-center gap-3 px-5 py-3 border-b border-white/8 bg-white/3">
               <span className="font-display text-green-pt font-black text-lg">{day.displayDate}</span>
               <span className="h-3 w-px bg-white/20" />
-              <span className="text-text-muted/60 text-xs uppercase tracking-widest">{phaseLabel(day.date)}</span>
+              <span className="text-text-muted/60 text-xs uppercase tracking-widest">{phaseLabel(day.date, isPt ? 'pt' : 'en')}</span>
             </div>
 
             <div className="divide-y divide-white/5">

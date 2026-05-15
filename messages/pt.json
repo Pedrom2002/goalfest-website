@@ -70,6 +70,16 @@
     "success_title": "Reserva recebida!",
     "success_msg": "Receberás uma confirmação por email em breve."
   },
+  "notFound": {
+    "heading": "Página não encontrada",
+    "body": "A página que procuras não existe ou foi removida.",
+    "back": "Voltar ao início"
+  },
+  "error": {
+    "heading": "Algo correu mal",
+    "body": "Ocorreu um erro inesperado. Por favor tenta novamente.",
+    "retry": "Tentar novamente"
+  },
   "faq": {
     "title": "Perguntas Frequentes",
     "category_entradas": "Entradas",

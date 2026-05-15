@@ -5,11 +5,20 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import type { SponsorsData } from '@/types'
 
-function SponsorLogo({ name, logo, url, large, index }: { name: string; logo: string | null; url?: string; large?: boolean; index: number }) {
+function SponsorLogo({ name, logo, url, large, logoScale, index }: { name: string; logo: string | null; url?: string; large?: boolean; logoScale?: number; index: number }) {
+  const scale = logoScale ?? 1
+  const pct = `${scale * 100}%`
   const inner = (
     <>
       {logo ? (
-        <Image src={logo} alt={name} width={large ? 160 : 100} height={large ? 72 : 44} className="object-contain" style={name === 'Carris' ? { width: '200%', height: '200%', maxWidth: 'none' } : name === 'Bolt' ? { width: '65%', height: '65%' } : { width: '100%', height: '100%' }} />
+        <Image
+          src={logo}
+          alt={name}
+          width={large ? 160 : 100}
+          height={large ? 72 : 44}
+          className="object-contain"
+          style={{ width: pct, height: pct, maxWidth: scale > 1 ? 'none' : undefined }}
+        />
       ) : (
         <span className="text-text-muted font-semibold uppercase tracking-wide text-xs">{name}</span>
       )}
@@ -59,7 +68,7 @@ export default function Sponsors({ data }: { data: SponsorsData }) {
           </motion.div>
           <div className="flex gap-6 flex-wrap justify-center">
             {data.principal.map((s, i) => (
-              <SponsorLogo key={s.id} name={s.name} logo={s.logo} url={s.url} large index={i} />
+              <SponsorLogo key={s.id} name={s.name} logo={s.logo} url={s.url} logoScale={s.logoScale} large index={i} />
             ))}
           </div>
         </div>
@@ -79,7 +88,7 @@ export default function Sponsors({ data }: { data: SponsorsData }) {
           </motion.div>
           <div className="flex gap-4 flex-wrap justify-center">
             {data.parceiros.map((s, i) => (
-              <SponsorLogo key={s.id} name={s.name} logo={s.logo} url={s.url} index={i} />
+              <SponsorLogo key={s.id} name={s.name} logo={s.logo} url={s.url} logoScale={s.logoScale} index={i} />
             ))}
           </div>
         </div>

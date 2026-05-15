@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Match } from '@/types'
@@ -12,13 +12,21 @@ export default function TicketsForm({ matches }: { matches: Match[] }) {
   const locale = useLocale()
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [selectedMatches, setSelectedMatches] = useState<string[]>([])
+  const lastSubmitRef = useRef<number>(0)
+  const submittingRef = useRef(false)
 
   const toggleMatch = (id: string) => {
     setSelectedMatches((prev) => toggle(prev, id))
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    const now = Date.now()
+    const COOLDOWN_MS = 5 * 60 * 1000
+    if (submittingRef.current || now - lastSubmitRef.current < COOLDOWN_MS) return
+
+    submittingRef.current = true
     setStatus('loading')
     const form = e.currentTarget
     const data = new FormData(form)
@@ -26,6 +34,7 @@ export default function TicketsForm({ matches }: { matches: Match[] }) {
 
     const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID
     if (!formspreeId) {
+      submittingRef.current = false
       setStatus('error')
       return
     }
@@ -36,8 +45,10 @@ export default function TicketsForm({ matches }: { matches: Match[] }) {
       headers: { Accept: 'application/json' },
     })
 
+    lastSubmitRef.current = Date.now()
+    submittingRef.current = false
     setStatus(res.ok ? 'success' : 'error')
-  }
+  }, [selectedMatches])
 
   return (
     <div className="max-w-xl mx-auto">

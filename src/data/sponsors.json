@@ -1,8 +1,8 @@
 {
   "principal": [
     { "id": "s1", "name": "ActivoBank", "logo": "/patrocinadores/logo_activobank.svg", "url": "https://www.activobank.pt" },
-    { "id": "s2", "name": "Bolt", "logo": "/patrocinadores/Bolt_logo.png", "url": "https://bolt.eu" },
-    { "id": "s3", "name": "Carris", "logo": "/patrocinadores/Carris_Logo_PNG.png", "url": "https://www.carris.pt" },
+    { "id": "s2", "name": "Bolt", "logo": "/patrocinadores/Bolt_logo.png", "url": "https://bolt.eu", "logoScale": 0.65 },
+    { "id": "s3", "name": "Carris", "logo": "/patrocinadores/Carris_Logo_PNG.png", "url": "https://www.carris.pt", "logoScale": 2.0 },
     { "id": "s4", "name": "Lime", "logo": "/patrocinadores/Lime.svg", "url": "https://www.li.me" }
   ],
   "parceiros": [
