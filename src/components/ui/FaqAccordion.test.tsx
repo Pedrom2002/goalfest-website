@@ -62,4 +62,26 @@ describe('FaqAccordion', () => {
     render(<FaqAccordion items={[]} />)
     expect(document.querySelector('[class*="divide-y"]')).toBeInTheDocument()
   })
+
+  it('button has aria-expanded=false when answer is hidden', () => {
+    render(<FaqAccordion items={items} />)
+    const btn = screen.getByText('Pergunta um').closest('button')!
+    expect(btn).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('button has aria-expanded=true when answer is visible', () => {
+    render(<FaqAccordion items={items} />)
+    const btn = screen.getByText('Pergunta um').closest('button')!
+    fireEvent.click(btn)
+    expect(btn).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('button aria-controls points to the answer panel id', () => {
+    render(<FaqAccordion items={items} />)
+    const btn = screen.getByText('Pergunta um').closest('button')!
+    const controlsId = btn.getAttribute('aria-controls')!
+    expect(controlsId).toBeTruthy()
+    fireEvent.click(btn)
+    expect(document.getElementById(controlsId)).toBeInTheDocument()
+  })
 })
