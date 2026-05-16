@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Oswald, Orbitron } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
@@ -12,6 +12,11 @@ const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald', display: 
 const orbitron = Orbitron({ subsets: ['latin'], variable: '--font-orbitron', weight: ['500', '600', '700'], display: 'swap' })
 
 const BASE_URL = 'https://goalfest.pt'
+
+export const viewport: Viewport = {
+  themeColor: '#16a34a',
+  colorScheme: 'dark',
+}
 
 export async function generateMetadata({
   params,
