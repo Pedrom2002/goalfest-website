@@ -5,15 +5,15 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { useRef, useEffect } from 'react'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
-class ModelErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+class ModelErrorBoundary extends Component<{ children: ReactNode; fallbackText: string }, { failed: boolean }> {
   state = { failed: false }
   static getDerivedStateFromError() { return { failed: true } }
   render() {
     if (this.state.failed) return (
       <div className="w-full h-full flex items-center justify-center text-text-muted text-xs uppercase tracking-widest">
-        Modelo 3D indisponível
+        {this.props.fallbackText}
       </div>
     )
     return this.props.children
@@ -72,6 +72,7 @@ const ACCESS_CARDS = {
 export default function Venue() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const locale = useLocale() as 'pt' | 'en'
+  const tVenue = useTranslations('venue')
   const cards = ACCESS_CARDS[locale] ?? ACCESS_CARDS.pt
 
   const copy = {
@@ -248,7 +249,7 @@ export default function Venue() {
             <span className="h-px w-12 bg-green-pt/40" />
           </div>
           <div className="w-full h-[240px] md:h-[340px] rounded-2xl overflow-hidden border border-white/8 bg-bg-surface shadow-[0_0_60px_rgba(0,200,81,0.05)]">
-            <ModelErrorBoundary>
+            <ModelErrorBoundary fallbackText={tVenue('model_unavailable')}>
               <VenueModel />
             </ModelErrorBoundary>
           </div>

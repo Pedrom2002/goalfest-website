@@ -45,7 +45,7 @@ describe('Venue error boundary', () => {
   it('renders fallback text when 3D model throws', () => {
     const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
     render(<Venue />)
-    expect(screen.getByText('Modelo 3D indisponível')).toBeInTheDocument()
+    expect(screen.getByText('model_unavailable')).toBeInTheDocument()
     consoleSpy.mockRestore()
   })
 

@@ -46,7 +46,8 @@
     "access_title": "Accessibility",
     "access": "Fully accessible venue. Reserved areas for reduced mobility.",
     "hours_title": "Hours",
-    "hours": "Doors open 1h before each match."
+    "hours": "Doors open 1h before each match.",
+    "model_unavailable": "3D model unavailable"
   },
   "galeria": {
     "title": "Gallery"

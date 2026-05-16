@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
@@ -10,16 +10,35 @@ import galleryData from '@/data/gallery.json'
 
 const breakpoints = { default: 3, 1024: 2, 640: 1 }
 
+function GaleriaSkeleton() {
+  return (
+    <div className="columns-2 md:columns-3 gap-3 space-y-3">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div
+          key={i}
+          className="break-inside-avoid rounded-lg bg-white/5 animate-pulse"
+          style={{ height: i % 3 === 0 ? '220px' : i % 3 === 1 ? '160px' : '190px' }}
+        />
+      ))}
+    </div>
+  )
+}
+
 export default function Galeria() {
   const t = useTranslations('galeria')
   const locale = useLocale()
   const photos = galleryData.map((p) => ({ src: p.src, alt: locale === 'en' ? p.altEn : p.alt }))
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => { setMounted(true) }, [])
 
   const total = galleryData.length
   const prev = useCallback(() => setLightboxIndex((i) => (i !== null ? (i - 1 + total) % total : null)), [total])
   const next = useCallback(() => setLightboxIndex((i) => (i !== null ? (i + 1) % total : null)), [total])
   const close = useCallback(() => setLightboxIndex(null), [])
+
+  if (!mounted) return <GaleriaSkeleton />
 
   return (
     <section id="galeria" className="py-24 px-4 max-w-7xl mx-auto">

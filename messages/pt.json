@@ -46,7 +46,8 @@
     "access_title": "Acessibilidade",
     "access": "Espaço totalmente acessível. Zonas reservadas para mobilidade reduzida.",
     "hours_title": "Horários",
-    "hours": "Portas abrem 1h antes de cada jogo."
+    "hours": "Portas abrem 1h antes de cada jogo.",
+    "model_unavailable": "Modelo 3D indisponível"
   },
   "galeria": {
     "title": "Galeria"
