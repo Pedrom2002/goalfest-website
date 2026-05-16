@@ -32,5 +32,5 @@ export default withSentryConfig(withNextIntl(nextConfig), {
   ...(process.env.SENTRY_PROJECT !== undefined && { project: process.env.SENTRY_PROJECT }),
   silent: true,
   widenClientFileUpload: true,
-  sourcemaps: { disable: true },
+  ...(process.env.SENTRY_AUTH_TOKEN !== undefined && { sourcemaps: { disable: false } }),
 })
