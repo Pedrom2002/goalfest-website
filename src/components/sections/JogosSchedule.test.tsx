@@ -86,4 +86,19 @@ describe('JogosSchedule', () => {
     const tbaLabels = screen.getAllByText('A definir')
     expect(tbaLabels.length).toBeGreaterThan(0)
   })
+
+  it('active filter button has aria-pressed=true, others aria-pressed=false', async () => {
+    const user = userEvent.setup()
+    render(<JogosSchedule />)
+    let allBtn = screen.getByRole('button', { name: /Todos/i })
+    let groupBtn = screen.getByRole('button', { name: /Fase de Grupos/i })
+    expect(allBtn).toHaveAttribute('aria-pressed', 'true')
+    expect(groupBtn).toHaveAttribute('aria-pressed', 'false')
+    await user.click(groupBtn)
+    // Re-query after state update
+    allBtn = screen.getByRole('button', { name: /Todos/i })
+    groupBtn = screen.getByRole('button', { name: /Fase de Grupos/i })
+    expect(allBtn).toHaveAttribute('aria-pressed', 'false')
+    expect(groupBtn).toHaveAttribute('aria-pressed', 'true')
+  })
 })

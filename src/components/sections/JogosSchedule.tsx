@@ -66,6 +66,7 @@ export default function JogosSchedule() {
           <button
             key={f.key}
             onClick={() => setFilter(f.key as typeof filter)}
+            aria-pressed={filter === f.key}
             className={`px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-200 ${
               filter === f.key
                 ? 'bg-green-pt text-bg-primary shadow-[0_0_20px_rgba(94,166,59,0.4)]'
