@@ -28,6 +28,12 @@ body {
   box-sizing: border-box;
 }
 
+:focus-visible {
+  outline: 2px solid var(--color-green-pt);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
 @keyframes particleFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-30px); }
