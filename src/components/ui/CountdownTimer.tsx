@@ -63,7 +63,12 @@ export default function CountdownTimer() {
   )
 
   return (
-    <div className="flex items-center gap-4 md:gap-6">
+    <div
+      className="flex items-center gap-4 md:gap-6"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Contagem decrescente para o evento"
+    >
       <FlipUnit value={time.days} label={t('countdown_days')} animate={false} />
       <span className="text-green-pt text-3xl font-bold mb-4">:</span>
       <FlipUnit value={time.hours} label={t('countdown_hours')} animate={false} />
