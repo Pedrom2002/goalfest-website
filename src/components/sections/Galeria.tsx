@@ -35,15 +35,17 @@ export default function Galeria() {
 
       <Masonry breakpointCols={breakpoints} className="flex gap-4" columnClassName="flex flex-col gap-4">
         {photos.map((photo, i) => (
-          <motion.div
+          <motion.button
             key={photo.src}
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
             whileHover="hover"
-            className="relative group cursor-pointer rounded-xl overflow-hidden"
+            className="relative group cursor-pointer rounded-xl overflow-hidden w-full text-left"
             onClick={() => setLightboxIndex(i)}
+            aria-label={`Abrir foto: ${photo.alt}`}
+            type="button"
           >
             <motion.div
               variants={{ hover: { scale: 1.05 } }}
@@ -82,7 +84,7 @@ export default function Galeria() {
                 {photo.alt}
               </motion.p>
             </motion.div>
-          </motion.div>
+          </motion.button>
         ))}
       </Masonry>
 
