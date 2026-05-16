@@ -47,7 +47,26 @@
     "access": "Fully accessible venue. Reserved areas for reduced mobility.",
     "hours_title": "Hours",
     "hours": "Doors open 1h before each match.",
-    "model_unavailable": "3D model unavailable"
+    "model_unavailable": "3D model unavailable",
+    "tag": "The Venue",
+    "venue_title": "Vale do Silêncio",
+    "sub": "Olivais · Lisbon · Portugal",
+    "addr": "Av. Cidade de Lourenço Marques · Olivais · Lisbon",
+    "maps": "Open in Google Maps",
+    "how": "Getting Here",
+    "model": "3D Model",
+    "drag": "Drag to rotate · Scroll to zoom",
+    "entrances": "<bold>Two entrances available</bold> — you can enter from the left side or the right side of the venue. Both give full access to the space.",
+    "loading": "Loading...",
+    "access_car_title": "By Car",
+    "access_car_body": "A2/IC17 (CRIL) or Av. Infante D. Henrique towards Oriente. Exit at Av. de Berlim or Av. Cidade de Lourenço Marques, Olivais Sul.",
+    "access_metro_title": "Metro",
+    "access_metro_body": "Red Line, Olivais station (1 min walk).",
+    "access_bus_title": "Bus",
+    "access_bus_body": "Carris lines 731, 744, 750, 759 and 781 with a stop next to the park.",
+    "access_parking_title": "Parking",
+    "access_parking_body": "Street parking on surrounding roads: Av. de Berlim and Rua Cidade de Nova Lisboa.",
+    "access_parking_link": "Find nearby car parks"
   },
   "galeria": {
     "title": "Gallery"

@@ -10,10 +10,14 @@ vi.mock('next/image', () => ({
 }))
 
 // Mock next-intl (global __mocks__ is not auto-applied by Vitest without automock config)
-vi.mock('next-intl', () => ({
-  useTranslations: () => (key: string) => key,
-  useLocale: () => 'pt',
-}))
+vi.mock('next-intl', () => {
+  const t = (key: string) => key
+  t.rich = (key: string) => key
+  return {
+    useTranslations: () => t,
+    useLocale: () => 'pt',
+  }
+})
 
 // Mock framer-motion (global __mocks__ is not auto-applied by Vitest without automock config)
 vi.mock('framer-motion', () => {
