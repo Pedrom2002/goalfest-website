@@ -44,8 +44,8 @@ export default function PhotoLightbox({ photos, index, onClose, onPrev, onNext }
           <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" />
           <div className="relative z-10 max-w-4xl w-full mx-4" onClick={(e) => e.stopPropagation()}>
             <Image
-              src={photos[index].src}
-              alt={photos[index].alt}
+              src={photos[index]?.src ?? ''}
+              alt={photos[index]?.alt ?? ''}
               width={1200}
               height={800}
               className="rounded-xl object-cover w-full max-h-[80vh]"

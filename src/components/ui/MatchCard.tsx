@@ -24,7 +24,7 @@ export default function MatchCard({ match, dateStr }: { match: Match; dateStr: s
       }`}
     >
       <div className="flex items-center justify-between text-xs uppercase tracking-wider">
-        <span className="text-text-muted">{t(phaseKeys[match.phase])}</span>
+        <span className="text-text-muted">{t(phaseKeys[match.phase] ?? 'phase_grupo')}</span>
         {isLive && (
           <span className="flex items-center gap-1.5 text-red-pt font-bold">
             <span className="w-2 h-2 rounded-full bg-red-pt animate-pulse" />

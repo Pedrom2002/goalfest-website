@@ -8,9 +8,9 @@ import { useRef, useEffect } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 
 class ModelErrorBoundary extends Component<{ children: ReactNode; fallbackText: string }, { failed: boolean }> {
-  state = { failed: false }
+  override state = { failed: false }
   static getDerivedStateFromError() { return { failed: true } }
-  render() {
+  override render() {
     if (this.state.failed) return (
       <div className="w-full h-full flex items-center justify-center text-text-muted text-xs uppercase tracking-widest">
         {this.props.fallbackText}

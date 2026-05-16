@@ -31,7 +31,9 @@ export async function generateMetadata({
   }
 }
 
-const categoryTitleKeys: Record<string, string> = {
+type FaqTKey = 'category_entradas' | 'category_local' | 'category_comida' | 'category_regras' | 'category_acessibilidade'
+
+const categoryTitleKeys: Record<string, FaqTKey> = {
   entradas: 'category_entradas',
   local: 'category_local',
   comida: 'category_comida',
@@ -81,10 +83,12 @@ export default async function FaqPage({
           {categories.map((cat) => (
             <div key={cat.category}>
               <h2 className="text-text-muted text-xs uppercase tracking-widest mb-4 border-b border-white/10 pb-2">
-                {categoryTitleKeys[cat.category]
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  ? t(categoryTitleKeys[cat.category] as any)
-                  : (locale === 'pt' ? cat.category : cat.categoryEn)}
+                {(() => {
+                  const key = categoryTitleKeys[cat.category]
+                  return key
+                    ? t(key)
+                    : (locale === 'pt' ? cat.category : cat.categoryEn)
+                })()}
               </h2>
               <FaqAccordion
                 items={cat.items.map((item) => ({

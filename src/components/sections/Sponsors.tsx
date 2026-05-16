@@ -68,7 +68,7 @@ export default function Sponsors({ data }: { data: SponsorsData }) {
           </motion.div>
           <div className="flex gap-6 flex-wrap justify-center">
             {data.principal.map((s, i) => (
-              <SponsorLogo key={s.id} name={s.name} logo={s.logo} url={s.url} logoScale={s.logoScale} large index={i} />
+              <SponsorLogo key={s.id} name={s.name} logo={s.logo} {...(s.url !== undefined && { url: s.url })} {...(s.logoScale !== undefined && { logoScale: s.logoScale })} large index={i} />
             ))}
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function Sponsors({ data }: { data: SponsorsData }) {
           </motion.div>
           <div className="flex gap-4 flex-wrap justify-center">
             {data.parceiros.map((s, i) => (
-              <SponsorLogo key={s.id} name={s.name} logo={s.logo} url={s.url} logoScale={s.logoScale} index={i} />
+              <SponsorLogo key={s.id} name={s.name} logo={s.logo} {...(s.url !== undefined && { url: s.url })} {...(s.logoScale !== undefined && { logoScale: s.logoScale })} index={i} />
             ))}
           </div>
         </div>

@@ -7,11 +7,11 @@ describe('SCHEDULE data integrity', () => {
   })
 
   it('starts on the tournament opening day (2026-06-11)', () => {
-    expect(SCHEDULE[0].date).toBe('2026-06-11')
+    expect(SCHEDULE[0]?.date).toBe('2026-06-11')
   })
 
   it('ends on the final day (2026-07-19)', () => {
-    expect(SCHEDULE[SCHEDULE.length - 1].date).toBe('2026-07-19')
+    expect(SCHEDULE[SCHEDULE.length - 1]?.date).toBe('2026-07-19')
   })
 
   it('all date strings parse to valid Date objects', () => {
@@ -22,8 +22,8 @@ describe('SCHEDULE data integrity', () => {
 
   it('dates are in strictly ascending chronological order', () => {
     for (let i = 1; i < SCHEDULE.length; i++) {
-      const prev = new Date(SCHEDULE[i - 1].date).getTime()
-      const curr = new Date(SCHEDULE[i].date).getTime()
+      const prev = new Date(SCHEDULE[i - 1]?.date ?? '').getTime()
+      const curr = new Date(SCHEDULE[i]?.date ?? '').getTime()
       expect(curr).toBeGreaterThan(prev)
     }
   })
@@ -47,7 +47,7 @@ describe('SCHEDULE data integrity', () => {
     const groupDays = SCHEDULE.filter(
       (d) => new Date(d.date) <= new Date(LAST_GROUP_DATE)
     )
-    expect(groupDays[groupDays.length - 1].date).toBe(LAST_GROUP_DATE)
+    expect(groupDays[groupDays.length - 1]?.date).toBe(LAST_GROUP_DATE)
   })
 
   it('displayDate is a non-empty string for every day', () => {
