@@ -4,7 +4,7 @@ import { useTranslations, useLocale } from 'next-intl'
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Navbar() {
@@ -15,6 +15,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [pastHero, setPastHero] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const hamburgerRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const onScroll = () => {
@@ -25,13 +27,41 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false)
+    hamburgerRef.current?.focus()
+  }, [])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const el = menuRef.current
+    if (!el) return
+    const focusable = el.querySelectorAll<HTMLElement>(
+      'a[href], button, [tabindex]:not([tabindex="-1"])'
+    )
+    focusable[0]?.focus()
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { closeMenu(); return }
+      if (e.key !== 'Tab') return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last?.focus() }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first?.focus() }
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [menuOpen, closeMenu])
+
   const otherLocale = locale === 'pt' ? 'en' : 'pt'
   const switchLocale = () => {
     const segments = pathname.split('/')
     segments[1] = otherLocale
     const hash = typeof window !== 'undefined' ? window.location.hash : ''
     router.push(segments.join('/') + hash)
-    setMenuOpen(false)
+    closeMenu()
   }
 
   const navLinks = [
@@ -48,11 +78,11 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
-        <Link href={`/${locale}`} className={`block transition-all duration-300 hover:scale-105 ${pastHero ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} aria-label="Ir para página principal">
+        <Link href={`/${locale}`} className={`block transition-all duration-300 hover:scale-105 ${pastHero ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} aria-label={locale === 'pt' ? 'Ir para página principal' : 'Go to home page'}>
           <Image src="/Design sem nome(3).png" alt="Fanzone Lisboa" height={28} width={84} className="object-contain" />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-8" aria-label={locale === 'pt' ? 'Navegação principal' : 'Main navigation'}>
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -64,6 +94,7 @@ export default function Navbar() {
           ))}
           <button
             onClick={switchLocale}
+            aria-label={locale === 'pt' ? 'Switch to English' : 'Mudar para Português'}
             className="text-text-muted hover:text-gold text-[12px] font-medium border border-text-muted/30 px-2 py-1 rounded hover:border-gold transition-colors" style={{ fontFamily: 'var(--font-orbitron)' }}
           >
             {otherLocale.toUpperCase()}
@@ -71,11 +102,14 @@ export default function Navbar() {
         </nav>
 
         <button
+          ref={hamburgerRef}
           className="md:hidden text-text-primary"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          aria-label={menuOpen ? (locale === 'pt' ? 'Fechar menu' : 'Close menu') : (locale === 'pt' ? 'Abrir menu' : 'Open menu')}
         >
-          <div className="w-6 flex flex-col gap-1.5">
+          <div className="w-6 flex flex-col gap-1.5" aria-hidden="true">
             <span className={`block h-0.5 bg-current transition-transform duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
             <span className={`block h-0.5 bg-current transition-opacity duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
             <span className={`block h-0.5 bg-current transition-transform duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
@@ -86,33 +120,36 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30"
-              onClick={() => setMenuOpen(false)}
+              onClick={closeMenu}
+              aria-hidden="true"
             />
             <motion.div
+              ref={menuRef}
+              id="mobile-menu"
+              role="dialog"
+              aria-modal="true"
+              aria-label={locale === 'pt' ? 'Menu de navegação' : 'Navigation menu'}
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               className="fixed inset-y-0 right-0 w-72 bg-bg-primary border-l border-white/10 z-40 flex flex-col"
             >
-              {/* Close button */}
               <div className="flex items-center justify-between px-6 h-20 border-b border-white/10">
-                <span className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium">Menu</span>
-                <button onClick={() => setMenuOpen(false)} className="text-text-muted hover:text-white transition-colors" aria-label="Fechar menu">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className="w-5 h-5">
+                <span className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium" aria-hidden="true">Menu</span>
+                <button onClick={closeMenu} className="text-text-muted hover:text-white transition-colors" aria-label={locale === 'pt' ? 'Fechar menu' : 'Close menu'}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className="w-5 h-5" aria-hidden="true">
                     <path d="M18 6L6 18M6 6l12 12"/>
                   </svg>
                 </button>
               </div>
 
-              {/* Links */}
-              <nav className="flex flex-col flex-1 px-6 py-8 gap-1">
+              <nav className="flex flex-col flex-1 px-6 py-8 gap-1" aria-label={locale === 'pt' ? 'Navegação mobile' : 'Mobile navigation'}>
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.href}
@@ -122,11 +159,11 @@ export default function Navbar() {
                   >
                     <Link
                       href={link.href}
-                      onClick={() => setMenuOpen(false)}
+                      onClick={closeMenu}
                       className="flex items-center justify-between py-4 border-b border-white/6 text-text-primary hover:text-green-pt text-base font-semibold uppercase tracking-wide transition-colors group"
                     >
                       {link.label}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className="w-4 h-4 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className="w-4 h-4 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all" aria-hidden="true">
                         <path d="M9 18l6-6-6-6"/>
                       </svg>
                     </Link>
@@ -134,13 +171,13 @@ export default function Navbar() {
                 ))}
               </nav>
 
-              {/* Bottom: locale switch */}
               <div className="px-6 py-6 border-t border-white/10">
                 <button
                   onClick={switchLocale}
+                  aria-label={locale === 'pt' ? 'Switch to English' : 'Mudar para Português'}
                   className="w-full flex items-center justify-center gap-2 py-2.5 border border-white/20 rounded-lg text-text-muted hover:text-white hover:border-white/40 text-sm font-medium transition-colors"
                 >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" className="w-4 h-4">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" className="w-4 h-4" aria-hidden="true">
                     <circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20M2 12h20"/>
                   </svg>
                   {locale === 'pt' ? 'English' : 'Português'}
