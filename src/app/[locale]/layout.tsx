@@ -73,7 +73,7 @@ export default async function LocaleLayout({
       <body className="bg-bg-primary text-text-primary antialiased">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-green-pt focus:text-bg-primary focus:font-bold focus:rounded focus:outline-none"
+          className="skip-link"
         >
           {locale === 'pt' ? 'Saltar para o conteúdo' : 'Skip to content'}
         </a>
