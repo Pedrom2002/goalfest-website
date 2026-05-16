@@ -76,7 +76,7 @@ export default async function LocaleLayout({
   const nonce = (await headers()).get('x-nonce') ?? ''
   return (
     <html lang={locale} className={`${inter.variable} ${oswald.variable} ${orbitron.variable}`}>
-      <body className="bg-bg-primary text-text-primary antialiased" data-nonce={nonce}>
+      <body className="bg-bg-primary text-text-primary antialiased">
         <NextIntlClientProvider messages={messages}>
           <BackgroundFXClient />
           {children}

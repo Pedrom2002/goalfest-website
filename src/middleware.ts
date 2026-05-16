@@ -49,6 +49,8 @@ export default async function middleware(request: NextRequest) {
   // Do NOT set x-nonce on the response — exposing it to the browser defeats the nonce.
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('x-nonce', nonce)
+  // Next.js reads CSP from the *request* headers to auto-nonce its inline framework/RSC scripts.
+  requestHeaders.set('Content-Security-Policy', csp)
 
   // Run next-intl middleware; pass modified request so it propagates downstream.
   const intlResponse = intlMiddleware(

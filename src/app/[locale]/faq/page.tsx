@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { headers } from 'next/headers'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -45,6 +46,7 @@ export default async function FaqPage({
 }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const nonce = (await headers()).get('x-nonce') ?? undefined
   const t = await getTranslations('faq')
   const categories = faqData as FaqCategory[]
 
@@ -67,6 +69,7 @@ export default async function FaqPage({
     <>
       <script
         type="application/ld+json"
+        nonce={nonce}
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Navbar />

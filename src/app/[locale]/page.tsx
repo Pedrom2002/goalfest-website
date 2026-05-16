@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { headers } from 'next/headers'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
@@ -49,7 +50,8 @@ function Divider() {
   )
 }
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const nonce = (await headers()).get('x-nonce') ?? undefined
   const sponsors = sponsorsData as SponsorsData
 
   const jsonLd = {
@@ -83,6 +85,7 @@ export default function LandingPage() {
     <>
       <script
         type="application/ld+json"
+        nonce={nonce}
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Navbar />
