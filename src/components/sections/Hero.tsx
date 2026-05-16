@@ -48,8 +48,10 @@ export default function Hero() {
           loop
           playsInline
           preload="metadata"
+          poster="/01_Sofia_ConcertoValeSilencio_0609_16x9.jpg"
           className="absolute inset-0 w-full h-full object-cover"
           src="https://phwtscjrqihtamdy.public.blob.vercel-storage.com/122965-726547934-fGrPQAr0RXA9c69k7WRaFODMAmxUK9.mp4"
+          aria-label="Vídeo de ambiente do evento Goalfest Lisboa"
         />
       </div>
 
