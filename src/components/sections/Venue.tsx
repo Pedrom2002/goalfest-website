@@ -233,7 +233,7 @@ export default function Venue() {
           </div>
           <div className="w-full h-[240px] md:h-[340px] rounded-2xl overflow-hidden border border-white/8 bg-bg-surface shadow-[0_0_60px_rgba(0,200,81,0.05)]">
             <ModelErrorBoundary fallbackText={t('model_unavailable')}>
-              <VenueModel />
+              <VenueModel loadingText={t('loading')} />
             </ModelErrorBoundary>
           </div>
           <p className="text-text-muted/60 text-xs text-center mt-4 tracking-wide">{t('drag')}</p>

@@ -6,10 +6,14 @@ import '@testing-library/jest-dom'
 
 expect.extend(toHaveNoViolations)
 
-vi.mock('next-intl', () => ({
-  useTranslations: () => (key: string) => key,
-  useLocale: () => 'pt',
-}))
+vi.mock('next-intl', () => {
+  const t = (key: string) => key
+  t.rich = (key: string) => key
+  return {
+    useTranslations: () => t,
+    useLocale: () => 'pt',
+  }
+})
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: vi.fn() }),
@@ -32,9 +36,8 @@ vi.mock('next/link', () => ({
 vi.mock('framer-motion', () => ({
   motion: new Proxy({}, {
     get: (_target, tag: string) => {
-      const El = tag as keyof JSX.IntrinsicElements
       const Component = ({ children, ...p }: React.HTMLAttributes<HTMLElement>) => {
-        const Tag = El as React.ElementType
+        const Tag = tag as React.ElementType
         return <Tag {...p}>{children}</Tag>
       }
       Component.displayName = `motion.${tag}`
@@ -42,14 +45,45 @@ vi.mock('framer-motion', () => ({
     },
   }),
   AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  useInView: () => true,
+}))
+
+vi.mock('next/dynamic', () => ({
+  default: (_fn: unknown, _opts: unknown) => {
+    const Stub = () => <div data-testid="dynamic-stub" />
+    Stub.displayName = 'DynamicStub'
+    return Stub
+  },
+}))
+
+vi.mock('@/data/faq.json', () => ({
+  default: [
+    {
+      category: 'entradas',
+      items: [
+        { q: 'Pergunta PT?', a: 'Resposta PT.', qEn: 'Question EN?', aEn: 'Answer EN.' },
+      ],
+    },
+  ],
+}))
+
+vi.mock('@/components/ui/CountdownTimer', () => ({
+  default: () => <div data-testid="countdown" aria-label="Countdown timer">00:00:00</div>,
 }))
 
 import Navbar from '@/components/layout/Navbar'
+import FaqSection from '@/components/sections/FaqSection'
 
 describe('Axe accessibility', () => {
   it('Navbar has no axe violations', async () => {
     Object.defineProperty(window, 'scrollY', { value: 0, writable: true, configurable: true })
     const { container } = render(<Navbar />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  })
+
+  it('FaqSection has no axe violations', async () => {
+    const { container } = render(<FaqSection />)
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   })

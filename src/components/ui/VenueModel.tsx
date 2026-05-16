@@ -11,7 +11,7 @@ function Model({ onLoad }: { onLoad: () => void }) {
   return <primitive object={scene} scale={1} position={[0, -1, 0]} />
 }
 
-export default function VenueModel() {
+export default function VenueModel({ loadingText = 'A carregar modelo' }: { loadingText?: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: false, margin: '0px 0px -100px 0px' })
   const [loaded, setLoaded] = useState(false)
@@ -19,10 +19,10 @@ export default function VenueModel() {
   return (
     <div ref={ref} className="w-full h-full relative">
       {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+        <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none" role="status" aria-label={loadingText}>
           <div className="flex flex-col items-center gap-3">
-            <div className="w-6 h-6 rounded-full border-2 border-green-pt border-t-transparent animate-spin" />
-            <span className="text-text-muted text-xs uppercase tracking-widest">A carregar modelo</span>
+            <div className="w-6 h-6 rounded-full border-2 border-green-pt border-t-transparent animate-spin" aria-hidden="true" />
+            <span className="text-text-muted text-xs uppercase tracking-widest">{loadingText}</span>
           </div>
         </div>
       )}
