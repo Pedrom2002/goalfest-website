@@ -55,3 +55,12 @@ docs/superpowers/
 scripts/
 
 .vercel
+
+# Office/binary files
+*.pptx
+*.docx
+*.xlsx
+*.pdf
+
+# Temp files
+*_readme.txt
