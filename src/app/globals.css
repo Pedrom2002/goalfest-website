@@ -40,6 +40,15 @@ body {
   border-radius: 3px;
 }
 
+@keyframes mainReveal {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#main-content {
+  animation: mainReveal 0.25s ease-out both;
+}
+
 @keyframes particleFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-30px); }

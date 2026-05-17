@@ -111,6 +111,7 @@ export default function Hero() {
                 width={80}
                 height={30}
                 className="object-contain w-16 sm:w-20"
+                priority
               />
             </div>
           </div>
