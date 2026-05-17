@@ -95,7 +95,7 @@ export default async function LandingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Navbar />
-      <main className="relative z-10">
+      <div className="relative z-10">
         <Hero />
         <Divider />
         <WhatIsGoalfest />
@@ -105,7 +105,7 @@ export default async function LandingPage() {
         <Sponsors data={sponsors} />
         <Divider />
         <FaqSection />
-      </main>
+      </div>
       <Footer />
     </>
   )

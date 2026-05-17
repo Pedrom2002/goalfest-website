@@ -44,7 +44,7 @@ export default async function TermosPage({
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-24 pb-20 px-4 max-w-3xl mx-auto">
+      <div className="min-h-screen pt-24 pb-20 px-4 max-w-3xl mx-auto">
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-4">
             <span className="h-px w-8 bg-green-pt/40" />
@@ -153,7 +153,7 @@ export default async function TermosPage({
             {isPt ? 'Política de Privacidade →' : 'Privacy Policy →'}
           </Link>
         </div>
-      </main>
+      </div>
       <Footer />
     </>
   )

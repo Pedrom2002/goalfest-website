@@ -5,7 +5,7 @@ export default async function NotFound() {
   const t = await getTranslations('notFound')
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center text-center px-4 gap-8">
+    <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 gap-8">
       <p className="text-green-pt font-display text-8xl font-black">404</p>
       <div className="flex flex-col gap-2">
         <h1 className="text-text-primary text-2xl font-bold uppercase tracking-wide">{t('heading')}</h1>
@@ -17,6 +17,6 @@ export default async function NotFound() {
       >
         {t('back')}
       </Link>
-    </main>
+    </div>
   )
 }

@@ -19,7 +19,7 @@ export default function Error({
   }, [error])
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center text-center px-4 gap-8">
+    <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 gap-8">
       <p className="text-red-pt font-display text-7xl font-black">500</p>
       <div className="flex flex-col gap-2">
         <h1 className="text-text-primary text-2xl font-bold uppercase tracking-wide">{t('heading')}</h1>
@@ -31,6 +31,6 @@ export default function Error({
       >
         {t('retry')}
       </button>
-    </main>
+    </div>
   )
 }

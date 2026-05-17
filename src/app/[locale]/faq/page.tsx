@@ -81,7 +81,7 @@ export default async function FaqPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Navbar />
-      <main className="min-h-screen pt-24 pb-16 px-4 max-w-3xl mx-auto">
+      <div className="min-h-screen pt-24 pb-16 px-4 max-w-3xl mx-auto">
         <h1 className="font-display text-5xl font-black text-gold uppercase tracking-wide mb-16 text-center">
           {t('title')}
         </h1>
@@ -105,7 +105,7 @@ export default async function FaqPage({
             </div>
           ))}
         </div>
-      </main>
+      </div>
       <Footer />
     </>
   )
