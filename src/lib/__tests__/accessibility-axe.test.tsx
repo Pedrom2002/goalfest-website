@@ -73,9 +73,19 @@ vi.mock('@/components/ui/CountdownTimer', () => ({
 
 vi.mock('@sentry/nextjs', () => ({ captureException: vi.fn() }))
 
+vi.mock('@/components/ui/BackgroundFX', () => ({
+  default: () => <div data-testid="bg-fx" aria-hidden="true" />,
+}))
+
+vi.mock('@/lib/env', () => ({
+  getEnv: vi.fn(() => ({ NEXT_PUBLIC_MAPBOX_TOKEN: 'mock' })),
+}))
+
 import Navbar from '@/components/layout/Navbar'
 import FaqSection from '@/components/sections/FaqSection'
 import Venue from '@/components/sections/Venue'
+import Hero from '@/components/sections/Hero'
+import WhatIsGoalfest from '@/components/sections/WhatIsGoalfest'
 
 describe('Axe accessibility', () => {
   it('Navbar has no axe violations', async () => {
@@ -93,6 +103,18 @@ describe('Axe accessibility', () => {
 
   it('Venue has no axe violations', async () => {
     const { container } = render(<Venue />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  }, 15000)
+
+  it('Hero has no axe violations', async () => {
+    const { container } = render(<Hero />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  }, 15000)
+
+  it('WhatIsGoalfest has no axe violations', async () => {
+    const { container } = render(<WhatIsGoalfest />)
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   }, 15000)

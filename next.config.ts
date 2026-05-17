@@ -1,8 +1,10 @@
 import createNextIntlPlugin from 'next-intl/plugin'
 import { withSentryConfig } from '@sentry/nextjs'
+import withBundleAnalyzer from '@next/bundle-analyzer'
 import type { NextConfig } from 'next'
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
+const analyzeBundles = withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })
 
 const securityHeaders = [
   { key: 'X-Frame-Options', value: 'DENY' },
@@ -27,7 +29,7 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default withSentryConfig(withNextIntl(nextConfig), {
+export default withSentryConfig(analyzeBundles(withNextIntl(nextConfig)), {
   ...(process.env.SENTRY_ORG !== undefined && { org: process.env.SENTRY_ORG }),
   ...(process.env.SENTRY_PROJECT !== undefined && { project: process.env.SENTRY_PROJECT }),
   silent: true,
