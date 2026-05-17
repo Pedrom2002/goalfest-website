@@ -136,13 +136,13 @@ describe('PhotoLightbox', () => {
     )
 
     const buttons = screen.getAllByRole('button')
-    const last = buttons[buttons.length - 1]
+    const last = buttons[buttons.length - 1]!
     last.focus()
     expect(document.activeElement).toBe(last)
 
     await user.keyboard('{Tab}')
 
-    const first = buttons[0]
+    const first = buttons[0]!
     expect(document.activeElement).toBe(first)
   })
 
@@ -153,13 +153,13 @@ describe('PhotoLightbox', () => {
     )
 
     const buttons = screen.getAllByRole('button')
-    const first = buttons[0]
+    const first = buttons[0]!
     first.focus()
     expect(document.activeElement).toBe(first)
 
     await user.keyboard('{Shift>}{Tab}{/Shift}')
 
-    const last = buttons[buttons.length - 1]
+    const last = buttons[buttons.length - 1]!
     expect(document.activeElement).toBe(last)
   })
 })
