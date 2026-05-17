@@ -15,6 +15,15 @@ export default function VenueModel({ loadingText = 'A carregar modelo' }: { load
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: false, margin: '0px 0px -100px 0px' })
   const [loaded, setLoaded] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReducedMotion(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   return (
     <div ref={ref} className="w-full h-full relative">
@@ -43,7 +52,7 @@ export default function VenueModel({ loadingText = 'A carregar modelo' }: { load
           enableZoom={true}
           minPolarAngle={Math.PI / 6}
           maxPolarAngle={Math.PI / 2}
-          autoRotate={inView}
+          autoRotate={inView && !reducedMotion}
           autoRotateSpeed={0.4}
         />
       </Canvas>
