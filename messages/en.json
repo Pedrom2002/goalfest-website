@@ -103,7 +103,8 @@
     "title_plain": "What is Goalfest?",
     "title_highlight": "Goalfest",
     "title_before": "What is",
-    "desc": "More than a Fanzone. Goalfest is Portugal's biggest FIFA World Cup 2026 celebration event, a park in the heart of Lisbon where football, music and culture come together.",
+    "desc_hook": "More than a Fanzone.",
+    "desc_body": "Goalfest is Portugal's biggest FIFA World Cup 2026 celebration event, a park in the heart of Lisbon where football, music and culture come together.",
     "view_schedule": "View schedule ↗",
     "features": {
       "matches_title": "World Cup Matches",

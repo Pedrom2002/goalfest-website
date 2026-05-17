@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { headers } from 'next/headers'
+import { setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { BASE_URL } from '@/lib/constants'
 import Hero from '@/components/sections/Hero'
@@ -54,7 +55,13 @@ function Divider() {
   )
 }
 
-export default async function LandingPage() {
+export default async function LandingPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  setRequestLocale(locale)
   const nonce = (await headers()).get('x-nonce') ?? undefined
   const sponsors = sponsorsData as SponsorsData
 

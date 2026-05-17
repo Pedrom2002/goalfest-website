@@ -45,8 +45,11 @@ export default function WhatIsGoalfest() {
           <h2 className="font-display text-4xl sm:text-5xl md:text-7xl font-black text-text-primary uppercase tracking-wide mb-6">
             {t('title_before')} <span className="text-green-pt">{t('title_highlight')}</span>?
           </h2>
+          <p className="text-text-primary text-2xl md:text-3xl font-bold max-w-xl mx-auto leading-snug mb-3">
+            {t('desc_hook')}
+          </p>
           <p className="text-text-muted text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            {t('desc')}
+            {t('desc_body')}
           </p>
         </motion.div>
 
