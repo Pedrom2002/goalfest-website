@@ -63,5 +63,3 @@ jobs:
 
       - name: Run E2E smoke tests
         run: npm run test:e2e
-        env:
-          PLAYWRIGHT_BASE_URL: ''
