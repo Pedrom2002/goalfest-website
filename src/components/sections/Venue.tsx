@@ -6,10 +6,12 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { useRef, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
+import * as Sentry from '@sentry/nextjs'
 
 class ModelErrorBoundary extends Component<{ children: ReactNode; fallbackText: string }, { failed: boolean }> {
   override state = { failed: false }
   static getDerivedStateFromError() { return { failed: true } }
+  override componentDidCatch(error: Error) { Sentry.captureException(error) }
   override render() {
     if (this.state.failed) return (
       <div className="w-full h-full flex items-center justify-center text-text-muted text-xs uppercase tracking-widest">
@@ -71,7 +73,18 @@ export default function Venue() {
   ]
 
   useEffect(() => {
-    if (videoRef.current) videoRef.current.playbackRate = 0.5
+    const video = videoRef.current
+    if (!video) return
+    video.playbackRate = 0.5
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const apply = (reduced: boolean) => {
+      if (reduced) { video.pause(); video.currentTime = 0 }
+      else void video.play()?.catch(() => undefined)
+    }
+    apply(mq.matches)
+    const handler = (e: MediaQueryListEvent) => apply(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
   }, [])
 
   return (

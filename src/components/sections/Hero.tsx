@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import CountdownTimer from '@/components/ui/CountdownTimer'
+import { useEffect, useRef } from 'react'
 
 const EQ_BARS = [
   { delay: '0s',     dur: '0.6s' },
@@ -37,12 +38,28 @@ function EqualizerBars() {
 
 export default function Hero() {
   const t = useTranslations('hero')
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const apply = (reduced: boolean) => {
+      if (reduced) { video.pause(); video.currentTime = 0 }
+      else void video.play()?.catch(() => undefined)
+    }
+    apply(mq.matches)
+    const handler = (e: MediaQueryListEvent) => apply(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   return (
     <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-20">
       {/* Video background */}
       <div className="absolute inset-0 z-0">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
@@ -51,7 +68,7 @@ export default function Hero() {
           poster="/01_Sofia_ConcertoValeSilencio_0609_16x9.jpg"
           className="absolute inset-0 w-full h-full object-cover"
           src="https://phwtscjrqihtamdy.public.blob.vercel-storage.com/122965-726547934-fGrPQAr0RXA9c69k7WRaFODMAmxUK9.mp4"
-          aria-label="Vídeo de ambiente do evento Goalfest Lisboa"
+          aria-hidden="true"
         />
       </div>
 

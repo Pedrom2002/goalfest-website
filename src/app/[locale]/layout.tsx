@@ -85,7 +85,7 @@ export default async function LocaleLayout({
         </a>
         <NextIntlClientProvider messages={messages}>
           <BackgroundFXClient />
-          <div id="main-content">{children}</div>
+          <main id="main-content">{children}</main>
         </NextIntlClientProvider>
       </body>
     </html>

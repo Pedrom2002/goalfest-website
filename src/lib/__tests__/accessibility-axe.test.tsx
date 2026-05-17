@@ -71,8 +71,11 @@ vi.mock('@/components/ui/CountdownTimer', () => ({
   default: () => <div data-testid="countdown" aria-label="Countdown timer">00:00:00</div>,
 }))
 
+vi.mock('@sentry/nextjs', () => ({ captureException: vi.fn() }))
+
 import Navbar from '@/components/layout/Navbar'
 import FaqSection from '@/components/sections/FaqSection'
+import Venue from '@/components/sections/Venue'
 
 describe('Axe accessibility', () => {
   it('Navbar has no axe violations', async () => {
@@ -87,4 +90,10 @@ describe('Axe accessibility', () => {
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   })
+
+  it('Venue has no axe violations', async () => {
+    const { container } = render(<Venue />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  }, 15000)
 })

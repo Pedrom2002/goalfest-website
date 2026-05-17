@@ -29,11 +29,11 @@ vi.mock('@/components/ui/CountdownTimer', () => ({
 import Hero from './Hero'
 
 describe('Hero', () => {
-  it('renders a video element with aria-label', () => {
+  it('renders a decorative background video', () => {
     render(<Hero />)
     const video = document.querySelector('video')
     expect(video).not.toBeNull()
-    expect(video?.getAttribute('aria-label')).toBeTruthy()
+    expect(video?.getAttribute('aria-hidden')).toBe('true')
   })
 
   it('renders countdown timer', () => {
