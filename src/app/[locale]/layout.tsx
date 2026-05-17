@@ -6,6 +6,8 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { BASE_URL } from '@/lib/constants'
 import BackgroundFXClient from '@/components/ui/BackgroundFXClient'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
@@ -87,6 +89,8 @@ export default async function LocaleLayout({
           <BackgroundFXClient />
           <main id="main-content">{children}</main>
         </NextIntlClientProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
