@@ -6,6 +6,8 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { BASE_URL } from '@/lib/constants'
 import BackgroundFXClient from '@/components/ui/BackgroundFXClient'
+import Navbar from '@/components/layout/Navbar'
+import Footer from '@/components/layout/Footer'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import '../globals.css'
@@ -50,7 +52,7 @@ export async function generateMetadata({
       siteName: 'Goalfest Lisboa',
       images: [
         {
-          url: '/01_Sofia_ConcertoValeSilencio_0609_16x9.jpg',
+          url: '/goalfest-og.jpg',
           width: 1600,
           height: 900,
           alt: 'Goalfest Lisboa - Fanzone Oficial Mundial 2026',
@@ -87,7 +89,9 @@ export default async function LocaleLayout({
         </a>
         <NextIntlClientProvider messages={messages}>
           <BackgroundFXClient />
+          <Navbar />
           <main id="main-content">{children}</main>
+          <Footer />
         </NextIntlClientProvider>
         <Analytics />
         <SpeedInsights />

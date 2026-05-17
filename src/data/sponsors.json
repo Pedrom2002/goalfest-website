@@ -7,6 +7,6 @@
   ],
   "parceiros": [
     { "id": "p1", "name": "Junta de Freguesia dos Olivais", "logo": "/parceiros/juntaolivais.png", "url": "https://olivais.pt" },
-    { "id": "p2", "name": "Lisboa", "logo": "/parceiros/Marca Lisboa_Horizontal_branco.png", "url": "https://www.lisboa.pt" }
+    { "id": "p2", "name": "Lisboa", "logo": "/parceiros/marca-lisboa.png", "url": "https://www.lisboa.pt" }
   ]
 }

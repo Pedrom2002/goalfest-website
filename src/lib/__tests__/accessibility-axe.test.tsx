@@ -92,6 +92,7 @@ vi.mock('@/lib/env', () => ({
 }))
 
 import Navbar from '@/components/layout/Navbar'
+import Footer from '@/components/layout/Footer'
 import FaqSection from '@/components/sections/FaqSection'
 import Venue from '@/components/sections/Venue'
 import Hero from '@/components/sections/Hero'
@@ -101,6 +102,28 @@ describe('Axe accessibility', () => {
   it('Navbar has no axe violations', async () => {
     Object.defineProperty(window, 'scrollY', { value: 0, writable: true, configurable: true })
     const { container } = render(<Navbar />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  })
+
+  it('Footer has no axe violations', async () => {
+    const { container } = render(<Footer />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  })
+
+  it('landmark structure: Navbar outside main, skip link bypasses nav', async () => {
+    Object.defineProperty(window, 'scrollY', { value: 0, writable: true, configurable: true })
+    const { container } = render(
+      <div>
+        <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
+        <Navbar />
+        <main id="main-content">
+          <h1>Page content</h1>
+        </main>
+        <Footer />
+      </div>
+    )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   })

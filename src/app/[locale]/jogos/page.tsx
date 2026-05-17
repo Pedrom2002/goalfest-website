@@ -2,8 +2,6 @@ import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { BASE_URL } from '@/lib/constants'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
 import JogosSchedule from '@/components/sections/JogosSchedule'
 import { SCHEDULE } from '@/data/schedule'
 
@@ -43,11 +41,5 @@ export default async function JogosPage({
   const { locale } = await params
   setRequestLocale(locale)
 
-  return (
-    <>
-      <Navbar />
-      <JogosSchedule schedule={SCHEDULE} />
-      <Footer />
-    </>
-  )
+  return <JogosSchedule schedule={SCHEDULE} />
 }

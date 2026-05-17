@@ -3,8 +3,6 @@ import { headers } from 'next/headers'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { BASE_URL } from '@/lib/constants'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
 import FaqAccordion from '@/components/ui/FaqAccordion'
 import faqData from '@/data/faq.json'
 import type { FaqCategory } from '@/types'
@@ -80,7 +78,6 @@ export default async function FaqPage({
         nonce={nonce}
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <Navbar />
       <div className="min-h-screen pt-24 pb-16 px-4 max-w-3xl mx-auto">
         <h1 className="font-display text-5xl font-black text-gold uppercase tracking-wide mb-16 text-center">
           {t('title')}
@@ -106,7 +103,6 @@ export default async function FaqPage({
           ))}
         </div>
       </div>
-      <Footer />
     </>
   )
 }

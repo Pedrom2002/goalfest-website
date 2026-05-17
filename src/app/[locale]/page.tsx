@@ -2,8 +2,6 @@ import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import { routing } from '@/i18n/routing'
 import { BASE_URL } from '@/lib/constants'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
 import Venue from '@/components/sections/Venue'
 import Sponsors from '@/components/sections/Sponsors'
@@ -37,7 +35,7 @@ export async function generateMetadata({
       canonical: `${BASE_URL}/${locale}`,
     },
     openGraph: {
-      title: isPt ? 'Goalfest Lisboa — Fanzone Oficial do Mundial 2026' : 'Goalfest Lisbon — Official FIFA World Cup 2026 Fanzone',
+      title: isPt ? 'Goalfest Lisboa: Fanzone Oficial do Mundial 2026' : 'Goalfest Lisbon: Official FIFA World Cup 2026 Fanzone',
       description: isPt
         ? 'A maior fanzone de Lisboa para o Mundial 2026.'
         : 'The biggest fanzone in Lisbon for the 2026 World Cup.',
@@ -94,7 +92,6 @@ export default async function LandingPage() {
         nonce={nonce}
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Navbar />
       <div className="relative z-10">
         <Hero />
         <Divider />
@@ -106,7 +103,6 @@ export default async function LandingPage() {
         <Divider />
         <FaqSection />
       </div>
-      <Footer />
     </>
   )
 }

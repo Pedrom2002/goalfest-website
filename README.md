@@ -1,101 +1,192 @@
-# Goalfest Lisboa 2026
+# Goalfest Lisboa
 
-Official fanzone website for Goalfest Lisboa — the biggest FIFA World Cup 2026 fanzone in Lisbon, at Vale do Silêncio, Parque das Nações. 11 June to 19 July 2026.
+Official fanzone website for the 2026 FIFA World Cup in Lisbon, deployed at [goalfest.pt](https://goalfest.pt).
 
-Live at: **[goalfest.pt](https://goalfest.pt)**
+Giant screens, food trucks, concerts, and a 3D venue preview — all at Vale do Silêncio, Olivais, from 11 June to 19 July 2026.
 
-## What it is
-
-- Bilingual landing page (PT/EN) with i18n routing via `next-intl`
-- Full match schedule for all 104 World Cup games with filters (all / groups / knockouts / Portugal)
-- Countdown timer to tournament start
-- Interactive 3D venue model (Three.js / React Three Fiber)
-- Mapbox-powered venue map
-- Sponsor showcase
-- FAQ section
+---
 
 ## Tech stack
 
 | Layer | Technology |
-|---|---|
-| Framework | Next.js 16 (App Router) |
+|-------|-----------|
+| Framework | Next.js 16 (App Router, SSG) |
 | Language | TypeScript (strict) |
 | Styling | Tailwind CSS v4 |
+| i18n | next-intl (locales: `pt`, `en`) |
+| 3D / WebGL | React Three Fiber + Drei |
+| Map | Mapbox GL via react-map-gl |
 | Animations | Framer Motion |
-| 3D | Three.js + React Three Fiber |
-| Maps | Mapbox GL + react-map-gl |
-| i18n | next-intl (PT + EN) |
-| Tests | Vitest + jsdom |
+| Error tracking | Sentry |
+| Analytics | Vercel Analytics + Speed Insights |
+| Media hosting | Vercel Blob |
+| Unit tests | Vitest + Testing Library + jest-axe |
+| E2E tests | Playwright |
+| CI | GitHub Actions |
 | Deploy | Vercel |
 
-## Setup
+---
 
-### Prerequisites
+## Getting started
 
-- Node.js 20+
-- npm 10+
-
-### Install
+**Prerequisites:** Node >= 20, npm.
 
 ```bash
 npm install
+cp .env.local.example .env.local   # fill in required vars (see below)
+npm run dev
 ```
 
-### Environment variables
+Open [http://localhost:3000](http://localhost:3000) — the middleware redirects `/` to `/pt`.
 
-```bash
-cp .env.local.example .env.local
-```
+---
 
-Fill in `.env.local`:
+## Environment variables
 
 | Variable | Required | Description |
-|---|---|---|
-| `NEXT_PUBLIC_MAPBOX_TOKEN` | Yes | Mapbox public token from [mapbox.com](https://mapbox.com) (free tier works) |
+|----------|----------|-------------|
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | No | Mapbox public token for the interactive venue map |
+| `NEXT_PUBLIC_SENTRY_DSN` | No | Sentry DSN (client-side error tracking) |
+| `SENTRY_DSN` | No | Sentry DSN (server/edge) |
+| `SENTRY_ORG` | No | Sentry org slug (source maps upload in CI) |
+| `SENTRY_PROJECT` | No | Sentry project slug |
+| `SENTRY_AUTH_TOKEN` | No | Sentry auth token (source maps upload) |
+| `NEXT_PUBLIC_APP_URL` | No | Canonical base URL (default: `https://goalfest.pt`) |
+| `NEXT_PUBLIC_VIDEO_HERO` | No | Hero background video URL (defaults to Vercel Blob) |
+| `NEXT_PUBLIC_VIDEO_VENUE` | No | Venue tour video URL (defaults to Vercel Blob) |
+| `NEXT_PUBLIC_MODEL_VENUE` | No | Venue 3D model path (default: `/venue_optimized.glb`) |
+| `NEXT_PUBLIC_ENV_VENUE` | No | HDR environment map URL for the 3D scene |
+| `BLOB_READ_WRITE_TOKEN` | No | Vercel Blob token |
 
-### Run
+All variables are validated at startup via Zod in [`src/lib/env.ts`](src/lib/env.ts). Missing required variables throw with a clear error message at build time rather than silently failing at runtime.
 
-```bash
-npm run dev      # development server at http://localhost:3000
-npm run build    # production build
-npm run start    # serve production build
-npm run lint     # ESLint
-npm run test     # run tests once
-npm run test:coverage  # run tests with coverage report
-```
+---
 
 ## Project structure
 
 ```
 src/
-  app/              # Next.js App Router (root layout + locale segment)
-    [locale]/       # PT and EN routes
+  app/
+    [locale]/           # All user-facing routes (SSG via generateStaticParams)
+      layout.tsx        # Locale layout: fonts, Navbar, Footer, skip link, hreflang
+      page.tsx          # Home (Hero, WhatIsGoalfest, Venue, Sponsors, FAQ)
+      jogos/            # Match schedule page
+      faq/              # FAQ page
+      privacidade/      # Privacy policy
+      termos/           # Terms of service
+    api/health/         # Health check: GET /api/health → { status, ts }
+    global-error.tsx    # Root error boundary (reports to Sentry)
   components/
-    layout/         # Navbar, Footer
-    sections/       # Page sections (Hero, Venue, JogosSchedule, FAQ, ...)
-    ui/             # Reusable UI components (CountdownTimer, FaqAccordion, MatchCard, ...)
-  data/             # Static data (schedule, matches, faq, sponsors)
-  i18n/             # next-intl routing and request config
-  lib/              # Pure utility functions (countdown, matchFilters, matchPhase, ...)
-  types/            # Shared TypeScript types
+    layout/             # Navbar (with focus-trapped mobile menu), Footer
+    sections/           # Hero, Venue, Sponsors, WhatIsGoalfest, FaqSection, JogosSchedule
+    ui/                 # FaqAccordion, MatchCard, CountdownTimer, VenueMap, VenueModel, ...
+  data/                 # Static data: schedule.ts, sponsors.json, faq.json
+  i18n/                 # next-intl routing, request config, navigation helpers
+  lib/                  # Utilities: env, constants, matchFilters, matchPhase, countdown
+  middleware.ts         # CSP nonce generation + next-intl locale routing
+messages/
+  pt.json               # Portuguese translations
+  en.json               # English translations (must have identical key set)
+e2e/
+  smoke.test.ts         # Playwright smoke tests
+public/
+  goalfest-logo.png
+  goalfest-og.jpg       # OG / social share image (1600x900)
+  quicnation-logo.png
+  venue_optimized.glb   # 3D venue model (served locally)
+  parceiros/            # Partner logos
+  patrocinadores/       # Sponsor logos
 ```
 
-## Testing
+---
 
-Tests cover `src/lib/`, `src/data/`, and key UI components (FaqAccordion, MatchCard, PhotoLightbox, JogosSchedule). Coverage thresholds are enforced (70% lines/functions/statements, 65% branches) and run in CI.
+## i18n
 
-```bash
-npm run test             # run all tests
-npm run test:watch       # watch mode
-npm run test:coverage    # coverage report (html + terminal)
-```
+All user-facing routes live under the `[locale]` segment (`/pt/*`, `/en/*`). The root `/` redirects to `/pt` via `src/app/page.tsx`. The middleware handles locale detection and routing.
 
-## Deployment
+Translations live in [`messages/pt.json`](messages/pt.json) and [`messages/en.json`](messages/en.json). A CI test enforces key parity between both files — adding a key to one file without the other fails the build.
 
-Deployed on Vercel. Pushes to `master` trigger automatic deployments. Set the environment variables in the Vercel project settings — `NEXT_PUBLIC_MAPBOX_TOKEN` is required at runtime for the interactive map.
+---
 
 ## Security
 
-- CSP headers with per-request nonce (set in middleware)
-- HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy
-- No secrets committed (see `.env.local.example`)
+Content Security Policy is generated per-request in [`src/middleware.ts`](src/middleware.ts):
+
+- **Production:** `strict-dynamic` + per-request nonce (no `unsafe-inline` for scripts)
+- **Development:** `unsafe-eval` added for HMR
+
+Additional security headers (set in [`next.config.ts`](next.config.ts)):
+
+```
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+```
+
+---
+
+## Testing
+
+```bash
+npm test                  # unit tests (single run)
+npm run test:watch        # unit tests (watch mode)
+npm run test:coverage     # unit tests + coverage report
+npm run test:e2e          # Playwright E2E (starts production server automatically)
+npm run test:e2e:ui       # Playwright with interactive UI
+```
+
+**Coverage thresholds** (enforced in CI — failing these fails the build):
+
+| Metric | Threshold |
+|--------|-----------|
+| Statements | 80% |
+| Branches | 75% |
+| Functions | 75% |
+| Lines | 80% |
+
+**E2E smoke tests** ([`e2e/smoke.test.ts`](e2e/smoke.test.ts)) cover:
+
+- PT and EN home page load with correct titles
+- `/pt/jogos` and `/pt/faq` pages render
+- Security headers present (`X-Frame-Options`, `X-Content-Type-Options`, `Strict-Transport-Security`)
+- Skip link is focusable and points to `#main-content`
+
+---
+
+## CI/CD
+
+GitHub Actions workflow ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs on every push and PR to `master`:
+
+1. **ci** job: lint, type-check (`tsc --noEmit`), unit tests with coverage, production build, `npm audit --audit-level=high`
+2. **e2e** job (runs after `ci`): install Playwright browsers, production build, smoke tests
+
+Vercel deploys automatically on merge to `master`. No manual deploy step needed.
+
+---
+
+## Bundle analysis
+
+```bash
+ANALYZE=true npm run build
+```
+
+Opens an interactive bundle treemap in the browser via `@next/bundle-analyzer`.
+
+---
+
+## Scripts reference
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript type-check only |
+| `npm test` | Unit tests (single run) |
+| `npm run test:watch` | Unit tests in watch mode |
+| `npm run test:coverage` | Unit tests with V8 coverage |
+| `npm run test:e2e` | Playwright E2E tests |
+| `npm run test:e2e:ui` | Playwright with interactive UI |

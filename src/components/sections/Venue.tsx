@@ -96,7 +96,7 @@ export default function Venue() {
       {/* Full-width image hero */}
       <div className="relative h-[70vh] min-h-[500px]">
         <Image
-          src="/01_Sofia_ConcertoValeSilencio_0609_16x9.jpg"
+          src="/goalfest-og.jpg"
           alt="Vale do Silêncio"
           fill
           sizes="100vw"

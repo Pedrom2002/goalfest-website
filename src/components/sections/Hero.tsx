@@ -68,7 +68,7 @@ export default function Hero() {
           loop
           playsInline
           preload="metadata"
-          poster="/01_Sofia_ConcertoValeSilencio_0609_16x9.jpg"
+          poster="/goalfest-og.jpg"
           className="absolute inset-0 w-full h-full object-cover"
           src={NEXT_PUBLIC_VIDEO_HERO}
           aria-hidden="true"
@@ -95,7 +95,7 @@ export default function Hero() {
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
             <Image
-              src="/Design sem nome(3).png"
+              src="/goalfest-logo.png"
               alt="Goalfest Lisboa"
               width={360}
               height={360}
@@ -106,7 +106,7 @@ export default function Hero() {
             <div className="sm:absolute sm:bottom-0 sm:right-0 sm:translate-x-24 sm:translate-y-2 flex flex-col items-center sm:items-end gap-0.5 mt-2 sm:mt-0">
               <span className="text-white/50 text-[11px] uppercase tracking-widest leading-none">powered by</span>
               <Image
-                src="/logo branco (1).png"
+                src="/quicnation-logo.png"
                 alt="Quic"
                 width={80}
                 height={30}

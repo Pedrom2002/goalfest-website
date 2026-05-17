@@ -2,8 +2,6 @@ import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { BASE_URL } from '@/lib/constants'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 
 export function generateStaticParams() {
@@ -42,9 +40,7 @@ export default async function TermosPage({
   const isPt = locale === 'pt'
 
   return (
-    <>
-      <Navbar />
-      <div className="min-h-screen pt-24 pb-20 px-4 max-w-3xl mx-auto">
+    <div className="min-h-screen pt-24 pb-20 px-4 max-w-3xl mx-auto">
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-4">
             <span className="h-px w-8 bg-green-pt/40" />
@@ -153,8 +149,6 @@ export default async function TermosPage({
             {isPt ? 'Política de Privacidade →' : 'Privacy Policy →'}
           </Link>
         </div>
-      </div>
-      <Footer />
-    </>
+    </div>
   )
 }

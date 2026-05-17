@@ -75,7 +75,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
         <Link href="/" className={`block transition-all duration-300 hover:scale-105 ${pastHero ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} aria-label={locale === 'pt' ? 'Ir para página principal' : 'Go to home page'}>
-          <Image src="/Design sem nome(3).png" alt="Fanzone Lisboa" height={28} width={84} className="object-contain" />
+          <Image src="/goalfest-logo.png" alt="Fanzone Lisboa" height={28} width={84} className="object-contain" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8" aria-label={locale === 'pt' ? 'Navegação principal' : 'Main navigation'}>

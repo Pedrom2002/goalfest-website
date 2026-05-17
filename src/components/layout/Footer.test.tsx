@@ -3,15 +3,17 @@ import React from 'react'
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 
+const mockUseLocale = vi.fn().mockReturnValue('pt')
+
 vi.mock('next-intl', () => ({
   useTranslations: (_ns: string) => (key: string) => ({
     copyright: '© 2026 Quic Nation. Todos os direitos reservados.',
   })[key] ?? key,
-  useLocale: () => 'pt',
+  useLocale: () => mockUseLocale(),
 }))
 
-vi.mock('next/link', () => ({
-  default: ({ children, href }: { children: React.ReactNode; href: string }) =>
+vi.mock('@/i18n/navigation', () => ({
+  Link: ({ children, href }: { children: React.ReactNode; href: string }) =>
     <a href={href}>{children}</a>,
 }))
 
@@ -50,9 +52,16 @@ describe('Footer', () => {
     expect(screen.getByText('Termos')).toBeInTheDocument()
   })
 
-  it('privacy link points to correct locale path', () => {
+  it('privacy link href is /privacidade (locale injected by next-intl Link)', () => {
     render(<Footer />)
     const privacyLink = screen.getByText('Privacidade').closest('a')
-    expect(privacyLink).toHaveAttribute('href', '/pt/privacidade')
+    expect(privacyLink).toHaveAttribute('href', '/privacidade')
+  })
+
+  it('renders English labels for en locale', () => {
+    mockUseLocale.mockReturnValueOnce('en')
+    render(<Footer />)
+    expect(screen.getByText('Privacy')).toBeInTheDocument()
+    expect(screen.getByText('Terms')).toBeInTheDocument()
   })
 })

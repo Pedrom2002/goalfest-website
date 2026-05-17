@@ -25,7 +25,6 @@ export default defineConfig({
         'src/data/sponsors.json',
         'src/data/faq.json',
         'src/data/matches.json',
-        'src/data/gallery.json',
         'src/data/teamFlags.ts',
         'src/components/three/**',
         'src/components/ui/VenueMap.tsx',
@@ -36,7 +35,7 @@ export default defineConfig({
       thresholds: {
         lines: 80,
         functions: 75,
-        branches: 69,
+        branches: 75,
         statements: 75,
       },
     },
