@@ -21,7 +21,7 @@ function buildCsp(nonce: string): string {
   // In production: strict-dynamic propagates nonce to dynamically loaded scripts.
   // In dev: unsafe-eval needed for HMR; nonce-only (no unsafe-inline) keeps dev/prod parity.
   const scriptSrc = isProd
-    ? `'self' 'nonce-${nonce}' 'strict-dynamic' 'wasm-unsafe-eval'`
+    ? `'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval' 'wasm-unsafe-eval'`
     : `'self' 'nonce-${nonce}' 'unsafe-eval' 'wasm-unsafe-eval'`
 
   return [
