@@ -64,3 +64,4 @@ scripts/
 
 # Temp files
 *_readme.txt
+.env*.local

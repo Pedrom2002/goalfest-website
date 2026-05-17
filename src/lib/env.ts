@@ -12,7 +12,7 @@ const schema = z.object({
   BLOB_READ_WRITE_TOKEN: z.string().optional(),
   NEXT_PUBLIC_VIDEO_HERO: z.string().url().default(`${BLOB_BASE}/122965-726547934-fGrPQAr0RXA9c69k7WRaFODMAmxUK9.mp4`),
   NEXT_PUBLIC_VIDEO_VENUE: z.string().url().default(`${BLOB_BASE}/136530-764417335-E3vSmNxFr1b7rZyCVuUefga9T4BlLL.mp4`),
-  NEXT_PUBLIC_MODEL_VENUE: z.string().url().default(`${BLOB_BASE}/venue_compressed-9HTTABhm50vbgKbJVaEvcchAdzZYd3.glb`),
+  NEXT_PUBLIC_MODEL_VENUE: z.string().default('/venue_optimized.glb'),
   NEXT_PUBLIC_ENV_VENUE: z.string().url().default(`${BLOB_BASE}/dikhololo_night_1k-vGG7SXP7RXLTzq0N3QZhB7bbKouvol.hdr`),
 })
 

@@ -21,8 +21,8 @@ function buildCsp(nonce: string): string {
   // In production: strict-dynamic propagates nonce to dynamically loaded scripts.
   // In dev: unsafe-eval needed for HMR; nonce-only (no unsafe-inline) keeps dev/prod parity.
   const scriptSrc = isProd
-    ? `'self' 'nonce-${nonce}' 'strict-dynamic' 'wasm-unsafe-eval'`
-    : `'self' 'nonce-${nonce}' 'unsafe-eval' 'wasm-unsafe-eval'`
+    ? `'self' 'nonce-${nonce}' 'strict-dynamic'`
+    : `'self' 'nonce-${nonce}' 'unsafe-eval'`
 
   return [
     "default-src 'self'",
@@ -31,7 +31,7 @@ function buildCsp(nonce: string): string {
     `font-src 'self' https://fonts.gstatic.com`,
     `img-src 'self' data: blob: https://images.unsplash.com https://plus.unsplash.com ${VERCEL_BLOB_HOST}`,
     `media-src 'self' blob: ${VERCEL_BLOB_HOST}`,
-    `connect-src 'self' ${VERCEL_BLOB_HOST} ${MAPBOX_HOSTS} https://www.gstatic.com blob:`,
+    `connect-src 'self' ${VERCEL_BLOB_HOST} ${MAPBOX_HOSTS} blob:`,
     `worker-src 'self' blob:`,
     `form-action 'self'`,
     `frame-ancestors 'none'`,
