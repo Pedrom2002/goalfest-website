@@ -2,11 +2,12 @@
 
 import Map, { Marker } from 'react-map-gl/mapbox'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import { getEnv } from '@/lib/env'
 
 const VENUE_COORDS = { longitude: -9.0938, latitude: 38.7693 }
 
 export default function VenueMap() {
-  const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
+  const token = getEnv().NEXT_PUBLIC_MAPBOX_TOKEN
 
   if (!token) {
     return (
