@@ -68,7 +68,6 @@ export default function Hero() {
           loop
           playsInline
           preload="metadata"
-          poster="/goalfest-og.jpg"
           className="absolute inset-0 w-full h-full object-cover"
           src={NEXT_PUBLIC_VIDEO_HERO}
           aria-hidden="true"
@@ -82,9 +81,9 @@ export default function Hero() {
 
       <div className="relative z-10 flex flex-col items-center gap-8">
         <motion.div
-          initial={{ opacity: 0, scale: 1.15, y: -20 }}
+          initial={{ opacity: 0, scale: 1.05, y: -10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
           className="relative flex flex-col items-center"
         >
           <div className="relative">
