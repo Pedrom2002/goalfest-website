@@ -35,7 +35,7 @@ export async function generateMetadata({
       canonical: `${BASE_URL}/${locale}`,
     },
     openGraph: {
-      title: isPt ? 'Goalfest Lisboa: Fanzone Oficial do Mundial 2026' : 'Goalfest Lisbon: Official FIFA World Cup 2026 Fanzone',
+      title: isPt ? 'Goalfest — Mais do que uma Fanzone' : 'Goalfest — More than a Fanzone',
       description: isPt
         ? 'A maior fanzone de Lisboa para o Mundial 2026.'
         : 'The biggest fanzone in Lisbon for the 2026 World Cup.',
