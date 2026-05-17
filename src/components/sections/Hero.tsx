@@ -103,7 +103,7 @@ export default function Hero() {
               className="object-contain relative z-10 w-[220px] sm:w-[300px] md:w-[360px]"
               priority
             />
-            <div className="absolute bottom-0 right-0 translate-x-24 translate-y-2 flex flex-col items-end gap-0.5">
+            <div className="sm:absolute sm:bottom-0 sm:right-0 sm:translate-x-24 sm:translate-y-2 flex flex-col items-center sm:items-end gap-0.5 mt-2 sm:mt-0">
               <span className="text-white/50 text-[11px] uppercase tracking-widest leading-none">powered by</span>
               <Image
                 src="/logo branco (1).png"

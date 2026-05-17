@@ -99,7 +99,7 @@ export default function Navbar() {
 
         <button
           ref={hamburgerRef}
-          className="md:hidden text-text-primary"
+          className="md:hidden text-text-primary bg-black/40 backdrop-blur-sm rounded-lg p-2 border border-white/10"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
