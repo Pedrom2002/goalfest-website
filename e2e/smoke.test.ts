@@ -4,7 +4,7 @@ test.describe('Smoke', () => {
   test('PT home loads with correct title', async ({ page }) => {
     await page.goto('/pt/')
     await expect(page).toHaveTitle(/Goalfest/i)
-    await expect(page.locator('h1, [role="heading"]').first()).toBeVisible()
+    await expect(page.locator('#main-content')).toBeVisible()
   })
 
   test('EN home loads with correct title', async ({ page }) => {
@@ -15,13 +15,13 @@ test.describe('Smoke', () => {
   test('/pt/jogos renders schedule', async ({ page }) => {
     await page.goto('/pt/jogos')
     await expect(page).toHaveTitle(/Jogos/i)
-    await expect(page.locator('main')).toBeVisible()
+    await expect(page.locator('#main-content')).toBeVisible()
   })
 
   test('/pt/faq renders accordion', async ({ page }) => {
     await page.goto('/pt/faq')
     await expect(page).toHaveTitle(/FAQ/i)
-    await expect(page.locator('main')).toBeVisible()
+    await expect(page.locator('#main-content')).toBeVisible()
   })
 
   test('security headers present on home', async ({ page }) => {

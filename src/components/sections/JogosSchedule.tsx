@@ -33,7 +33,7 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
   ] as const
 
   return (
-    <main className="min-h-screen pt-24 pb-20 px-4 max-w-4xl mx-auto">
+    <div className="min-h-screen pt-24 pb-20 px-4 max-w-4xl mx-auto">
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -131,6 +131,6 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
           ← {t('back')}
         </Link>
       </motion.div>
-    </main>
+    </div>
   )
 }
