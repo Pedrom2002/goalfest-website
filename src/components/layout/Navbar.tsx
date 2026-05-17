@@ -1,8 +1,7 @@
 'use client'
 
 import { useTranslations, useLocale } from 'next-intl'
-import { useRouter, usePathname } from 'next/navigation'
-import Link from 'next/link'
+import { useRouter, usePathname, Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -57,10 +56,7 @@ export default function Navbar() {
 
   const otherLocale = locale === 'pt' ? 'en' : 'pt'
   const switchLocale = () => {
-    const segments = pathname.split('/')
-    segments[1] = otherLocale
-    const hash = typeof window !== 'undefined' ? window.location.hash : ''
-    router.push(segments.join('/') + hash)
+    router.push(pathname, { locale: otherLocale })
     closeMenu()
   }
 

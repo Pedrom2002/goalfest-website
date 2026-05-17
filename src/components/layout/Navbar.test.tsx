@@ -7,19 +7,16 @@ vi.mock('next-intl', () => ({
   useLocale: () => 'pt',
 }))
 
-vi.mock('next/navigation', () => ({
+vi.mock('@/i18n/navigation', () => ({
   useRouter: () => ({ push: vi.fn() }),
   usePathname: () => '/pt',
+  Link: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }) => (
+    <a href={href} {...props}>{children}</a>
+  ),
 }))
 
 vi.mock('next/image', () => ({
   default: ({ alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => <img alt={alt} {...props} />,
-}))
-
-vi.mock('next/link', () => ({
-  default: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }) => (
-    <a href={href} {...props}>{children}</a>
-  ),
 }))
 
 vi.mock('framer-motion', () => ({

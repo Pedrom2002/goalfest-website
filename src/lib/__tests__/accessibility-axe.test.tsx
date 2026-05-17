@@ -16,9 +16,12 @@ vi.mock('next-intl', () => {
   }
 })
 
-vi.mock('next/navigation', () => ({
+vi.mock('@/i18n/navigation', () => ({
   useRouter: () => ({ push: vi.fn() }),
   usePathname: () => '/pt',
+  Link: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }) => (
+    <a href={href} {...props}>{children}</a>
+  ),
 }))
 
 vi.mock('next/image', () => ({
