@@ -51,17 +51,15 @@ import JogosSchedule from './JogosSchedule'
 const GROUP_DAY: BroadcastDay = {
   date: '2026-06-14',
   displayDate: '14 Jun',
-  matches: [
-    { time: '21:00', home: 'Portugal', away: 'Brasil' },
-  ],
+  matches: [{ time: '21:00', home: 'Portugal', away: 'Brasil' }],
+  artists: ['Artista Teste'],
 }
 
 const KNOCKOUT_DAY: BroadcastDay = {
   date: '2026-07-04',
   displayDate: '4 Jul',
-  matches: [
-    { time: '21:00', home: 'TBA', away: 'TBA' },
-  ],
+  matches: [{ time: '21:00', home: 'TBA', away: 'TBA' }],
+  artists: [],
 }
 
 const FULL_SCHEDULE: BroadcastDay[] = [GROUP_DAY, KNOCKOUT_DAY]

@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+import React from 'react'
 import { describe, it, expect, vi } from 'vitest'
 import { render } from '@testing-library/react'
 import { axe, toHaveNoViolations } from 'jest-axe'
@@ -37,8 +38,8 @@ vi.mock('framer-motion', () => ({
   motion: new Proxy({}, {
     get: (_target, tag: string) => {
       const Component = ({ children, ...p }: React.HTMLAttributes<HTMLElement>) => {
-        const Tag = tag as React.ElementType
-        return <Tag {...p}>{children}</Tag>
+        const Tag = tag as keyof React.JSX.IntrinsicElements
+        return React.createElement(Tag, p as Record<string, unknown>, children)
       }
       Component.displayName = `motion.${tag}`
       return Component
