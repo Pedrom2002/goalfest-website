@@ -46,15 +46,31 @@ export default function Hero() {
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
+
+    // Set src client-side only — keeps it out of SSR HTML so crawlers/prerenderers
+    // don't trigger Blob downloads.
+    video.src = NEXT_PUBLIC_VIDEO_HERO
+
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const apply = (reduced: boolean) => {
-      if (reduced) { video.pause(); video.currentTime = 0 }
-      else void video.play()?.catch(() => undefined)
+    const play = () => void video.play()?.catch(() => undefined)
+
+    if (!mq.matches) play()
+
+    const onMotion = (e: MediaQueryListEvent) => {
+      if (e.matches) { video.pause(); video.currentTime = 0 } else play()
     }
-    apply(mq.matches)
-    const handler = (e: MediaQueryListEvent) => apply(e.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
+    // Pause when tab is hidden — stops download/decoding in background.
+    const onVisibility = () => {
+      if (document.visibilityState === 'hidden') video.pause()
+      else if (!mq.matches) play()
+    }
+
+    mq.addEventListener('change', onMotion)
+    document.addEventListener('visibilitychange', onVisibility)
+    return () => {
+      mq.removeEventListener('change', onMotion)
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
   }, [])
 
   return (
@@ -67,9 +83,8 @@ export default function Hero() {
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           className="absolute inset-0 w-full h-full object-cover"
-          src={NEXT_PUBLIC_VIDEO_HERO}
           aria-hidden="true"
         />
       </div>

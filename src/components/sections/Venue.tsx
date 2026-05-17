@@ -61,6 +61,7 @@ const BusIcon = () => (
 
 export default function Venue() {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
   const t = useTranslations('venue')
 
   const cards = [
@@ -77,17 +78,43 @@ export default function Venue() {
 
   useEffect(() => {
     const video = videoRef.current
-    if (!video) return
-    video.playbackRate = 0.5
+    const section = sectionRef.current
+    if (!video || !section) return
+
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const apply = (reduced: boolean) => {
-      if (reduced) { video.pause(); video.currentTime = 0 }
-      else void video.play()?.catch(() => undefined)
+    const play = () => void video.play()?.catch(() => undefined)
+
+    const load = () => {
+      if (video.src) return
+      // Set src only when section enters viewport — users who never scroll here
+      // never download this video.
+      video.src = NEXT_PUBLIC_VIDEO_VENUE
+      video.playbackRate = 0.5
+      if (!mq.matches) play()
     }
-    apply(mq.matches)
-    const handler = (e: MediaQueryListEvent) => apply(e.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
+
+    const onMotion = (e: MediaQueryListEvent) => {
+      if (e.matches) { video.pause(); video.currentTime = 0 }
+      else if (video.src) play()
+    }
+    const onVisibility = () => {
+      if (document.visibilityState === 'hidden') video.pause()
+      else if (!mq.matches && video.src) play()
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => { if (entries[0]?.isIntersecting) { load(); observer.disconnect() } },
+      { threshold: 0.1 }
+    )
+    observer.observe(section)
+
+    mq.addEventListener('change', onMotion)
+    document.addEventListener('visibilitychange', onVisibility)
+    return () => {
+      observer.disconnect()
+      mq.removeEventListener('change', onMotion)
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
   }, [])
 
   return (
@@ -139,7 +166,7 @@ export default function Venue() {
       </div>
 
       {/* Video background for info section */}
-      <div className="relative">
+      <div className="relative" ref={sectionRef}>
         <video
           ref={videoRef}
           autoPlay
@@ -149,7 +176,6 @@ export default function Venue() {
           preload="none"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ objectPosition: '5% 70%', transform: 'scaleX(-1)' }}
-          src={NEXT_PUBLIC_VIDEO_VENUE}
         />
         <div className="absolute inset-0" style={{
           background: 'linear-gradient(to bottom, rgba(13,26,13,1) 0%, rgba(0,0,0,0.78) 20%, rgba(0,0,0,0.78) 80%, rgba(13,26,13,1) 100%)'
