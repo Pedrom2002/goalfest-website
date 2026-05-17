@@ -44,20 +44,18 @@ export default async function middleware(request: NextRequest) {
   const nonce = generateNonce()
   const csp = buildCsp(nonce)
 
-  // Build request headers with nonce so RSC layout can read it via headers().
-  // NextResponse.next({ request: { headers } }) is the documented forwarding pattern.
-  // Do NOT set x-nonce on the response — exposing it to the browser defeats the nonce.
+  // Run next-intl on the original NextRequest — preserves nextUrl/pathname
+  // so locale detection from the URL works correctly.
+  const intlResponse = intlMiddleware(request)
+
+  // Attach nonce to request headers so RSC layout can read it via headers().
+  // next-intl may return a redirect/rewrite response; clone and inject headers.
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('x-nonce', nonce)
-  // Next.js reads CSP from the *request* headers to auto-nonce its inline framework/RSC scripts.
   requestHeaders.set('Content-Security-Policy', csp)
 
-  // Run next-intl middleware; pass modified request so it propagates downstream.
-  const intlResponse = intlMiddleware(
-    new Request(request, { headers: requestHeaders }) as NextRequest
-  )
-
   const response = intlResponse ?? NextResponse.next({ request: { headers: requestHeaders } })
+  response.headers.set('x-middleware-request-x-nonce', nonce)
   response.headers.set('Content-Security-Policy', csp)
 
   return response
