@@ -7,6 +7,9 @@ import dynamic from 'next/dynamic'
 import { useRef, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import * as Sentry from '@sentry/nextjs'
+import { getEnv } from '@/lib/env'
+
+const { NEXT_PUBLIC_VIDEO_VENUE } = getEnv()
 
 class ModelErrorBoundary extends Component<{ children: ReactNode; fallbackText: string }, { failed: boolean }> {
   override state = { failed: false }
@@ -146,7 +149,7 @@ export default function Venue() {
           preload="none"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ objectPosition: '5% 70%', transform: 'scaleX(-1)' }}
-          src="https://phwtscjrqihtamdy.public.blob.vercel-storage.com/136530-764417335-E3vSmNxFr1b7rZyCVuUefga9T4BlLL.mp4"
+          src={NEXT_PUBLIC_VIDEO_VENUE}
         />
         <div className="absolute inset-0" style={{
           background: 'linear-gradient(to bottom, rgba(13,26,13,1) 0%, rgba(0,0,0,0.78) 20%, rgba(0,0,0,0.78) 80%, rgba(13,26,13,1) 100%)'

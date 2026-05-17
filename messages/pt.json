@@ -100,5 +100,41 @@
     "category_comida": "Comida & Bebida",
     "category_regras": "Regras",
     "category_acessibilidade": "Acessibilidade"
+  },
+  "whatIsGoalfest": {
+    "tag": "O Evento",
+    "title_plain": "O que é o Goalfest?",
+    "title_highlight": "Goalfest",
+    "title_before": "O que é o",
+    "desc": "Mais do que uma Fanzone. O Goalfest é o maior evento de celebração do Mundial 2026 em Portugal, um parque no coração de Lisboa onde o futebol, a música e a cultura se encontram.",
+    "view_schedule": "Ver programação ↗",
+    "features": {
+      "matches_title": "Jogos do Mundial",
+      "matches_body": "+50 jogos da FIFA World Cup 2026 transmitidos ao vivo num ecrã gigante de alta definição.",
+      "concerts_title": "Concertos",
+      "concerts_body": "Atuações ao vivo de grandes nomes da música portuguesa e internacional nos dias de jogo.",
+      "gaming_title": "Zona Gaming",
+      "gaming_body": "Consolas disponíveis para todos. Participa nas competições e mostra quem é o melhor.",
+      "football_title": "Football Park",
+      "football_body": "Competições e torneios de futebol 5vs5 para todos os escalões, com prémios para os melhores.",
+      "kids_title": "Zona Kids",
+      "kids_body": "Espaço dedicado às crianças com atividades, animação e entretenimento para os mais novos.",
+      "food_title": "Food Court",
+      "food_body": "Food trucks, bar e restaurante gourmet para todos os gostos.",
+      "fun_title": "Fun Activities",
+      "fun_body": "Roda gigante com vista sobre o recinto e parede de escalada para os mais aventureiros. Diversão para toda a família.",
+      "golden_title": "Golden Circle",
+      "golden_body": "Área paga com acesso exclusivo à zona reservada mais próxima do ecrã gigante, com bar exclusivo. A melhor vista garantida.",
+      "vip_title": "VIP Lounge",
+      "vip_body": "Lounge exclusivo por convite. Um espaço reservado para viver o evento de forma única e privilegiada."
+    },
+    "stats": {
+      "matches_value": "+50",
+      "matches_label": "jogos transmitidos",
+      "concerts_value": "+10",
+      "concerts_label": "concertos",
+      "hours_value": "10h–02h",
+      "hours_label": "horário diário"
+    }
   }
 }

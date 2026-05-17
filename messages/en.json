@@ -100,5 +100,41 @@
     "category_comida": "Food & Drink",
     "category_regras": "Rules",
     "category_acessibilidade": "Accessibility"
+  },
+  "whatIsGoalfest": {
+    "tag": "The Event",
+    "title_plain": "What is Goalfest?",
+    "title_highlight": "Goalfest",
+    "title_before": "What is",
+    "desc": "More than a Fanzone. Goalfest is Portugal's biggest FIFA World Cup 2026 celebration event, a park in the heart of Lisbon where football, music and culture come together.",
+    "view_schedule": "View schedule ↗",
+    "features": {
+      "matches_title": "World Cup Matches",
+      "matches_body": "+50 FIFA World Cup 2026 matches broadcast live on a giant high-definition screen.",
+      "concerts_title": "Concerts",
+      "concerts_body": "Live performances by major Portuguese and international music artists on match days.",
+      "gaming_title": "Gaming Zone",
+      "gaming_body": "Consoles available for everyone. Join the competitions and prove who's the best.",
+      "football_title": "Football Park",
+      "football_body": "5-a-side competitions and tournaments for all age groups, with prizes for the winners.",
+      "kids_title": "Kids Zone",
+      "kids_body": "A dedicated space for children with activities, entertainment and fun for the little ones.",
+      "food_title": "Food Court",
+      "food_body": "Food trucks, bar and a gourmet restaurant for every taste.",
+      "fun_title": "Fun Activities",
+      "fun_body": "Ferris wheel overlooking the venue and a climbing wall for the more adventurous. Fun for the whole family.",
+      "golden_title": "Golden Circle",
+      "golden_body": "Paid access to the exclusive reserved area closest to the giant screen, with an exclusive bar. The best view, guaranteed.",
+      "vip_title": "VIP Lounge",
+      "vip_body": "Invite-only exclusive lounge. A private space to experience the event in a truly privileged way."
+    },
+    "stats": {
+      "matches_value": "+50",
+      "matches_label": "matches broadcast",
+      "concerts_value": "+10",
+      "concerts_label": "concerts",
+      "hours_value": "10am–2am",
+      "hours_label": "daily hours"
+    }
   }
 }

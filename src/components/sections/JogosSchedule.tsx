@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
 import Link from 'next/link'
-import { SCHEDULE } from '@/data/schedule'
+import type { BroadcastDay } from '@/data/schedule'
 import { TEAM_FLAG } from '@/data/teamFlags'
 import { phaseOf, phaseLabel } from '@/lib/matchPhase'
 import * as Flags from 'country-flag-icons/react/3x2'
@@ -19,12 +19,12 @@ function Flag({ team }: { team: string }) {
   return <FlagComp className="w-6 h-4 rounded-sm object-cover shadow-sm" />
 }
 
-export default function JogosSchedule() {
+export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }) {
   const t = useTranslations('jogos')
   const locale = useLocale()
   const [filter, setFilter] = useState<'all' | 'group' | 'knockout'>('all')
 
-  const filtered = SCHEDULE.filter(d => filter === 'all' || phaseOf(d.date) === filter)
+  const filtered = schedule.filter(d => filter === 'all' || phaseOf(d.date) === filter)
 
   const FILTERS = [
     { key: 'all',      label: t('filter_all') },

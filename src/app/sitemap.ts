@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
+import { BASE_URL } from '@/lib/constants'
 
-const BASE_URL = 'https://goalfest.pt'
 const LOCALES = ['pt', 'en'] as const
 
 const routes = [

@@ -4,14 +4,13 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
+import { BASE_URL } from '@/lib/constants'
 import BackgroundFXClient from '@/components/ui/BackgroundFXClient'
 import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald', display: 'swap' })
 const orbitron = Orbitron({ subsets: ['latin'], variable: '--font-orbitron', weight: ['500', '600', '700'], display: 'swap' })
-
-const BASE_URL = 'https://goalfest.pt'
 
 export const viewport: Viewport = {
   themeColor: '#16a34a',
@@ -77,6 +76,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${oswald.variable} ${orbitron.variable}`}>
       <body className="bg-bg-primary text-text-primary antialiased">
+        <div className="bg-fixed-gradient" aria-hidden="true" />
         <a
           href="#main-content"
           className="skip-link"

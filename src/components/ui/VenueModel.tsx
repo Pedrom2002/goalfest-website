@@ -4,9 +4,12 @@ import { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, useGLTF, Environment, ContactShadows } from '@react-three/drei'
 import { useInView } from 'framer-motion'
+import { getEnv } from '@/lib/env'
+
+const { NEXT_PUBLIC_MODEL_VENUE, NEXT_PUBLIC_ENV_VENUE } = getEnv()
 
 function Model({ onLoad }: { onLoad: () => void }) {
-  const { scene } = useGLTF('https://phwtscjrqihtamdy.public.blob.vercel-storage.com/venue_compressed-9HTTABhm50vbgKbJVaEvcchAdzZYd3.glb')
+  const { scene } = useGLTF(NEXT_PUBLIC_MODEL_VENUE)
   useEffect(() => { onLoad() }, [onLoad])
   return <primitive object={scene} scale={1} position={[0, -1, 0]} />
 }
@@ -44,7 +47,7 @@ export default function VenueModel({ loadingText = 'A carregar modelo' }: { load
         <directionalLight position={[5, 10, 5]} intensity={1} />
         <Suspense fallback={null}>
           <Model onLoad={() => setLoaded(true)} />
-          <Environment files="https://phwtscjrqihtamdy.public.blob.vercel-storage.com/dikhololo_night_1k-vGG7SXP7RXLTzq0N3QZhB7bbKouvol.hdr" />
+          <Environment files={NEXT_PUBLIC_ENV_VENUE} />
           <ContactShadows position={[0, -1.5, 0]} opacity={0.4} scale={10} blur={2} />
         </Suspense>
         <OrbitControls

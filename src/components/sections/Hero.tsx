@@ -5,6 +5,9 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import CountdownTimer from '@/components/ui/CountdownTimer'
 import { useEffect, useRef } from 'react'
+import { getEnv } from '@/lib/env'
+
+const { NEXT_PUBLIC_VIDEO_HERO } = getEnv()
 
 const EQ_BARS = [
   { delay: '0s',     dur: '0.6s' },
@@ -67,7 +70,7 @@ export default function Hero() {
           preload="metadata"
           poster="/01_Sofia_ConcertoValeSilencio_0609_16x9.jpg"
           className="absolute inset-0 w-full h-full object-cover"
-          src="https://phwtscjrqihtamdy.public.blob.vercel-storage.com/122965-726547934-fGrPQAr0RXA9c69k7WRaFODMAmxUK9.mp4"
+          src={NEXT_PUBLIC_VIDEO_HERO}
           aria-hidden="true"
         />
       </div>

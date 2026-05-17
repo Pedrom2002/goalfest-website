@@ -1,13 +1,19 @@
 import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { routing } from '@/i18n/routing'
+import { BASE_URL } from '@/lib/constants'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import FaqAccordion from '@/components/ui/FaqAccordion'
 import faqData from '@/data/faq.json'
 import type { FaqCategory } from '@/types'
 
-const BASE_URL = 'https://goalfest.pt'
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
+export const dynamicParams = false
 
 export async function generateMetadata({
   params,

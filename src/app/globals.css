@@ -20,8 +20,14 @@ html {
 
 body {
   overflow-x: hidden;
+}
+
+.bg-fixed-gradient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   background: linear-gradient(160deg, #0d1a0d 0%, #112411 35%, #163216 65%, #1d4a1d 100%);
-  background-attachment: fixed;
+  pointer-events: none;
 }
 
 * {

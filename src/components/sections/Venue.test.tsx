@@ -3,6 +3,16 @@ import { describe, it, expect, vi } from 'vitest'
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 
+vi.mock('@/lib/env', () => ({
+  getEnv: vi.fn(() => ({
+    NEXT_PUBLIC_VIDEO_HERO: 'https://example.com/hero.mp4',
+    NEXT_PUBLIC_VIDEO_VENUE: 'https://example.com/venue.mp4',
+    NEXT_PUBLIC_MODEL_VENUE: 'https://example.com/venue.glb',
+    NEXT_PUBLIC_ENV_VENUE: 'https://example.com/env.hdr',
+    NEXT_PUBLIC_MAPBOX_TOKEN: 'mock',
+  })),
+}))
+
 // Mock next/image
 vi.mock('next/image', () => ({
   default: ({ alt, ...rest }: { alt: string; [key: string]: unknown }) =>

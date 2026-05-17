@@ -2,6 +2,16 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 
+vi.mock('@/lib/env', () => ({
+  getEnv: vi.fn(() => ({
+    NEXT_PUBLIC_VIDEO_HERO: 'https://example.com/hero.mp4',
+    NEXT_PUBLIC_VIDEO_VENUE: 'https://example.com/venue.mp4',
+    NEXT_PUBLIC_MODEL_VENUE: 'https://example.com/venue.glb',
+    NEXT_PUBLIC_ENV_VENUE: 'https://example.com/env.hdr',
+    NEXT_PUBLIC_MAPBOX_TOKEN: 'mock',
+  })),
+}))
+
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
   useLocale: () => 'pt',
