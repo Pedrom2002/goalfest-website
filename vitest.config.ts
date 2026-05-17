@@ -7,6 +7,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      'framer-motion': path.resolve(__dirname, './src/__mocks__/framer-motion.tsx'),
+      'next-intl': path.resolve(__dirname, './src/__mocks__/next-intl.ts'),
     },
   },
   test: {
