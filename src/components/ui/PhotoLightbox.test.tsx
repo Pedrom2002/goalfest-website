@@ -97,4 +97,69 @@ describe('PhotoLightbox', () => {
     await user.keyboard('{ArrowRight}')
     expect(onNext).toHaveBeenCalledTimes(1)
   })
+
+  it('moves focus to close button when lightbox opens', () => {
+    render(
+      <PhotoLightbox photos={photos} index={0} onClose={vi.fn()} onPrev={vi.fn()} onNext={vi.fn()} />
+    )
+    expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Fechar galeria' }))
+  })
+
+  it('returns focus to previously focused element when lightbox closes via Escape', async () => {
+    const user = userEvent.setup()
+    const trigger = document.createElement('button')
+    trigger.textContent = 'Open'
+    document.body.appendChild(trigger)
+    trigger.focus()
+
+    const onClose = vi.fn()
+    const { rerender } = render(
+      <PhotoLightbox photos={photos} index={0} onClose={onClose} onPrev={vi.fn()} onNext={vi.fn()} />
+    )
+
+    await user.keyboard('{Escape}')
+    expect(onClose).toHaveBeenCalledTimes(1)
+
+    rerender(
+      <PhotoLightbox photos={photos} index={null} onClose={onClose} onPrev={vi.fn()} onNext={vi.fn()} />
+    )
+
+    expect(document.activeElement).toBe(trigger)
+
+    document.body.removeChild(trigger)
+  })
+
+  it('focus trap: Tab from last focusable element wraps to first', async () => {
+    const user = userEvent.setup()
+    render(
+      <PhotoLightbox photos={photos} index={0} onClose={vi.fn()} onPrev={vi.fn()} onNext={vi.fn()} />
+    )
+
+    const buttons = screen.getAllByRole('button')
+    const last = buttons[buttons.length - 1]
+    last.focus()
+    expect(document.activeElement).toBe(last)
+
+    await user.keyboard('{Tab}')
+
+    const first = buttons[0]
+    expect(document.activeElement).toBe(first)
+  })
+
+  it('focus trap: Shift+Tab from first focusable element wraps to last', async () => {
+    const user = userEvent.setup()
+    render(
+      <PhotoLightbox photos={photos} index={0} onClose={vi.fn()} onPrev={vi.fn()} onNext={vi.fn()} />
+    )
+
+    const buttons = screen.getAllByRole('button')
+    const first = buttons[0]
+    first.focus()
+    expect(document.activeElement).toBe(first)
+
+    await user.keyboard('{Shift>}{Tab}{/Shift}')
+
+    const last = buttons[buttons.length - 1]
+    expect(document.activeElement).toBe(last)
+  })
 })
