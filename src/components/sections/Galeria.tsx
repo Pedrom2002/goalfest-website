@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useSyncExternalStore } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
@@ -29,9 +29,7 @@ export default function Galeria() {
   const locale = useLocale()
   const photos = galleryData.map((p) => ({ src: p.src, alt: locale === 'en' ? p.altEn : p.alt }))
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => { setMounted(true) }, [])
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false)
 
   const total = galleryData.length
   const prev = useCallback(() => setLightboxIndex((i) => (i !== null ? (i - 1 + total) % total : null)), [total])
