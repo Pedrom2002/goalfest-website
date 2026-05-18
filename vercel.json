@@ -4,5 +4,13 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "regions": ["lhr1"],
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "goalfest.pt" }],
+      "destination": "https://www.goalfest.pt/$1",
+      "permanent": true
+    }
+  ]
 }

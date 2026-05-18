@@ -27,8 +27,8 @@ export async function generateMetadata({
 
   return {
     title: isPt
-      ? 'Goalfest Lisboa | Fanzone Oficial do Mundial 2026'
-      : 'Goalfest Lisbon | Official FIFA World Cup 2026 Fanzone',
+      ? 'Goalfest 2026 | Mais do que uma Fanzone'
+      : 'Goalfest 2026 | More than a Fanzone',
     description: isPt
       ? 'A maior fanzone de Lisboa para o Mundial 2026. Ecrãs gigantes, food trucks e bar no Parque das Nações. 11 Jun - 19 Jul 2026.'
       : 'The biggest fanzone in Lisbon for the 2026 FIFA World Cup. Giant screens, food trucks and bar at Parque das Nações. 11 Jun - 19 Jul 2026.',
