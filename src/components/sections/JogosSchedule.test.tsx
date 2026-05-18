@@ -103,7 +103,7 @@ describe('JogosSchedule', () => {
 
   it('renders TBA label for unknown matches', () => {
     render(<JogosSchedule schedule={FULL_SCHEDULE} />)
-    expect(screen.getByText('A definir')).toBeInTheDocument()
+    expect(screen.getAllByText('A definir').length).toBeGreaterThanOrEqual(1)
   })
 
   it('active filter button has aria-pressed=true, others aria-pressed=false', async () => {

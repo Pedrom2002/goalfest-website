@@ -97,9 +97,15 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
                 <div key={i} className="flex items-center px-5 py-3.5 gap-4 hover:bg-white/3 transition-colors">
                   <span className="text-green-pt font-mono text-xs font-bold w-12 shrink-0 tabular-nums">{m.time}</span>
                   {m.home === 'TBA' ? (
-                    <span className="text-text-muted/40 text-xs italic tracking-widest uppercase">
-                      {t('tba')}
-                    </span>
+                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-1 justify-end min-w-0">
+                        <span className="text-text-muted/40 text-xs italic tracking-widest uppercase">{t('tba')}</span>
+                      </div>
+                      <span className="text-text-muted/40 text-xs font-bold shrink-0 w-6 text-center">vs</span>
+                      <div className="flex items-center gap-2 flex-1 min-w-0">
+                        <span className="text-text-muted/40 text-xs italic tracking-widest uppercase">{t('tba')}</span>
+                      </div>
+                    </div>
                   ) : (
                     <div className="flex items-center gap-3 flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-1 justify-end min-w-0">
