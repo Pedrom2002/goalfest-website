@@ -40,8 +40,8 @@ export async function generateMetadata({
       template: '%s | Goalfest 2026',
     },
     description: isPt
-      ? 'A maior fanzone de Lisboa para o Mundial 2026. Ecrãs gigantes, food trucks e bar no Parque das Nações. 11 Jun - 19 Jul 2026.'
-      : 'The biggest fanzone in Lisbon for the 2026 FIFA World Cup. Giant screens, food trucks and bar at Parque das Nações. 11 Jun - 19 Jul 2026.',
+      ? 'A maior fanzone de Lisboa para o Mundial 2026. Ecrãs gigantes, food trucks e bar no Vale do Silêncio. 11 Jun - 19 Jul 2026.'
+      : 'The biggest fanzone in Lisbon for the 2026 FIFA World Cup. Giant screens, food trucks and bar at Vale do Silêncio. 11 Jun - 19 Jul 2026.',
     alternates: {
       canonical: `${BASE_URL}/${locale}`,
       languages: {

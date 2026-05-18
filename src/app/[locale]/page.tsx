@@ -30,8 +30,8 @@ export async function generateMetadata({
       ? 'Goalfest 2026 | Mais do que uma Fanzone'
       : 'Goalfest 2026 | More than a Fanzone',
     description: isPt
-      ? 'A maior fanzone de Lisboa para o Mundial 2026. Ecrãs gigantes, food trucks e bar no Parque das Nações. 11 Jun - 19 Jul 2026.'
-      : 'The biggest fanzone in Lisbon for the 2026 FIFA World Cup. Giant screens, food trucks and bar at Parque das Nações. 11 Jun - 19 Jul 2026.',
+      ? 'A maior fanzone de Lisboa para o Mundial 2026. Ecrãs gigantes, food trucks e bar no Vale do Silêncio. 11 Jun - 19 Jul 2026.'
+      : 'The biggest fanzone in Lisbon for the 2026 FIFA World Cup. Giant screens, food trucks and bar at Vale do Silêncio. 11 Jun - 19 Jul 2026.',
     alternates: {
       canonical: `${BASE_URL}/${locale}`,
     },
@@ -76,10 +76,10 @@ export default async function LandingPage({
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     location: {
       '@type': 'Place',
-      name: 'Parque das Nações',
+      name: 'Vale do Silêncio',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Parque das Nações',
+        streetAddress: 'Vale do Silêncio',
         addressLocality: 'Lisboa',
         addressCountry: 'PT',
       },

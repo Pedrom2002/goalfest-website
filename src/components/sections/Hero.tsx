@@ -109,7 +109,7 @@ export default function Hero() {
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
             <Image
-              src="/goalfest-logo.png"
+              src="/Sem título-1.webp"
               alt="Goalfest Lisboa"
               width={360}
               height={360}
