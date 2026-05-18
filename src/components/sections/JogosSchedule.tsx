@@ -28,7 +28,6 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
 
   const FILTERS = [
     { key: 'all',      label: t('filter_all') },
-    { key: 'group',    label: t('filter_grupos') },
     { key: 'knockout', label: t('filter_eliminatorias') },
   ] as const
 
