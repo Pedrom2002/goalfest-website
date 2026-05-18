@@ -68,7 +68,7 @@ describe('JogosSchedule', () => {
   it('renders all filter buttons', () => {
     render(<JogosSchedule schedule={FULL_SCHEDULE} />)
     expect(screen.getByRole('button', { name: 'Todos' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Fase de Grupos' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Fase de Grupos' })).not.toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Eliminatórias' })).toBeInTheDocument()
   })
 
@@ -76,14 +76,6 @@ describe('JogosSchedule', () => {
     render(<JogosSchedule schedule={FULL_SCHEDULE} />)
     expect(screen.getByText('14 Jun')).toBeInTheDocument()
     expect(screen.getByText('4 Jul')).toBeInTheDocument()
-  })
-
-  it('shows only group stage days after clicking Fase de Grupos', async () => {
-    const user = userEvent.setup()
-    render(<JogosSchedule schedule={FULL_SCHEDULE} />)
-    await user.click(screen.getByRole('button', { name: 'Fase de Grupos' }))
-    expect(screen.getByText('14 Jun')).toBeInTheDocument()
-    expect(screen.queryByText('4 Jul')).not.toBeInTheDocument()
   })
 
   it('shows only knockout days after clicking Eliminatórias', async () => {
@@ -97,7 +89,7 @@ describe('JogosSchedule', () => {
   it('returns to all matches after clicking Todos', async () => {
     const user = userEvent.setup()
     render(<JogosSchedule schedule={FULL_SCHEDULE} />)
-    await user.click(screen.getByRole('button', { name: 'Fase de Grupos' }))
+    await user.click(screen.getByRole('button', { name: 'Eliminatórias' }))
     await user.click(screen.getByRole('button', { name: 'Todos' }))
     expect(screen.getByText('14 Jun')).toBeInTheDocument()
     expect(screen.getByText('4 Jul')).toBeInTheDocument()
@@ -118,14 +110,13 @@ describe('JogosSchedule', () => {
     const user = userEvent.setup()
     render(<JogosSchedule schedule={FULL_SCHEDULE} />)
     let allBtn = screen.getByRole('button', { name: /Todos/i })
-    let groupBtn = screen.getByRole('button', { name: /Fase de Grupos/i })
+    const knockoutBtn = screen.getByRole('button', { name: /Eliminatórias/i })
     expect(allBtn).toHaveAttribute('aria-pressed', 'true')
-    expect(groupBtn).toHaveAttribute('aria-pressed', 'false')
-    await user.click(groupBtn)
+    expect(knockoutBtn).toHaveAttribute('aria-pressed', 'false')
+    await user.click(knockoutBtn)
     allBtn = screen.getByRole('button', { name: /Todos/i })
-    groupBtn = screen.getByRole('button', { name: /Fase de Grupos/i })
     expect(allBtn).toHaveAttribute('aria-pressed', 'false')
-    expect(groupBtn).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', { name: /Eliminatórias/i })).toHaveAttribute('aria-pressed', 'true')
   })
 
   it('renders back to home link', () => {
