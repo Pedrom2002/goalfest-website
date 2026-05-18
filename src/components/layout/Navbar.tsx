@@ -62,10 +62,10 @@ export default function Navbar() {
   }
 
   const navLinks = [
-    { href: '/#goalfest', label: t('goalfest') },
-    { href: '/#venue', label: t('venue') },
-    { href: '/#sponsors', label: t('sponsors') },
-    { href: '/#faq', label: t('faq') },
+    { href: '#goalfest', label: t('goalfest') },
+    { href: '#venue', label: t('venue') },
+    { href: '#sponsors', label: t('sponsors') },
+    { href: '#faq', label: t('faq') },
   ]
 
   return (
@@ -90,7 +90,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <a
               key={link.href}
-              href={`/${locale}${link.href}`}
+              href={pathname === '/' ? link.href : `/${locale}/${link.href}`}
               className="text-white hover:text-gold transition-colors duration-200 text-[17px] uppercase tracking-[0.12em]" style={{ fontFamily: 'var(--font-bebas)' }}
             >
               {link.label}
@@ -162,7 +162,7 @@ export default function Navbar() {
                     transition={{ delay: i * 0.07 }}
                   >
                     <a
-                      href={`/${locale}${link.href}`}
+                      href={pathname === '/' ? link.href : `/${locale}/${link.href}`}
                       onClick={closeMenu}
                       className="flex items-center justify-between py-4 border-b border-white/6 text-text-primary hover:text-green-pt text-xl uppercase tracking-[0.12em] transition-colors group" style={{ fontFamily: 'var(--font-bebas)' }}
                     >
