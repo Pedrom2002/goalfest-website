@@ -7,6 +7,7 @@ import { routing } from '@/i18n/routing'
 import { BASE_URL } from '@/lib/constants'
 import BackgroundFXClient from '@/components/ui/BackgroundFXClient'
 import ScrollRestorer from '@/components/ui/ScrollRestorer'
+import HashScroller from '@/components/ui/HashScroller'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import { Analytics } from '@vercel/analytics/next'
@@ -93,6 +94,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <BackgroundFXClient />
           <ScrollRestorer />
+          <HashScroller />
           <Navbar />
           <main id="main-content">{children}</main>
           <Footer />
