@@ -74,7 +74,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-20">
+    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-8">
       {/* Video background */}
       <div className="absolute inset-0 z-0">
         <video
@@ -117,17 +117,16 @@ export default function Hero() {
               className="object-contain relative z-10 w-[220px] sm:w-[300px] md:w-[360px]"
               priority
             />
-            <div className="sm:absolute sm:bottom-0 sm:right-0 sm:translate-x-24 sm:translate-y-2 flex flex-col items-center sm:items-end gap-0.5 mt-2 sm:mt-0">
-              <span className="text-white/50 text-[11px] uppercase tracking-widest leading-none">powered by</span>
-              <Image
-                src="/quicnation-logo.png"
-                alt="Quic"
-                width={80}
-                height={30}
-                className="object-contain w-16 sm:w-20"
-                priority
-              />
-            </div>
+          </div>
+          <div className="flex flex-col items-center gap-1 mt-3">
+            <span className="text-white/60 text-[10px] uppercase tracking-widest leading-none">powered by</span>
+            <Image
+              src="/quicnation-logo.png"
+              alt="Quic"
+              width={60}
+              height={22}
+              className="object-contain"
+            />
           </div>
           <p className="text-text-muted tracking-[0.5em] text-sm uppercase mt-4">{t('subtitle')}</p>
         </motion.div>

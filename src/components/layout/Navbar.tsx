@@ -19,8 +19,8 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 40)
-      setPastHero(window.scrollY > window.innerHeight * 0.3)
+      setScrolled(window.scrollY > window.innerHeight * 0.85)
+      setPastHero(window.scrollY > window.innerHeight * 0.85)
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -70,7 +70,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-bg-primary/97 backdrop-blur-md shadow-lg border-b border-green-pt/25' : 'bg-black/20 backdrop-blur-sm'
+        scrolled ? 'bg-bg-primary/97 backdrop-blur-md shadow-lg border-b border-green-pt/25' : 'bg-black/10 backdrop-blur-[2px]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
@@ -83,7 +83,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-text-muted hover:text-gold transition-colors duration-200 text-[13px] font-medium uppercase tracking-wide" style={{ fontFamily: 'var(--font-orbitron)' }}
+              className="text-white hover:text-gold transition-colors duration-200 text-[17px] uppercase tracking-[0.12em]" style={{ fontFamily: 'var(--font-bebas)' }}
             >
               {link.label}
             </Link>
@@ -91,7 +91,7 @@ export default function Navbar() {
           <button
             onClick={switchLocale}
             aria-label={locale === 'pt' ? 'Switch to English' : 'Mudar para Português'}
-            className="text-text-muted hover:text-gold text-[12px] font-medium border border-text-muted/30 px-2 py-1 rounded hover:border-gold transition-colors" style={{ fontFamily: 'var(--font-orbitron)' }}
+            className="text-white hover:text-gold text-[15px] border border-white/30 px-2 py-1 rounded hover:border-gold transition-colors tracking-[0.1em]" style={{ fontFamily: 'var(--font-bebas)' }}
           >
             {otherLocale.toUpperCase()}
           </button>
@@ -156,7 +156,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={closeMenu}
-                      className="flex items-center justify-between py-4 border-b border-white/6 text-text-primary hover:text-green-pt text-base font-semibold uppercase tracking-wide transition-colors group"
+                      className="flex items-center justify-between py-4 border-b border-white/6 text-text-primary hover:text-green-pt text-xl uppercase tracking-[0.12em] transition-colors group" style={{ fontFamily: 'var(--font-bebas)' }}
                     >
                       {link.label}
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className="w-4 h-4 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all" aria-hidden="true">

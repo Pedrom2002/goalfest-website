@@ -10,7 +10,7 @@ export default function Footer() {
   const isPt = locale === 'pt'
 
   return (
-    <footer className="bg-bg-surface border-t border-white/10 py-6 mt-10">
+    <footer className="bg-bg-surface border-t border-white/10 py-6 mt-10" style={{ fontFamily: 'var(--font-dm-sans)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <Image src="/goalfest-logo.png" alt="Fanzone Lisboa" height={28} width={84} className="object-contain" />
         <p className="text-text-muted text-xs opacity-60">{t('copyright')}</p>

@@ -27,37 +27,6 @@ class ModelErrorBoundary extends Component<{ children: ReactNode; fallbackText: 
 
 const VenueModel = dynamic(() => import('@/components/ui/VenueModel'), { ssr: false })
 
-const CarIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7" aria-hidden="true">
-    <path d="M5 17H3v-5l2.5-6h13L21 12v5h-2" />
-    <circle cx="7.5" cy="17.5" r="2.5" />
-    <circle cx="16.5" cy="17.5" r="2.5" />
-    <path d="M5 12h14" />
-  </svg>
-)
-
-const MetroIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7" aria-hidden="true">
-    <rect x="4" y="3" width="16" height="13" rx="2" />
-    <path d="M8 16v3m8-3v3M6 19h12" />
-    <path d="M8 7l2 3 2-3 2 3 2-3" />
-  </svg>
-)
-
-const ParkingIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7" aria-hidden="true">
-    <rect x="3" y="3" width="18" height="18" rx="2" />
-    <path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
-  </svg>
-)
-
-const BusIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7" aria-hidden="true">
-    <path d="M8 6v6M3 6h18M3 10h18M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z" />
-    <circle cx="7" cy="17" r="1" />
-    <circle cx="17" cy="17" r="1" />
-  </svg>
-)
 
 export default function Venue() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -65,11 +34,10 @@ export default function Venue() {
   const t = useTranslations('venue')
 
   const cards = [
-    { Icon: CarIcon, title: t('access_car_title'), body: t('access_car_body') },
-    { Icon: MetroIcon, title: t('access_metro_title'), body: t('access_metro_body') },
-    { Icon: BusIcon, title: t('access_bus_title'), body: t('access_bus_body') },
+    { title: t('access_car_title'), body: t('access_car_body') },
+    { title: t('access_metro_title'), body: t('access_metro_body') },
+    { title: t('access_bus_title'), body: t('access_bus_body') },
     {
-      Icon: ParkingIcon,
       title: t('access_parking_title'),
       body: t('access_parking_body'),
       link: { href: 'https://maps.google.com/maps/search/estacionamento/@38.7659217,-9.1187136,16z', label: `${t('access_parking_link')} ↗` }
@@ -231,8 +199,7 @@ export default function Venue() {
 
               <div className="relative p-4">
                 <p className="text-green-pt/30 text-xs font-mono font-bold mb-3 tracking-widest">0{i + 1}</p>
-                <card.Icon />
-                <h3 className="text-text-primary font-semibold text-xs uppercase tracking-wider mb-2 mt-2">{card.title}</h3>
+                <h3 className="text-text-primary font-semibold text-xs uppercase tracking-wider mb-2">{card.title}</h3>
                 <p className="text-text-muted text-xs leading-relaxed">{card.body}</p>
                 {'link' in card && card.link && (
                   <a href={card.link.href} target="_blank" rel="noopener noreferrer" className="inline-block mt-2 text-green-pt text-xs hover:underline">
