@@ -25,7 +25,7 @@ function SponsorLogo({ name, logo, url, large, logoScale, index }: { name: strin
     </>
   )
 
-  return (
+  const card = (
     <motion.div
       initial={{ opacity: 0, scale: large ? 0.8 : 0.9, y: large ? 0 : 10 }}
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -36,13 +36,15 @@ function SponsorLogo({ name, logo, url, large, logoScale, index }: { name: strin
         large ? 'w-36 h-16 md:w-48 md:h-24' : 'w-36 h-16 md:w-44 md:h-24'
       }`}
     >
-      {url ? (
-        <a href={url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full h-full cursor-pointer">
-          {inner}
-        </a>
-      ) : inner}
+      {inner}
     </motion.div>
   )
+
+  return url ? (
+    <a href={url} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+      {card}
+    </a>
+  ) : card
 }
 
 export default function Sponsors({ data }: { data: SponsorsData }) {
