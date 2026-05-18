@@ -56,6 +56,7 @@ export default function Navbar() {
 
   const otherLocale = locale === 'pt' ? 'en' : 'pt'
   const switchLocale = () => {
+    sessionStorage.setItem('locale-switch-scroll', String(window.scrollY))
     router.push(pathname, { locale: otherLocale })
     closeMenu()
   }
