@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations, useLocale } from 'next-intl'
-import { useRouter, usePathname, Link } from '@/i18n/navigation'
+import { useRouter, usePathname } from '@/i18n/navigation'
 import Image from 'next/image'
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -83,7 +83,7 @@ export default function Navbar() {
           className={`block transition-all duration-300 hover:scale-105 ${pastHero || pathname !== '/' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           aria-label={locale === 'pt' ? 'Ir para página principal' : 'Go to home page'}
         >
-          <Image src="/goalfest-logo.png" alt="Fanzone Lisboa" height={28} width={84} className="object-contain" />
+          <Image src="/GOALFEST-logo2.png" alt="Fanzone Lisboa" height={28} width={84} className="object-contain" />
         </button>
 
         <nav className="hidden md:flex items-center gap-8" aria-label={locale === 'pt' ? 'Navegação principal' : 'Main navigation'}>
