@@ -87,13 +87,13 @@ export default function Navbar() {
 
         <nav className="hidden md:flex items-center gap-8" aria-label={locale === 'pt' ? 'Navegação principal' : 'Main navigation'}>
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.href}
-              href={link.href}
+              href={`/${locale}${link.href}`}
               className="text-white hover:text-gold transition-colors duration-200 text-[17px] uppercase tracking-[0.12em]" style={{ fontFamily: 'var(--font-bebas)' }}
             >
               {link.label}
-            </Link>
+            </a>
           ))}
           <button
             onClick={switchLocale}
@@ -160,8 +160,8 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.07 }}
                   >
-                    <Link
-                      href={link.href}
+                    <a
+                      href={`/${locale}${link.href}`}
                       onClick={closeMenu}
                       className="flex items-center justify-between py-4 border-b border-white/6 text-text-primary hover:text-green-pt text-xl uppercase tracking-[0.12em] transition-colors group" style={{ fontFamily: 'var(--font-bebas)' }}
                     >
@@ -169,7 +169,7 @@ export default function Navbar() {
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className="w-4 h-4 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all" aria-hidden="true">
                         <path d="M9 18l6-6-6-6"/>
                       </svg>
-                    </Link>
+                    </a>
                   </motion.div>
                 ))}
               </nav>
