@@ -83,7 +83,7 @@ export default function WhatIsGoalfest() {
               <h3 className="text-text-primary font-semibold text-sm uppercase tracking-wider mb-2">{t(f.titleKey)}</h3>
               <p className="text-text-muted text-sm leading-relaxed">{t(f.bodyKey)}</p>
               {f.isMatches && (
-                <Link href={`/${locale}/jogos`} className="inline-block mt-3 text-green-pt text-xs font-semibold hover:underline uppercase tracking-widest">
+                <Link href={`/${locale}/jogos`} target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-green-pt text-xs font-semibold hover:underline uppercase tracking-widest">
                   {t('view_schedule')}
                 </Link>
               )}
