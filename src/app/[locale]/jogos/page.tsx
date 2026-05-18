@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { BASE_URL } from '@/lib/constants'
 import JogosSchedule from '@/components/sections/JogosSchedule'
+import ScrollToTop from '@/components/ui/ScrollToTop'
 import { SCHEDULE } from '@/data/schedule'
 
 export function generateStaticParams() {
@@ -41,5 +42,10 @@ export default async function JogosPage({
   const { locale } = await params
   setRequestLocale(locale)
 
-  return <JogosSchedule schedule={SCHEDULE} />
+  return (
+    <>
+      <JogosSchedule schedule={SCHEDULE} />
+      <ScrollToTop />
+    </>
+  )
 }
