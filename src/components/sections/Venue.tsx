@@ -143,7 +143,7 @@ export default function Venue() {
           playsInline
           preload="none"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: 'center center' }}
+          style={{ objectPosition: '5% 70%', transform: 'scaleX(-1)' }}
         />
         <div className="absolute inset-0" style={{
           background: 'linear-gradient(to bottom, rgba(13,26,13,1) 0%, rgba(0,0,0,0.78) 20%, rgba(0,0,0,0.78) 80%, rgba(13,26,13,1) 100%)'
