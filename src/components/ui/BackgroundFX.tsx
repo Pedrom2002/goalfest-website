@@ -8,12 +8,12 @@ function seededRandom(seed: number): number {
 }
 
 const BEAMS = [
-  { x: '8%',  rotate: -35, color: 'rgba(34,197,94,0.55)',  duration: '7s',  delay: '0s'   },
-  { x: '22%', rotate: -15, color: 'rgba(255,215,0,0.40)',  duration: '9s',  delay: '1.5s' },
-  { x: '40%', rotate: -5,  color: 'rgba(34,197,94,0.50)',  duration: '8s',  delay: '0.8s' },
-  { x: '58%', rotate: 5,   color: 'rgba(255,215,0,0.45)',  duration: '10s', delay: '2.2s' },
-  { x: '75%', rotate: 18,  color: 'rgba(34,197,94,0.60)',  duration: '7.5s',delay: '0.4s' },
-  { x: '90%', rotate: 32,  color: 'rgba(255,215,0,0.42)',  duration: '11s', delay: '3s'   },
+  { x: '8%',  rotate: -35, color: 'rgba(34,197,94,0.55)',  duration: '7s',  delay: '-2.1s' },
+  { x: '22%', rotate: -15, color: 'rgba(255,215,0,0.40)',  duration: '9s',  delay: '-4.2s' },
+  { x: '40%', rotate: -5,  color: 'rgba(34,197,94,0.50)',  duration: '8s',  delay: '-1.3s' },
+  { x: '58%', rotate: 5,   color: 'rgba(255,215,0,0.45)',  duration: '10s', delay: '-5.8s' },
+  { x: '75%', rotate: 18,  color: 'rgba(34,197,94,0.60)',  duration: '7.5s',delay: '-3.4s' },
+  { x: '90%', rotate: 32,  color: 'rgba(255,215,0,0.42)',  duration: '11s', delay: '-7s'   },
 ]
 
 export default function BackgroundFX() {
@@ -53,7 +53,8 @@ export default function BackgroundFX() {
 
       {BEAMS.map((b, i) => {
         const sweepDur = `${30 + (i % 3) * 5}s`
-        const sweepDelay = `${i * 2.1}s`
+        // Negative delay so beams start mid-animation, avoiding initial snap
+        const sweepDelay = `-${i * 2.1}s`
         const m = b.color.match(/rgba\((\d+),(\d+),(\d+)/)
         const rgb = m ? `${m[1]},${m[2]},${m[3]}` : '255,255,255'
         return (
