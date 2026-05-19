@@ -104,20 +104,14 @@ export default function ConfirmadoActions({
   }
 
   return (
-    <div className="flex flex-col sm:flex-row gap-2 mt-5">
+    <div className="mt-5">
       <button
         onClick={() => void downloadCard()}
-        className="flex-1 rounded-full px-4 py-3 font-black tracking-[.14em] text-xs uppercase transition cursor-pointer text-bg-primary hover:brightness-110"
+        className="w-full rounded-full px-4 py-3 font-black tracking-[.14em] text-xs uppercase transition cursor-pointer text-bg-primary hover:brightness-110"
         style={{ background: "#5ea63b" }}
       >
         Guardar QR
       </button>
-      <a
-        href={`/api/ics/${token}`}
-        className="flex-1 rounded-full border border-white/20 text-text-primary px-4 py-3 font-black tracking-[.14em] text-xs uppercase hover:bg-white/5 transition text-center"
-      >
-        Add ao calendário
-      </a>
     </div>
   );
 }
