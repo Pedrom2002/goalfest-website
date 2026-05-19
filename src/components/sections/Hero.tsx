@@ -120,7 +120,7 @@ export default function Hero() {
             />
           </div>
           <h1 className="sr-only">Goalfest Lisboa - Fanzone Oficial do Mundial 2026 no Parque das Nações</h1>
-          <p className="text-text-muted tracking-[0.5em] text-base uppercase relative z-20 -mt-28 sm:-mt-36 md:-mt-44">{t('subtitle')}</p>
+          <p className="tracking-[0.15em] text-2xl sm:text-3xl md:text-4xl uppercase relative z-20 -mt-28 sm:-mt-36 md:-mt-44" style={{ fontFamily: 'var(--font-bebas)', color: 'rgba(255,255,255,0.7)' }}>{t('subtitle')}</p>
           <div className="flex flex-col items-center gap-0.5 mt-3 relative z-20">
             <span className="text-white/60 text-[9px] uppercase tracking-widest leading-none">powered by</span>
             <Image
