@@ -109,7 +109,7 @@ export default function Hero() {
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
             <Image
-              src="/Sem título-1.webp"
+              src="/GOALFEST-logo2.png"
               alt="Goalfest Lisboa"
               width={360}
               height={360}
@@ -118,6 +118,7 @@ export default function Hero() {
               priority
             />
           </div>
+          <h1 className="sr-only">Goalfest Lisboa - Fanzone Oficial do Mundial 2026 no Parque das Nações</h1>
           <div className="flex flex-col items-center gap-1 mt-3">
             <span className="text-white/60 text-[10px] uppercase tracking-widest leading-none">powered by</span>
             <Image
