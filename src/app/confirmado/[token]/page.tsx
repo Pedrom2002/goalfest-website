@@ -51,8 +51,8 @@ export default async function ConfirmadoPage({
         />
 
         {/* Card */}
-        <div className="w-full rounded-2xl border border-white/10 pt-16 pb-5 px-5 text-center"
-          style={{ background: "rgba(10,30,10,0.88)", backdropFilter: "blur(20px)" }}>
+        <div className="w-full rounded-2xl border border-white/10 pt-20 pb-5 px-5 text-center"
+          style={{ background: "rgba(20,50,20,0.65)", backdropFilter: "blur(20px)" }}>
 
           <h1 className="text-2xl font-black uppercase tracking-widest text-white" style={{ fontFamily: "var(--font-bebas, sans-serif)" }}>
             Tás <span style={{ color: "#5ea63b" }}>dentro</span>
