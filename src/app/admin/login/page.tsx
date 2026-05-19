@@ -2,34 +2,23 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Turnstile from "@/components/turnstile";
 
 type Mode = "password" | "magic";
-
-const SITEKEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
   );
   const [message, setMessage] = useState<string>("");
 
-  const captchaRequired = !!SITEKEY;
-  const canSubmit =
-    !captchaRequired || captchaToken !== null || status === "sending";
+  const canSubmit = status !== "sending";
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (captchaRequired && !captchaToken) {
-      setMessage("Resolve o captcha primeiro.");
-      setStatus("error");
-      return;
-    }
     setStatus("sending");
     setMessage("");
 
@@ -37,7 +26,7 @@ export default function AdminLoginPage() {
       const res = await fetch("/api/admin/sign-in", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, captchaToken }),
+        body: JSON.stringify({ email, password }),
       /* v8 ignore next */
       }).catch(() => null);
       const json = (await res?.json().catch(() => ({}))) as {
@@ -58,7 +47,6 @@ export default function AdminLoginPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email,
-        captchaToken,
         redirectTo: `${window.location.origin}/auth/callback?next=/admin`,
       }),
     /* v8 ignore next */
@@ -76,28 +64,26 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <main className="min-h-dvh grid place-items-center bg-[#06182A] text-[#F4EBD6] p-6">
+    <main className="min-h-dvh grid place-items-center bg-bg-primary text-text-primary p-6">
       <form
         onSubmit={submit}
-        className="w-full max-w-sm rounded-2xl border-2 border-[#06111B] bg-[#F4EBD6] text-[#06111B] p-6 shadow-[5px_5px_0_#06111B]"
+        className="w-full max-w-sm rounded-2xl border border-white/10 bg-bg-surface text-text-primary p-6 shadow-lg"
       >
-        <h1 className="font-serif text-2xl font-black leading-tight">
-          {/* #B83F1F atinge contraste 4.6:1 sobre #F4EBD6 (axe AA-friendly).
-              `#E8613C` da paleta principal cai para 2.85:1 e falha WCAG AA. */}
-          Admin <em className="text-[#B83F1F] italic">QUIC</em>
+        <h1 className="font-sans text-2xl font-black leading-tight tracking-[.1em] uppercase">
+          GOALFEST <em className="text-[#FFD700] not-italic">admin</em>
         </h1>
-        <p className="text-sm opacity-70 mt-1 mb-4">
+        <p className="text-sm opacity-60 mt-1 mb-4">
           Entra no painel de gestão.
         </p>
 
-        <div className="flex gap-1 rounded-full border-2 border-[#06111B] p-1 mb-4 text-xs">
+        <div className="flex gap-1 rounded-full border border-white/20 p-1 mb-4 text-xs">
           <button
             type="button"
             onClick={() => setMode("password")}
             className={`flex-1 px-3 py-2 rounded-full tracking-[.14em] uppercase font-bold transition ${
               mode === "password"
-                ? "bg-[#06111B] text-[#FFD27A]"
-                : "opacity-70 hover:opacity-100"
+                ? "bg-[#FFD700] text-bg-primary"
+                : "opacity-60 hover:opacity-100"
             }`}
           >
             Password
@@ -107,8 +93,8 @@ export default function AdminLoginPage() {
             onClick={() => setMode("magic")}
             className={`flex-1 px-3 py-2 rounded-full tracking-[.14em] uppercase font-bold transition ${
               mode === "magic"
-                ? "bg-[#06111B] text-[#FFD27A]"
-                : "opacity-70 hover:opacity-100"
+                ? "bg-[#FFD700] text-bg-primary"
+                : "opacity-60 hover:opacity-100"
             }`}
           >
             Magic Link
@@ -122,7 +108,7 @@ export default function AdminLoginPage() {
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full border-b-2 border-[#06111B] bg-transparent py-2 text-base outline-none focus:border-[#F2A93C] mb-3"
+          className="w-full border-b border-white/30 bg-transparent py-2 text-base outline-none focus:border-[#FFD700] mb-3 transition-colors"
           placeholder="tu@exemplo.pt"
         />
 
@@ -135,25 +121,15 @@ export default function AdminLoginPage() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border-b-2 border-[#06111B] bg-transparent py-2 text-base outline-none focus:border-[#F2A93C]"
+              className="w-full border-b border-white/30 bg-transparent py-2 text-base outline-none focus:border-[#FFD700] transition-colors"
               placeholder="••••••••"
             />
           </>
         )}
 
-        {SITEKEY && (
-          <div className="mt-4">
-            <Turnstile
-              sitekey={SITEKEY}
-              theme="light"
-              onToken={setCaptchaToken}
-            />
-          </div>
-        )}
-
         <button
           disabled={status === "sending" || !canSubmit}
-          className="mt-5 w-full rounded-full border-2 border-[#06111B] bg-[#06111B] text-[#FFD27A] px-4 py-3 font-black tracking-[.14em] disabled:opacity-60"
+          className="mt-5 w-full rounded-full bg-[#FFD700] text-bg-primary px-4 py-3 font-black tracking-[.14em] uppercase disabled:opacity-50 hover:brightness-110 transition-all"
         >
           {status === "sending"
             ? "A ENTRAR…"
@@ -163,7 +139,7 @@ export default function AdminLoginPage() {
         </button>
         {message && (
           <p
-            className={`mt-3 text-sm ${status === "error" ? "text-red-700" : "text-green-800"}`}
+            className={`mt-3 text-sm ${status === "error" ? "text-red-400" : "text-green-400"}`}
           >
             {message}
           </p>

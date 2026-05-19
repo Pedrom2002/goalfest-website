@@ -27,13 +27,13 @@ export default async function AdminLayout({
   if (!isAdmin) redirect("/admin/login?err=forbidden");
 
   return (
-    <div className="min-h-dvh bg-[#06182A] text-[#F4EBD6]">
+    <div className="min-h-dvh bg-bg-primary text-text-primary">
       <header className="flex items-center justify-between border-b border-white/10 px-6 py-4">
         <Link
           href="/admin"
-          className="text-sm tracking-[.22em] uppercase text-[#FFD27A] hover:opacity-80"
+          className="text-sm tracking-[.22em] uppercase text-[#FFD700] hover:opacity-80"
         >
-          QUIC · admin
+          GOALFEST · admin
         </Link>
         <div className="flex items-center gap-4">
           <Link

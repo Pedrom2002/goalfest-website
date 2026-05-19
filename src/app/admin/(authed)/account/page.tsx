@@ -19,7 +19,7 @@ export default async function AccountPage() {
         </div>
         <Link
           href="/admin"
-          className="rounded-full border-2 border-white/25 px-4 py-2 text-xs tracking-[.18em] uppercase hover:border-[#FFD27A] hover:text-[#FFD27A] transition"
+          className="rounded-full border-2 border-white/25 px-4 py-2 text-xs tracking-[.18em] uppercase hover:border-[#FFD700] hover:text-[#FFD700] transition"
         >
           ← Tabela
         </Link>
