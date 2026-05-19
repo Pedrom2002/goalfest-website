@@ -95,7 +95,7 @@ export default function Venue() {
           alt="Vale do Silêncio"
           fill
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-right"
           priority
         />
         <div className="absolute inset-0" style={{
