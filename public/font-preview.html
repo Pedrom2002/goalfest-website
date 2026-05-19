@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Font Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Bebas+Neue&family=Rajdhani:wght@500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500&family=Raleway:wght@400;500&family=DM+Sans:wght@400;500&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0d1a0d; color: #F7FFF7; font-family: Inter, sans-serif; padding: 32px 24px; }
+  h1 { font-family: Oswald, sans-serif; font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #5ea63b; margin-bottom: 32px; }
+  .section { margin-bottom: 48px; }
+  .section-title { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #5ea63b; margin-bottom: 16px; border-bottom: 1px solid #5ea63b33; padding-bottom: 8px; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .card { background: #163216; border: 1px solid #ffffff18; border-radius: 12px; padding: 20px 24px; }
+  .card.current { border-color: #5ea63b44; }
+  .label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #5ea63b; margin-bottom: 12px; }
+  .current-badge { display: inline-block; background: #5ea63b22; color: #5ea63b; font-size: 9px; letter-spacing: 0.1em; padding: 2px 6px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
+
+  /* NAV FONTS */
+  .nav-orbitron  { font-family: 'Orbitron', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .nav-bebas     { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .nav-rajdhani  { font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .nav-barlow    { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* FOOTER FONTS */
+  .footer-inter   { font-family: 'Inter', sans-serif; font-size: 12px; }
+  .footer-raleway { font-family: 'Raleway', sans-serif; font-size: 12px; }
+  .footer-dm      { font-family: 'DM Sans', sans-serif; font-size: 12px; }
+  .footer-oswald  { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+  .nav-sample { display: flex; gap: 24px; align-items: center; color: #a8d4a8; }
+  .nav-sample span.active { color: #FFD700; }
+  .nav-sample span.btn { border: 1px solid #a8d4a833; padding: 3px 10px; border-radius: 4px; font-size: 0.85em; }
+
+  .footer-sample { display: flex; flex-direction: column; gap: 6px; color: #a8d4a8; opacity: 0.8; }
+  .footer-sample .row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .footer-sample .link { color: #a8d4a866; }
+  .footer-sample .link:hover { color: #5ea63b; }
+  .footer-sample .copy { font-size: 0.9em; opacity: 0.6; }
+</style>
+</head>
+<body>
+
+<h1>Font Preview — Navbar &amp; Footer</h1>
+
+<div class="section">
+  <div class="section-title">Navbar — opções</div>
+  <div class="cards">
+
+    <div class="card current">
+      <div class="label">A — Orbitron <span class="current-badge">atual</span></div>
+      <nav class="nav-sample nav-orbitron">
+        <span class="active">O Evento</span>
+        <span>Local</span>
+        <span>Patrocinadores</span>
+        <span>FAQ</span>
+        <span class="btn">EN</span>
+      </nav>
+    </div>
+
+    <div class="card">
+      <div class="label">B — Bebas Neue</div>
+      <nav class="nav-sample nav-bebas">
+        <span class="active">O Evento</span>
+        <span>Local</span>
+        <span>Patrocinadores</span>
+        <span>FAQ</span>
+        <span class="btn">EN</span>
+      </nav>
+    </div>
+
+    <div class="card">
+      <div class="label">C — Rajdhani</div>
+      <nav class="nav-sample nav-rajdhani">
+        <span class="active">O Evento</span>
+        <span>Local</span>
+        <span>Patrocinadores</span>
+        <span>FAQ</span>
+        <span class="btn">EN</span>
+      </nav>
+    </div>
+
+    <div class="card">
+      <div class="label">D — Barlow Condensed</div>
+      <nav class="nav-sample nav-barlow">
+        <span class="active">O Evento</span>
+        <span>Local</span>
+        <span>Patrocinadores</span>
+        <span>FAQ</span>
+        <span class="btn">EN</span>
+      </nav>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Footer — opções</div>
+  <div class="cards">
+
+    <div class="card current">
+      <div class="label">A — Inter <span class="current-badge">atual</span></div>
+      <div class="footer-sample footer-inter">
+        <div class="copy">© 2026 Goalfest Lisboa. Todos os direitos reservados.</div>
+        <div class="row">
+          <span class="link">goalfest@quic.pt</span>
+          <span class="link">Privacidade</span>
+          <span class="link">Termos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">B — Raleway</div>
+      <div class="footer-sample footer-raleway">
+        <div class="copy">© 2026 Goalfest Lisboa. Todos os direitos reservados.</div>
+        <div class="row">
+          <span class="link">goalfest@quic.pt</span>
+          <span class="link">Privacidade</span>
+          <span class="link">Termos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">C — DM Sans</div>
+      <div class="footer-sample footer-dm">
+        <div class="copy">© 2026 Goalfest Lisboa. Todos os direitos reservados.</div>
+        <div class="row">
+          <span class="link">goalfest@quic.pt</span>
+          <span class="link">Privacidade</span>
+          <span class="link">Termos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">D — Oswald</div>
+      <div class="footer-sample footer-oswald">
+        <div class="copy">© 2026 Goalfest Lisboa. Todos os direitos reservados.</div>
+        <div class="row">
+          <span class="link">goalfest@quic.pt</span>
+          <span class="link">Privacidade</span>
+          <span class="link">Termos</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

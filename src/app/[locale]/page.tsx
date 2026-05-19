@@ -69,27 +69,39 @@ export default async function LandingPage({
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: 'Goalfest Lisboa',
-    description: 'Fanzone oficial do Mundial 2026 em Lisboa',
+    description: 'Fanzone oficial do Mundial 2026 em Lisboa. Ecrãs gigantes, food trucks, concertos e bar no Vale do Silêncio, Olivais. 11 Jun - 19 Jul 2026.',
     startDate: '2026-06-11',
     endDate: '2026-07-19',
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    image: 'https://goalfest.pt/goalfest-og.jpg',
     location: {
       '@type': 'Place',
-      name: 'Vale do Silêncio',
+      name: 'Vale do Silêncio, Olivais',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Vale do Silêncio',
+        streetAddress: 'Av. Cidade de Lourenço Marques',
         addressLocality: 'Lisboa',
+        addressRegion: 'Lisboa',
         addressCountry: 'PT',
       },
+    },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'EUR',
+      availability: 'https://schema.org/InStock',
+      url: 'https://goalfest.pt',
+      validFrom: '2026-01-01',
     },
     organizer: {
       '@type': 'Organization',
       name: 'QUIC NATION',
       url: 'https://goalfest.pt',
     },
+    keywords: 'fanzone, mundial 2026, FIFA World Cup, Lisboa, Olivais, goalfest, futebol, concertos',
     url: 'https://goalfest.pt',
+    inLanguage: locale === 'pt' ? 'pt-PT' : 'en-GB',
   }
 
   return (
