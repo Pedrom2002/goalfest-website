@@ -39,19 +39,19 @@ export default async function ConfirmadoPage({
       <ConfirmadoVideo />
       <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(13,26,13,0.75) 100%)" }} />
 
-      <div className="relative z-10 w-full max-w-sm flex flex-col items-center gap-6">
-        {/* Logo */}
+      <div className="relative z-10 w-full max-w-sm flex flex-col items-center">
+        {/* Logo overlapping card top */}
         <Image
           src="/goalfest-main-logo.webp"
           alt="Goalfest Lisboa 2026"
-          width={200}
-          height={200}
-          className="w-56 sm:w-64 h-auto object-contain drop-shadow-2xl"
+          width={256}
+          height={256}
+          className="relative z-10 w-56 sm:w-64 h-auto object-contain drop-shadow-2xl mb-[-80px]"
           priority
         />
 
         {/* Card */}
-        <div className="w-full rounded-2xl border border-white/10 p-6 text-center"
+        <div className="w-full rounded-2xl border border-white/10 pt-24 pb-6 px-6 text-center"
           style={{ background: "rgba(22,50,22,0.80)", backdropFilter: "blur(16px)" }}>
 
           {/* Check */}
@@ -84,7 +84,7 @@ export default async function ConfirmadoPage({
           <ConfirmadoActions qrDataUrl={qr} token={rawToken} name={guest.name} />
         </div>
 
-        <p className="text-xs text-white/30 text-center tracking-widest uppercase">
+        <p className="text-xs text-white/30 text-center tracking-widest uppercase mt-4">
           Vale do Silêncio · Lisboa · 11 Jun – 19 Jul
         </p>
       </div>
