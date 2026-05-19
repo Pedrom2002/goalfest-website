@@ -10,8 +10,6 @@ import ScrollRestorer from '@/components/ui/ScrollRestorer'
 import HashScroller from '@/components/ui/HashScroller'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import { Analytics } from '@vercel/analytics/next'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
@@ -82,26 +80,22 @@ export default async function LocaleLayout({
   const messages = await getMessages()
   const tCommon = await getTranslations('common')
   return (
-    <html lang={locale} className={`${inter.variable} ${oswald.variable} ${orbitron.variable} ${bebasNeue.variable} ${dmSans.variable}`}>
-      <body className="bg-bg-primary text-text-primary antialiased">
-        <div className="bg-fixed-gradient" aria-hidden="true" />
-        <a
-          href="#main-content"
-          className="skip-link"
-        >
-          {tCommon('skip_to_content')}
-        </a>
-        <NextIntlClientProvider messages={messages}>
-          <BackgroundFXClient />
-          <ScrollRestorer />
-          <HashScroller />
-          <Navbar />
-          <main id="main-content">{children}</main>
-          <Footer />
-        </NextIntlClientProvider>
-        <Analytics />
-        <SpeedInsights />
-      </body>
-    </html>
+    <div className={`${inter.variable} ${oswald.variable} ${orbitron.variable} ${bebasNeue.variable} ${dmSans.variable} bg-bg-primary text-text-primary antialiased`} data-locale={locale}>
+      <div className="bg-fixed-gradient" aria-hidden="true" />
+      <a
+        href="#main-content"
+        className="skip-link"
+      >
+        {tCommon('skip_to_content')}
+      </a>
+      <NextIntlClientProvider messages={messages}>
+        <BackgroundFXClient />
+        <ScrollRestorer />
+        <HashScroller />
+        <Navbar />
+        <main id="main-content">{children}</main>
+        <Footer />
+      </NextIntlClientProvider>
+    </div>
   )
 }

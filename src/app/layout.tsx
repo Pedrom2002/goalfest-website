@@ -18,10 +18,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const nonce = (await headers()).get('x-nonce') ?? undefined
+  const h = await headers()
+  const nonce = h.get('x-nonce') ?? undefined
+  const lang = h.get('x-locale') ?? 'pt'
 
   return (
-    <html suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         {nonce && <meta name="csp-nonce" content={nonce} />}
       </head>
