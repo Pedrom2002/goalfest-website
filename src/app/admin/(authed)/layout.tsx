@@ -29,14 +29,14 @@ export default async function AdminLayout({
 
   return (
     <div className="min-h-dvh bg-bg-primary text-text-primary">
-      <header className="sticky top-0 z-40 flex items-center justify-between border-b border-white/10 bg-bg-primary/80 backdrop-blur-md px-6 py-3">
-        <Link href="/admin" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+      <header className="sticky top-0 z-40 flex items-center justify-between border-b border-white/10 bg-bg-primary/80 backdrop-blur-md px-6 py-2">
+        <Link href="/admin" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <Image
             src="/goalfest-main-logo.webp"
             alt="Goalfest"
-            width={120}
-            height={32}
-            className="h-8 w-auto object-contain"
+            width={360}
+            height={96}
+            className="h-[84px] w-auto object-contain"
             priority
           />
           <span className="text-white/40 tracking-[.18em] uppercase text-xs">admin</span>
