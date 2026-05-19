@@ -5,6 +5,7 @@ import { supabaseAdmin } from "@/lib/supabase/admin";
 import { generateQrDataUrl } from "@/lib/qr";
 import { verifyQrToken } from "@/lib/qr-token";
 import ConfirmadoActions from "@/components/confirmado-actions";
+import ConfirmadoVideo from "@/components/confirmado-video";
 
 export const dynamic = "force-dynamic";
 
@@ -35,8 +36,8 @@ export default async function ConfirmadoPage({
 
   return (
     <main className="relative min-h-dvh flex items-center justify-center p-4 overflow-hidden bg-bg-primary">
-      {/* Static gradient background */}
-      <div className="absolute inset-0 z-0" style={{ background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(94,166,59,0.12) 0%, transparent 70%)" }} />
+      <ConfirmadoVideo />
+      <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(13,26,13,0.75) 100%)" }} />
 
       <div className="relative z-10 w-full max-w-sm flex flex-col items-center gap-6">
         {/* Logo */}
