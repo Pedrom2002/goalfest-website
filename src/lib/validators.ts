@@ -1,0 +1,129 @@
+﻿import { z } from "zod";
+import { INVITE_CODE_RE } from "@/lib/invite-code";
+
+const phonePT = /^(\+351\s?)?9\d{8}$/;
+// Letras Unicode (p/ acentos), marcas combinatÃ³rias, espaÃ§os, apÃ³strofos, hÃ­fens, ponto.
+// Bloqueia HTML, ASCII control, dÃ­gitos, sÃ­mbolos exÃ³ticos.
+const namePattern = /^[\p{L}\p{M}\s'.\-]{2,120}$/u;
+
+export const rsvpSchema = z
+  .object({
+    name: z
+      .string()
+      .trim()
+      .min(2, "Nome demasiado curto")
+      .max(120)
+      .regex(namePattern, "Nome contÃ©m caracteres invÃ¡lidos"),
+    email: z.string().trim().toLowerCase().email("Email invÃ¡lido"),
+    phone: z
+      .string()
+      .trim()
+      .regex(phonePT, "Telefone PT invÃ¡lido (9XXXXXXXX)"),
+    acompanhante: z.enum(["sim", "nao"]),
+    companion_nome: z.string().trim().max(120).optional().default(""),
+    companion_tel: z
+      .string()
+      .trim()
+      .refine((v) => v === "" || phonePT.test(v), "Telefone invÃ¡lido")
+      .optional()
+      .default(""),
+    companion_email: z
+      .string()
+      .trim()
+      .toLowerCase()
+      .refine((v) => v === "" || z.string().email().safeParse(v).success, "Email invÃ¡lido")
+      .optional()
+      .default(""),
+
+    inviteCode: z
+      .string()
+      .trim()
+      .regex(INVITE_CODE_RE, "CÃ³digo de convite invÃ¡lido")
+      .optional(),
+    captchaToken: z.string().max(2048).optional(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.acompanhante === "sim") {
+      if (!data.companion_nome || data.companion_nome.length < 2) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["companion_nome"],
+          message: "Nome do acompanhante obrigatÃ³rio",
+        });
+      } else if (!namePattern.test(data.companion_nome)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["companion_nome"],
+          message: "Nome do acompanhante contÃ©m caracteres invÃ¡lidos",
+        });
+      }
+      if (!data.companion_tel || !phonePT.test(data.companion_tel)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["companion_tel"],
+          message: "Telefone do acompanhante invÃ¡lido",
+        });
+      }
+      if (!data.companion_email || !z.string().email().safeParse(data.companion_email).success) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["companion_email"],
+          message: "Email do acompanhante obrigatÃ³rio",
+        });
+      }
+    }
+  });
+
+export type RsvpInput = z.infer<typeof rsvpSchema>;
+
+// Admin: criar/editar invite_links.
+export const inviteCreateSchema = z.object({
+  label: z.string().trim().max(120).optional(),
+  max_uses: z.number().int().min(1).max(1000),
+  expires_at: z.iso.datetime().optional(),
+  is_vip: z.boolean().optional().default(false),
+});
+export type InviteCreateInput = z.infer<typeof inviteCreateSchema>;
+
+export const inviteArchiveSchema = z.object({
+  archived: z.boolean(),
+});
+
+// Admin: criar links de acreditaÃ§Ã£o (igual a inviteCreateSchema).
+export const accreditationLinkCreateSchema = z.object({
+  label: z.string().trim().max(120).optional(),
+  max_uses: z.number().int().min(1).max(1000),
+  expires_at: z.iso.datetime().optional(),
+});
+export type AccreditationLinkCreateInput = z.infer<typeof accreditationLinkCreateSchema>;
+
+export const accreditationArchiveSchema = z.object({
+  archived: z.boolean(),
+});
+
+// PÃºblico: submissÃ£o do formulÃ¡rio de acreditaÃ§Ã£o media.
+export const accreditationRsvpSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, "Nome demasiado curto")
+    .max(120)
+    .regex(namePattern, "Nome contÃ©m caracteres invÃ¡lidos"),
+  email: z.string().trim().toLowerCase().email("Email invÃ¡lido"),
+  phone: z
+    .string()
+    .trim()
+    .regex(phonePT, "Telefone PT invÃ¡lido (9XXXXXXXX)"),
+  media_company: z
+    .string()
+    .trim()
+    .min(1, "Empresa de media obrigatÃ³ria")
+    .max(120),
+  accreditationCode: z
+    .string()
+    .trim()
+    .regex(INVITE_CODE_RE, "CÃ³digo invÃ¡lido")
+    .optional(),
+});
+export type AccreditationRsvpInput = z.infer<typeof accreditationRsvpSchema>;
+
