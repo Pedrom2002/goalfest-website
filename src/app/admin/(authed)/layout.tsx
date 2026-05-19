@@ -30,7 +30,7 @@ export default async function AdminLayout({
     <div className="min-h-dvh bg-bg-primary text-text-primary">
       <header className="sticky top-0 z-40 flex items-center justify-between border-b border-white/10 bg-bg-primary/80 backdrop-blur-md px-6 py-3">
         <Link href="/admin" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <span className="text-[#FFD700] font-black tracking-[.22em] uppercase text-sm">GOALFEST</span>
+          <span className="text-[#5ea63b] font-black tracking-[.22em] uppercase text-sm">GOALFEST</span>
           <span className="text-white/30 text-xs">·</span>
           <span className="text-white/50 tracking-[.18em] uppercase text-xs">admin</span>
         </Link>

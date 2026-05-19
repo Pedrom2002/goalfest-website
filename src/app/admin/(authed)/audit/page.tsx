@@ -74,7 +74,7 @@ export default async function AuditPage({
         </div>
         <Link
           href="/admin"
-          className="rounded-full border-2 border-white/25 px-4 py-2 text-xs tracking-[.18em] uppercase hover:border-[#FFD700] transition"
+          className="rounded-full border-2 border-white/25 px-4 py-2 text-xs tracking-[.18em] uppercase hover:border-[#5ea63b] transition"
         >
           ← Tabela
         </Link>
@@ -87,7 +87,7 @@ export default async function AuditPage({
             href={`?filter=${k}`}
             className={`px-3 py-2 rounded-lg tracking-[.14em] uppercase transition ${
               filter === k
-                ? "bg-[#FFD700] text-bg-primary"
+                ? "bg-[#5ea63b] text-bg-primary"
                 : "opacity-70 hover:opacity-100"
             }`}
           >
@@ -104,7 +104,7 @@ export default async function AuditPage({
 
       <div className="overflow-x-auto rounded-xl border border-white/10">
         <table className="w-full text-sm">
-          <thead className="bg-white/5 text-[#FFD700]">
+          <thead className="bg-white/5 text-[#5ea63b]">
             <tr>
               <th className="text-left px-3 py-2">Quando</th>
               <th className="text-left px-3 py-2">Ação</th>
