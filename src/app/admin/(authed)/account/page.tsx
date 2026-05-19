@@ -1,3 +1,4 @@
+import Link from "next/link";
 import AccountForm from "@/components/admin/account-form";
 import { supabaseServer } from "@/lib/supabase/server";
 
@@ -16,12 +17,12 @@ export default async function AccountPage() {
           <h1 className="font-serif text-3xl font-black leading-none">Conta</h1>
           <p className="text-sm opacity-60 mt-1">{user?.email ?? "—"}</p>
         </div>
-        <a
+        <Link
           href="/admin"
           className="rounded-full border-2 border-white/25 px-4 py-2 text-xs tracking-[.18em] uppercase hover:border-[#FFD27A] hover:text-[#FFD27A] transition"
         >
           ← Tabela
-        </a>
+        </Link>
       </div>
 
       <section className="rounded-2xl border-2 border-white/15 bg-white/5 p-6">

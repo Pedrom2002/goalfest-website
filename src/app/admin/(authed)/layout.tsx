@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { supabaseServer } from "@/lib/supabase/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
@@ -28,31 +29,31 @@ export default async function AdminLayout({
   return (
     <div className="min-h-dvh bg-[#06182A] text-[#F4EBD6]">
       <header className="flex items-center justify-between border-b border-white/10 px-6 py-4">
-        <a
+        <Link
           href="/admin"
           className="text-sm tracking-[.22em] uppercase text-[#FFD27A] hover:opacity-80"
         >
           QUIC · admin
-        </a>
+        </Link>
         <div className="flex items-center gap-4">
-          <a
+          <Link
             href="/admin/invites"
             className="text-xs tracking-[.18em] uppercase opacity-70 hover:opacity-100"
           >
             Convites
-          </a>
-          <a
+          </Link>
+          <Link
             href="/admin/acreditacoes"
             className="text-xs tracking-[.18em] uppercase opacity-70 hover:opacity-100"
           >
             Acreditações
-          </a>
-          <a
+          </Link>
+          <Link
             href="/admin/account"
             className="text-xs tracking-[.18em] uppercase opacity-70 hover:opacity-100"
           >
             Conta
-          </a>
+          </Link>
           <form action="/api/admin/signout" method="post">
             <button className="text-xs tracking-[.18em] uppercase opacity-70 hover:opacity-100">
               Sair

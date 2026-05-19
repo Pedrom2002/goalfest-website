@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
@@ -71,12 +72,12 @@ export default async function AuditPage({
             Últimas {rows.length} entradas (máx. 200).
           </p>
         </div>
-        <a
+        <Link
           href="/admin"
           className="rounded-full border-2 border-white/25 px-4 py-2 text-xs tracking-[.18em] uppercase hover:border-[#FFD27A] transition"
         >
           ← Tabela
-        </a>
+        </Link>
       </div>
 
       <div className="flex gap-1 rounded-xl border border-white/15 bg-white/5 p-1 text-xs mb-6 flex-wrap">

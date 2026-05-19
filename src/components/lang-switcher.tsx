@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useT, type Lang } from "@/lib/i18n";
+
+const subscribe = () => () => {};
 
 export default function LangSwitcher() {
   const { lang, setLang } = useT();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(subscribe, () => true, () => false);
 
   return (
     <div

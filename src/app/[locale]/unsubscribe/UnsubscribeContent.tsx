@@ -9,15 +9,11 @@ type Status = 'loading' | 'success' | 'error'
 export default function UnsubscribeContent() {
   const searchParams = useSearchParams()
   const email = searchParams.get('email')
-  const [status, setStatus] = useState<Status>('loading')
-  const [message, setMessage] = useState('')
+  const [status, setStatus] = useState<Status>(() => email ? 'loading' : 'error')
+  const [message, setMessage] = useState(() => email ? '' : 'No email address provided.')
 
   useEffect(() => {
-    if (!email) {
-      setStatus('error')
-      setMessage('No email address provided.')
-      return
-    }
+    if (!email) return
 
     fetch(`/api/unsubscribe?email=${encodeURIComponent(email)}`)
       .then((res) => res.json())

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { rsvpSchema, type RsvpInput } from "@/lib/validators";
 import Turnstile from "@/components/turnstile";
@@ -227,7 +228,7 @@ export default function RsvpForm({ inviteCode }: Props = {}) {
 
       <motion.p className="text-white/30 text-xs leading-relaxed" variants={item}>
         {t("rsvp.fineprint")}
-        <a href="/privacidade" style={{ color: "inherit", textDecoration: "underline" }}>/privacidade</a>.
+        <Link href="/privacidade" style={{ color: "inherit", textDecoration: "underline" }}>/privacidade</Link>.
       </motion.p>
     </motion.form>
   );

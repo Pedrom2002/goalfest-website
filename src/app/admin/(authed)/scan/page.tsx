@@ -1,3 +1,4 @@
+import Link from "next/link";
 import QrScanner from "@/components/admin/qr-scanner";
 
 export const dynamic = "force-dynamic";
@@ -14,12 +15,12 @@ export default function ScanPage() {
             Aponta a câmara ao QR de cada convidado.
           </p>
         </div>
-        <a
+        <Link
           href="/admin"
           className="rounded-full border-2 border-white/25 px-4 py-2 text-xs tracking-[.18em] uppercase hover:border-[#FFD27A] transition"
         >
           ← Tabela
-        </a>
+        </Link>
       </div>
       <QrScanner />
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import GuestsTable from "@/components/admin/guests-table";
 import AccreditationsTable from "@/components/admin/accreditations-table";
 
@@ -123,33 +124,33 @@ export default function DashboardTabs({
         <div className="flex gap-2 flex-wrap">
           {tab === "convidados" && (
             <>
-              <a
+              <Link
                 href="/admin/scan"
                 className="rounded-full border-2 border-[#FFD27A] bg-[#FFD27A] text-[#06111B] px-4 py-2 text-xs tracking-[.18em] uppercase hover:opacity-90 transition"
               >
                 Scan QR
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/admin/audit"
                 className="rounded-full border-2 border-white/25 px-4 py-2 text-xs tracking-[.18em] uppercase hover:border-[#FFD27A] hover:text-[#FFD27A] transition"
               >
                 Audit
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/api/admin/export"
                 className="rounded-full border-2 border-[#FFD27A] text-[#FFD27A] px-4 py-2 text-xs tracking-[.18em] uppercase hover:bg-[#FFD27A] hover:text-[#06111B] transition"
               >
                 Export CSV
-              </a>
+              </Link>
             </>
           )}
           {tab === "acreditacoes" && (
-            <a
+            <Link
               href="/admin/acreditacoes"
               className="rounded-full border-2 border-[#FFD27A] text-[#FFD27A] px-4 py-2 text-xs tracking-[.18em] uppercase hover:bg-[#FFD27A] hover:text-[#06111B] transition"
             >
               Gerir Links
-            </a>
+            </Link>
           )}
         </div>
       </div>

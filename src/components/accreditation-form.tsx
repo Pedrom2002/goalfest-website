@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { accreditationRsvpSchema, type AccreditationRsvpInput } from "@/lib/validators";
 import { useT } from "@/lib/i18n";
@@ -184,9 +185,9 @@ export default function AccreditationForm({
 
       <motion.p className="fine-print" variants={item}>
         {t("acc.fineprint")}
-        <a href="/privacidade" style={{ color: "inherit", textDecoration: "underline" }}>
+        <Link href="/privacidade" style={{ color: "inherit", textDecoration: "underline" }}>
           /privacidade
-        </a>
+        </Link>
         {t("acc.fineprint.delete")}
         <a href="mailto:ola@quic.pt" style={{ color: "inherit", textDecoration: "underline" }}>
           ola@quic.pt
