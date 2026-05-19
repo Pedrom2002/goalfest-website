@@ -107,7 +107,7 @@ export default function ConfirmadoActions({
     <div className="mt-3">
       <button
         onClick={() => void downloadCard()}
-        className="w-full rounded-full px-3 py-2 font-black tracking-[.14em] text-[11px] uppercase transition cursor-pointer text-bg-primary hover:brightness-110"
+        className="w-full rounded-full px-4 py-2.5 font-black tracking-[.14em] text-xs uppercase transition cursor-pointer text-bg-primary hover:brightness-110"
         style={{ background: "#5ea63b" }}
       >
         Guardar QR
