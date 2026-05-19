@@ -35,7 +35,7 @@ export default async function ConfirmadoPage({
   const qr = await generateQrDataUrl(rawToken);
 
   return (
-    <main className="relative min-h-dvh flex items-start justify-center pt-10 pb-10 px-4 overflow-hidden bg-bg-primary">
+    <main className="relative min-h-dvh flex items-start justify-center pt-24 pb-10 px-4 overflow-hidden bg-bg-primary">
       <ConfirmadoVideo />
       <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(13,26,13,0.75) 100%)" }} />
 
@@ -51,8 +51,8 @@ export default async function ConfirmadoPage({
         />
 
         {/* Card */}
-        <div className="w-full rounded-2xl border border-white/10 pt-20 pb-5 px-5 text-center"
-          style={{ background: "rgba(20,50,20,0.65)", backdropFilter: "blur(20px)" }}>
+        <div className="w-full rounded-2xl border border-white/10 pt-14 pb-5 px-5 text-center"
+          style={{ background: "rgba(20,50,20,0.45)", backdropFilter: "blur(20px)" }}>
 
           <h1 className="text-2xl font-black uppercase tracking-widest text-white" style={{ fontFamily: "var(--font-bebas, sans-serif)" }}>
             Tás <span style={{ color: "#5ea63b" }}>dentro</span>
