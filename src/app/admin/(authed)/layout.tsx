@@ -1,5 +1,6 @@
-﻿import { redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { supabaseServer } from "@/lib/supabase/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
@@ -30,14 +31,20 @@ export default async function AdminLayout({
     <div className="min-h-dvh bg-bg-primary text-text-primary">
       <header className="sticky top-0 z-40 flex items-center justify-between border-b border-white/10 bg-bg-primary/80 backdrop-blur-md px-6 py-3">
         <Link href="/admin" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <span className="text-[#22c55e] font-black tracking-[.22em] uppercase text-sm">GOALFEST</span>
-          <span className="text-white/30 text-xs">Â·</span>
-          <span className="text-white/50 tracking-[.18em] uppercase text-xs">admin</span>
+          <Image
+            src="/goalfest-main-logo.webp"
+            alt="Goalfest"
+            width={120}
+            height={32}
+            className="h-8 w-auto object-contain"
+            priority
+          />
+          <span className="text-white/40 tracking-[.18em] uppercase text-xs">admin</span>
         </Link>
         <nav className="flex items-center gap-1">
           {[
             { href: "/admin/invites", label: "Convites" },
-            { href: "/admin/acreditacoes", label: "AcreditaÃ§Ãµes" },
+            { href: "/admin/acreditacoes", label: "Acreditações" },
             { href: "/admin/scan", label: "Scan" },
             { href: "/admin/audit", label: "Audit" },
             { href: "/admin/account", label: "Conta" },

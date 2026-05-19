@@ -19,7 +19,6 @@ type Guest = {
   email_sent_at: string | null;
   email_failed_at: string | null;
   email_attempts: number;
-  is_vip: boolean;
 };
 
 type Accreditation = {
@@ -41,7 +40,6 @@ type GuestStats = {
   checkInRate: number;
   emailFailed: number;
   lastCheckIn: string | undefined;
-  vipCount: number;
 };
 
 type AccreditationStats = {
@@ -167,7 +165,6 @@ export default function DashboardTabs({
             <Stat label="Acompanhantes" value={guestStats.companions} />
             <Stat label="Check-in Dia 1" value={guestStats.checkedInDay1} accent />
             <Stat label="Check-in Dia 2" value={guestStats.checkedInDay2} accent />
-            <Stat label="VIP" value={guestStats.vipCount} accent />
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
             <Stat label="Pendentes" value={guestStats.pending} />

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
 import Link from 'next/link'
 import type { BroadcastDay } from '@/data/schedule'
-import { TEAM_FLAG } from '@/data/teamFlags'
+import { TEAM_FLAG, TEAM_EN } from '@/data/teamFlags'
 import { phaseOf, phaseLabel } from '@/lib/matchPhase'
 import * as Flags from 'country-flag-icons/react/3x2'
 
@@ -23,6 +23,7 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
   const t = useTranslations('jogos')
   const locale = useLocale()
   const [filter, setFilter] = useState<'all' | 'group' | 'knockout'>('all')
+  const teamName = (name: string) => locale === 'pt' ? name : (TEAM_EN[name] ?? name)
 
   const filtered = schedule.filter(d => filter === 'all' || phaseOf(d.date) === filter)
 
@@ -109,13 +110,13 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
                   ) : (
                     <div className="flex items-center gap-3 flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-1 justify-end min-w-0">
-                        <span className="text-text-primary text-sm font-semibold truncate">{m.home}</span>
+                        <span className="text-text-primary text-sm font-semibold truncate">{teamName(m.home)}</span>
                         <Flag team={m.home} />
                       </div>
                       <span className="text-text-muted/40 text-xs font-bold shrink-0 w-6 text-center">vs</span>
                       <div className="flex items-center gap-2 flex-1 min-w-0">
                         <Flag team={m.away} />
-                        <span className="text-text-primary text-sm font-semibold truncate">{m.away}</span>
+                        <span className="text-text-primary text-sm font-semibold truncate">{teamName(m.away)}</span>
                       </div>
                     </div>
                   )}

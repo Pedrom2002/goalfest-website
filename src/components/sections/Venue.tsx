@@ -218,7 +218,6 @@ export default function Venue() {
           transition={{ duration: 0.5 }}
           className="mt-6 flex items-center gap-3 rounded-2xl border border-green-pt/20 bg-green-pt/5 px-5 py-4"
         >
-          <span className="text-green-pt text-lg shrink-0" aria-hidden="true">â†”</span>
           <p className="text-text-muted text-sm leading-relaxed">
             {t.rich('entrances', {
               bold: (chunks) => <span className="text-text-primary font-semibold">{chunks}</span>
