@@ -94,12 +94,12 @@ export default function Hero() {
       {/* Edge vignette */}
       <div className="absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(0,0,0,0.28) 100%)' }} />
 
-      <div className="relative z-10 flex flex-col items-center gap-8">
+      <div className="relative z-10 flex flex-col items-center gap-3">
         <motion.div
           initial={{ opacity: 0, scale: 1.05, y: -10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="relative flex flex-col items-center -mt-12"
+          className="relative flex flex-col items-center -mt-24"
         >
           <div className="relative">
             <motion.div
@@ -109,27 +109,28 @@ export default function Hero() {
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
             <Image
-              src="/GOALFEST-logo2.png"
+              src="/goalfest-main-logo.webp"
               alt="Goalfest Lisboa"
-              width={480}
-              height={480}
-              sizes="(max-width: 640px) 300px, (max-width: 768px) 400px, 480px"
-              className="object-contain relative z-10 w-[300px] sm:w-[400px] md:w-[480px]"
+              width={700}
+              height={700}
+              sizes="(max-width: 640px) 420px, (max-width: 768px) 560px, 700px"
+              className="object-contain relative z-10 w-[420px] sm:w-[560px] md:w-[700px]"
+              quality={100}
               priority
             />
-            <div className="absolute bottom-4 left-0 right-0 flex flex-col items-center gap-0.5 z-20">
-              <span className="text-white/60 text-[9px] uppercase tracking-widest leading-none">powered by</span>
-              <Image
-                src="/quicnation-logo.png"
-                alt="Quic"
-                width={56}
-                height={20}
-                className="object-contain"
-              />
-            </div>
           </div>
           <h1 className="sr-only">Goalfest Lisboa - Fanzone Oficial do Mundial 2026 no Parque das Nações</h1>
-          <p className="text-text-muted tracking-[0.5em] text-sm uppercase mt-4">{t('subtitle')}</p>
+          <p className="text-text-muted tracking-[0.5em] text-base uppercase relative z-20 -mt-28 sm:-mt-36 md:-mt-44">{t('subtitle')}</p>
+          <div className="flex flex-col items-center gap-0.5 mt-3 relative z-20">
+            <span className="text-white/60 text-[9px] uppercase tracking-widest leading-none">powered by</span>
+            <Image
+              src="/quicnation-logo.png"
+              alt="Quic"
+              width={56}
+              height={20}
+              className="object-contain w-[56px] h-auto"
+            />
+          </div>
         </motion.div>
 
         <motion.div

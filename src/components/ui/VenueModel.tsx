@@ -48,7 +48,7 @@ export default function VenueModel({ loadingText = 'A carregar modelo' }: { load
         <directionalLight position={[5, 10, 5]} intensity={1} />
         <Suspense fallback={null}>
           <Model onLoad={() => setLoaded(true)} />
-          <Environment files={NEXT_PUBLIC_ENV_VENUE} />
+          {NEXT_PUBLIC_ENV_VENUE ? <Environment files={NEXT_PUBLIC_ENV_VENUE} /> : null}
           <ContactShadows position={[0, -1.5, 0]} opacity={0.4} scale={10} blur={2} />
         </Suspense>
         <OrbitControls
