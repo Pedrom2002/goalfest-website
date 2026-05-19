@@ -128,7 +128,7 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/70 z-30"
+              className="fixed inset-0 bg-black/80 z-30"
               onClick={closeMenu}
               aria-hidden="true"
             />
@@ -138,11 +138,11 @@ export default function Navbar() {
               role="dialog"
               aria-modal="true"
               aria-label={locale === 'pt' ? 'Menu de navegação' : 'Navigation menu'}
-              initial={{ x: '100%', backgroundColor: '#0a140a' }}
-              animate={{ x: 0, backgroundColor: '#0a140a' }}
-              exit={{ x: '100%', backgroundColor: '#0a140a' }}
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed inset-y-0 right-0 w-full sm:w-72 border-l border-green-pt/20 z-40 flex flex-col"
+              className="fixed inset-y-0 right-0 w-full sm:w-72 bg-[#0a140a] border-l border-green-pt/20 z-40 flex flex-col"
             >
               <div className="flex items-center justify-between px-6 h-20 border-b border-white/10">
                 <span className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium" aria-hidden="true">Menu</span>
