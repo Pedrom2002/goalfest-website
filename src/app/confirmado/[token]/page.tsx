@@ -35,7 +35,7 @@ export default async function ConfirmadoPage({
   const qr = await generateQrDataUrl(rawToken);
 
   return (
-    <main className="relative min-h-dvh flex items-center justify-center p-4 overflow-hidden bg-bg-primary">
+    <main className="relative min-h-dvh flex items-start justify-center pt-10 pb-10 px-4 overflow-hidden bg-bg-primary">
       <ConfirmadoVideo />
       <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(13,26,13,0.75) 100%)" }} />
 
