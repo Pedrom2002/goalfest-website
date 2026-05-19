@@ -69,13 +69,14 @@ export default function Navbar() {
   ]
 
   return (
+    <>
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? 'bg-bg-primary/97 backdrop-blur-md shadow-lg border-b border-green-pt/25' : 'bg-black/10 backdrop-blur-[2px]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
-        <button
+<button
           onClick={() => {
             if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' })
             else router.push('/')
@@ -121,29 +122,31 @@ export default function Navbar() {
         </button>
       </div>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 z-30"
-              onClick={closeMenu}
-              aria-hidden="true"
-            />
-            <motion.div
-              ref={menuRef}
-              id="mobile-menu"
-              role="dialog"
-              aria-modal="true"
-              aria-label={locale === 'pt' ? 'Menu de navegação' : 'Navigation menu'}
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed inset-y-0 right-0 w-full sm:w-72 bg-[#0a140a] border-l border-green-pt/20 z-40 flex flex-col"
-            >
+    </header>
+
+    <AnimatePresence>
+      {menuOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 z-40"
+            onClick={closeMenu}
+            aria-hidden="true"
+          />
+          <motion.div
+            ref={menuRef}
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label={locale === 'pt' ? 'Menu de navegação' : 'Navigation menu'}
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            className="fixed inset-y-0 right-0 w-full sm:w-72 bg-[#0a140a] border-l border-green-pt/20 z-50 flex flex-col"
+          >
               <div className="flex items-center justify-between px-6 h-20 border-b border-white/10">
                 <span className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium" aria-hidden="true">Menu</span>
                 <button onClick={closeMenu} className="text-text-muted hover:text-white transition-colors" aria-label={locale === 'pt' ? 'Fechar menu' : 'Close menu'}>
@@ -191,6 +194,6 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
-    </header>
+    </>
   )
 }
