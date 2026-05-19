@@ -31,9 +31,9 @@ function buildCsp(nonce: string): string {
     ? `'self' 'nonce-${nonce}' 'strict-dynamic' 'wasm-unsafe-eval'`
     : `'self' 'nonce-${nonce}' 'unsafe-eval' 'wasm-unsafe-eval' https://va.vercel-scripts.com https://challenges.cloudflare.com`
 
-  const styleSrc = isProd
-    ? `'self' 'nonce-${nonce}' https://fonts.googleapis.com`
-    : `'self' 'unsafe-inline' https://fonts.googleapis.com`
+  // React inline style attrs cannot receive nonces, so prod requires 'unsafe-inline'
+  // for style-src (script-src remains strict-dynamic+nonce).
+  const styleSrc = `'self' 'unsafe-inline' https://fonts.googleapis.com`
 
   return [
     "default-src 'self'",
