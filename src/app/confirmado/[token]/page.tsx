@@ -35,31 +35,31 @@ export default async function ConfirmadoPage({
   const qr = await generateQrDataUrl(rawToken);
 
   return (
-    <main className="relative min-h-dvh overflow-hidden bg-bg-primary">
+    <main className="relative h-dvh overflow-hidden bg-bg-primary flex flex-col items-center justify-start">
       <ConfirmadoVideo />
       <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.40) 0%, rgba(13,26,13,0.70) 100%)" }} />
 
-      {/* Logo - full width header */}
-      <div className="relative z-10 flex justify-center pt-8 pb-2">
+      {/* Logo */}
+      <div className="relative z-10 flex justify-center pt-3 pb-1 shrink-0">
         <Image
           src="/goalfest-main-logo.webp"
           alt="Goalfest Lisboa 2026"
-          width={320}
-          height={320}
-          className="w-64 sm:w-72 h-auto object-contain drop-shadow-2xl"
+          width={240}
+          height={240}
+          className="w-40 sm:w-48 h-auto object-contain drop-shadow-2xl"
           priority
         />
       </div>
 
       {/* Card */}
-      <div className="relative z-10 flex justify-center px-4 pb-10">
-        <div className="w-full max-w-[340px] rounded-2xl border border-white/10 p-6 text-center"
+      <div className="relative z-10 flex justify-center px-4 pb-4 w-full">
+        <div className="w-full max-w-[320px] rounded-2xl border border-white/10 px-5 py-4 text-center"
           style={{ background: "rgba(20,50,20,0.40)", backdropFilter: "blur(24px)" }}>
 
-          <h1 className="text-3xl font-black uppercase tracking-widest text-white" style={{ fontFamily: "var(--font-bebas, sans-serif)" }}>
+          <h1 className="text-2xl font-black uppercase tracking-widest text-white leading-none" style={{ fontFamily: "var(--font-bebas, sans-serif)" }}>
             Tás <span style={{ color: "#5ea63b" }}>dentro</span>
           </h1>
-          <p className="text-xs text-white/55 mt-1 mb-5 leading-snug">
+          <p className="text-[11px] text-white/55 mt-1 mb-3 leading-snug">
             Olá <span className="text-white/85">{guest.name}</span>. Mostra este QR à entrada do Golden Circle.
           </p>
 
@@ -68,18 +68,18 @@ export default async function ConfirmadoPage({
           <img
             src={qr}
             alt="QR de entrada"
-            className="mx-auto w-56 h-56 rounded-xl p-2 bg-white shadow-xl"
+            className="mx-auto w-44 h-44 rounded-lg p-1.5 bg-white shadow-xl"
           />
 
           {guest.companion_count > 0 && (
-            <p className="text-xs text-white/45 mt-3">
+            <p className="text-[11px] text-white/45 mt-2">
               + {guest.companion_names.join(", ")}
             </p>
           )}
 
           <ConfirmadoActions qrDataUrl={qr} token={rawToken} name={guest.name} />
 
-          <p className="text-[10px] text-white/30 mt-5 tracking-widest uppercase">
+          <p className="text-[9px] text-white/30 mt-3 tracking-widest uppercase">
             Vale do Silêncio · Lisboa · 11 Jun – 19 Jul
           </p>
         </div>
