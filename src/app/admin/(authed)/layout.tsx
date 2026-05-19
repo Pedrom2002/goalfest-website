@@ -28,38 +28,34 @@ export default async function AdminLayout({
 
   return (
     <div className="min-h-dvh bg-bg-primary text-text-primary">
-      <header className="flex items-center justify-between border-b border-white/10 px-6 py-4">
-        <Link
-          href="/admin"
-          className="text-sm tracking-[.22em] uppercase text-[#FFD700] hover:opacity-80"
-        >
-          GOALFEST · admin
+      <header className="sticky top-0 z-40 flex items-center justify-between border-b border-white/10 bg-bg-primary/80 backdrop-blur-md px-6 py-3">
+        <Link href="/admin" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <span className="text-[#FFD700] font-black tracking-[.22em] uppercase text-sm">GOALFEST</span>
+          <span className="text-white/30 text-xs">·</span>
+          <span className="text-white/50 tracking-[.18em] uppercase text-xs">admin</span>
         </Link>
-        <div className="flex items-center gap-4">
-          <Link
-            href="/admin/invites"
-            className="text-xs tracking-[.18em] uppercase opacity-70 hover:opacity-100"
-          >
-            Convites
-          </Link>
-          <Link
-            href="/admin/acreditacoes"
-            className="text-xs tracking-[.18em] uppercase opacity-70 hover:opacity-100"
-          >
-            Acreditações
-          </Link>
-          <Link
-            href="/admin/account"
-            className="text-xs tracking-[.18em] uppercase opacity-70 hover:opacity-100"
-          >
-            Conta
-          </Link>
+        <nav className="flex items-center gap-1">
+          {[
+            { href: "/admin/invites", label: "Convites" },
+            { href: "/admin/acreditacoes", label: "Acreditações" },
+            { href: "/admin/scan", label: "Scan" },
+            { href: "/admin/audit", label: "Audit" },
+            { href: "/admin/account", label: "Conta" },
+          ].map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="px-3 py-1.5 rounded-full text-xs tracking-[.14em] uppercase opacity-60 hover:opacity-100 hover:bg-white/5 transition-all"
+            >
+              {label}
+            </Link>
+          ))}
           <form action="/api/admin/signout" method="post">
-            <button className="text-xs tracking-[.18em] uppercase opacity-70 hover:opacity-100">
+            <button className="px-3 py-1.5 rounded-full text-xs tracking-[.14em] uppercase opacity-60 hover:opacity-100 hover:bg-white/5 transition-all">
               Sair
             </button>
           </form>
-        </div>
+        </nav>
       </header>
       <main className="p-6">{children}</main>
     </div>
