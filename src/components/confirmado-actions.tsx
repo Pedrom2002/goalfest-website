@@ -19,104 +19,87 @@ export default function ConfirmadoActions({
     canvas.height = H;
     const ctx = canvas.getContext("2d")!;
 
-    await document.fonts.load('900 100px "Big Shoulders Stencil"');
-    await document.fonts.load('700 40px "Fraunces"');
-    await document.fonts.load('500 18px "DM Sans"');
+    await document.fonts.load('700 40px "DM Sans"');
 
     // Background
-    ctx.fillStyle = "#06111B";
+    ctx.fillStyle = "#0d1a0d";
     ctx.fillRect(0, 0, W, H);
 
-    // Outer gold border
-    ctx.strokeStyle = "#FFD27A";
-    ctx.lineWidth = 3;
-    roundRect(ctx, 22, 22, W - 44, H - 44, 20);
+    // Subtle green radial glow
+    const glow = ctx.createRadialGradient(W / 2, 0, 0, W / 2, 0, H * 0.7);
+    glow.addColorStop(0, "rgba(94,166,59,0.18)");
+    glow.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, W, H);
+
+    // Border
+    ctx.strokeStyle = "rgba(94,166,59,0.4)";
+    ctx.lineWidth = 2;
+    roundRect(ctx, 24, 24, W - 48, H - 48, 24);
     ctx.stroke();
 
-    // Inner faint border
-    ctx.strokeStyle = "rgba(242,169,60,0.25)";
-    ctx.lineWidth = 1;
-    roundRect(ctx, 34, 34, W - 68, H - 68, 14);
-    ctx.stroke();
-
-    // ── Header ──────────────────────────────────────
+    // Logo text
     ctx.textAlign = "center";
+    ctx.fillStyle = "#5ea63b";
+    ctx.font = '900 72px "DM Sans", sans-serif';
+    ctx.fillText("GOALFEST", W / 2, 120);
 
-    // Stars
-    ctx.fillStyle = "rgba(255,210,122,0.55)";
-    ctx.font = "13px sans-serif";
-    ctx.fillText("★   ★   ★", W / 2, 88);
+    ctx.fillStyle = "rgba(247,255,247,0.45)";
+    ctx.font = '400 14px "DM Sans", sans-serif';
+    ctx.fillText("FANZONE OFICIAL · MUNDIAL 2026", W / 2, 152);
 
-    // QUIC
-    ctx.fillStyle = "#FFD27A";
-    ctx.font = '900 108px "Big Shoulders Stencil", sans-serif';
-    ctx.fillText("QUIC", W / 2, 188);
+    // Divider
+    ctx.strokeStyle = "rgba(94,166,59,0.3)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(W / 2 - 120, 172);
+    ctx.lineTo(W / 2 + 120, 172);
+    ctx.stroke();
 
-    // FESTIVAL 2026
-    ctx.fillStyle = "#F4EBD6";
-    ctx.font = '500 15px "DM Sans", sans-serif';
-    ctx.fillText("F E S T I V A L   2 0 2 6", W / 2, 222);
-
-    // Gold rule
-    ctx.fillStyle = "#FFD27A";
-    ctx.fillRect(W / 2 - 80, 240, 160, 2);
-
-    // ── QR box ──────────────────────────────────────
+    // QR box
     const qrSize = 480;
-    const qrBoxPad = 24;
-    const qrBoxW = qrSize + qrBoxPad * 2;
-    const qrBoxH = qrSize + qrBoxPad * 2;
-    const qrBoxX = (W - qrBoxW) / 2;
-    const qrBoxY = 262;
+    const pad = 24;
+    const boxX = (W - qrSize - pad * 2) / 2;
+    const boxY = 192;
 
-    // Cream card behind QR
-    ctx.fillStyle = "#F4EBD6";
-    roundRect(ctx, qrBoxX, qrBoxY, qrBoxW, qrBoxH, 18);
+    ctx.fillStyle = "#ffffff";
+    roundRect(ctx, boxX, boxY, qrSize + pad * 2, qrSize + pad * 2, 20);
     ctx.fill();
 
-    // QR image
     const qrImg = new Image();
     qrImg.src = qrDataUrl;
-    await new Promise<void>((res) => {
-      qrImg.onload = () => res();
-    });
-    ctx.drawImage(qrImg, qrBoxX + qrBoxPad, qrBoxY + qrBoxPad, qrSize, qrSize);
-
-    // ── Guest info ───────────────────────────────────
-    const infoY = qrBoxY + qrBoxH + 44;
+    await new Promise<void>((res) => { qrImg.onload = () => res(); });
+    ctx.drawImage(qrImg, boxX + pad, boxY + pad, qrSize, qrSize);
 
     // Name
-    ctx.fillStyle = "#F4EBD6";
-    ctx.font = '700 38px "Fraunces", serif';
+    const infoY = boxY + qrSize + pad * 2 + 52;
+    ctx.fillStyle = "#f7fff7";
+    ctx.font = '700 36px "DM Sans", sans-serif';
     ctx.fillText(name, W / 2, infoY);
 
-    // Tag line
-    ctx.fillStyle = "rgba(244,235,214,0.5)";
-    ctx.font = '500 12px "DM Sans", sans-serif';
-    ctx.fillText("C O N V I T E   P E S S O A L   ·   I N T R A N S M I S S Í V E L", W / 2, infoY + 32);
+    ctx.fillStyle = "rgba(247,255,247,0.35)";
+    ctx.font = '400 12px "DM Sans", sans-serif';
+    ctx.fillText("C O N V I T E   P E S S O A L   ·   I N T R A N S M I S S Í V E L", W / 2, infoY + 30);
 
-    // Gold rule
-    ctx.fillStyle = "#FFD27A";
-    ctx.fillRect(W / 2 - 60, infoY + 52, 120, 1.5);
+    ctx.strokeStyle = "rgba(94,166,59,0.4)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(W / 2 - 80, infoY + 50);
+    ctx.lineTo(W / 2 + 80, infoY + 50);
+    ctx.stroke();
 
-    // Date + venue
-    ctx.fillStyle = "#FFD27A";
+    ctx.fillStyle = "#5ea63b";
     ctx.font = '700 15px "DM Sans", sans-serif';
-    ctx.fillText("8 & 9 MAIO 2026", W / 2, infoY + 84);
+    ctx.fillText("11 JUN – 19 JUL 2026", W / 2, infoY + 82);
 
-    ctx.fillStyle = "rgba(244,235,214,0.6)";
-    ctx.font = '500 13px "DM Sans", sans-serif';
-    ctx.fillText("Monsanto Open Air, Lisboa", W / 2, infoY + 108);
-
-    // Bottom stars
-    ctx.fillStyle = "rgba(255,210,122,0.35)";
-    ctx.font = "11px sans-serif";
-    ctx.fillText("★   ★   ★", W / 2, H - 46);
+    ctx.fillStyle = "rgba(247,255,247,0.4)";
+    ctx.font = '400 13px "DM Sans", sans-serif';
+    ctx.fillText("Vale do Silêncio · Lisboa", W / 2, infoY + 106);
 
     const url = canvas.toDataURL("image/png");
     const a = document.createElement("a");
     a.href = url;
-    a.download = `quic-convite-${safeName}.png`;
+    a.download = `goalfest-convite-${safeName}.png`;
     a.click();
   }
 
@@ -124,13 +107,14 @@ export default function ConfirmadoActions({
     <div className="flex flex-col sm:flex-row gap-2 mt-5">
       <button
         onClick={() => void downloadCard()}
-        className="flex-1 rounded-full border-2 border-[#06111B] bg-[#06111B] text-[#FFD27A] px-4 py-3 font-black tracking-[.14em] text-xs uppercase hover:bg-[#F2A93C] hover:text-[#06111B] transition cursor-pointer"
+        className="flex-1 rounded-full px-4 py-3 font-black tracking-[.14em] text-xs uppercase transition cursor-pointer text-bg-primary hover:brightness-110"
+        style={{ background: "#5ea63b" }}
       >
         Guardar QR
       </button>
       <a
         href={`/api/ics/${token}`}
-        className="flex-1 rounded-full border-2 border-[#06111B] text-[#06111B] px-4 py-3 font-black tracking-[.14em] text-xs uppercase hover:bg-[#06111B] hover:text-[#FFD27A] transition"
+        className="flex-1 rounded-full border border-white/20 text-text-primary px-4 py-3 font-black tracking-[.14em] text-xs uppercase hover:bg-white/5 transition text-center"
       >
         Add ao calendário
       </a>
