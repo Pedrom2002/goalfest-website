@@ -64,7 +64,7 @@ export default async function ConfirmadoPage({
             Tás <em className="text-[#5ea63b] not-italic">dentro</em>.
           </h1>
           <p className="text-sm text-white/60 mt-1 mb-5">
-            Olá {guest.name}. Mostra este QR à entrada.
+            Olá {guest.name}. Mostra este QR à entrada do Golden Circle.
           </p>
 
           {/* QR */}
