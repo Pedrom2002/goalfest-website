@@ -142,7 +142,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed inset-y-0 right-0 w-72 border-l border-green-pt/20 z-40 flex flex-col" style={{ backgroundColor: '#0a140a', opacity: 1 }}
+              className="fixed inset-y-0 right-0 w-full sm:w-72 border-l border-green-pt/20 z-40 flex flex-col" style={{ backgroundColor: '#0a140a', opacity: 1 }}
             >
               <div className="flex items-center justify-between px-6 h-20 border-b border-white/10">
                 <span className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium" aria-hidden="true">Menu</span>
