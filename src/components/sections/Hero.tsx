@@ -111,10 +111,10 @@ export default function Hero() {
             <Image
               src="/GOALFEST-logo2.png"
               alt="Goalfest Lisboa"
-              width={360}
-              height={360}
-              sizes="(max-width: 640px) 220px, (max-width: 768px) 300px, 360px"
-              className="object-contain relative z-10 w-[220px] sm:w-[300px] md:w-[360px]"
+              width={480}
+              height={480}
+              sizes="(max-width: 640px) 300px, (max-width: 768px) 400px, 480px"
+              className="object-contain relative z-10 w-[300px] sm:w-[400px] md:w-[480px]"
               priority
             />
           </div>
