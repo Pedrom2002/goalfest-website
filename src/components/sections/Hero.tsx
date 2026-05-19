@@ -99,7 +99,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 1.05, y: -10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="relative flex flex-col items-center"
+          className="relative flex flex-col items-center -mt-12"
         >
           <div className="relative">
             <motion.div
@@ -117,18 +117,18 @@ export default function Hero() {
               className="object-contain relative z-10 w-[300px] sm:w-[400px] md:w-[480px]"
               priority
             />
+            <div className="absolute bottom-4 left-0 right-0 flex flex-col items-center gap-0.5 z-20">
+              <span className="text-white/60 text-[9px] uppercase tracking-widest leading-none">powered by</span>
+              <Image
+                src="/quicnation-logo.png"
+                alt="Quic"
+                width={56}
+                height={20}
+                className="object-contain"
+              />
+            </div>
           </div>
           <h1 className="sr-only">Goalfest Lisboa - Fanzone Oficial do Mundial 2026 no Parque das Nações</h1>
-          <div className="flex flex-col items-center gap-1 mt-3">
-            <span className="text-white/60 text-[10px] uppercase tracking-widest leading-none">powered by</span>
-            <Image
-              src="/quicnation-logo.png"
-              alt="Quic"
-              width={60}
-              height={22}
-              className="object-contain"
-            />
-          </div>
           <p className="text-text-muted tracking-[0.5em] text-sm uppercase mt-4">{t('subtitle')}</p>
         </motion.div>
 
