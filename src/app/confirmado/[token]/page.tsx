@@ -46,7 +46,7 @@ export default async function ConfirmadoPage({
           alt="Goalfest Lisboa 2026"
           width={200}
           height={200}
-          className="w-36 h-auto object-contain drop-shadow-2xl"
+          className="w-56 sm:w-64 h-auto object-contain drop-shadow-2xl"
           priority
         />
 
