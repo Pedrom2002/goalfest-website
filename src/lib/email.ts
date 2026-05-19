@@ -18,7 +18,7 @@ type BrevoPayload = {
 
 function parseFrom(input: string): BrevoSender {
   const m = input.match(/^\s*(.*?)\s*<([^>]+)>\s*$/);
-  if (m) return { name: m[1] || undefined, email: m[2] };
+  if (m) return { name: m[1] || undefined, email: m[2] as string };
   return { email: input.trim() };
 }
 
