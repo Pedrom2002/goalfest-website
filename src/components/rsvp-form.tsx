@@ -115,12 +115,6 @@ export default function RsvpForm({ inviteCode, label }: Props = {}) {
           {t("rsvp.title.before")}<em className="text-green-400 not-italic">{t("rsvp.title.em")}</em>{t("rsvp.title.after")}
         </h2>
         <p className="text-white/50 text-sm mt-1">{t("rsvp.subtitle")}</p>
-        {label && (
-          <div className="inline-flex items-center gap-1.5 mt-3 px-3 py-1 rounded-full text-xs font-medium tracking-wide border border-green-400/30 text-green-300" style={{ background: "rgba(94,166,59,0.10)" }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3 h-3 opacity-70" aria-hidden="true"><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7"/><path d="M12 3v15"/><path d="M3 8h18"/></svg>
-            {t("invite.banner.for")} {label.charAt(0).toUpperCase() + label.slice(1)}
-          </div>
-        )}
       </motion.div>
 
       <motion.div variants={item}>
