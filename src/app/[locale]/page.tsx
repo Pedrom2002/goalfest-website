@@ -8,6 +8,7 @@ import Venue from '@/components/sections/Venue'
 import Sponsors from '@/components/sections/Sponsors'
 import WhatIsGoalfest from '@/components/sections/WhatIsGoalfest'
 import FaqSection from '@/components/sections/FaqSection'
+import NewsletterSection from '@/components/sections/NewsletterSection'
 import sponsorsData from '@/data/sponsors.json'
 import type { SponsorsData } from '@/types'
 
@@ -121,6 +122,8 @@ export default async function LandingPage({
         <Sponsors data={sponsors} />
         <Divider />
         <FaqSection />
+        <Divider />
+        <NewsletterSection />
       </div>
     </>
   )
