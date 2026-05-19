@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { Component, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
@@ -40,7 +40,7 @@ export default function Venue() {
     {
       title: t('access_parking_title'),
       body: t('access_parking_body'),
-      link: { href: 'https://maps.google.com/maps/search/estacionamento/@38.7659217,-9.1187136,16z', label: `${t('access_parking_link')} ↗` }
+      link: { href: 'https://maps.google.com/maps/search/estacionamento/@38.7659217,-9.1187136,16z', label: t('access_parking_link') }
     },
   ]
 
@@ -54,7 +54,7 @@ export default function Venue() {
 
     const load = () => {
       if (video.src) return
-      // Set src only when section enters viewport — users who never scroll here
+      // Set src only when section enters viewport â€” users who never scroll here
       // never download this video.
       video.src = NEXT_PUBLIC_VIDEO_VENUE
       video.playbackRate = 0.5
@@ -92,7 +92,7 @@ export default function Venue() {
       <div className="relative h-[70vh] min-h-[500px]">
         <Image
           src="/goalfest-og.jpg"
-          alt="Vale do Silêncio"
+          alt="Vale do SilÃªncio"
           fill
           sizes="100vw"
           className="object-cover object-center"
@@ -178,7 +178,6 @@ export default function Venue() {
               <circle cx="12" cy="9" r="2.5"/>
             </svg>
             {t('maps')}
-            <span className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true">↗</span>
           </a>
         </motion.div>
 
@@ -219,7 +218,7 @@ export default function Venue() {
           transition={{ duration: 0.5 }}
           className="mt-6 flex items-center gap-3 rounded-2xl border border-green-pt/20 bg-green-pt/5 px-5 py-4"
         >
-          <span className="text-green-pt text-lg shrink-0" aria-hidden="true">↔</span>
+          <span className="text-green-pt text-lg shrink-0" aria-hidden="true">â†”</span>
           <p className="text-text-muted text-sm leading-relaxed">
             {t.rich('entrances', {
               bold: (chunks) => <span className="text-text-primary font-semibold">{chunks}</span>
@@ -240,7 +239,7 @@ export default function Venue() {
             <p className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium">{t('model')}</p>
             <span className="h-px w-12 bg-green-pt/40" />
           </div>
-          <div className="w-full h-[240px] md:h-[340px] rounded-2xl overflow-hidden border border-white/8 bg-bg-surface shadow-[0_0_60px_rgba(0,200,81,0.05)]">
+          <div className="w-full h-[240px] md:h-[340px] rounded-2xl overflow-hidden border border-white/8 bg-bg-3d/50 backdrop-blur-sm shadow-[0_0_60px_rgba(0,200,81,0.05)]">
             <ModelErrorBoundary fallbackText={t('model_unavailable')}>
               <VenueModel loadingText={t('loading')} />
             </ModelErrorBoundary>

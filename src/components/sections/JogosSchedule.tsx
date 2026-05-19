@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
@@ -68,7 +68,7 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
             aria-pressed={filter === f.key}
             className={`px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-200 ${
               filter === f.key
-                ? 'bg-green-pt text-bg-primary shadow-[0_0_20px_rgba(94,166,59,0.4)]'
+                ? 'bg-green-pt text-bg-primary shadow-[0_0_20px_rgba(34,197,94,0.4)]'
                 : 'border border-white/15 text-text-muted hover:border-green-pt/40 hover:text-green-pt'
             }`}
           >
@@ -133,7 +133,7 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
         className="text-center mt-10"
       >
         <Link href={`/${locale}`} className="text-text-muted/50 text-xs uppercase tracking-widest hover:text-green-pt transition-colors">
-          ← {t('back')}
+          â† {t('back')}
         </Link>
       </motion.div>
     </div>

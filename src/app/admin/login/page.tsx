@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
@@ -114,7 +114,7 @@ export default function AdminLoginPage() {
             height={160}
             className="object-contain w-32 h-auto"
           />
-          <p className="text-xs tracking-[.22em] uppercase text-[#5ea63b] mt-1">painel de gestão</p>
+          <p className="text-xs tracking-[.22em] uppercase text-[#22c55e] mt-1">painel de gestÃ£o</p>
         </div>
 
         <div className="flex gap-1 rounded-full border border-white/20 p-1 mb-5 text-xs">
@@ -122,7 +122,7 @@ export default function AdminLoginPage() {
             type="button"
             onClick={() => setMode("magic")}
             className={`flex-1 px-3 py-2 rounded-full tracking-[.14em] uppercase font-bold transition ${
-              mode === "magic" ? "bg-[#5ea63b] text-bg-primary" : "opacity-60 hover:opacity-100"
+              mode === "magic" ? "bg-[#22c55e] text-bg-primary" : "opacity-60 hover:opacity-100"
             }`}
           >
             Magic Link
@@ -131,7 +131,7 @@ export default function AdminLoginPage() {
             type="button"
             onClick={() => setMode("password")}
             className={`flex-1 px-3 py-2 rounded-full tracking-[.14em] uppercase font-bold transition ${
-              mode === "password" ? "bg-[#5ea63b] text-bg-primary" : "opacity-60 hover:opacity-100"
+              mode === "password" ? "bg-[#22c55e] text-bg-primary" : "opacity-60 hover:opacity-100"
             }`}
           >
             Password
@@ -145,7 +145,7 @@ export default function AdminLoginPage() {
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full border-b border-white/30 bg-transparent py-2 text-base outline-none focus:border-[#5ea63b] mb-4 transition-colors placeholder:opacity-30"
+          className="w-full border-b border-white/30 bg-transparent py-2 text-base outline-none focus:border-[#22c55e] mb-4 transition-colors placeholder:opacity-30"
           placeholder="tu@goalfest.pt"
         />
 
@@ -158,18 +158,18 @@ export default function AdminLoginPage() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border-b border-white/30 bg-transparent py-2 text-base outline-none focus:border-[#5ea63b] mb-4 transition-colors placeholder:opacity-30"
-              placeholder="••••••••"
+              className="w-full border-b border-white/30 bg-transparent py-2 text-base outline-none focus:border-[#22c55e] mb-4 transition-colors placeholder:opacity-30"
+              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
             />
           </>
         )}
 
         <button
           disabled={status === "sending" || !canSubmit}
-          className="mt-2 w-full rounded-full bg-[#5ea63b] text-bg-primary px-4 py-3 font-black tracking-[.14em] uppercase disabled:opacity-50 hover:brightness-110 transition-all"
+          className="mt-2 w-full rounded-full bg-[#22c55e] text-bg-primary px-4 py-3 font-black tracking-[.14em] uppercase disabled:opacity-50 hover:brightness-110 transition-all"
         >
           {status === "sending"
-            ? "A ENTRAR…"
+            ? "A ENTRARâ€¦"
             : mode === "password"
               ? "ENTRAR"
               : "ENVIAR MAGIC LINK"}

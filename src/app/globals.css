@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-primary: #0d1a0d;
-  --color-bg-surface: #163216;
+  --color-bg-primary: #0f1614;
+  --color-bg-surface: #1a2421;
+  --color-bg-card: #1a2f25;
+  --color-bg-3d: #0d1a0d;
   --color-gold: #FFD700;
-  --color-red-pt: #C8102E;
-  --color-green-pt: #5ea63b;
+  --color-red-pt: #E63951;
+  --color-green-pt: #22c55e;
+  --color-accent: #34d399;
   --color-text-primary: #F7FFF7;
-  --color-text-muted: #a8d4a8;
+  --color-text-muted: #9ca8a3;
 
   --font-sans: var(--font-inter), sans-serif;
   --font-display: var(--font-oswald), sans-serif;
@@ -25,12 +28,19 @@ body {
   min-width: 320px;
 }
 
-.bg-fixed-gradient {
+@keyframes routeFade {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+#main-content::before {
+  content: '';
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 50;
   background: linear-gradient(160deg, #0d1a0d 0%, #112411 35%, #163216 65%, #1d4a1d 100%);
   pointer-events: none;
+  animation: routeFade 0.4s ease-out forwards;
 }
 
 * {
@@ -52,14 +62,20 @@ body {
   animation: mainReveal 0.25s ease-out both;
 }
 
-@keyframes particleFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-30px); }
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.2; }
+  50%       { opacity: 1; }
 }
 
+
 @keyframes beamPulse {
-  0%, 100% { opacity: 0.3; transform: scaleX(1); }
-  50%       { opacity: 0.85; transform: scaleX(2); }
+  0%, 100% { opacity: 0.5; transform: scaleX(1) scaleY(1); }
+  50%       { opacity: 1;   transform: scaleX(2.6) scaleY(1.05); }
+}
+
+@keyframes beamSweep {
+  0%, 100% { rotate: var(--beam-rot-min); }
+  50%       { rotate: var(--beam-rot-max); }
 }
 
 @keyframes eqBar {
@@ -78,7 +94,7 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .particle, .beam {
+  .beam {
     animation: none !important;
   }
 }

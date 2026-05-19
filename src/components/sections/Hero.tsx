@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
@@ -47,7 +47,7 @@ export default function Hero() {
     const video = videoRef.current
     if (!video) return
 
-    // Set src client-side only — keeps it out of SSR HTML so crawlers/prerenderers
+    // Set src client-side only â€” keeps it out of SSR HTML so crawlers/prerenderers
     // don't trigger Blob downloads.
     video.src = NEXT_PUBLIC_VIDEO_HERO
 
@@ -59,7 +59,7 @@ export default function Hero() {
     const onMotion = (e: MediaQueryListEvent) => {
       if (e.matches) { video.pause(); video.currentTime = 0 } else play()
     }
-    // Pause when tab is hidden — stops download/decoding in background.
+    // Pause when tab is hidden â€” stops download/decoding in background.
     const onVisibility = () => {
       if (document.visibilityState === 'hidden') video.pause()
       else if (!mq.matches) play()
@@ -104,7 +104,7 @@ export default function Hero() {
           <div className="relative">
             <motion.div
               className="absolute inset-0 rounded-full"
-              style={{ background: 'radial-gradient(ellipse, rgba(94,166,59,0.18) 0%, transparent 70%)', filter: 'blur(24px)' }}
+              style={{ background: 'radial-gradient(ellipse, rgba(34,197,94,0.18) 0%, transparent 70%)', filter: 'blur(24px)' }}
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
@@ -115,12 +115,13 @@ export default function Hero() {
               height={700}
               sizes="(max-width: 640px) 420px, (max-width: 768px) 560px, 700px"
               className="object-contain relative z-10 w-[420px] sm:w-[560px] md:w-[700px]"
+              style={{ filter: 'brightness(0.95) saturate(1.05)' }}
               quality={100}
               priority
             />
           </div>
-          <h1 className="sr-only">Goalfest Lisboa - Fanzone Oficial do Mundial 2026 no Parque das Nações</h1>
-          <p className="tracking-[0.15em] text-2xl sm:text-3xl md:text-4xl uppercase relative z-20 -mt-28 sm:-mt-36 md:-mt-44" style={{ fontFamily: 'var(--font-bebas)', color: 'rgba(255,255,255,0.7)' }}>{t('subtitle')}</p>
+          <h1 className="sr-only">Goalfest Lisboa - Fanzone Oficial do Mundial 2026 no Parque das NaÃ§Ãµes</h1>
+          <p className="tracking-[0.15em] text-base sm:text-lg md:text-xl uppercase relative z-20 -mt-28 sm:-mt-36 md:-mt-44" style={{ fontFamily: 'var(--font-bebas)', color: 'rgba(255,255,255,0.7)' }}>{t('subtitle')}</p>
           <div className="flex flex-col items-center gap-0.5 mt-3 relative z-20">
             <span className="text-white/60 text-[9px] uppercase tracking-widest leading-none">powered by</span>
             <Image

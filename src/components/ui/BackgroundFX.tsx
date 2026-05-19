@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useMemo } from 'react'
 
@@ -8,66 +8,111 @@ function seededRandom(seed: number): number {
 }
 
 const BEAMS = [
-  { x: '10%', rotate: -30, color: 'rgba(94,166,59,0.18)',  duration: '9s',  delay: '0s'  },
-  { x: '35%', rotate: -10, color: 'rgba(255,215,0,0.12)',  duration: '11s', delay: '2s'  },
-  { x: '65%', rotate: 10,  color: 'rgba(94,166,59,0.15)',  duration: '10s', delay: '1s'  },
-  { x: '88%', rotate: 30,  color: 'rgba(255,215,0,0.12)',  duration: '12s', delay: '3s'  },
+  { x: '8%',  rotate: -35, color: 'rgba(34,197,94,0.55)',  duration: '7s',  delay: '0s'   },
+  { x: '22%', rotate: -15, color: 'rgba(255,215,0,0.40)',  duration: '9s',  delay: '1.5s' },
+  { x: '40%', rotate: -5,  color: 'rgba(34,197,94,0.50)',  duration: '8s',  delay: '0.8s' },
+  { x: '58%', rotate: 5,   color: 'rgba(255,215,0,0.45)',  duration: '10s', delay: '2.2s' },
+  { x: '75%', rotate: 18,  color: 'rgba(34,197,94,0.60)',  duration: '7.5s',delay: '0.4s' },
+  { x: '90%', rotate: 32,  color: 'rgba(255,215,0,0.42)',  duration: '11s', delay: '3s'   },
 ]
 
 export default function BackgroundFX() {
-  const particles = useMemo(
+  const stars = useMemo(
     () =>
-      Array.from({ length: 20 }, (_, i) => ({
-        x: seededRandom(i * 7) * 100,
-        y: seededRandom(i * 7 + 1) * 100,
-        size: seededRandom(i * 7 + 2) * 3 + 0.8,
-        duration: `${5 + seededRandom(i * 7 + 3) * 8}s`,
-        delay: `${seededRandom(i * 7 + 4) * 6}s`,
-        color: i % 3 === 0 ? '#FFD700' : i % 3 === 1 ? '#5ea63b' : '#ffffff',
-        opacity: 0.25 + seededRandom(i * 7 + 5) * 0.35,
+      Array.from({ length: 250 }, (_, i) => ({
+        x: seededRandom(i * 11) * 100,
+        y: seededRandom(i * 11 + 1) * 100,
+        size: seededRandom(i * 11 + 2) * 1.8 + 0.6,
+        duration: `${2 + seededRandom(i * 11 + 3) * 5}s`,
+        delay: `${seededRandom(i * 11 + 4) * 6}s`,
+        color: '#ffffff',
+        opacity: 0.3 + seededRandom(i * 11 + 5) * 0.7,
       })),
     []
   )
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden>
-      {BEAMS.map((b, i) => (
+      {stars.map((s, i) => (
         <div
-          key={i}
-          className="beam"
+          key={`s${i}`}
           style={{
             position: 'absolute',
-            top: '-5%',
-            left: b.x,
-            width: 4,
-            height: '115vh',
-            rotate: `${b.rotate}deg`,
-            transformOrigin: 'top center',
-            background: `linear-gradient(to bottom, transparent 0%, ${b.color} 25%, ${b.color} 75%, transparent 100%)`,
-            filter: 'blur(16px)',
-            animation: `beamPulse ${b.duration} ${b.delay} ease-in-out infinite`,
+            left: `${s.x}%`,
+            top: `${s.y}%`,
+            width: s.size,
+            height: s.size,
+            borderRadius: '50%',
+            background: s.color,
+            opacity: s.opacity,
+            boxShadow: `0 0 ${s.size * 1.5}px rgba(255,255,255,0.8)`,
+            animation: `starTwinkle ${s.duration} ${s.delay} ease-in-out infinite`,
           }}
         />
       ))}
 
-      {particles.map((p, i) => (
-        <div
-          key={i}
-          className="particle"
-          style={{
-            position: 'absolute',
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-            borderRadius: '50%',
-            background: p.color,
-            opacity: p.opacity,
-            willChange: 'transform',
-            animation: `particleFloat ${p.duration} ${p.delay} ease-in-out infinite`,
-          }}
-        />
-      ))}
+      {BEAMS.map((b, i) => {
+        const sweepDur = `${30 + (i % 3) * 5}s`
+        const sweepDelay = `${i * 2.1}s`
+        const m = b.color.match(/rgba\((\d+),(\d+),(\d+)/)
+        const rgb = m ? `${m[1]},${m[2]},${m[3]}` : '255,255,255'
+        return (
+          <div
+            key={i}
+            style={{
+              position: 'absolute',
+              bottom: '-5%',
+              left: b.x,
+              width: 10,
+              height: '120vh',
+              transformOrigin: 'bottom center',
+              ['--beam-rot-min' as string]: `${b.rotate - 15}deg`,
+              ['--beam-rot-max' as string]: `${b.rotate + 15}deg`,
+              animation: `beamSweep ${sweepDur} ${sweepDelay} ease-in-out infinite`,
+            }}
+          >
+            <div
+              className="beam"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                transformOrigin: 'bottom center',
+                background: `linear-gradient(to top, transparent 0%, ${b.color} 20%, ${b.color} 80%, transparent 100%)`,
+                filter: 'blur(18px)',
+                mixBlendMode: 'screen',
+                animation: `beamPulse ${b.duration} ${b.delay} ease-in-out infinite`,
+              }}
+            />
+            {/* Source light at base */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: -6,
+                left: '50%',
+                width: 18,
+                height: 18,
+                transform: 'translateX(-50%)',
+                borderRadius: '50%',
+                background: `radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(${rgb},0.9) 35%, rgba(${rgb},0.3) 65%, transparent 100%)`,
+                filter: 'blur(1.5px)',
+                mixBlendMode: 'screen',
+                boxShadow: `0 0 24px rgba(${rgb},0.6)`,
+              }}
+            />
+          </div>
+        )
+      })}
+
+      {/* Bottom fog/haze */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'radial-gradient(ellipse 90% 35% at 50% 100%, rgba(34,197,94,0.08) 0%, rgba(34,197,94,0.03) 50%, transparent 75%)',
+          mixBlendMode: 'screen',
+          pointerEvents: 'none',
+        }}
+      />
     </div>
   )
 }
