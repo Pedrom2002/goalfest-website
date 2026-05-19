@@ -107,11 +107,6 @@ function InviteInner({ code, label, expired, exhausted }: Props) {
               </div>
             </div>
 
-            {label && (
-              <div className="inline-block px-4 py-1.5 rounded-full border border-green-400/40 text-green-300 text-sm font-medium tracking-wide" style={{ background: "rgba(94,166,59,0.12)" }}>
-                {t("invite.banner.for")} {label.charAt(0).toUpperCase() + label.slice(1)}
-              </div>
-            )}
           </div>
 
           {/* Right: form */}
@@ -126,7 +121,7 @@ function InviteInner({ code, label, expired, exhausted }: Props) {
                 Convite esgotado. Já não há convites neste link.
               </div>
             )}
-            {!blocked && <RsvpForm inviteCode={code} />}
+            {!blocked && <RsvpForm inviteCode={code} label={label} />}
           </div>
 
         </div>
