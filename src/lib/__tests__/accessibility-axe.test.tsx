@@ -16,6 +16,14 @@ vi.mock('next-intl', () => {
   }
 })
 
+vi.mock('next-intl/server', () => {
+  const t = (key: string) => key
+  return {
+    getLocale: async () => 'pt',
+    getTranslations: async () => t,
+  }
+})
+
 vi.mock('@/i18n/navigation', () => ({
   useRouter: () => ({ push: vi.fn() }),
   usePathname: () => '/pt',
@@ -147,7 +155,8 @@ describe('Axe accessibility', () => {
   }, 15000)
 
   it('WhatIsGoalfest has no axe violations', async () => {
-    const { container } = render(<WhatIsGoalfest />)
+    const tree = await WhatIsGoalfest()
+    const { container } = render(tree)
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   }, 15000)

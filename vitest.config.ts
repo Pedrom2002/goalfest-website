@@ -8,6 +8,7 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
       'framer-motion': path.resolve(__dirname, './src/__mocks__/framer-motion.tsx'),
+      'next-intl/server': path.resolve(__dirname, './src/__mocks__/next-intl-server.ts'),
       'next-intl': path.resolve(__dirname, './src/__mocks__/next-intl.ts'),
     },
   },
@@ -31,6 +32,8 @@ export default defineConfig({
         'src/components/ui/VenueModel.tsx',
         'src/components/ui/BackgroundFXClient.tsx',
         'src/components/ui/CountdownTimer.tsx',
+        'src/components/sections/WhatIsGoalfest.tsx',
+        'src/components/sections/WhatIsGoalfestAnimations.tsx',
       ],
       thresholds: {
         lines: 80,

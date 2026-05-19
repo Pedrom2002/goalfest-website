@@ -40,6 +40,11 @@ vi.mock('next-intl', () => ({
   useTranslations: (_ns: string) => (key: string) => ptMessages[key] ?? key,
 }))
 
+vi.mock('next-intl/server', () => ({
+  getLocale: async () => 'pt',
+  getTranslations: async (_ns: string) => (key: string) => ptMessages[key] ?? key,
+}))
+
 vi.mock('next/link', () => ({
   default: ({ children, href }: { children: React.ReactNode; href: string }) =>
     <a href={href}>{children}</a>,
@@ -56,32 +61,37 @@ vi.mock('framer-motion', () => ({
 import WhatIsGoalfest from './WhatIsGoalfest'
 
 describe('WhatIsGoalfest', () => {
-  it('renders without crashing', () => {
-    render(<WhatIsGoalfest />)
+  it('renders without crashing', async () => {
+    const tree = await WhatIsGoalfest()
+    render(tree)
     expect(document.body).toBeTruthy()
   })
 
-  it('renders headings', () => {
-    render(<WhatIsGoalfest />)
+  it('renders headings', async () => {
+    const tree = await WhatIsGoalfest()
+    render(tree)
     const headings = screen.getAllByRole('heading')
     expect(headings.length).toBeGreaterThan(0)
   })
 
-  it('renders feature cards for pt locale', () => {
-    render(<WhatIsGoalfest />)
+  it('renders feature cards for pt locale', async () => {
+    const tree = await WhatIsGoalfest()
+    render(tree)
     expect(screen.getByText('Jogos do Mundial')).toBeInTheDocument()
     expect(screen.getByText('Concertos')).toBeInTheDocument()
     expect(screen.getByText('Zona Gaming')).toBeInTheDocument()
   })
 
-  it('renders stats', () => {
-    render(<WhatIsGoalfest />)
+  it('renders stats', async () => {
+    const tree = await WhatIsGoalfest()
+    render(tree)
     expect(screen.getByText('+50')).toBeInTheDocument()
     expect(screen.getByText('+10')).toBeInTheDocument()
   })
 
-  it('renders schedule link for World Cup Matches card', () => {
-    render(<WhatIsGoalfest />)
+  it('renders schedule link for World Cup Matches card', async () => {
+    const tree = await WhatIsGoalfest()
+    render(tree)
     const link = screen.getByText(/Ver programação/i)
     expect(link).toBeInTheDocument()
   })
