@@ -72,44 +72,40 @@ function InviteInner({ code, label, expired, exhausted }: Props) {
       <VideoBackground />
 
       <div className="relative z-10 flex-1 flex flex-col">
+        {/* Mobile: logo + form stacked. Desktop: branding left, form right */}
+        <div className="flex-1 flex flex-col lg:flex-row lg:items-center lg:justify-center w-full max-w-[1100px] mx-auto px-4 sm:px-6 pt-8 pb-10 gap-6 lg:gap-20">
 
-        <div className="flex-1 flex flex-col lg:flex-row items-start justify-center px-4 sm:px-6 lg:pl-[42px] lg:pr-12 pt-6 pb-10 gap-8 lg:gap-24 w-full max-w-[1200px] mx-auto">
-
-          {/* Left: branding */}
-          <div className="flex flex-col items-center justify-start pt-16 text-center lg:flex-1 gap-0">
+          {/* Branding */}
+          <div className="flex flex-col items-center text-center lg:flex-1 lg:justify-center">
             <Image
               src="/goalfest-logo.webp"
               alt="Goalfest Lisboa 2026"
-              width={420}
-              height={420}
+              width={320}
+              height={320}
               unoptimized
-              className="w-64 sm:w-80 lg:w-[420px] h-auto object-contain drop-shadow-2xl mb-[-100px]"
+              className="w-40 sm:w-56 lg:w-80 h-auto object-contain drop-shadow-2xl"
               priority
             />
-
-            <div className="flex flex-col items-center">
-              <p className="text-white font-bold leading-tight" style={{ fontFamily: "var(--font-oswald, sans-serif)", fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)", textShadow: "0 2px 24px rgba(0,0,0,0.7)" }}>
-                MAIS DO QUE UMA <span className="text-green-400">FANZONE</span>
-              </p>
-              <p className="text-white/80 text-xs tracking-[0.2em] uppercase mt-1.5">
-                Vale do Silêncio · Lisboa · 11 Jun – 19 Jul
-              </p>
-              <div className="flex flex-row items-center gap-2 mt-6">
-                <span className="text-white/60 text-[10px] uppercase tracking-widest leading-none">powered by</span>
-                <Image
-                  src="/quicnation-logo.png"
-                  alt="QUIC Nation"
-                  width={80}
-                  height={28}
-                  style={{ width: "auto", height: "48px" }}
-                  className="object-contain"
-                />
-              </div>
+            <p className="text-white font-bold leading-tight mt-2 lg:mt-4" style={{ fontFamily: "var(--font-oswald, sans-serif)", fontSize: "clamp(1.1rem, 3vw, 2rem)", textShadow: "0 2px 24px rgba(0,0,0,0.7)" }}>
+              MAIS DO QUE UMA <span className="text-green-400">FANZONE</span>
+            </p>
+            <p className="text-white/70 text-xs tracking-[0.2em] uppercase mt-1">
+              Vale do Silêncio · Lisboa · 11 Jun – 19 Jul
+            </p>
+            <div className="hidden lg:flex flex-row items-center gap-2 mt-6">
+              <span className="text-white/60 text-[10px] uppercase tracking-widest leading-none">powered by</span>
+              <Image
+                src="/quicnation-logo.png"
+                alt="QUIC Nation"
+                width={80}
+                height={28}
+                style={{ width: "auto", height: "40px" }}
+                className="object-contain"
+              />
             </div>
-
           </div>
 
-          {/* Right: form */}
+          {/* Form */}
           <div className="w-full lg:w-[420px] lg:flex-shrink-0">
             {expired && (
               <div className="mb-4 px-4 py-3 rounded-xl border border-red-500/40 text-red-300 text-sm" style={{ background: "rgba(200,16,46,0.15)" }} role="alert">
@@ -122,6 +118,19 @@ function InviteInner({ code, label, expired, exhausted }: Props) {
               </div>
             )}
             {!blocked && <RsvpForm inviteCode={code} label={label} />}
+          </div>
+
+          {/* powered by — mobile only, below form */}
+          <div className="flex lg:hidden flex-row items-center justify-center gap-2 pb-2">
+            <span className="text-white/50 text-[10px] uppercase tracking-widest leading-none">powered by</span>
+            <Image
+              src="/quicnation-logo.png"
+              alt="QUIC Nation"
+              width={60}
+              height={20}
+              style={{ width: "auto", height: "32px" }}
+              className="object-contain"
+            />
           </div>
 
         </div>
