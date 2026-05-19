@@ -12,5 +12,11 @@
       "destination": "https://www.goalfest.pt/$1",
       "permanent": true
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/email-retry",
+      "schedule": "*/15 * * * *"
+    }
   ]
 }
