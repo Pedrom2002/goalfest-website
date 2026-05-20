@@ -72,7 +72,7 @@ export function AnimatedFeatureCard({
   viewScheduleLabel: string
 }) {
   const col = index % 3
-  const { border, shadow, bgBase, bgAccent } = CARD_COLORS[col]
+  const { border, shadow, bgBase, bgAccent } = CARD_COLORS[col]!
 
   return (
     <motion.div
