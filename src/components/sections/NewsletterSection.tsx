@@ -121,12 +121,12 @@ export default function NewsletterSection() {
               placeholder={t.placeholder}
               required
               disabled={status === 'loading' || status === 'success'}
-              className="flex-1 px-4 py-3 rounded-lg bg-bg-surface border border-[#0033A0]/30 text-text-primary placeholder-text-muted text-sm focus:outline-none focus:border-[#0033A0] transition-colors disabled:opacity-50"
+              className="flex-1 px-4 py-3 rounded-lg bg-bg-surface border border-[#43B02A]/30 text-text-primary placeholder-text-muted text-sm focus:outline-none focus:border-[#43B02A] transition-colors disabled:opacity-50"
             />
             <button
               type="submit"
               disabled={status === 'loading' || status === 'success'}
-              className="px-6 py-3 rounded-lg bg-[#0033A0] text-white text-sm font-semibold tracking-wide hover:bg-[#0033A0]/80 transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-default whitespace-nowrap"
+              className="px-6 py-3 rounded-lg bg-[#43B02A] text-white text-sm font-semibold tracking-wide hover:bg-[#43B02A]/80 transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-default whitespace-nowrap"
             >
               {status === 'loading' ? t.loading : status === 'success' ? t.done : t.cta}
             </button>
