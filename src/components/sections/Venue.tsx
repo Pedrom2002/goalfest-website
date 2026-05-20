@@ -108,7 +108,7 @@ export default function Venue() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-green-pt text-sm uppercase tracking-[0.4em] mb-3 drop-shadow-lg font-semibold"
+            className="text-[#43B02A] text-sm uppercase tracking-[0.4em] mb-3 drop-shadow-lg font-semibold"
           >
             {t('tag')}
           </motion.p>
@@ -161,9 +161,9 @@ export default function Venue() {
           className="text-center mb-12 md:mb-20 pt-10 md:pt-16"
         >
           <div className="inline-flex items-center gap-3 mb-5">
-            <span className="h-px w-12 bg-green-pt/40" />
-            <p className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium">{t('how')}</p>
-            <span className="h-px w-12 bg-green-pt/40" />
+            <span className="h-px w-12 bg-[#43B02A]/40" />
+            <p className="text-[#43B02A] text-xs uppercase tracking-[0.3em] font-medium">{t('how')}</p>
+            <span className="h-px w-12 bg-[#43B02A]/40" />
           </div>
           <p className="text-white text-xl md:text-2xl font-bold mb-1">{t('venue_title')}</p>
           <p className="text-white/70 text-sm">{t('addr')}</p>
@@ -171,7 +171,7 @@ export default function Venue() {
             href="https://maps.google.com/?q=38.7659217,-9.1187136"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-6 bg-green-pt/10 border border-green-pt/40 text-green-pt hover:bg-green-pt hover:text-bg-primary text-xs font-semibold px-5 py-2.5 rounded-full uppercase tracking-widest transition-all duration-200 group"
+            className="inline-flex items-center gap-2 mt-6 bg-[#43B02A]/10 border border-[#43B02A]/40 text-[#43B02A] hover:bg-[#43B02A] hover:text-white text-xs font-semibold px-5 py-2.5 rounded-full uppercase tracking-widest transition-all duration-200 group"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5" aria-hidden="true">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
@@ -193,15 +193,15 @@ export default function Venue() {
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
               className="relative group rounded-2xl overflow-hidden"
             >
-              <div className="absolute inset-0 bg-white/5 backdrop-blur-sm border border-white/12 rounded-2xl transition-all duration-300 group-hover:border-green-pt/30 group-hover:shadow-[0_0_30px_rgba(0,200,81,0.10)]" />
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-pt/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-white/5 backdrop-blur-sm border border-white/12 rounded-2xl transition-all duration-300 group-hover:border-[#C8102E]/30 group-hover:shadow-[0_0_30px_rgba(200,16,46,0.15)]" />
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C8102E]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="relative p-4">
-                <p className="text-green-pt/30 text-xs font-mono font-bold mb-3 tracking-widest">0{i + 1}</p>
+                <p className="text-[#43B02A]/30 text-xs font-mono font-bold mb-3 tracking-widest">0{i + 1}</p>
                 <h3 className="text-text-primary font-semibold text-xs uppercase tracking-wider mb-2">{card.title}</h3>
                 <p className="text-text-muted text-xs leading-relaxed">{card.body}</p>
                 {'link' in card && card.link && (
-                  <a href={card.link.href} target="_blank" rel="noopener noreferrer" className="inline-block mt-2 text-green-pt text-xs hover:underline">
+                  <a href={card.link.href} target="_blank" rel="noopener noreferrer" className="inline-block mt-2 text-[#43B02A] text-xs hover:underline">
                     {card.link.label}
                   </a>
                 )}
@@ -216,7 +216,7 @@ export default function Venue() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-6 flex items-center gap-3 rounded-2xl border border-green-pt/20 bg-green-pt/5 px-5 py-4"
+          className="mt-6 flex items-center gap-3 rounded-2xl border border-[#43B02A]/20 bg-[#43B02A]/5 px-5 py-4"
         >
           <p className="text-text-muted text-sm leading-relaxed">
             {t.rich('entrances', {
@@ -234,9 +234,9 @@ export default function Venue() {
           className="mt-20"
         >
           <div className="flex items-center gap-3 mb-6 justify-center">
-            <span className="h-px w-12 bg-green-pt/40" />
-            <p className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium">{t('model')}</p>
-            <span className="h-px w-12 bg-green-pt/40" />
+            <span className="h-px w-12 bg-[#43B02A]/40" />
+            <p className="text-[#43B02A] text-xs uppercase tracking-[0.3em] font-medium">{t('model')}</p>
+            <span className="h-px w-12 bg-[#43B02A]/40" />
           </div>
           <div className="w-full h-[240px] md:h-[340px] rounded-2xl overflow-hidden border border-white/8 bg-bg-3d/50 backdrop-blur-sm shadow-[0_0_60px_rgba(0,200,81,0.05)]">
             <ModelErrorBoundary fallbackText={t('model_unavailable')}>

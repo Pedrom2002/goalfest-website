@@ -22,9 +22,9 @@ export default function FaqSection() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-3 justify-center mb-12"
         >
-          <span className="h-px w-12 bg-green-pt/40" />
+          <span className="h-px w-12 bg-[#43B02A]/40" />
           <h2 className="font-display text-3xl md:text-5xl font-black text-center text-text-primary uppercase tracking-wide">FAQ</h2>
-          <span className="h-px w-12 bg-green-pt/40" />
+          <span className="h-px w-12 bg-[#43B02A]/40" />
         </motion.div>
 
         <motion.div

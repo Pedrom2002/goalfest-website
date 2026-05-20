@@ -19,7 +19,7 @@ export default function MatchCard({ match, dateStr }: { match: Match; dateStr: s
 
   return (
     <div
-      className={`bg-bg-surface border border-white/14 rounded-xl p-5 flex flex-col gap-4 transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(0,200,81,0.25)] hover:border-green-pt/50 ${
+      className={`bg-bg-surface border border-white/14 rounded-xl p-5 flex flex-col gap-4 transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(200,16,46,0.25)] hover:border-[#C8102E]/50 ${
         isFinished ? 'opacity-50' : ''
       }`}
     >

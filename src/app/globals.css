@@ -8,6 +8,9 @@
   --color-gold: #FFD700;
   --color-red-pt: #E63951;
   --color-green-pt: #22c55e;
+  --color-wc-blue: #0033A0;
+  --color-wc-green: #43B02A;
+  --color-wc-red: #C8102E;
   --color-accent: #34d399;
   --color-text-primary: #F7FFF7;
   --color-text-muted: #9ca8a3;
@@ -21,6 +24,11 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
 }
 
 body {
@@ -48,7 +56,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-green-pt);
+  outline: 2px solid var(--color-wc-blue);
   outline-offset: 3px;
   border-radius: 3px;
 }
@@ -123,7 +131,7 @@ body {
   overflow: visible;
   clip: auto;
   white-space: normal;
-  background-color: var(--color-green-pt);
+  background-color: var(--color-wc-blue);
   color: var(--color-bg-primary);
   font-weight: bold;
   border-radius: 0.25rem;

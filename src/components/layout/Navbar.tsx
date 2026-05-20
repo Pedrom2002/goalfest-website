@@ -72,7 +72,7 @@ export default function Navbar() {
     <>
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-bg-primary/97 backdrop-blur-md shadow-lg border-b border-green-pt/25' : 'bg-black/10 backdrop-blur-[2px]'
+        scrolled ? 'bg-bg-primary/97 shadow-lg border-b border-[#43B02A]/25' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14 sm:h-16 md:h-20">
@@ -92,7 +92,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={pathname === '/' ? link.href : `/${locale}/${link.href}`}
-              className="text-white hover:text-gold transition-colors duration-200 text-sm lg:text-[17px] uppercase tracking-[0.12em]" style={{ fontFamily: 'var(--font-bebas)' }}
+              className="text-white hover:text-gold transition-colors duration-200 text-sm lg:text-[17px] uppercase tracking-[0.12em]" style={{ fontFamily: 'var(--font-bebas)', textShadow: '0 0 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)' }}
             >
               {link.label}
             </a>
@@ -100,7 +100,7 @@ export default function Navbar() {
           <button
             onClick={switchLocale}
             aria-label={locale === 'pt' ? 'Switch to English' : 'Mudar para Português'}
-            className="text-white hover:text-gold text-xs lg:text-[15px] border border-white/30 px-2 py-1 rounded hover:border-gold transition-colors tracking-[0.1em]" style={{ fontFamily: 'var(--font-bebas)' }}
+            className="text-white hover:text-gold text-xs lg:text-[15px] border border-white/30 w-8 h-8 flex items-center justify-center rounded hover:border-gold transition-colors tracking-[0.1em]" style={{ fontFamily: 'var(--font-bebas)', textShadow: '0 0 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)' }}
           >
             {otherLocale.toUpperCase()}
           </button>
@@ -145,10 +145,10 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed inset-y-0 right-0 w-full sm:w-72 bg-[#0a140a] border-l border-green-pt/20 z-50 flex flex-col"
+            className="fixed inset-y-0 right-0 w-full sm:w-72 bg-[#0a140a] border-l border-[#43B02A]/20 z-50 flex flex-col"
           >
               <div className="flex items-center justify-between px-6 h-20 border-b border-white/10">
-                <span className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium" aria-hidden="true">Menu</span>
+                <span className="text-[#43B02A] text-xs uppercase tracking-[0.3em] font-medium" aria-hidden="true">Menu</span>
                 <button onClick={closeMenu} className="text-text-muted hover:text-white transition-colors" aria-label={locale === 'pt' ? 'Fechar menu' : 'Close menu'}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className="w-5 h-5" aria-hidden="true">
                     <path d="M18 6L6 18M6 6l12 12"/>
@@ -167,7 +167,7 @@ export default function Navbar() {
                     <a
                       href={pathname === '/' ? link.href : `/${locale}/${link.href}`}
                       onClick={closeMenu}
-                      className="flex items-center justify-between py-4 border-b border-white/6 text-text-primary hover:text-green-pt text-xl uppercase tracking-[0.12em] transition-colors group" style={{ fontFamily: 'var(--font-bebas)' }}
+                      className="flex items-center justify-between py-4 border-b border-white/6 text-text-primary hover:text-[#43B02A] text-xl uppercase tracking-[0.12em] transition-colors group" style={{ fontFamily: 'var(--font-bebas)' }}
                     >
                       {link.label}
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className="w-4 h-4 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all" aria-hidden="true">

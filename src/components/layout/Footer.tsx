@@ -17,21 +17,21 @@ export default function Footer() {
         <div className="flex items-center gap-5 flex-wrap justify-center">
           <a
             href="mailto:goalfest@quic.pt"
-            className="text-text-muted/50 text-xs hover:text-green-pt transition-colors"
+            className="text-text-muted/50 text-xs hover:text-[#43B02A] transition-colors"
           >
             goalfest@quic.pt
           </a>
           <span className="text-white/10 text-xs">|</span>
           <Link
             href="/privacidade"
-            className="text-text-muted/50 text-xs uppercase tracking-widest hover:text-green-pt transition-colors"
+            className="text-text-muted/50 text-xs uppercase tracking-widest hover:text-[#43B02A] transition-colors"
           >
             {isPt ? 'Privacidade' : 'Privacy'}
           </Link>
           <span className="text-white/10 text-xs">|</span>
           <Link
             href="/termos"
-            className="text-text-muted/50 text-xs uppercase tracking-widest hover:text-green-pt transition-colors"
+            className="text-text-muted/50 text-xs uppercase tracking-widest hover:text-[#43B02A] transition-colors"
           >
             {isPt ? 'Termos' : 'Terms'}
           </Link>
