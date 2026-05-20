@@ -205,3 +205,64 @@ Dúvidas? Responde a este email.
 
   return data;
 }
+
+type WelcomeArgs = { to: string; unsubscribeUrl: string };
+
+export async function sendNewsletterWelcome({ to, unsubscribeUrl }: WelcomeArgs) {
+  const fromEnv = process.env.EMAIL_FROM ?? process.env.RESEND_FROM;
+  if (!fromEnv && process.env.NODE_ENV === "production") {
+    throw new Error("EMAIL_FROM em falta em produção");
+  }
+  const from = fromEnv ?? "QUIC Festival <noreply@quic.pt>";
+  const sender = parseFrom(from);
+
+  const safeUnsub = unsubscribeUrl.replace(/"/g, "%22");
+  const subject = "Estás dentro — newsletter QUIC";
+
+  const html = `<!doctype html>
+<html lang="pt-PT">
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>${subject}</title></head>
+<body style="margin:0;padding:0;background:#06182A;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#F4EBD6;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#06182A" style="background:#06182A;">
+    <tr><td align="center" style="padding:40px 16px;">
+      <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" bgcolor="#F4EBD6" style="max-width:560px;width:100%;background:#F4EBD6;color:#06111B;border-radius:22px;border:2px solid #06111B;">
+        <tr><td style="padding:32px 30px 8px 30px;">
+          <p style="margin:0;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#E8613C;font-weight:700;">Newsletter · QUIC</p>
+          <h1 style="margin:10px 0 0 0;font-family:Georgia,'Times New Roman',serif;font-size:30px;line-height:1.1;font-weight:900;color:#06111B;">
+            Estás <em style="color:#F2A93C;font-style:italic;">dentro</em>.
+          </h1>
+          <p style="margin:14px 0 0 0;font-size:15px;line-height:1.6;color:#3a4b5a;">
+            Obrigado pela subscrição. Vais receber novidades sobre o <strong style="color:#06111B;">QUIC Festival 2026</strong> — line-up, bilhetes, surpresas.
+          </p>
+          <p style="margin:10px 0 0 0;font-size:14px;line-height:1.6;color:#3a4b5a;">Sem spam. Cancelas quando quiseres.</p>
+        </td></tr>
+        <tr><td style="padding:20px 30px 30px 30px;">
+          <div style="height:2px;background:#06111B;opacity:.12;border-radius:2px;margin-bottom:18px;"></div>
+          <p style="margin:0;font-size:12px;color:#6a7885;line-height:1.55;">
+            Não te subscreveste? <a href="${safeUnsub}" style="color:#6a7885;text-decoration:underline;">Cancela aqui</a>.
+          </p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+  const text = `QUIC Festival 2026 — estás dentro.
+
+Obrigado pela subscrição. Vais receber novidades sobre o QUIC Festival 2026.
+
+Cancelar: ${unsubscribeUrl}
+
+— QUIC Festival
+`;
+
+  return brevoSend({
+    sender,
+    to: [{ email: to }],
+    subject,
+    htmlContent: html,
+    textContent: text,
+    headers: { "List-Unsubscribe": `<${unsubscribeUrl}>` },
+  });
+}

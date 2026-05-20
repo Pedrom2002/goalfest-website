@@ -75,7 +75,7 @@ export default function Navbar() {
         scrolled ? 'bg-bg-primary/97 backdrop-blur-md shadow-lg border-b border-green-pt/25' : 'bg-black/10 backdrop-blur-[2px]'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14 sm:h-16 md:h-20">
 <button
           onClick={() => {
             if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -84,15 +84,15 @@ export default function Navbar() {
           className={`block transition-all duration-300 hover:scale-105 ${pastHero || pathname !== '/' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           aria-label={locale === 'pt' ? 'Ir para página principal' : 'Go to home page'}
         >
-          <Image src="/GOALFEST-logo2.png" alt="Fanzone Lisboa" height={60} width={180} className="object-contain h-[60px] w-auto" />
+          <Image src="/GOALFEST-logo2.png" alt="Fanzone Lisboa" height={60} width={180} className="object-contain h-9 sm:h-11 md:h-[60px] w-auto" />
         </button>
 
-        <nav className="hidden md:flex items-center gap-8" aria-label={locale === 'pt' ? 'Navegação principal' : 'Main navigation'}>
+        <nav className="hidden md:flex items-center gap-4 lg:gap-8" aria-label={locale === 'pt' ? 'Navegação principal' : 'Main navigation'}>
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={pathname === '/' ? link.href : `/${locale}/${link.href}`}
-              className="text-white hover:text-gold transition-colors duration-200 text-[17px] uppercase tracking-[0.12em]" style={{ fontFamily: 'var(--font-bebas)' }}
+              className="text-white hover:text-gold transition-colors duration-200 text-sm lg:text-[17px] uppercase tracking-[0.12em]" style={{ fontFamily: 'var(--font-bebas)' }}
             >
               {link.label}
             </a>
@@ -100,7 +100,7 @@ export default function Navbar() {
           <button
             onClick={switchLocale}
             aria-label={locale === 'pt' ? 'Switch to English' : 'Mudar para Português'}
-            className="text-white hover:text-gold text-[15px] border border-white/30 px-2 py-1 rounded hover:border-gold transition-colors tracking-[0.1em]" style={{ fontFamily: 'var(--font-bebas)' }}
+            className="text-white hover:text-gold text-xs lg:text-[15px] border border-white/30 px-2 py-1 rounded hover:border-gold transition-colors tracking-[0.1em]" style={{ fontFamily: 'var(--font-bebas)' }}
           >
             {otherLocale.toUpperCase()}
           </button>
