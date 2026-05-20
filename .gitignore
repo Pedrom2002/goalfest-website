@@ -66,3 +66,7 @@ scripts/
 # Temp files
 *_readme.txt
 .env*.local
+
+# supabase cli local state
+supabase/.temp/
+supabase/.branches/

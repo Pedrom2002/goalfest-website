@@ -1,43 +1,77 @@
 import { NextRequest } from 'next/server'
-import { readFileSync, writeFileSync } from 'fs'
-import { resolve } from 'path'
+import { supabaseAdmin } from '@/lib/supabase/admin'
+import { rateLimit } from '@/lib/rate-limit'
 import { sendNewsletterWelcome } from '@/lib/email'
 
-const DATA_PATH = resolve(process.cwd(), 'src/data/subscribers.json')
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-type Subscriber = { email: string; subscribedAt: string }
-
-function loadSubscribers(): Subscriber[] {
-  try {
-    return JSON.parse(readFileSync(DATA_PATH, 'utf-8'))
-  } catch {
-    return []
-  }
-}
-
-function saveSubscribers(list: Subscriber[]) {
-  writeFileSync(DATA_PATH, JSON.stringify(list, null, 2))
+function clientIp(req: NextRequest): string {
+  const xff = req.headers.get('x-forwarded-for')
+  if (xff) return xff.split(',')[0]!.trim()
+  return req.headers.get('x-real-ip') ?? 'unknown'
 }
 
 export async function POST(request: NextRequest) {
-  const { email } = await request.json()
+  const ip = clientIp(request)
+  const rl = await rateLimit(`subscribe:${ip}`, 5, 60_000)
+  if (!rl.ok) {
+    return Response.json(
+      { error: 'Demasiados pedidos. Tenta novamente em breve.' },
+      { status: 429, headers: { 'retry-after': String(rl.retryAfterSeconds) } },
+    )
+  }
 
-  if (!email || typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  let body: unknown
+  try {
+    body = await request.json()
+  } catch {
+    return Response.json({ error: 'Invalid JSON.' }, { status: 400 })
+  }
+
+  const email = (body as { email?: unknown })?.email
+  if (!email || typeof email !== 'string' || !EMAIL_RE.test(email)) {
     return Response.json({ error: 'Invalid email address.' }, { status: 400 })
   }
 
   const normalized = email.trim().toLowerCase()
-  const subscribers = loadSubscribers()
+  const db = supabaseAdmin()
 
-  if (subscribers.some((s) => s.email.toLowerCase() === normalized)) {
-    return Response.json({ error: 'This email is already subscribed.' }, { status: 409 })
+  // Upsert pattern: try insert, on unique conflict re-activate if soft-unsubscribed.
+  const { data: existing, error: selErr } = await db
+    .from('newsletter_subscribers')
+    .select('id, unsubscribed_at')
+    .ilike('email', normalized)
+    .maybeSingle()
+
+  if (selErr) {
+    console.error('[subscribe] select failed', selErr)
+    return Response.json({ error: 'Erro do servidor.' }, { status: 500 })
   }
 
-  subscribers.push({ email: normalized, subscribedAt: new Date().toISOString() })
-  saveSubscribers(subscribers)
+  if (existing) {
+    if (existing.unsubscribed_at === null) {
+      return Response.json({ error: 'This email is already subscribed.' }, { status: 409 })
+    }
+    const { error: updErr } = await db
+      .from('newsletter_subscribers')
+      .update({ unsubscribed_at: null, subscribed_at: new Date().toISOString() })
+      .eq('id', existing.id)
+    if (updErr) {
+      console.error('[subscribe] reactivate failed', updErr)
+      return Response.json({ error: 'Erro do servidor.' }, { status: 500 })
+    }
+  } else {
+    const { error: insErr } = await db
+      .from('newsletter_subscribers')
+      .insert({ email: normalized })
+    if (insErr) {
+      console.error('[subscribe] insert failed', insErr)
+      return Response.json({ error: 'Erro do servidor.' }, { status: 500 })
+    }
+  }
 
   const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+    process.env.NEXT_PUBLIC_SITE_URL ?? process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000'
   const unsubscribeUrl = `${baseUrl}/unsubscribe?email=${encodeURIComponent(normalized)}`
 
   if (process.env.BREVO_API_KEY) {

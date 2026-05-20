@@ -213,11 +213,11 @@ export async function sendNewsletterWelcome({ to, unsubscribeUrl }: WelcomeArgs)
   if (!fromEnv && process.env.NODE_ENV === "production") {
     throw new Error("EMAIL_FROM em falta em produção");
   }
-  const from = fromEnv ?? "QUIC Festival <noreply@quic.pt>";
+  const from = fromEnv ?? "Goalfest <noreply@goalfest.pt>";
   const sender = parseFrom(from);
 
   const safeUnsub = unsubscribeUrl.replace(/"/g, "%22");
-  const subject = "Estás dentro — newsletter QUIC";
+  const subject = "Estás dentro — newsletter Goalfest";
 
   const html = `<!doctype html>
 <html lang="pt-PT">
@@ -227,12 +227,12 @@ export async function sendNewsletterWelcome({ to, unsubscribeUrl }: WelcomeArgs)
     <tr><td align="center" style="padding:40px 16px;">
       <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" bgcolor="#F4EBD6" style="max-width:560px;width:100%;background:#F4EBD6;color:#06111B;border-radius:22px;border:2px solid #06111B;">
         <tr><td style="padding:32px 30px 8px 30px;">
-          <p style="margin:0;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#E8613C;font-weight:700;">Newsletter · QUIC</p>
+          <p style="margin:0;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#16a34a;font-weight:700;">Newsletter · Goalfest</p>
           <h1 style="margin:10px 0 0 0;font-family:Georgia,'Times New Roman',serif;font-size:30px;line-height:1.1;font-weight:900;color:#06111B;">
-            Estás <em style="color:#F2A93C;font-style:italic;">dentro</em>.
+            Estás <em style="color:#16a34a;font-style:italic;">dentro</em>.
           </h1>
           <p style="margin:14px 0 0 0;font-size:15px;line-height:1.6;color:#3a4b5a;">
-            Obrigado pela subscrição. Vais receber novidades sobre o <strong style="color:#06111B;">QUIC Festival 2026</strong> — line-up, bilhetes, surpresas.
+            Obrigado pela subscrição. Vais receber novidades sobre o <strong style="color:#06111B;">Goalfest Lisboa 2026</strong> — programa, bilhetes, surpresas.
           </p>
           <p style="margin:10px 0 0 0;font-size:14px;line-height:1.6;color:#3a4b5a;">Sem spam. Cancelas quando quiseres.</p>
         </td></tr>
@@ -248,13 +248,13 @@ export async function sendNewsletterWelcome({ to, unsubscribeUrl }: WelcomeArgs)
 </body>
 </html>`;
 
-  const text = `QUIC Festival 2026 — estás dentro.
+  const text = `Goalfest Lisboa 2026 — estás dentro.
 
-Obrigado pela subscrição. Vais receber novidades sobre o QUIC Festival 2026.
+Obrigado pela subscrição. Vais receber novidades sobre o Goalfest Lisboa 2026.
 
 Cancelar: ${unsubscribeUrl}
 
-— QUIC Festival
+— Goalfest
 `;
 
   return brevoSend({
