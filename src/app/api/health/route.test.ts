@@ -1,15 +1,36 @@
 import { GET } from './route'
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest'
+
+vi.mock('@/lib/supabase/admin', () => ({
+  supabaseAdmin: vi.fn(() => ({
+    from: vi.fn(() => ({
+      select: vi.fn(() => ({
+        limit: vi.fn(() => Promise.resolve({ error: null })),
+      })),
+    })),
+  })),
+}))
 
 describe('GET /api/health', () => {
+  const originalBrevo = process.env.BREVO_API_KEY
+
+  beforeEach(() => {
+    process.env.BREVO_API_KEY = 'test-key'
+  })
+
+  afterEach(() => {
+    process.env.BREVO_API_KEY = originalBrevo
+  })
+
   it('returns 200', async () => {
     const res = await GET()
     expect(res.status).toBe(200)
   })
 
-  it('returns status ok', async () => {
+  it('returns ok true', async () => {
     const res = await GET()
     const body = await res.json()
-    expect(body.status).toBe('ok')
+    expect(body.ok).toBe(true)
   })
 
   it('returns a ts ISO string', async () => {
