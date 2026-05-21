@@ -44,6 +44,11 @@ export default function Hero() {
     const video = videoRef.current
     if (!video) return
 
+    // Source baseado em viewport — mobile recebe 720p mais leve
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+    const isLowPerf = document.documentElement.getAttribute('data-perf') === 'low'
+    video.src = (isMobile || isLowPerf) ? '/mundial-mobile.mp4' : '/mundial.mp4'
+
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
     const play = () => void video.play()?.catch(() => undefined)
 
@@ -85,9 +90,7 @@ export default function Hero() {
           preload="metadata"
           disablePictureInPicture
           disableRemotePlayback
-          src="/mundial.mp4"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ transform: 'scale(1.25)', transformOrigin: 'center' }}
           aria-hidden="true"
         />
       </div>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 function seededRandom(seed: number): number {
   const x = Math.sin(seed + 1) * 10000
@@ -17,9 +17,14 @@ const BEAMS = [
 ]
 
 export default function BackgroundFX() {
+  const [isLowPerf, setIsLowPerf] = useState(false)
+  useEffect(() => {
+    setIsLowPerf(document.documentElement.getAttribute('data-perf') === 'low')
+  }, [])
+
   const stars = useMemo(
     () =>
-      Array.from({ length: 180 }, (_, i) => ({
+      Array.from({ length: isLowPerf ? 40 : 180 }, (_, i) => ({
         x: seededRandom(i * 11) * 100,
         y: seededRandom(i * 11 + 1) * 75,
         size: seededRandom(i * 11 + 2) * 2.0 + 0.7,
@@ -27,8 +32,44 @@ export default function BackgroundFX() {
         delay: `-${seededRandom(i * 11 + 4) * 6}s`,
         opacity: 0.35 + seededRandom(i * 11 + 5) * 0.65,
       })),
-    []
+    [isLowPerf]
   )
+
+  // Modo low-perf: só base gradient + estrelas reduzidas, sem blurs/fog/grain/vignette/holofotes
+  if (isLowPerf) {
+    return (
+      <div data-bgfx className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden>
+        <style>{`
+          @keyframes starTwinkle {
+            0%, 100% { opacity: var(--op-start); }
+            50%       { opacity: var(--op-mid); }
+          }
+        `}</style>
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to bottom, #0a1525 0%, #0a1220 60%, #050a14 100%)',
+        }} />
+        {stars.map((s, i) => (
+          <div
+            key={`s${i}`}
+            style={{
+              position: 'absolute',
+              left: `${s.x}%`,
+              top: `${s.y}%`,
+              width: s.size,
+              height: s.size,
+              borderRadius: '50%',
+              background: '#ffffff',
+              ['--op-start' as string]: s.opacity,
+              ['--op-mid' as string]: Math.min(s.opacity * 1.8, 1),
+              animation: `starTwinkle ${s.duration} ${s.delay} ease-in-out infinite`,
+            }}
+          />
+        ))}
+      </div>
+    )
+  }
 
   return (
     <div data-bgfx className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden>
@@ -137,7 +178,7 @@ export default function BackgroundFX() {
               inset: 0,
               transformOrigin: 'bottom center',
               background: 'linear-gradient(to top, transparent 0%, rgba(67,176,42,0.30) 25%, rgba(67,176,42,0.18) 60%, transparent 100%)',
-              filter: 'blur(38px)',
+              filter: 'blur(16px)',
               mixBlendMode: 'screen',
             }} />
             {/* Cone interior (luz focada) */}
@@ -176,7 +217,7 @@ export default function BackgroundFX() {
         bottom: 0,
         height: '40vh',
         background: 'radial-gradient(ellipse 60% 100% at 30% 100%, rgba(67,176,42,0.18) 0%, transparent 70%), radial-gradient(ellipse 70% 100% at 70% 100%, rgba(67,176,42,0.14) 0%, transparent 70%)',
-        filter: 'blur(20px)',
+        filter: 'blur(14px)',
         mixBlendMode: 'screen',
         pointerEvents: 'none',
         animation: 'fogDrift 22s ease-in-out infinite',
@@ -190,7 +231,7 @@ export default function BackgroundFX() {
         bottom: 0,
         height: '32vh',
         background: 'radial-gradient(ellipse 55% 100% at 50% 100%, rgba(0,51,160,0.12) 0%, transparent 70%), radial-gradient(ellipse 40% 100% at 85% 100%, rgba(200,16,46,0.08) 0%, transparent 75%)',
-        filter: 'blur(28px)',
+        filter: 'blur(16px)',
         mixBlendMode: 'screen',
         pointerEvents: 'none',
         animation: 'fogDriftAlt 28s ease-in-out infinite',
