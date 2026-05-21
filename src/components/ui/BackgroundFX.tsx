@@ -1,10 +1,16 @@
 'use client'
 
-import { useMemo, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 function seededRandom(seed: number): number {
   const x = Math.sin(seed + 1) * 10000
   return x - Math.floor(x)
+}
+
+function isLowEndDevice(): boolean {
+  const nav = navigator as Navigator & { deviceMemory?: number }
+  return (nav.deviceMemory !== undefined && nav.deviceMemory < 2) ||
+         (navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 2)
 }
 
 const BEAMS = [
@@ -41,24 +47,22 @@ function createStarTemplate(): HTMLCanvasElement {
 export default function BackgroundFX() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  const stars = useMemo(
-    () =>
-      Array.from({ length: 180 }, (_, i) => ({
-        x:           seededRandom(i * 11)       * 100,
-        y:           seededRandom(i * 11 + 1)   * 75,  // top 75% only
-        size:        seededRandom(i * 11 + 2)   * 2.0 + 0.7,
-        duration:    2 + seededRandom(i * 11 + 3) * 5,
-        delay:       seededRandom(i * 11 + 4)   * 6,
-        opacityBase: 0.35 + seededRandom(i * 11 + 5) * 0.65,
-      })),
-    []
-  )
-
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return // jsdom / no-canvas environments exit gracefully
+
+    const isMobile = window.innerWidth < 768
+    const starCount = (isLowEndDevice() || isMobile) ? 90 : 180
+    const stars = Array.from({ length: starCount }, (_, i) => ({
+      x:           seededRandom(i * 11)       * 100,
+      y:           seededRandom(i * 11 + 1)   * 75,
+      size:        seededRandom(i * 11 + 2)   * 2.0 + 0.7,
+      duration:    2 + seededRandom(i * 11 + 3) * 5,
+      delay:       seededRandom(i * 11 + 4)   * 6,
+      opacityBase: 0.35 + seededRandom(i * 11 + 5) * 0.65,
+    }))
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const template = createStarTemplate()
@@ -129,7 +133,7 @@ export default function BackgroundFX() {
       window.removeEventListener('resize', resize)
       document.removeEventListener('visibilitychange', onVisibility)
     }
-  }, [stars])
+  }, [])
 
   return (
     <div data-bgfx className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden>

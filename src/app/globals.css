@@ -107,6 +107,14 @@ body {
   }
 }
 
+/* Mobile perf: remove expensive GPU compositor layers on small screens */
+@media (max-width: 768px) {
+  .backdrop-blur-sm { backdrop-filter: none !important; }
+  .backdrop-blur { backdrop-filter: none !important; }
+  [data-bgfx] .fog-1,
+  [data-bgfx] .fog-2 { display: none !important; }
+}
+
 .skip-link {
   position: absolute;
   width: 1px;
