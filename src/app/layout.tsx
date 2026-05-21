@@ -26,6 +26,8 @@ export default async function RootLayout({
     <html lang={lang} suppressHydrationWarning>
       <head>
         {nonce && <meta name="csp-nonce" content={nonce} />}
+        <link rel="preload" as="image" href="/mundial-poster.jpg" fetchPriority="high" />
+        <link rel="preload" as="video" href="/mundial.mp4" type="video/mp4" fetchPriority="high" />
         {/* Runs before first paint — marks weak devices so CSS + Framer Motion skip all animations */}
         <script
           nonce={nonce}
