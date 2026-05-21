@@ -118,6 +118,7 @@ export default function BackgroundFX() {
         return (
           <div
             key={`beam-${i}`}
+            className="beam"
             style={{
               position: 'absolute',
               bottom: '-5%',
