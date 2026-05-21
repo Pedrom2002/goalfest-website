@@ -35,22 +35,19 @@ export default function BackgroundFX() {
     [isLowPerf]
   )
 
-  // Modo low-perf: só base gradient + estrelas reduzidas, sem blurs/fog/grain/vignette/holofotes
+  // Modo low-perf: gradient estático + estrelas estáticas (sem animação para scroll fluído mobile)
   if (isLowPerf) {
     return (
-      <div data-bgfx className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden>
-        <style>{`
-          @keyframes starTwinkle {
-            0%, 100% { opacity: var(--op-start); }
-            50%       { opacity: var(--op-mid); }
-          }
-        `}</style>
-        <div style={{
-          position: 'absolute',
-          inset: 0,
+      <div
+        data-bgfx
+        className="fixed inset-0 pointer-events-none overflow-hidden z-0"
+        aria-hidden
+        style={{
           background: 'linear-gradient(to bottom, #0a1525 0%, #0a1220 60%, #050a14 100%)',
-        }} />
-        {stars.map((s, i) => (
+          transform: 'translateZ(0)',
+        }}
+      >
+        {stars.slice(0, 30).map((s, i) => (
           <div
             key={`s${i}`}
             style={{
@@ -61,9 +58,7 @@ export default function BackgroundFX() {
               height: s.size,
               borderRadius: '50%',
               background: '#ffffff',
-              ['--op-start' as string]: s.opacity,
-              ['--op-mid' as string]: Math.min(s.opacity * 1.8, 1),
-              animation: `starTwinkle ${s.duration} ${s.delay} ease-in-out infinite`,
+              opacity: s.opacity,
             }}
           />
         ))}

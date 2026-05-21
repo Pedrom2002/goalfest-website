@@ -29,7 +29,7 @@ export default async function RootLayout({
         {/* Runs before first paint — marks weak devices so CSS + Framer Motion skip all animations */}
         <script
           nonce={nonce}
-          dangerouslySetInnerHTML={{ __html: `(function(){try{var m=navigator.deviceMemory,c=navigator.hardwareConcurrency;if((m!==undefined&&m<2)||(c!==undefined&&c<=2))document.documentElement.setAttribute('data-perf','low')}catch(e){}})()` }}
+          dangerouslySetInnerHTML={{ __html: `(function(){try{var m=navigator.deviceMemory,c=navigator.hardwareConcurrency,w=window.innerWidth,t=('ontouchstart' in window);if((m!==undefined&&m<4)||(c!==undefined&&c<=4)||w<900||t)document.documentElement.setAttribute('data-perf','low')}catch(e){}})()` }}
         />
       </head>
       <body>

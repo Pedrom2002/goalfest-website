@@ -19,12 +19,16 @@ export default function Navbar() {
 
   useEffect(() => {
     let rafId = 0
+    let lastPast = false
     const onScroll = () => {
       cancelAnimationFrame(rafId)
       rafId = requestAnimationFrame(() => {
         const past = window.scrollY > window.innerHeight * 0.85
-        setScrolled(past)
-        setPastHero(past)
+        if (past !== lastPast) {
+          lastPast = past
+          setScrolled(past)
+          setPastHero(past)
+        }
       })
     }
     window.addEventListener('scroll', onScroll, { passive: true })
