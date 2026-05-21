@@ -18,12 +18,20 @@ export default function Navbar() {
   const hamburgerRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
+    let rafId = 0
     const onScroll = () => {
-      setScrolled(window.scrollY > window.innerHeight * 0.85)
-      setPastHero(window.scrollY > window.innerHeight * 0.85)
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        const past = window.scrollY > window.innerHeight * 0.85
+        setScrolled(past)
+        setPastHero(past)
+      })
     }
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      cancelAnimationFrame(rafId)
+    }
   }, [])
 
   const closeMenu = useCallback(() => {
