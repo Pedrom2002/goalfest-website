@@ -61,7 +61,7 @@ export default function Venue() {
       if (video.src) return
       // Set src only when section enters viewport â€” users who never scroll here
       // never download this video.
-      video.src = window.matchMedia('(max-width: 768px)').matches ? '/venue-dark.mp4' : NEXT_PUBLIC_VIDEO_VENUE
+      video.src = NEXT_PUBLIC_VIDEO_VENUE
       video.playbackRate = 0.5
       if (!mq.matches) play()
     }
@@ -148,7 +148,14 @@ export default function Venue() {
           playsInline
           preload="none"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: '5% 70%', transform: 'scaleX(-1) translateZ(0)', zIndex: 0 }}
+          style={{
+            objectPosition: '5% 70%',
+            transform: 'scaleX(-1) translateZ(0)',
+            zIndex: 0,
+            filter: isMobile
+              ? 'brightness(0.32) saturate(0.55) hue-rotate(15deg) contrast(1.05)'
+              : undefined,
+          }}
         />
         {!isMobile && (
           <div className="absolute inset-0" style={{
@@ -156,6 +163,12 @@ export default function Venue() {
             transform: 'translate3d(0,0,0)',
             zIndex: 1,
             willChange: 'transform',
+          }} />
+        )}
+        {isMobile && (
+          <div className="absolute inset-0 pointer-events-none" style={{
+            background: 'linear-gradient(to bottom, rgba(13,26,13,1) 0%, transparent 18%, transparent 82%, rgba(13,26,13,1) 100%)',
+            zIndex: 1,
           }} />
         )}
 
