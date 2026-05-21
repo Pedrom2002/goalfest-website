@@ -44,6 +44,16 @@ export default function Hero() {
     const video = videoRef.current
     if (!video) return
 
+    // Respect data-saver mode and genuinely slow connections — skip video entirely
+    // to save ~10 MB and reduce CPU decoding on weak devices.
+    type NetInfo = { effectiveType?: string; saveData?: boolean }
+    const conn = (navigator as Navigator & { connection?: NetInfo }).connection
+    const isSlowOrSaving =
+      conn?.saveData === true ||
+      conn?.effectiveType === 'slow-2g' ||
+      conn?.effectiveType === '2g'
+    if (isSlowOrSaving) return
+
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
     const play = () => void video.play()?.catch(() => undefined)
 

@@ -14,7 +14,7 @@ import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald', display: 'swap' })
-const orbitron = Orbitron({ subsets: ['latin'], variable: '--font-orbitron', weight: ['500', '600', '700'], display: 'swap' })
+const orbitron = Orbitron({ subsets: ['latin'], variable: '--font-orbitron', weight: ['700'], display: 'swap' })
 const bebasNeue = Bebas_Neue({ subsets: ['latin'], variable: '--font-bebas', weight: '400', display: 'swap' })
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans', display: 'swap' })
 

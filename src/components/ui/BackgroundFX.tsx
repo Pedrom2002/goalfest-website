@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useEffect, useRef } from 'react'
 
 function seededRandom(seed: number): number {
   const x = Math.sin(seed + 1) * 10000
@@ -16,19 +16,120 @@ const BEAMS = [
   { x: '92%', rotate: 36,  duration: '13s',  delay: '-7s'   },
 ]
 
+// Pre-rendered star template: white radial gradient simulating box-shadow glow.
+// Created once and stamped per-star via drawImage — avoids per-draw shadowBlur cost.
+const TEMPLATE_SIZE = 24
+
+function createStarTemplate(): HTMLCanvasElement {
+  const canvas = document.createElement('canvas')
+  canvas.width = TEMPLATE_SIZE
+  canvas.height = TEMPLATE_SIZE
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return canvas
+  const cx = TEMPLATE_SIZE / 2
+  const gradient = ctx.createRadialGradient(cx, cx, 0, cx, cx, cx)
+  gradient.addColorStop(0,    'rgba(255,255,255,1)')
+  gradient.addColorStop(0.15, 'rgba(255,255,255,0.9)')
+  gradient.addColorStop(0.45, 'rgba(255,255,255,0.4)')
+  gradient.addColorStop(0.75, 'rgba(255,255,255,0.12)')
+  gradient.addColorStop(1,    'rgba(255,255,255,0)')
+  ctx.fillStyle = gradient
+  ctx.fillRect(0, 0, TEMPLATE_SIZE, TEMPLATE_SIZE)
+  return canvas
+}
+
 export default function BackgroundFX() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
   const stars = useMemo(
     () =>
       Array.from({ length: 180 }, (_, i) => ({
-        x: seededRandom(i * 11) * 100,
-        y: seededRandom(i * 11 + 1) * 75,
-        size: seededRandom(i * 11 + 2) * 2.0 + 0.7,
-        duration: `${2 + seededRandom(i * 11 + 3) * 5}s`,
-        delay: `-${seededRandom(i * 11 + 4) * 6}s`,
-        opacity: 0.35 + seededRandom(i * 11 + 5) * 0.65,
+        x:           seededRandom(i * 11)       * 100,
+        y:           seededRandom(i * 11 + 1)   * 75,  // top 75% only
+        size:        seededRandom(i * 11 + 2)   * 2.0 + 0.7,
+        duration:    2 + seededRandom(i * 11 + 3) * 5,
+        delay:       seededRandom(i * 11 + 4)   * 6,
+        opacityBase: 0.35 + seededRandom(i * 11 + 5) * 0.65,
       })),
     []
   )
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return // jsdom / no-canvas environments exit gracefully
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const template = createStarTemplate()
+    let rafId = 0
+    let w = 0
+    let h = 0
+
+    function resize() {
+      if (!canvas) return
+      // Cap DPR at 2 — saves 50 % pixel fill on 3× screens with no visible difference for stars
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      w = window.innerWidth
+      h = window.innerHeight
+      canvas.width  = w * dpr
+      canvas.height = h * dpr
+      canvas.style.width  = w + 'px'
+      canvas.style.height = h + 'px'
+      ctx.scale(dpr, dpr)
+    }
+
+    function draw(t: number) {
+      ctx.clearRect(0, 0, w, h)
+      ctx.fillStyle = '#ffffff'
+      for (const star of stars) {
+        const phase   = ((t / 1000 + star.delay) % star.duration) / star.duration
+        const twinkle = 0.5 + 0.5 * Math.sin(phase * Math.PI * 2)
+        const opacity = reducedMotion
+          ? star.opacityBase
+          : star.opacityBase + (Math.min(star.opacityBase * 1.8, 1) - star.opacityBase) * twinkle
+        const scale = reducedMotion ? 1 : 1 + 0.4 * twinkle
+
+        // drawSize matches original CSS: star radius + glow (size * 1.8 blur)
+        const drawSize = star.size * 4.6 * scale
+        const x = (star.x / 100) * w
+        const y = (star.y / 100) * h
+
+        ctx.globalAlpha = opacity
+        ctx.drawImage(template, x - drawSize / 2, y - drawSize / 2, drawSize, drawSize)
+      }
+      ctx.globalAlpha = 1
+    }
+
+    function animate(t: number) {
+      draw(t)
+      rafId = requestAnimationFrame(animate)
+    }
+
+    function onVisibility() {
+      if (document.visibilityState === 'hidden') {
+        cancelAnimationFrame(rafId)
+      } else if (!reducedMotion) {
+        rafId = requestAnimationFrame(animate)
+      }
+    }
+
+    resize()
+    window.addEventListener('resize', resize, { passive: true })
+    document.addEventListener('visibilitychange', onVisibility)
+
+    if (reducedMotion) {
+      draw(0)
+    } else {
+      rafId = requestAnimationFrame(animate)
+    }
+
+    return () => {
+      cancelAnimationFrame(rafId)
+      window.removeEventListener('resize', resize)
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
+  }, [stars])
 
   return (
     <div data-bgfx className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden>
@@ -45,10 +146,6 @@ export default function BackgroundFX() {
           0%, 100% { opacity: 0.55; }
           50%       { opacity: 1.0; }
         }
-        @keyframes starTwinkle {
-          0%, 100% { opacity: var(--op-start); transform: scale(1); }
-          50%       { opacity: var(--op-mid);   transform: scale(1.4); }
-        }
         @keyframes fogDrift {
           0%   { transform: translateX(-8%); opacity: 0.55; }
           50%  { transform: translateX(8%);  opacity: 0.85; }
@@ -63,9 +160,17 @@ export default function BackgroundFX() {
           0%, 100% { transform: translateX(0px) scale(1); }
           50%       { transform: translateX(40px) scale(1.05); }
         }
+        /* Mobile: hide 3 outer beams, halve blur costs on remaining beams and fog */
+        @media (max-width: 768px) {
+          [data-bgfx] .beam-secondary { display: none; }
+          [data-bgfx] .beam-outer { filter: blur(20px) !important; }
+          [data-bgfx] .beam-inner { filter: blur(8px) !important; }
+          [data-bgfx] .fog-1 { filter: blur(12px) !important; }
+          [data-bgfx] .fog-2 { filter: blur(16px) !important; }
+        }
       `}</style>
 
-      {/* Base — tom azul-noite */}
+      {/* Base — dark blue-night tone */}
       <div style={{
         position: 'absolute',
         inset: 0,
@@ -73,7 +178,7 @@ export default function BackgroundFX() {
         pointerEvents: 'none',
       }} />
 
-      {/* Profundidade vertical base */}
+      {/* Vertical depth base */}
       <div style={{
         position: 'absolute',
         inset: 0,
@@ -81,7 +186,7 @@ export default function BackgroundFX() {
         pointerEvents: 'none',
       }} />
 
-      {/* Glow tricolor difuso */}
+      {/* Diffuse tricolor glow */}
       <div style={{
         position: 'absolute',
         inset: 0,
@@ -91,34 +196,22 @@ export default function BackgroundFX() {
         animation: 'hazeShift 24s ease-in-out infinite',
       }} />
 
-{/* Estrelas (só metade superior) */}
-      {stars.map((s, i) => (
-        <div
-          key={`s${i}`}
-          style={{
-            position: 'absolute',
-            left: `${s.x}%`,
-            top: `${s.y}%`,
-            width: s.size,
-            height: s.size,
-            borderRadius: '50%',
-            background: '#ffffff',
-            boxShadow: `0 0 ${s.size * 1.8}px rgba(255,255,255,0.85)`,
-            ['--op-start' as string]: s.opacity,
-            ['--op-mid' as string]: Math.min(s.opacity * 1.8, 1),
-            animation: `starTwinkle ${s.duration} ${s.delay} ease-in-out infinite`,
-          }}
-        />
-      ))}
+      {/* Stars — single canvas replaces 180 animated divs */}
+      <canvas
+        ref={canvasRef}
+        style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
+      />
 
-      {/* Holofotes verdes */}
+      {/* Green spotlights — all 6 kept in DOM (tests expect 6 .beam nodes).
+          beam-secondary (.beam indices 3-5) hidden on mobile via CSS above. */}
       {BEAMS.map((b, i) => {
-        const sweepDur = `${30 + (i % 3) * 5}s`
+        const sweepDur   = `${30 + (i % 3) * 5}s`
         const sweepDelay = `-${i * 2.1}s`
+        const secondary  = i >= 3
         return (
           <div
             key={`beam-${i}`}
-            className="beam"
+            className={`beam${secondary ? ' beam-secondary' : ''}`}
             style={{
               position: 'absolute',
               bottom: '-5%',
@@ -131,8 +224,8 @@ export default function BackgroundFX() {
               animation: `beamSweep ${sweepDur} ${sweepDelay} ease-in-out infinite`,
             }}
           >
-            {/* Cone exterior (haze volumétrico) */}
-            <div style={{
+            {/* Outer volumetric haze */}
+            <div className="beam-outer" style={{
               position: 'absolute',
               inset: 0,
               transformOrigin: 'bottom center',
@@ -140,8 +233,8 @@ export default function BackgroundFX() {
               filter: 'blur(38px)',
               mixBlendMode: 'screen',
             }} />
-            {/* Cone interior (luz focada) */}
-            <div style={{
+            {/* Inner focused beam */}
+            <div className="beam-inner" style={{
               position: 'absolute',
               inset: 0,
               transformOrigin: 'bottom center',
@@ -150,7 +243,7 @@ export default function BackgroundFX() {
               mixBlendMode: 'screen',
               animation: `beamPulse ${b.duration} ${b.delay} ease-in-out infinite`,
             }} />
-            {/* Fonte de luz na base */}
+            {/* Light source at base */}
             <div style={{
               position: 'absolute',
               bottom: -6,
@@ -168,8 +261,8 @@ export default function BackgroundFX() {
         )
       })}
 
-      {/* Névoa baixa — camada 1 (verde subtil) */}
-      <div style={{
+      {/* Low ground fog — layer 1 (subtle green) */}
+      <div className="fog-1" style={{
         position: 'absolute',
         left: '-15%',
         right: '-15%',
@@ -182,8 +275,8 @@ export default function BackgroundFX() {
         animation: 'fogDrift 22s ease-in-out infinite',
       }} />
 
-      {/* Névoa baixa — camada 2 (azul subtil) */}
-      <div style={{
+      {/* Low ground fog — layer 2 (subtle blue/red) */}
+      <div className="fog-2" style={{
         position: 'absolute',
         left: '-15%',
         right: '-15%',
@@ -196,7 +289,7 @@ export default function BackgroundFX() {
         animation: 'fogDriftAlt 28s ease-in-out infinite',
       }} />
 
-      {/* Grain/noise texture — coesão cinematográfica */}
+      {/* Grain/noise — cinematic cohesion */}
       <div style={{
         position: 'absolute',
         inset: 0,
@@ -207,7 +300,7 @@ export default function BackgroundFX() {
         pointerEvents: 'none',
       }} />
 
-      {/* Vignette nos cantos */}
+      {/* Corner vignette */}
       <div style={{
         position: 'absolute',
         inset: 0,
