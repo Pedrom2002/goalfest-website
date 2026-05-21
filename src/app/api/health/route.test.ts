@@ -1,36 +1,32 @@
-import { GET } from './route'
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { vi } from 'vitest'
 
 vi.mock('@/lib/supabase/admin', () => ({
-  supabaseAdmin: vi.fn(() => ({
-    from: vi.fn(() => ({
-      select: vi.fn(() => ({
-        limit: vi.fn(() => Promise.resolve({ error: null })),
-      })),
-    })),
-  })),
+  supabaseAdmin: () => ({
+    from: () => ({
+      select: () => ({
+        limit: () => Promise.resolve({ error: null }),
+      }),
+    }),
+  }),
 }))
 
-describe('GET /api/health', () => {
-  const originalBrevo = process.env.BREVO_API_KEY
+const { GET } = await import('./route')
 
-  beforeEach(() => {
+describe('GET /api/health', () => {
+  beforeAll(() => {
     process.env.BREVO_API_KEY = 'test-key'
   })
 
-  afterEach(() => {
-    process.env.BREVO_API_KEY = originalBrevo
-  })
-
-  it('returns 200', async () => {
+  it('returns 200 when all checks ok', async () => {
     const res = await GET()
     expect(res.status).toBe(200)
   })
 
-  it('returns ok true', async () => {
+  it('returns ok=true and checks', async () => {
     const res = await GET()
     const body = await res.json()
     expect(body.ok).toBe(true)
+    expect(body.checks).toEqual({ supabase: 'ok', email: 'ok' })
   })
 
   it('returns a ts ISO string', async () => {

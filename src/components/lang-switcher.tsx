@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useSyncExternalStore } from "react";
 import { useT, type Lang } from "@/lib/i18n";
@@ -21,7 +21,7 @@ export default function LangSwitcher() {
           aria-hidden="true"
           className="absolute top-0.5 bottom-0.5 w-[calc(50%-2px)] rounded-full transition-all duration-200"
           style={{
-            background: "rgba(94,166,59,0.85)",
+            background: "rgba(34,197,94,0.85)",
             left: lang === "pt" ? "2px" : "calc(50%)",
           }}
         />
@@ -32,7 +32,7 @@ export default function LangSwitcher() {
           type="button"
           onClick={() => setLang(code)}
           aria-pressed={mounted ? lang === code : false}
-          aria-label={code === "pt" ? "Português" : "English"}
+          aria-label={code === "pt" ? "PortuguÃªs" : "English"}
           className="relative z-10 px-3 py-1 rounded-full transition-colors duration-200"
           style={{ color: mounted && lang === code ? "#fff" : "rgba(255,255,255,0.45)" }}
         >

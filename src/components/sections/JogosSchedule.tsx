@@ -1,11 +1,11 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
 import Link from 'next/link'
 import type { BroadcastDay } from '@/data/schedule'
-import { TEAM_FLAG } from '@/data/teamFlags'
+import { TEAM_FLAG, TEAM_EN } from '@/data/teamFlags'
 import { phaseOf, phaseLabel } from '@/lib/matchPhase'
 import * as Flags from 'country-flag-icons/react/3x2'
 
@@ -23,6 +23,7 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
   const t = useTranslations('jogos')
   const locale = useLocale()
   const [filter, setFilter] = useState<'all' | 'group' | 'knockout'>('all')
+  const teamName = (name: string) => locale === 'pt' ? name : (TEAM_EN[name] ?? name)
 
   const filtered = schedule.filter(d => filter === 'all' || phaseOf(d.date) === filter)
 
@@ -41,11 +42,11 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
         className="text-center mb-10"
       >
         <div className="flex items-center gap-3 justify-center mb-4">
-          <span className="h-px w-12 bg-green-pt/40" />
-          <p className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium">
+          <span className="h-px w-12 bg-[#43B02A]/40" />
+          <p className="text-[#43B02A] text-xs uppercase tracking-[0.3em] font-medium">
             {t('subtitle')}
           </p>
-          <span className="h-px w-12 bg-green-pt/40" />
+          <span className="h-px w-12 bg-[#43B02A]/40" />
         </div>
         <h1 className="font-display text-4xl sm:text-6xl font-black text-text-primary uppercase tracking-wide mb-3">
           {t('heading')}
@@ -68,8 +69,8 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
             aria-pressed={filter === f.key}
             className={`px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-200 ${
               filter === f.key
-                ? 'bg-green-pt text-bg-primary shadow-[0_0_20px_rgba(94,166,59,0.4)]'
-                : 'border border-white/15 text-text-muted hover:border-green-pt/40 hover:text-green-pt'
+                ? 'bg-[#0033A0] text-white shadow-[0_0_20px_rgba(0,51,160,0.4)]'
+                : 'border border-white/15 text-text-muted hover:border-[#0033A0]/40 hover:text-[#4477ff]'
             }`}
           >
             {f.label}
@@ -84,10 +85,10 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: di * 0.04 }}
-            className="rounded-2xl border border-white/10 bg-bg-surface/60 backdrop-blur-sm overflow-hidden hover:border-green-pt/20 transition-colors duration-300 group"
+            className="rounded-2xl border border-white/10 bg-bg-surface/60 backdrop-blur-sm overflow-hidden hover:border-[#C8102E]/20 transition-colors duration-300 group"
           >
             <div className="flex items-center gap-3 px-5 py-3 border-b border-white/8 bg-white/3">
-              <span className="font-display text-green-pt font-black text-lg">{day.displayDate}</span>
+              <span className="font-display text-[#43B02A] font-black text-lg">{day.displayDate}</span>
               <span className="h-3 w-px bg-white/20" />
               <span className="text-text-muted/60 text-xs uppercase tracking-widest">{phaseLabel(day.date, locale === 'pt' ? 'pt' : 'en')}</span>
             </div>
@@ -95,7 +96,7 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
             <div className="divide-y divide-white/5">
               {day.matches.map((m, i) => (
                 <div key={i} className="flex items-center px-5 py-3.5 gap-4 hover:bg-white/3 transition-colors">
-                  <span className="text-green-pt font-mono text-xs font-bold w-12 shrink-0 tabular-nums">{m.time}</span>
+                  <span className="text-[#43B02A] font-mono text-xs font-bold w-12 shrink-0 tabular-nums">{m.time}</span>
                   {m.home === 'TBA' ? (
                     <div className="flex items-center gap-3 flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-1 justify-end min-w-0">
@@ -109,13 +110,13 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
                   ) : (
                     <div className="flex items-center gap-3 flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-1 justify-end min-w-0">
-                        <span className="text-text-primary text-sm font-semibold truncate">{m.home}</span>
+                        <span className="text-text-primary text-sm font-semibold truncate">{teamName(m.home)}</span>
                         <Flag team={m.home} />
                       </div>
                       <span className="text-text-muted/40 text-xs font-bold shrink-0 w-6 text-center">vs</span>
                       <div className="flex items-center gap-2 flex-1 min-w-0">
                         <Flag team={m.away} />
-                        <span className="text-text-primary text-sm font-semibold truncate">{m.away}</span>
+                        <span className="text-text-primary text-sm font-semibold truncate">{teamName(m.away)}</span>
                       </div>
                     </div>
                   )}
@@ -133,7 +134,7 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
         className="text-center mt-10"
       >
         <Link href={`/${locale}`} className="text-text-muted/50 text-xs uppercase tracking-widest hover:text-green-pt transition-colors">
-          ← {t('back')}
+          â† {t('back')}
         </Link>
       </motion.div>
     </div>

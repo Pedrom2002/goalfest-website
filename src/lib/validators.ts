@@ -81,7 +81,6 @@ export const inviteCreateSchema = z.object({
   label: z.string().trim().max(120).optional(),
   max_uses: z.number().int().min(1).max(1000),
   expires_at: z.iso.datetime().optional(),
-  is_vip: z.boolean().optional().default(false),
 });
 export type InviteCreateInput = z.infer<typeof inviteCreateSchema>;
 

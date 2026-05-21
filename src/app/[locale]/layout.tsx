@@ -81,7 +81,6 @@ export default async function LocaleLayout({
   const tCommon = await getTranslations('common')
   return (
     <div className={`${inter.variable} ${oswald.variable} ${orbitron.variable} ${bebasNeue.variable} ${dmSans.variable} bg-bg-primary text-text-primary antialiased`} data-locale={locale}>
-      <div className="bg-fixed-gradient" aria-hidden="true" />
       <a
         href="#main-content"
         className="skip-link"

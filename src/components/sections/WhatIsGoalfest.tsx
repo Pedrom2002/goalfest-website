@@ -38,12 +38,12 @@ export default async function WhatIsGoalfest() {
 
         <AnimatedHeader>
           <div className="flex items-center gap-3 justify-center mb-5">
-            <span className="h-px w-12 bg-green-pt/40" />
-            <p className="text-green-pt text-xs uppercase tracking-[0.3em] font-medium">{t('tag')}</p>
-            <span className="h-px w-12 bg-green-pt/40" />
+            <span className="h-px w-12 bg-[#43B02A]/40" />
+            <p className="text-[#43B02A] text-xs uppercase tracking-[0.3em] font-medium">{t('tag')}</p>
+            <span className="h-px w-12 bg-[#43B02A]/40" />
           </div>
           <h2 className="font-display text-4xl sm:text-5xl md:text-7xl font-black text-text-primary uppercase tracking-wide mb-6">
-            {t('title_before')} <span className="text-green-pt">{t('title_highlight')}</span>?
+            {t('title_before')} <span className="text-[#43B02A]">{t('title_highlight')}</span>?
           </h2>
           <p className="text-text-primary text-2xl md:text-3xl font-bold max-w-xl mx-auto leading-snug mb-3">
             {t('desc_hook')}

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -13,9 +13,9 @@ import LangSwitcher from "@/components/lang-switcher";
 
 const SITEKEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
 
-type Props = { inviteCode?: string };
+type Props = { inviteCode?: string; label?: string | null };
 
-export default function RsvpForm({ inviteCode }: Props = {}) {
+export default function RsvpForm({ inviteCode, label }: Props = {}) {
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
   const [serverInfo, setServerInfo] = useState<string | null>(null);
@@ -98,7 +98,7 @@ export default function RsvpForm({ inviteCode }: Props = {}) {
   return (
     <motion.form
       className="rounded-2xl p-6 space-y-4 ml-auto"
-      style={{ background: "rgba(30,55,30,0.72)", backdropFilter: "blur(16px)", border: "1px solid rgba(94,166,59,0.35)" }}
+      style={{ background: "rgba(30,55,30,0.72)", backdropFilter: "blur(16px)", border: "1px solid rgba(34,197,94,0.35)" }}
       noValidate
       onSubmit={handleSubmit(onSubmit)}
       variants={container}
@@ -190,7 +190,7 @@ export default function RsvpForm({ inviteCode }: Props = {}) {
       </div>
 
       {captchaRequired && (
-        <motion.div variants={item} className="mt-3">
+        <motion.div variants={item} className="mt-3 flex justify-center">
           <Turnstile sitekey={SITEKEY} theme="dark" onToken={setCaptchaToken} />
         </motion.div>
       )}
@@ -201,7 +201,7 @@ export default function RsvpForm({ inviteCode }: Props = {}) {
         aria-busy={isSubmitting}
         variants={item}
         className="w-full py-3.5 rounded-lg font-bold uppercase tracking-widest text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-        style={{ background: isSubmitting ? "rgba(94,166,59,0.5)" : "#5ea63b", color: "#0d1a0d" }}
+        style={{ background: isSubmitting ? "rgba(34,197,94,0.5)" : "#22c55e", color: "#0d1a0d" }}
       >
         <span>{isSubmitting ? t("rsvp.submitting") : t("rsvp.submit")}</span>
         {isSubmitting ? (
@@ -221,7 +221,7 @@ export default function RsvpForm({ inviteCode }: Props = {}) {
         </div>
       )}
       {serverInfo && (
-        <div className="px-4 py-3 rounded-xl border border-green-500/40 text-green-300 text-sm" style={{ background: "rgba(94,166,59,0.15)" }} role="status">
+        <div className="px-4 py-3 rounded-xl border border-green-500/40 text-green-300 text-sm" style={{ background: "rgba(34,197,94,0.15)" }} role="status">
           {serverInfo}
         </div>
       )}

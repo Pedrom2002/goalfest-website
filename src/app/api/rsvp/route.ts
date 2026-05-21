@@ -137,7 +137,6 @@ export async function POST(req: NextRequest) {
 
   // Reclamar lugar do invite (se aplicável). Atómico via SQL function.
   let invite_link_id: string | null = null;
-  let invite_is_vip = false;
   if (data.inviteCode) {
     const { data: claim, error: claimErr } = await supabase.rpc(
       "claim_invite_seat",
@@ -164,7 +163,6 @@ export async function POST(req: NextRequest) {
       );
     }
     invite_link_id = result.invite_link_id as string;
-    invite_is_vip = !!(result.is_vip);
   }
 
   const { data: inserted, error: insertError } = await supabase
@@ -178,7 +176,6 @@ export async function POST(req: NextRequest) {
       companion_emails,
       ics,
       invite_link_id,
-      is_vip: invite_is_vip,
     })
     .select("id, token")
     .single();
@@ -256,7 +253,6 @@ export async function POST(req: NextRequest) {
         companion_emails: [],
         ics: compIcs,
         invite_link_id,
-        is_vip: invite_is_vip,
       })
       .select("id, token")
       .single();

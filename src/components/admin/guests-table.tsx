@@ -14,11 +14,10 @@ type Guest = {
   checked_in_day1_at: string | null;
   checked_in_day2_at: string | null;
   email_sent_at: string | null;
-  is_vip: boolean;
 };
 
 type Toast = { id: number; kind: "ok" | "err"; msg: string };
-type Filter = "all" | "checked" | "pending" | "vip";
+type Filter = "all" | "checked" | "pending";
 type SortKey = "created_at" | "name" | "checked_in_day1_at";
 
 export default function GuestsTable({ initial }: { initial: Guest[] }) {
@@ -51,7 +50,6 @@ export default function GuestsTable({ initial }: { initial: Guest[] }) {
     }
     if (filter === "checked") out = out.filter((r) => r.checked_in_day1_at || r.checked_in_day2_at);
     if (filter === "pending") out = out.filter((r) => !r.checked_in_day1_at && !r.checked_in_day2_at);
-    if (filter === "vip") out = out.filter((r) => r.is_vip);
 
     const sorted = [...out].sort((a, b) => {
       const av = a[sortKey] ?? "";
@@ -87,24 +85,6 @@ export default function GuestsTable({ initial }: { initial: Guest[] }) {
     pushToast("ok", next ? `Check-in D${day} feito.` : `Check-in D${day} removido.`);
   }
 
-  async function toggleVip(g: Guest) {
-    setBusy(g.id);
-    const next = !g.is_vip;
-    setRows((prev) => prev.map((r) => (r.id === g.id ? { ...r, is_vip: next } : r)));
-    const res = await fetch("/api/admin/toggle-vip", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: g.id, is_vip: next }),
-    });
-    setBusy(null);
-    if (!res.ok) {
-      setRows((prev) => prev.map((r) => (r.id === g.id ? { ...r, is_vip: g.is_vip } : r)));
-      pushToast("err", "Falha a atualizar VIP.");
-      return;
-    }
-    pushToast("ok", next ? "VIP ativado." : "VIP removido.");
-  }
-
   async function resendEmail(g: Guest) {
     setBusy(g.id);
     const res = await fetch("/api/admin/resend-email", {
@@ -130,7 +110,7 @@ export default function GuestsTable({ initial }: { initial: Guest[] }) {
     else { setSortKey(k); setSortAsc(false); }
   }
 
-  const arrow = (k: SortKey) => sortKey === k ? (sortAsc ? " ↑" : " ↓") : "";
+  const arrow = (k: SortKey) => sortKey === k ? (sortAsc ? " up" : " down") : "";
 
   return (
     <div>
@@ -138,8 +118,8 @@ export default function GuestsTable({ initial }: { initial: Guest[] }) {
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Procurar por nome, email ou telefone…"
-          className="flex-1 min-w-[240px] rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm outline-none focus:border-[#FFD27A]"
+          placeholder="Procurar por nome, email ou telefone..."
+          className="flex-1 min-w-[240px] rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm outline-none focus:border-[#5ea63b]"
         />
         <div className="flex gap-1 rounded-xl border border-white/15 bg-white/5 p-1 text-xs">
           {(
@@ -147,7 +127,6 @@ export default function GuestsTable({ initial }: { initial: Guest[] }) {
               ["all", "Todos"],
               ["pending", "Pendentes"],
               ["checked", "Check-in"],
-              ["vip", "VIP"],
             ] as const
           ).map(([k, label]) => (
             <button
@@ -155,7 +134,7 @@ export default function GuestsTable({ initial }: { initial: Guest[] }) {
               onClick={() => setFilter(k)}
               className={`px-3 py-2 rounded-lg tracking-[.14em] uppercase transition ${
                 filter === k
-                  ? "bg-[#FFD27A] text-[#06111B]"
+                  ? "bg-[#5ea63b] text-bg-primary"
                   : "opacity-70 hover:opacity-100"
               }`}
             >
@@ -167,7 +146,7 @@ export default function GuestsTable({ initial }: { initial: Guest[] }) {
 
       <div className="overflow-x-auto rounded-xl border border-white/10">
         <table className="w-full text-sm">
-          <thead className="bg-white/5 text-[#FFD27A]">
+          <thead className="bg-white/5 text-[#5ea63b]">
             <tr>
               <th
                 className="text-left px-3 py-2 cursor-pointer select-none"
@@ -197,14 +176,7 @@ export default function GuestsTable({ initial }: { initial: Guest[] }) {
           <tbody>
             {filtered.map((g) => (
               <tr key={g.id} className="border-t border-white/5">
-                <td className="px-3 py-2">
-                  <span>{g.name}</span>
-                  {g.is_vip && (
-                    <span className="ml-2 text-[10px] tracking-[.12em] uppercase font-black text-[#FFD27A] bg-[#FFD27A]/15 border border-[#FFD27A]/40 rounded px-1 py-0.5">
-                      VIP
-                    </span>
-                  )}
-                </td>
+                <td className="px-3 py-2">{g.name}</td>
                 <td className="px-3 py-2 opacity-80">{g.email}</td>
                 <td className="px-3 py-2 opacity-80">{g.phone}</td>
                 <td className="px-3 py-2">
@@ -213,21 +185,21 @@ export default function GuestsTable({ initial }: { initial: Guest[] }) {
                       +{g.companion_count}
                     </span>
                   ) : (
-                    "—"
+                    "-"
                   )}
                 </td>
                 <td className="px-3 py-2">
                   {g.checked_in_day1_at ? (
-                    <span className="text-[#FFD27A]" title={new Date(g.checked_in_day1_at).toLocaleString("pt-PT")}>✓</span>
+                    <span className="text-[#5ea63b]" title={new Date(g.checked_in_day1_at).toLocaleString("pt-PT")}>OK</span>
                   ) : (
-                    <span className="opacity-50">—</span>
+                    <span className="opacity-50">-</span>
                   )}
                 </td>
                 <td className="px-3 py-2">
                   {g.checked_in_day2_at ? (
-                    <span className="text-[#FFD27A]" title={new Date(g.checked_in_day2_at).toLocaleString("pt-PT")}>✓</span>
+                    <span className="text-[#5ea63b]" title={new Date(g.checked_in_day2_at).toLocaleString("pt-PT")}>OK</span>
                   ) : (
-                    <span className="opacity-50">—</span>
+                    <span className="opacity-50">-</span>
                   )}
                 </td>
                 <td className="px-3 py-2 opacity-60">
@@ -235,21 +207,9 @@ export default function GuestsTable({ initial }: { initial: Guest[] }) {
                 </td>
                 <td className="px-3 py-2 text-right whitespace-nowrap">
                   <button
-                    onClick={() => toggleVip(g)}
-                    disabled={busy === g.id}
-                    className={`rounded-full border px-2 py-1 text-xs tracking-[.12em] uppercase transition disabled:opacity-50 mr-1 ${
-                      g.is_vip
-                        ? "border-[#FFD27A] text-[#FFD27A] bg-[#FFD27A]/10 hover:bg-[#FFD27A] hover:text-[#06111B]"
-                        : "border-white/25 opacity-60 hover:opacity-100 hover:border-[#FFD27A] hover:text-[#FFD27A]"
-                    }`}
-                    title="Toggle VIP"
-                  >
-                    {g.is_vip ? "VIP ★" : "VIP"}
-                  </button>
-                  <button
                     onClick={() => resendEmail(g)}
                     disabled={busy === g.id}
-                    className="rounded-full border border-white/25 px-3 py-1 text-xs tracking-[.14em] uppercase opacity-80 hover:opacity-100 hover:border-[#FFD27A] transition disabled:opacity-40 mr-2"
+                    className="rounded-full border border-white/25 px-3 py-1 text-xs tracking-[.14em] uppercase opacity-80 hover:opacity-100 hover:border-[#5ea63b] transition disabled:opacity-40 mr-2"
                     title="Reenviar email + QR"
                   >
                     Reenviar
@@ -257,25 +217,25 @@ export default function GuestsTable({ initial }: { initial: Guest[] }) {
                   <button
                     onClick={() => toggleCheckin(g, 1)}
                     disabled={busy === g.id}
-                    className="rounded-full border border-[#FFD27A] text-[#FFD27A] px-2 py-1 text-xs tracking-[.12em] uppercase hover:bg-[#FFD27A] hover:text-[#06111B] transition disabled:opacity-50 mr-1"
+                    className="rounded-full border border-[#5ea63b] text-[#5ea63b] px-2 py-1 text-xs tracking-[.12em] uppercase hover:bg-[#5ea63b] hover:text-bg-primary transition disabled:opacity-50 mr-1"
                     title="Toggle check-in Dia 1"
                   >
-                    {g.checked_in_day1_at ? "D1 ✓" : "D1"}
+                    {g.checked_in_day1_at ? "D1 OK" : "D1"}
                   </button>
                   <button
                     onClick={() => toggleCheckin(g, 2)}
                     disabled={busy === g.id}
-                    className="rounded-full border border-[#FFD27A]/60 text-[#FFD27A]/80 px-2 py-1 text-xs tracking-[.12em] uppercase hover:bg-[#FFD27A] hover:text-[#06111B] transition disabled:opacity-50"
+                    className="rounded-full border border-[#5ea63b]/60 text-[#5ea63b]/80 px-2 py-1 text-xs tracking-[.12em] uppercase hover:bg-[#5ea63b] hover:text-bg-primary transition disabled:opacity-50"
                     title="Toggle check-in Dia 2"
                   >
-                    {g.checked_in_day2_at ? "D2 ✓" : "D2"}
+                    {g.checked_in_day2_at ? "D2 OK" : "D2"}
                   </button>
                 </td>
               </tr>
             ))}
             {!filtered.length && (
               <tr>
-                <td colSpan={9} className="px-3 py-10 text-center opacity-50">
+                <td colSpan={8} className="px-3 py-10 text-center opacity-50">
                   Sem resultados.
                 </td>
               </tr>
@@ -288,10 +248,10 @@ export default function GuestsTable({ initial }: { initial: Guest[] }) {
         {toasts.map((t) => (
           <div
             key={t.id}
-            className={`rounded-xl px-4 py-3 text-sm shadow-lg border-2 ${
+            className={`rounded-xl px-4 py-3 text-sm shadow-lg border ${
               t.kind === "ok"
-                ? "bg-[#F4EBD6] text-[#06111B] border-[#06111B]"
-                : "bg-red-100 text-red-900 border-red-900"
+                ? "bg-[#5ea63b] text-bg-primary border-[#5ea63b]"
+                : "bg-red-500/20 text-red-200 border-red-500/40"
             }`}
           >
             {t.msg}

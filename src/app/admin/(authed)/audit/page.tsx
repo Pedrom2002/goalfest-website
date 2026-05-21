@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
@@ -42,7 +42,7 @@ export default async function AuditPage({
   searchParams: Promise<{ filter?: string }>;
 }) {
   const { filter: rawFilter = "all" } = await searchParams;
-  // Whitelist explícito: ignora qualquer valor fora da lista conhecida.
+  // Whitelist explÃ­cito: ignora qualquer valor fora da lista conhecida.
   const filter: FilterKey = (FILTER_KEYS.has(rawFilter)
     ? rawFilter
     : "all") as FilterKey;
@@ -69,14 +69,14 @@ export default async function AuditPage({
             Audit log
           </h1>
           <p className="text-sm opacity-60 mt-1">
-            Últimas {rows.length} entradas (máx. 200).
+            Ãšltimas {rows.length} entradas (mÃ¡x. 200).
           </p>
         </div>
         <Link
           href="/admin"
-          className="rounded-full border-2 border-white/25 px-4 py-2 text-xs tracking-[.18em] uppercase hover:border-[#FFD27A] transition"
+          className="rounded-full border-2 border-white/25 px-4 py-2 text-xs tracking-[.18em] uppercase hover:border-[#22c55e] transition"
         >
-          ← Tabela
+          â† Tabela
         </Link>
       </div>
 
@@ -87,7 +87,7 @@ export default async function AuditPage({
             href={`?filter=${k}`}
             className={`px-3 py-2 rounded-lg tracking-[.14em] uppercase transition ${
               filter === k
-                ? "bg-[#FFD27A] text-[#06111B]"
+                ? "bg-[#22c55e] text-bg-primary"
                 : "opacity-70 hover:opacity-100"
             }`}
           >
@@ -104,10 +104,10 @@ export default async function AuditPage({
 
       <div className="overflow-x-auto rounded-xl border border-white/10">
         <table className="w-full text-sm">
-          <thead className="bg-white/5 text-[#FFD27A]">
+          <thead className="bg-white/5 text-[#22c55e]">
             <tr>
               <th className="text-left px-3 py-2">Quando</th>
-              <th className="text-left px-3 py-2">Ação</th>
+              <th className="text-left px-3 py-2">AÃ§Ã£o</th>
               <th className="text-left px-3 py-2">Quem</th>
               <th className="text-left px-3 py-2">IP</th>
               <th className="text-left px-3 py-2">Target</th>
@@ -128,16 +128,16 @@ export default async function AuditPage({
                   </span>
                 </td>
                 <td className="px-3 py-2 opacity-90">
-                  {r.actor_email ?? "—"}
+                  {r.actor_email ?? "â€”"}
                 </td>
                 <td className="px-3 py-2 opacity-70 font-mono text-xs">
-                  {r.ip ?? "—"}
+                  {r.ip ?? "â€”"}
                 </td>
                 <td className="px-3 py-2 opacity-60 font-mono text-xs">
-                  {r.target_id?.slice(0, 8) ?? "—"}
+                  {r.target_id?.slice(0, 8) ?? "â€”"}
                 </td>
                 <td className="px-3 py-2 opacity-60 font-mono text-xs max-w-xs truncate">
-                  {r.meta ? JSON.stringify(r.meta) : "—"}
+                  {r.meta ? JSON.stringify(r.meta) : "â€”"}
                 </td>
               </tr>
             ))}

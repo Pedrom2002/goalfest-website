@@ -1,64 +1,85 @@
 import { NextRequest } from 'next/server'
-import { readFileSync, writeFileSync } from 'fs'
-import { resolve } from 'path'
-import { Resend } from 'resend'
+import { supabaseAdmin } from '@/lib/supabase/admin'
+import { rateLimit } from '@/lib/rate-limit'
+import { sendNewsletterWelcome } from '@/lib/email'
 
-const DATA_PATH = resolve(process.cwd(), 'src/data/subscribers.json')
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-function loadSubscribers(): { email: string; subscribedAt: string }[] {
-  try {
-    return JSON.parse(readFileSync(DATA_PATH, 'utf-8'))
-  } catch {
-    return []
-  }
-}
-
-function saveSubscribers(list: { email: string; subscribedAt: string }[]) {
-  writeFileSync(DATA_PATH, JSON.stringify(list, null, 2))
+function clientIp(req: NextRequest): string {
+  const xff = req.headers.get('x-forwarded-for')
+  if (xff) return xff.split(',')[0]!.trim()
+  return req.headers.get('x-real-ip') ?? 'unknown'
 }
 
 export async function POST(request: NextRequest) {
-  const { email } = await request.json()
+  const ip = clientIp(request)
+  const rl = await rateLimit(`subscribe:${ip}`, 5, 60_000)
+  if (!rl.ok) {
+    return Response.json(
+      { error: 'Demasiados pedidos. Tenta novamente em breve.' },
+      { status: 429, headers: { 'retry-after': String(rl.retryAfterSeconds) } },
+    )
+  }
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  let body: unknown
+  try {
+    body = await request.json()
+  } catch {
+    return Response.json({ error: 'Invalid JSON.' }, { status: 400 })
+  }
+
+  const email = (body as { email?: unknown })?.email
+  if (!email || typeof email !== 'string' || !EMAIL_RE.test(email)) {
     return Response.json({ error: 'Invalid email address.' }, { status: 400 })
   }
 
-  const subscribers = loadSubscribers()
+  const normalized = email.trim().toLowerCase()
+  const db = supabaseAdmin()
 
-  if (subscribers.some((s) => s.email === email)) {
-    return Response.json({ error: 'This email is already subscribed.' }, { status: 409 })
+  // Upsert pattern: try insert, on unique conflict re-activate if soft-unsubscribed.
+  const { data: existing, error: selErr } = await db
+    .from('newsletter_subscribers')
+    .select('id, unsubscribed_at')
+    .ilike('email', normalized)
+    .maybeSingle()
+
+  if (selErr) {
+    console.error('[subscribe] select failed', selErr)
+    return Response.json({ error: 'Erro do servidor.' }, { status: 500 })
   }
 
-  subscribers.push({ email, subscribedAt: new Date().toISOString() })
-  saveSubscribers(subscribers)
+  if (existing) {
+    if (existing.unsubscribed_at === null) {
+      return Response.json({ error: 'This email is already subscribed.' }, { status: 409 })
+    }
+    const { error: updErr } = await db
+      .from('newsletter_subscribers')
+      .update({ unsubscribed_at: null, subscribed_at: new Date().toISOString() })
+      .eq('id', existing.id)
+    if (updErr) {
+      console.error('[subscribe] reactivate failed', updErr)
+      return Response.json({ error: 'Erro do servidor.' }, { status: 500 })
+    }
+  } else {
+    const { error: insErr } = await db
+      .from('newsletter_subscribers')
+      .insert({ email: normalized })
+    if (insErr) {
+      console.error('[subscribe] insert failed', insErr)
+      return Response.json({ error: 'Erro do servidor.' }, { status: 500 })
+    }
+  }
 
-  const apiKey = process.env.RESEND_API_KEY
-  const fromEmail = process.env.FROM_EMAIL
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000'
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000'
+  const unsubscribeUrl = `${baseUrl}/unsubscribe?email=${encodeURIComponent(normalized)}`
 
-  if (apiKey && fromEmail) {
-    const resend = new Resend(apiKey)
-    const unsubscribeUrl = `${baseUrl}/unsubscribe?email=${encodeURIComponent(email)}`
-
-    await resend.emails.send({
-      from: fromEmail,
-      to: email,
-      subject: 'You\'re subscribed — welcome aboard',
-      html: `
-        <div style="font-family:sans-serif;max-width:520px;margin:0 auto;background:#0d0d0d;color:#f5f5f5;padding:40px 32px;border-radius:8px;">
-          <h1 style="margin:0 0 16px;font-size:24px;color:#FFD700;">You're in.</h1>
-          <p style="margin:0 0 12px;line-height:1.6;color:#d1d5db;">
-            Thanks for subscribing. You'll hear from us when there's something worth reading.
-          </p>
-          <p style="margin:0 0 32px;line-height:1.6;color:#d1d5db;">No spam. Unsubscribe any time.</p>
-          <hr style="border:none;border-top:1px solid #2a2a2a;margin:0 0 24px;" />
-          <p style="margin:0;font-size:12px;color:#6b7280;">
-            <a href="${unsubscribeUrl}" style="color:#6b7280;text-decoration:underline;">Unsubscribe</a>
-          </p>
-        </div>
-      `,
-    })
+  if (process.env.BREVO_API_KEY) {
+    try {
+      await sendNewsletterWelcome({ to: normalized, unsubscribeUrl })
+    } catch (err) {
+      console.error('[subscribe] welcome email failed', err)
+    }
   }
 
   return Response.json({ success: true })

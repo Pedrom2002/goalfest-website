@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { generateQrDataUrl } from "@/lib/qr";
 import { verifyQrToken } from "@/lib/qr-token";
 import ConfirmadoActions from "@/components/confirmado-actions";
+import ConfirmadoVideo from "@/components/confirmado-video";
 
 export const dynamic = "force-dynamic";
 
@@ -18,8 +20,6 @@ export default async function ConfirmadoPage({
 }) {
   const { token: rawToken } = await params;
 
-  // O token na URL pode ser UUID legacy ou string assinada `<uuid>.<exp>.<sig>`.
-  // verifyQrToken devolve sempre o uuid persistido em `guests.token`.
   const verified = await verifyQrToken(rawToken);
   if (!verified.ok) notFound();
 
@@ -32,40 +32,57 @@ export default async function ConfirmadoPage({
 
   if (!guest) notFound();
 
-  // O conteúdo do QR é a string ORIGINAL (assinada quando aplicável); o
-  // download/ICS/scan validam a assinatura. /api/qr/[token] e /api/ics
-  // continuam a aceitar o `rawToken` recebido.
   const qr = await generateQrDataUrl(rawToken);
 
   return (
-    <main className="min-h-dvh grid place-items-center bg-[#06182A] text-[#F4EBD6] p-6">
-      <div className="w-full max-w-md rounded-3xl border-2 border-[#06111B] bg-[#F4EBD6] text-[#06111B] p-7 text-center shadow-[8px_8px_0_#F2A93C]">
-        <div className="mx-auto mb-4 grid place-items-center w-16 h-16 rounded-full bg-[#FFD27A] border-2 border-[#06111B] shadow-[4px_4px_0_#06111B] font-black text-3xl">
-          ✓
-        </div>
-        <h1 className="font-serif text-3xl font-black leading-none">
-          Tás <em className="italic text-[#F2A93C]">dentro</em>.
-        </h1>
-        <p className="text-sm opacity-70 mt-2 mb-4">
-          Olá {guest.name}. Mostra este QR à entrada no dia do festival.
-        </p>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={qr}
-          alt="QR"
-          className="mx-auto w-64 h-64 rounded-2xl border-2 border-[#06111B] bg-[#F4EBD6]"
+    <main className="relative h-dvh overflow-hidden bg-bg-primary flex flex-col items-center justify-start">
+      <ConfirmadoVideo />
+      <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.40) 0%, rgba(13,26,13,0.70) 100%)" }} />
+
+      {/* Logo */}
+      <div className="relative z-10 flex justify-center pt-4 pb-2 shrink-0">
+        <Image
+          src="/goalfest-main-logo.webp"
+          alt="Goalfest Lisboa 2026"
+          width={280}
+          height={280}
+          className="w-52 sm:w-60 h-auto object-contain drop-shadow-2xl"
+          priority
         />
-        {guest.companion_count > 0 && (
-          <p className="text-xs opacity-70 mt-4">
-            Acompanhante: {guest.companion_names.join(", ")}
+      </div>
+
+      {/* Card */}
+      <div className="relative z-10 flex justify-center px-4 pb-6 w-full">
+        <div className="w-full max-w-[360px] rounded-2xl border border-white/10 px-6 py-5 text-center"
+          style={{ background: "rgba(20,50,20,0.40)", backdropFilter: "blur(24px)" }}>
+
+          <h1 className="text-3xl font-black uppercase tracking-widest text-white leading-none" style={{ fontFamily: "var(--font-bebas, sans-serif)" }}>
+            Tás <span style={{ color: "#5ea63b" }}>dentro</span>
+          </h1>
+          <p className="text-xs text-white/55 mt-1.5 mb-4 leading-snug">
+            Olá <span className="text-white/85">{guest.name}</span>. Mostra este QR à entrada do Golden Circle.
           </p>
-        )}
 
-        <ConfirmadoActions qrDataUrl={qr} token={rawToken} name={guest.name} />
+          {/* QR */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={qr}
+            alt="QR de entrada"
+            className="mx-auto w-52 h-52 rounded-lg p-2 bg-white shadow-xl"
+          />
 
-        <p className="text-[11px] opacity-60 mt-5 leading-relaxed">
-          8 e 9 de Maio · Monsanto Open Air, Lisboa
-        </p>
+          {guest.companion_count > 0 && (
+            <p className="text-xs text-white/45 mt-2">
+              + {guest.companion_names.join(", ")}
+            </p>
+          )}
+
+          <ConfirmadoActions qrDataUrl={qr} token={rawToken} name={guest.name} />
+
+          <p className="text-[10px] text-white/30 mt-4 tracking-widest uppercase">
+            Vale do Silêncio · Lisboa · 11 Jun – 19 Jul
+          </p>
+        </div>
       </div>
     </main>
   );

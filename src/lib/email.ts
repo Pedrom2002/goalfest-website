@@ -205,3 +205,152 @@ Dúvidas? Responde a este email.
 
   return data;
 }
+
+type WelcomeArgs = { to: string; unsubscribeUrl: string };
+
+export async function sendNewsletterWelcome({ to, unsubscribeUrl }: WelcomeArgs) {
+  const fromEnv = process.env.EMAIL_FROM ?? process.env.RESEND_FROM;
+  if (!fromEnv && process.env.NODE_ENV === "production") {
+    throw new Error("EMAIL_FROM em falta em producao");
+  }
+  const from = fromEnv ?? "Goalfest <noreply@goalfest.pt>";
+  const sender = parseFrom(from);
+  const site = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const logoUrl = `${site}/logo.png`;
+
+  const safeUnsub = unsubscribeUrl.replace(/"/g, "%22");
+  const subject = "Estas dentro: newsletter Goalfest 2026";
+  const preheader = "Bem-vindo ao Goalfest 2026. Vais ser o primeiro a saber de tudo.";
+
+  const html = `<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light only" />
+  <meta name="supported-color-schemes" content="light only" />
+  <title>${subject}</title>
+  <style>
+    :root { color-scheme: light only; supported-color-schemes: light only; }
+    u + .body .gmail-blend-screen { background:#06182A; mix-blend-mode:screen; }
+    u + .body .gmail-blend-difference { background:#06182A; mix-blend-mode:difference; }
+    @media (prefers-color-scheme: dark) {
+      .lock-bg { background:#06182A !important; }
+      .lock-paper { background:#F4EBD6 !important; color:#06111B !important; }
+    }
+  </style>
+</head>
+<body class="body lock-bg" style="margin:0;padding:0;background:#06182A;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#F4EBD6;">
+
+  <!-- preheader -->
+  <div style="display:none!important;max-height:0;overflow:hidden;opacity:0;color:transparent;font-size:1px;line-height:1px;mso-hide:all;">
+    ${preheader}&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#06182A" class="lock-bg" style="background:#06182A;">
+    <tr><td align="center" style="padding:28px 14px 40px 14px;">
+
+      <!-- HERO / LOGO -->
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+        <tr><td align="center" style="padding:12px 0 24px 0;">
+          <img src="${logoUrl}" alt="Goalfest 2026" width="220" style="display:block;width:220px;max-width:60%;height:auto;border:0;outline:none;text-decoration:none;" />
+        </td></tr>
+      </table>
+
+      <!-- CARD -->
+      <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" bgcolor="#F4EBD6" class="lock-paper" style="max-width:560px;width:100%;background:#F4EBD6;color:#06111B;border-radius:22px;border:2px solid #06111B;">
+
+        <!-- TOP ACCENT BAR -->
+        <tr><td style="background:#16a34a;height:6px;border-radius:20px 20px 0 0;font-size:0;line-height:0;">&nbsp;</td></tr>
+
+        <!-- BODY -->
+        <tr><td style="padding:32px 32px 8px 32px;">
+          <p style="margin:0;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#16a34a;font-weight:700;">Goalfest 2026 &middot; Newsletter</p>
+          <h1 style="margin:12px 0 0 0;font-family:Georgia,'Times New Roman',serif;font-size:34px;line-height:1.05;font-weight:900;color:#06111B;">
+            Estas <em style="color:#16a34a;font-style:italic;">dentro</em>.
+          </h1>
+          <p style="margin:16px 0 0 0;font-size:16px;line-height:1.65;color:#2d3748;">
+            Bem-vindo ao Goalfest 2026. A partir de agora vais ser o primeiro a saber de tudo: programa, convidados, bilhetes e surpresas que ainda nao anunciamos.
+          </p>
+          <p style="margin:14px 0 0 0;font-size:15px;line-height:1.65;color:#2d3748;">
+            So enviamos quando vale a pena. Nada de spam.
+          </p>
+        </td></tr>
+
+        <!-- DIVIDER -->
+        <tr><td style="padding:24px 32px 0 32px;">
+          <div style="height:2px;background:#06111B;opacity:.1;border-radius:2px;"></div>
+        </td></tr>
+
+        <!-- WHAT TO EXPECT -->
+        <tr><td style="padding:22px 32px 8px 32px;">
+          <p style="margin:0;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6a7885;font-weight:700;">O que vem a seguir</p>
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:14px;width:100%;">
+            <tr>
+              <td style="padding:0 12px 12px 0;width:32px;vertical-align:top;font-size:20px;">&#127942;</td>
+              <td style="padding:0 0 12px 0;font-size:14px;line-height:1.55;color:#2d3748;vertical-align:top;"><strong style="color:#06111B;">Linha de convidados</strong><br>Quem vai estar em palco. Nomes que nao esperas.</td>
+            </tr>
+            <tr>
+              <td style="padding:0 12px 12px 0;width:32px;vertical-align:top;font-size:20px;">&#127909;</td>
+              <td style="padding:0 0 12px 0;font-size:14px;line-height:1.55;color:#2d3748;vertical-align:top;"><strong style="color:#06111B;">Programa completo</strong><br>Sessoes, paineis, ativacoes e muito mais.</td>
+            </tr>
+            <tr>
+              <td style="padding:0 12px 0 0;width:32px;vertical-align:top;font-size:20px;">&#127915;</td>
+              <td style="padding:0;font-size:14px;line-height:1.55;color:#2d3748;vertical-align:top;"><strong style="color:#06111B;">Acesso prioritario a bilhetes</strong><br>Subscribers sao os primeiros a ter acesso.</td>
+            </tr>
+          </table>
+        </td></tr>
+
+        <!-- DIVIDER -->
+        <tr><td style="padding:20px 32px 0 32px;">
+          <div style="height:2px;background:#06111B;opacity:.08;border-radius:2px;"></div>
+        </td></tr>
+
+        <!-- FOOTER NOTE -->
+        <tr><td style="padding:20px 32px 28px 32px;">
+          <p style="margin:0;font-size:12px;color:#6a7885;line-height:1.6;">
+            Nao te subscreveste? <a href="${safeUnsub}" style="color:#16a34a;text-decoration:underline;">Cancela aqui</a>. Sem drama.
+          </p>
+        </td></tr>
+
+      </table>
+
+      <!-- FOOTER -->
+      <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;width:100%;margin-top:20px;">
+        <tr><td align="center">
+          <p style="margin:0;color:#16a34a;font-size:11px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;">GOALFEST 2026</p>
+          <p style="margin:6px 0 0 0;color:#7c8a97;font-size:11px;line-height:1.6;">
+            Portugal &middot; <a href="${site}" style="color:#7c8a97;text-decoration:underline;">goalfest.pt</a>
+          </p>
+        </td></tr>
+      </table>
+
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+  const text = `Goalfest 2026 - estas dentro.
+
+Bem-vindo ao Goalfest 2026. A partir de agora vais ser o primeiro a saber de tudo: programa, convidados, bilhetes e surpresas.
+
+So enviamos quando vale a pena. Nada de spam.
+
+Cancelar subscricao: ${unsubscribeUrl}
+
+-- Goalfest 2026
+`;
+
+  return brevoSend({
+    sender,
+    to: [{ email: to }],
+    subject,
+    htmlContent: html,
+    textContent: text,
+    headers: {
+      "List-Unsubscribe": `<${unsubscribeUrl}>`,
+      "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+    },
+  });
+}

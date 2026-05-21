@@ -66,3 +66,13 @@ scripts/
 # Temp files
 *_readme.txt
 .env*.local
+
+# supabase cli local state
+supabase/.temp/
+supabase/.branches/
+
+# Unused/local-only assets
+public/2.mp4
+public/bola.png
+public/goalfest-logo-new.png
+public/Sem*tulo-1.png

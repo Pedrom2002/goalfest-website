@@ -6,9 +6,7 @@ type ScanResult =
   | { kind: "ok"; name: string; companions: number; token: string; day: number; hadOtherDay: boolean }
   | { kind: "duplicate"; name: string; token: string; day: number }
   | { kind: "not_found"; token: string }
-  | { kind: "error"; message: string }
-  | { kind: "vip-ok"; name: string; token: string }
-  | { kind: "vip-denied"; name: string; token: string };
+  | { kind: "error"; message: string };
 
 const TOKEN_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(\.[0-9]+\.[A-Za-z0-9_-]+)?$/i;
@@ -20,15 +18,14 @@ const DAY_LABELS: Record<1 | 2, string> = {
   2: "Dia 2 · Dom 9 Mai",
 };
 
-const SESSION_LABEL: Record<1 | 2 | "vip", string> = {
+const SESSION_LABEL: Record<1 | 2, string> = {
   1: "Dia 1 · Sáb 8 Mai",
   2: "Dia 2 · Dom 9 Mai",
-  vip: "Deck VIP",
 };
 
 export default function QrScanner() {
   const containerId = "qr-reader";
-  const [activeDay, setActiveDay] = useState<1 | 2 | "vip" | null>(null);
+  const [activeDay, setActiveDay] = useState<1 | 2 | null>(null);
   const [modal, setModal] = useState<ScanResult | null>(null);
   const [history, setHistory] = useState<ScanResult[]>([]);
   const [busy, setBusy] = useState(false);
@@ -42,7 +39,7 @@ export default function QrScanner() {
 
   useEffect(() => {
     if (activeDay === null) return;
-    const day = activeDay as 1 | 2 | "vip";
+    const day = activeDay as 1 | 2;
 
     let cancelled = false;
     let scanner: unknown;
@@ -102,7 +99,7 @@ export default function QrScanner() {
     modalOpenRef.current = false;
   }
 
-  async function onDecode(raw: string, day: 1 | 2 | "vip") {
+  async function onDecode(raw: string, day: 1 | 2) {
     const token = raw.trim();
     if (!TOKEN_RE.test(token)) return;
 
@@ -118,27 +115,7 @@ export default function QrScanner() {
     try {
       let result: ScanResult;
 
-      if (day === "vip") {
-        const res = await fetch("/api/admin/vip-access", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token }),
-        });
-        const json = (await res.json().catch(() => ({}))) as {
-          name?: string;
-          is_vip?: boolean;
-          error?: string;
-        };
-        if (!res.ok) {
-          result = res.status === 404
-            ? { kind: "not_found", token }
-            : { kind: "error", message: json.error ?? "Erro." };
-        } else if (json.is_vip) {
-          result = { kind: "vip-ok", name: json.name ?? "?", token };
-        } else {
-          result = { kind: "vip-denied", name: json.name ?? "?", token };
-        }
-      } else {
+      {
         const res = await fetch("/api/admin/checkin", {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -245,7 +222,7 @@ export default function QrScanner() {
               className="mx-auto mb-5 w-20 h-20 rounded-full border-2 grid place-items-center text-4xl font-black"
               style={iconStyle(modal)}
             >
-              {modal.kind === "ok" || modal.kind === "vip-ok" ? "✓" : modal.kind === "duplicate" ? "⚠" : "✗"}
+              {modal.kind === "ok" ? "✓" : modal.kind === "duplicate" ? "⚠" : "✗"}
             </div>
 
             <p className="text-xs tracking-[.22em] uppercase opacity-80 mb-2">
@@ -253,8 +230,6 @@ export default function QrScanner() {
               {modal.kind === "duplicate" && "Já tinha check-in hoje"}
               {modal.kind === "not_found" && "QR não reconhecido"}
               {modal.kind === "error" && "Erro"}
-              {modal.kind === "vip-ok" && "Acesso VIP confirmado"}
-              {modal.kind === "vip-denied" && "Sem acesso ao Deck VIP"}
             </p>
 
             {"day" in modal && (
@@ -263,7 +238,7 @@ export default function QrScanner() {
               </p>
             )}
 
-            {(modal.kind === "ok" || modal.kind === "duplicate" || modal.kind === "vip-ok" || modal.kind === "vip-denied") && (
+            {(modal.kind === "ok" || modal.kind === "duplicate") && (
               <p className="font-serif text-3xl font-black leading-tight mb-1">
                 {modal.name}
               </p>
@@ -284,7 +259,7 @@ export default function QrScanner() {
               onClick={dismiss}
               className="mt-7 w-full rounded-full border-2 border-current py-3 text-xs tracking-[.18em] uppercase font-black opacity-90 hover:opacity-100 transition"
             >
-              {modal.kind === "ok" || modal.kind === "vip-ok" ? "Próximo" : "Fechar"}
+              {modal.kind === "ok" ? "Próximo" : "Fechar"}
             </button>
           </div>
         </div>
@@ -310,13 +285,6 @@ export default function QrScanner() {
                     Iniciar {DAY_LABELS[d]}
                   </button>
                 ))}
-                <button
-                  type="button"
-                  onClick={() => setActiveDay("vip")}
-                  className="rounded-full border-2 border-white/40 text-white/80 px-6 py-3 text-sm tracking-[.18em] uppercase font-black hover:border-[#FFD27A] hover:text-[#FFD27A] transition"
-                >
-                  Deck VIP
-                </button>
               </div>
             </div>
           )}
@@ -381,7 +349,7 @@ export default function QrScanner() {
                 <li
                   key={i}
                   className={`flex items-center gap-3 px-3 py-2 rounded-lg border ${
-                    r.kind === "ok" || r.kind === "vip-ok"
+                    r.kind === "ok"
                       ? "border-emerald-500/40 text-emerald-200"
                       : r.kind === "duplicate"
                         ? "border-amber-500/40 text-amber-200"
@@ -389,10 +357,10 @@ export default function QrScanner() {
                   }`}
                 >
                   <span className="text-base">
-                    {r.kind === "ok" || r.kind === "vip-ok" ? "✓" : r.kind === "duplicate" ? "⚠" : "✗"}
+                    {r.kind === "ok" ? "✓" : r.kind === "duplicate" ? "⚠" : "✗"}
                   </span>
                   <span className="flex-1 truncate">
-                    {r.kind === "ok" || r.kind === "duplicate" || r.kind === "vip-ok" || r.kind === "vip-denied"
+                    {r.kind === "ok" || r.kind === "duplicate"
                       ? r.name
                       : r.kind === "not_found"
                         ? "Token desconhecido"
@@ -409,7 +377,7 @@ export default function QrScanner() {
 }
 
 function modalStyle(r: ScanResult): React.CSSProperties {
-  if (r.kind === "ok" || r.kind === "vip-ok")
+  if (r.kind === "ok")
     return { background: "#064e3b", borderColor: "#34d399", color: "#ecfdf5" };
   if (r.kind === "duplicate")
     return { background: "#78350f", borderColor: "#fbbf24", color: "#fffbeb" };
@@ -417,7 +385,7 @@ function modalStyle(r: ScanResult): React.CSSProperties {
 }
 
 function iconStyle(r: ScanResult): React.CSSProperties {
-  if (r.kind === "ok" || r.kind === "vip-ok") return { borderColor: "#34d399", background: "#065f46" };
+  if (r.kind === "ok") return { borderColor: "#34d399", background: "#065f46" };
   if (r.kind === "duplicate") return { borderColor: "#fbbf24", background: "#92400e" };
   return { borderColor: "#f87171", background: "#991b1b" };
 }

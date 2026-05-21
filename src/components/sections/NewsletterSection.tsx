@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useLocale } from 'next-intl'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
@@ -36,7 +36,14 @@ export default function NewsletterSection() {
   const t = locale === 'pt' ? copy.pt : copy.en
   const [status, setStatus] = useState<Status>('idle')
   const [message, setMessage] = useState('')
+  const [toastOpen, setToastOpen] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (!toastOpen) return
+    const t = setTimeout(() => setToastOpen(false), 5000)
+    return () => clearTimeout(t)
+  }, [toastOpen])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -57,14 +64,17 @@ export default function NewsletterSection() {
       if (res.ok) {
         setStatus('success')
         setMessage(t.success)
+        setToastOpen(true)
         if (inputRef.current) inputRef.current.value = ''
       } else {
         setStatus('error')
         setMessage(data.error ?? 'Erro. Tenta novamente.')
+        setToastOpen(true)
       }
     } catch {
       setStatus('error')
       setMessage('Erro de rede. Tenta novamente.')
+      setToastOpen(true)
     }
   }
 
@@ -78,11 +88,11 @@ export default function NewsletterSection() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-3 justify-center mb-6"
         >
-          <span className="h-px w-12 bg-green-pt/40" />
+          <span className="h-px w-12 bg-[#43B02A]/40" />
           <h2 className="font-display text-3xl md:text-5xl font-black text-center text-text-primary uppercase tracking-wide">
             {t.title}
           </h2>
-          <span className="h-px w-12 bg-green-pt/40" />
+          <span className="h-px w-12 bg-[#43B02A]/40" />
         </motion.div>
 
         <motion.p
@@ -111,27 +121,52 @@ export default function NewsletterSection() {
               placeholder={t.placeholder}
               required
               disabled={status === 'loading' || status === 'success'}
-              className="flex-1 px-4 py-3 rounded-lg bg-bg-surface border border-green-pt/20 text-text-primary placeholder-text-muted text-sm focus:outline-none focus:border-green-pt transition-colors disabled:opacity-50"
+              className="flex-1 px-4 py-3 rounded-lg bg-bg-surface border border-[#43B02A]/30 text-text-primary placeholder-text-muted text-sm focus:outline-none focus:border-[#43B02A] transition-colors disabled:opacity-50"
             />
             <button
               type="submit"
               disabled={status === 'loading' || status === 'success'}
-              className="px-6 py-3 rounded-lg bg-green-pt text-white text-sm font-semibold tracking-wide hover:bg-green-pt/80 transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-default whitespace-nowrap"
+              className="px-6 py-3 rounded-lg bg-[#43B02A] text-white text-sm font-semibold tracking-wide hover:bg-[#43B02A]/80 transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-default whitespace-nowrap"
             >
               {status === 'loading' ? t.loading : status === 'success' ? t.done : t.cta}
             </button>
           </div>
 
-          {message && (
-            <p
+        </motion.form>
+
+        <AnimatePresence>
+          {toastOpen && (
+            <motion.div
               role="status"
               aria-live="polite"
-              className={`mt-4 text-sm ${status === 'success' ? 'text-green-pt' : 'text-red-400'}`}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 280, damping: 24 }}
+              className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex items-center gap-3 px-5 py-3 rounded-xl shadow-2xl border backdrop-blur-md max-w-[90vw] ${
+                status === 'success'
+                  ? 'bg-[#43B02A]/15 border-[#43B02A]/60 text-white'
+                  : 'bg-[#C8102E]/15 border-[#C8102E]/60 text-white'
+              }`}
+              style={{ boxShadow: status === 'success' ? '0 8px 32px rgba(67,176,42,0.35)' : '0 8px 32px rgba(200,16,46,0.35)' }}
             >
-              {message}
-            </p>
+              <span
+                className="flex items-center justify-center w-7 h-7 rounded-full text-sm font-bold"
+                style={{ background: status === 'success' ? '#43B02A' : '#C8102E', color: 'white' }}
+                aria-hidden
+              >
+                {status === 'success' ? '✓' : '!'}
+              </span>
+              <p className="text-sm flex-1">{message}</p>
+              <button
+                type="button"
+                onClick={() => setToastOpen(false)}
+                aria-label={locale === 'pt' ? 'Fechar' : 'Close'}
+                className="text-white/60 hover:text-white text-lg leading-none"
+              >×</button>
+            </motion.div>
           )}
-        </motion.form>
+        </AnimatePresence>
 
         <motion.p
           initial={{ opacity: 0 }}

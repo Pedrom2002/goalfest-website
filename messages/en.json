@@ -10,6 +10,7 @@
     "faq": "FAQ"
   },
   "hero": {
+    "dates": "11 Jun – 19 Jul 2026",
     "subtitle": "More than a Fanzone",
     "cta_matches": "See Matches",
     "countdown_days": "Days",
@@ -105,7 +106,7 @@
     "title_before": "What is",
     "desc_hook": "More than a Fanzone.",
     "desc_body": "Goalfest is Portugal's biggest FIFA World Cup 2026 celebration event, a park in the heart of Lisbon where football, music and culture come together.",
-    "view_schedule": "View schedule ↗",
+    "view_schedule": "View schedule",
     "features": {
       "matches_title": "World Cup Matches",
       "matches_body": "+50 FIFA World Cup 2026 matches broadcast live on a giant high-definition screen.",

@@ -1,4 +1,6 @@
-const getTranslations = async (_ns: string) => (key: string) => key
+const getTranslations = async () => (key: string) => key
 const getLocale = async () => 'pt'
+const setRequestLocale = () => {}
+const getMessages = async () => ({})
 
-export { getTranslations, getLocale }
+export { getTranslations, getLocale, setRequestLocale, getMessages }

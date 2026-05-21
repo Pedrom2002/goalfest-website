@@ -49,9 +49,9 @@ export async function generateMetadata({
 function Divider() {
   return (
     <div className="flex items-center gap-4 px-8 md:px-24 opacity-30">
-      <div className="flex-1 h-px bg-gradient-to-r from-transparent to-green-pt" />
-      <div className="w-1 h-1 rounded-full bg-green-pt" />
-      <div className="flex-1 h-px bg-gradient-to-l from-transparent to-green-pt" />
+      <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[#43B02A]" />
+      <div className="w-1 h-1 rounded-full bg-[#43B02A]" />
+      <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[#43B02A]" />
     </div>
   )
 }

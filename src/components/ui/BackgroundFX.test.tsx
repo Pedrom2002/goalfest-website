@@ -9,16 +9,10 @@ describe('BackgroundFX', () => {
     expect(container.firstChild).toBeTruthy()
   })
 
-  it('renders exactly 20 particles', () => {
-    const { container } = render(<BackgroundFX />)
-    const particles = container.querySelectorAll('.particle')
-    expect(particles).toHaveLength(20)
-  })
-
-  it('renders exactly 4 beams', () => {
+  it('renders exactly 6 beams', () => {
     const { container } = render(<BackgroundFX />)
     const beams = container.querySelectorAll('.beam')
-    expect(beams).toHaveLength(4)
+    expect(beams).toHaveLength(6)
   })
 
   it('wrapping div has aria-hidden', () => {

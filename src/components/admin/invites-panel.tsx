@@ -11,7 +11,6 @@ type Invite = {
   expires_at: string | null;
   archived_at: string | null;
   created_at: string;
-  is_vip: boolean;
 };
 
 export default function InvitesPanel({
@@ -24,11 +23,9 @@ export default function InvitesPanel({
   const [success, setSuccess] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
-  // Form state
   const [label, setLabel] = useState("");
   const [maxUses, setMaxUses] = useState("40");
   const [expires, setExpires] = useState("");
-  const [isVip, setIsVip] = useState(false);
 
   async function refresh() {
     const res = await fetch("/api/admin/invites", { cache: "no-store" });
@@ -57,7 +54,6 @@ export default function InvitesPanel({
           label: label.trim() || undefined,
           max_uses: max,
           expires_at: expires ? new Date(expires).toISOString() : undefined,
-          is_vip: isVip,
         }),
       });
       const json = (await res.json().catch(() => ({}))) as {
@@ -68,11 +64,10 @@ export default function InvitesPanel({
         setError(json.error ?? "Falha a criar.");
         return;
       }
-      setSuccess(`Convite ${isVip ? "VIP " : ""}criado · código ${json.code}`);
+      setSuccess(`Convite criado · código ${json.code}`);
       setLabel("");
       setMaxUses("40");
       setExpires("");
-      setIsVip(false);
       await refresh();
     });
   }
@@ -101,13 +96,12 @@ export default function InvitesPanel({
 
   return (
     <div className="grid gap-8 max-w-5xl">
-      <section className="rounded-2xl border-2 border-[#FFD27A]/40 bg-[#06111B]/40 p-6">
+      <section className="rounded-2xl border border-[#5ea63b]/40 bg-bg-surface/40 p-6">
         <h1 className="font-serif text-3xl font-black mb-1">
-          Convites <em className="not-italic text-[#F2A93C]">/i/</em>
+          Convites <em className="not-italic text-[#5ea63b]">/i/</em>
         </h1>
         <p className="text-sm opacity-70 mb-4">
-          Gera um link com N convites. Partilha o link — cada submissão
-          consome um convite.
+          Gera um link com N convites. Partilha o link, cada submissão consome um convite.
         </p>
 
         <form onSubmit={createInvite} noValidate className="grid gap-3">
@@ -116,7 +110,7 @@ export default function InvitesPanel({
               value={label}
               onChange={(e) => setLabel(e.target.value)}
               placeholder="Etiqueta (ex.: Sonae 8/05)"
-              className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm outline-none focus:border-[#FFD27A]"
+              className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm outline-none focus:border-[#5ea63b]"
               maxLength={120}
             />
             <input
@@ -126,59 +120,33 @@ export default function InvitesPanel({
               min={1}
               max={1000}
               inputMode="numeric"
-              className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm outline-none focus:border-[#FFD27A]"
+              className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm outline-none focus:border-[#5ea63b]"
               aria-label="Número de convites"
             />
             <input
               value={expires}
               onChange={(e) => setExpires(e.target.value)}
               type="datetime-local"
-              className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm outline-none focus:border-[#FFD27A]"
+              className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm outline-none focus:border-[#5ea63b]"
               aria-label="Expira em"
             />
           </div>
-          <div className="flex items-center gap-4">
-            <label className="flex items-center gap-2 cursor-pointer select-none">
-              <input
-                type="checkbox"
-                checked={isVip}
-                onChange={(e) => setIsVip(e.target.checked)}
-                className="w-4 h-4 accent-[#FFD27A]"
-              />
-              <span className="text-sm font-black tracking-[.14em] uppercase text-[#FFD27A]">
-                Convite VIP
-              </span>
-              <span className="text-xs opacity-60">(guests ganham acesso ao Deck VIP)</span>
-            </label>
+          <div className="flex items-center">
             <button
               type="submit"
               disabled={isPending}
-              className={`ml-auto rounded-lg border-2 px-5 py-2 text-xs tracking-[.16em] uppercase font-black disabled:opacity-50 transition ${
-                isVip
-                  ? "border-[#FFD27A] bg-[#FFD27A] text-[#06111B] hover:bg-[#F2A93C]"
-                  : "border-[#FFD27A] bg-[#FFD27A] text-[#06111B] hover:bg-[#F2A93C]"
-              }`}
+              className="ml-auto rounded-lg border border-[#5ea63b] bg-[#5ea63b] text-bg-primary px-5 py-2 text-xs tracking-[.16em] uppercase font-black disabled:opacity-50 hover:brightness-110 transition"
             >
-              {isPending ? "..." : isVip ? "Gerar VIP" : "Gerar"}
+              {isPending ? "..." : "Gerar"}
             </button>
           </div>
         </form>
 
         {error && (
-          <p
-            className="mt-3 text-sm text-rose-300"
-            role="alert"
-          >
-            {error}
-          </p>
+          <p className="mt-3 text-sm text-rose-300" role="alert">{error}</p>
         )}
         {success && !error && (
-          <p
-            className="mt-3 text-sm text-emerald-300"
-            role="status"
-          >
-            {success}
-          </p>
+          <p className="mt-3 text-sm text-emerald-300" role="status">{success}</p>
         )}
       </section>
 
@@ -218,14 +186,7 @@ export default function InvitesPanel({
               return (
                 <tr key={inv.id} className={archived ? "opacity-50" : ""}>
                   <td className="py-3 pr-3">
-                    <div className="font-bold flex items-center gap-2">
-                      {inv.label ?? "—"}
-                      {inv.is_vip && (
-                        <span className="text-[10px] tracking-[.12em] uppercase font-black text-[#FFD27A] bg-[#FFD27A]/15 border border-[#FFD27A]/40 rounded px-1 py-0.5">
-                          VIP
-                        </span>
-                      )}
-                    </div>
+                    <div className="font-bold">{inv.label ?? "-"}</div>
                     <div className="text-xs opacity-60">
                       {new Date(inv.created_at).toLocaleString("pt-PT")}
                     </div>
@@ -237,7 +198,7 @@ export default function InvitesPanel({
                     </div>
                     <div className="mt-1 h-1.5 w-32 overflow-hidden rounded-full bg-white/10">
                       <div
-                        className="h-full bg-[#FFD27A]"
+                        className="h-full bg-[#5ea63b]"
                         style={{
                           width: `${Math.min(100, (inv.uses_count / inv.max_uses) * 100)}%`,
                         }}
@@ -247,7 +208,7 @@ export default function InvitesPanel({
                   <td className="py-3 pr-3 text-xs opacity-80">
                     {inv.expires_at
                       ? new Date(inv.expires_at).toLocaleString("pt-PT")
-                      : "—"}
+                      : "-"}
                   </td>
                   <td className="py-3 pr-3">
                     <span
@@ -260,7 +221,7 @@ export default function InvitesPanel({
                     <div className="inline-flex gap-1">
                       <button
                         onClick={() => copyLink(inv.code)}
-                        className="rounded border border-white/20 px-2 py-1 text-[11px] tracking-[.16em] uppercase hover:border-[#FFD27A] hover:text-[#FFD27A]"
+                        className="rounded border border-white/20 px-2 py-1 text-[11px] tracking-[.16em] uppercase hover:border-[#5ea63b] hover:text-[#5ea63b]"
                       >
                         Copiar link
                       </button>
