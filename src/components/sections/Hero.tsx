@@ -91,6 +91,7 @@ export default function Hero() {
           disablePictureInPicture
           disableRemotePlayback
           className="absolute inset-0 w-full h-full object-cover"
+          style={{ transform: 'scale(1.08)' }}
           aria-hidden="true"
         />
       </div>

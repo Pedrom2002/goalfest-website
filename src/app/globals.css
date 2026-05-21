@@ -25,19 +25,10 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
-  scroll-snap-type: y proximity;
 }
 
 section[id] {
   scroll-margin-top: 5rem;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-/* Skip render of offscreen sections (browser optimization for weak devices) */
-section[id]:not(#hero) {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 800px;
 }
 
 body {
