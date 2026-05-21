@@ -33,6 +33,7 @@ export default function Venue() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const t = useTranslations('venue')
   const [isMobile, setIsMobile] = useState(false)
+  const [load3D, setLoad3D] = useState(false)
 
   useEffect(() => {
     setIsMobile(window.matchMedia('(max-width: 768px)').matches)
@@ -261,10 +262,30 @@ export default function Venue() {
             <p className="text-[#43B02A] text-xs uppercase tracking-[0.3em] font-medium">{t('model')}</p>
             <span className="h-px w-12 bg-[#43B02A]/40" />
           </div>
-          <div className="w-full h-[240px] md:h-[340px] rounded-2xl overflow-hidden border border-white/8 bg-bg-3d/50 backdrop-blur-sm shadow-[0_0_60px_rgba(0,200,81,0.05)]">
-            <ModelErrorBoundary fallbackText={t('model_unavailable')}>
-              <VenueModel loadingText={t('loading')} />
-            </ModelErrorBoundary>
+          <div className="w-full h-[240px] md:h-[340px] rounded-2xl overflow-hidden border border-white/8 bg-bg-3d/50 backdrop-blur-sm shadow-[0_0_60px_rgba(0,200,81,0.05)] relative">
+            {isMobile && !load3D ? (
+              <button
+                type="button"
+                onClick={() => setLoad3D(true)}
+                className="w-full h-full flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-white/[0.02] transition-colors"
+                aria-label="Carregar modelo 3D"
+              >
+                <Image src="/goalfest-og.jpg" alt="" fill sizes="100vw" className="object-cover opacity-30" aria-hidden />
+                <div className="relative z-10 flex flex-col items-center gap-2">
+                  <div className="w-14 h-14 rounded-full bg-[#43B02A]/20 border-2 border-[#43B02A] flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#43B02A" strokeWidth={2.5} className="w-6 h-6" aria-hidden>
+                      <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" />
+                    </svg>
+                  </div>
+                  <span className="text-[#43B02A] text-xs uppercase tracking-[0.25em] font-semibold">Ver em 3D</span>
+                  <span className="text-text-muted/70 text-[10px] uppercase tracking-widest">~6 MB</span>
+                </div>
+              </button>
+            ) : (
+              <ModelErrorBoundary fallbackText={t('model_unavailable')}>
+                <VenueModel loadingText={t('loading')} />
+              </ModelErrorBoundary>
+            )}
           </div>
           <p className="text-text-muted/60 text-xs text-center mt-4 tracking-wide">{t('drag')}</p>
         </motion.div>
