@@ -9,10 +9,10 @@ type Stat = { value: string; label: string }
 export function AnimatedHeader({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.75, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="text-center mb-6"
     >
       {children}
@@ -28,7 +28,7 @@ export function AnimatedStats({ stats }: { stats: Stat[] }) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.2 }}
+      transition={{ duration: 0.75, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="flex flex-wrap justify-center gap-8 md:gap-12 my-12 md:my-16"
     >
       {stats.map((s, i) => (
@@ -76,10 +76,10 @@ export function AnimatedFeatureCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
+      transition={{ duration: 0.65, delay: index * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
       whileHover={{ y: -4 }}
       className="group relative rounded-2xl p-6 transition-all duration-300"
       style={{

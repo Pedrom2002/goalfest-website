@@ -97,9 +97,9 @@ export default function Hero() {
 
       <div className="relative z-10 flex flex-col items-center gap-3">
         <motion.div
-          initial={{ opacity: 0, scale: 1.05, y: -10 }}
+          initial={{ opacity: 0, scale: 1.06, y: -14 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="relative flex flex-col items-center -mt-32"
         >
           <div className="relative">
