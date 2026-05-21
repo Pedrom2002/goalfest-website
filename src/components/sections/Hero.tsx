@@ -73,9 +73,16 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-8">
+    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-8 bg-black">
       {/* Video background — mundial.mp4 (primeiros 30s em loop) */}
-      <div className="absolute inset-0 z-0">
+      <div
+        className="absolute inset-0 z-[1]"
+        style={{
+          backgroundImage: 'url(/mundial-poster.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
         <video
           ref={videoRef}
           autoPlay
@@ -94,13 +101,13 @@ export default function Hero() {
       </div>
 
       {/* Fade overlay — apenas bottom fade para transição suave */}
-      <div className="absolute inset-0 z-0" style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 60%, rgba(13,26,13,0.90) 100%)' }} />
+      <div className="absolute inset-0 z-[2]" style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 60%, rgba(13,26,13,0.90) 100%)' }} />
 
       <div className="relative z-10 flex flex-col items-center gap-3">
         <motion.div
           initial={{ opacity: 0, scale: 1.06, y: -14 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.9, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="relative flex flex-col items-center -mt-32"
         >
           <div className="relative">
@@ -135,7 +142,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.9, delay: 0.85, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="flex flex-col items-center gap-3 mt-4"
         >
           <p className="text-white text-sm sm:text-base font-semibold uppercase tracking-[0.25em]" style={{ textShadow: '0 0 12px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,1)' }}>Countdown para o Mundial 2026</p>
