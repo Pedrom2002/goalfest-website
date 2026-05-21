@@ -4,7 +4,7 @@ import { Component, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import * as Sentry from '@sentry/nextjs'
 import { getEnv } from '@/lib/env'
@@ -32,6 +32,11 @@ export default function Venue() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const sectionRef = useRef<HTMLDivElement>(null)
   const t = useTranslations('venue')
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    setIsMobile(window.matchMedia('(max-width: 768px)').matches)
+  }, [])
 
   const cards = [
     { title: t('access_car_title'), body: t('access_car_body') },
@@ -56,7 +61,7 @@ export default function Venue() {
       if (video.src) return
       // Set src only when section enters viewport â€” users who never scroll here
       // never download this video.
-      video.src = NEXT_PUBLIC_VIDEO_VENUE
+      video.src = window.matchMedia('(max-width: 768px)').matches ? '/venue-dark.mp4' : NEXT_PUBLIC_VIDEO_VENUE
       video.playbackRate = 0.5
       if (!mq.matches) play()
     }
@@ -145,12 +150,14 @@ export default function Venue() {
           className="absolute inset-0 w-full h-full object-cover"
           style={{ objectPosition: '5% 70%', transform: 'scaleX(-1) translateZ(0)', zIndex: 0 }}
         />
-        <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to bottom, rgba(13,26,13,1) 0%, rgba(0,0,0,0.78) 20%, rgba(0,0,0,0.78) 80%, rgba(13,26,13,1) 100%)',
-          transform: 'translate3d(0,0,0)',
-          zIndex: 1,
-          willChange: 'transform',
-        }} />
+        {!isMobile && (
+          <div className="absolute inset-0" style={{
+            background: 'linear-gradient(to bottom, rgba(13,26,13,1) 0%, rgba(0,0,0,0.78) 20%, rgba(0,0,0,0.78) 80%, rgba(13,26,13,1) 100%)',
+            transform: 'translate3d(0,0,0)',
+            zIndex: 1,
+            willChange: 'transform',
+          }} />
+        )}
 
       {/* Info section */}
       <div className="relative z-10 px-4 md:px-8 pb-12 md:pb-24 max-w-7xl mx-auto">
