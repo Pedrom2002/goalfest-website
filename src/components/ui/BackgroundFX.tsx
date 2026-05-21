@@ -66,8 +66,8 @@ export default function BackgroundFX() {
     let w = 0
     let h = 0
 
-    function resize() {
-      if (!canvas) return
+    // Arrow functions (not declarations) preserve const narrowing of ctx through closures.
+    const resize = () => {
       // Cap DPR at 2 — saves 50 % pixel fill on 3× screens with no visible difference for stars
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
       w = window.innerWidth
@@ -79,7 +79,7 @@ export default function BackgroundFX() {
       ctx.scale(dpr, dpr)
     }
 
-    function draw(t: number) {
+    const draw = (t: number) => {
       ctx.clearRect(0, 0, w, h)
       ctx.fillStyle = '#ffffff'
       for (const star of stars) {
@@ -101,12 +101,12 @@ export default function BackgroundFX() {
       ctx.globalAlpha = 1
     }
 
-    function animate(t: number) {
+    const animate = (t: number) => {
       draw(t)
       rafId = requestAnimationFrame(animate)
     }
 
-    function onVisibility() {
+    const onVisibility = () => {
       if (document.visibilityState === 'hidden') {
         cancelAnimationFrame(rafId)
       } else if (!reducedMotion) {
