@@ -95,7 +95,7 @@ export default function Hero() {
           src="/mundial.mp4"
           poster="/mundial-poster.jpg"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ transform: 'scale(1.25)', transformOrigin: 'center' }}
+          style={{ transform: 'scaleX(-1) scale(1.25)', transformOrigin: 'center' }}
           aria-hidden="true"
         />
       </div>
