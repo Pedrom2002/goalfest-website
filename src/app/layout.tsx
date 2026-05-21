@@ -26,6 +26,11 @@ export default async function RootLayout({
     <html lang={lang} suppressHydrationWarning>
       <head>
         {nonce && <meta name="csp-nonce" content={nonce} />}
+        {/* Runs before first paint — marks weak devices so CSS + Framer Motion skip all animations */}
+        <script
+          nonce={nonce}
+          dangerouslySetInnerHTML={{ __html: `(function(){try{var m=navigator.deviceMemory,c=navigator.hardwareConcurrency;if((m!==undefined&&m<2)||(c!==undefined&&c<=2))document.documentElement.setAttribute('data-perf','low')}catch(e){}})()` }}
+        />
       </head>
       <body>
         {children}

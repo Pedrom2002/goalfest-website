@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { BASE_URL } from '@/lib/constants'
 import BackgroundFXClient from '@/components/ui/BackgroundFXClient'
+import MotionProvider from '@/components/ui/MotionProvider'
 import ScrollRestorer from '@/components/ui/ScrollRestorer'
 import HashScroller from '@/components/ui/HashScroller'
 import Navbar from '@/components/layout/Navbar'
@@ -88,12 +89,14 @@ export default async function LocaleLayout({
         {tCommon('skip_to_content')}
       </a>
       <NextIntlClientProvider messages={messages}>
-        <BackgroundFXClient />
-        <ScrollRestorer />
-        <HashScroller />
-        <Navbar />
-        <main id="main-content">{children}</main>
-        <Footer />
+        <MotionProvider>
+          <BackgroundFXClient />
+          <ScrollRestorer />
+          <HashScroller />
+          <Navbar />
+          <main id="main-content">{children}</main>
+          <Footer />
+        </MotionProvider>
       </NextIntlClientProvider>
     </div>
   )

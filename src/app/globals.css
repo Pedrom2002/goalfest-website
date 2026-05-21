@@ -107,6 +107,15 @@ body {
   }
 }
 
+/* Low-end devices: kill all CSS animations/transitions (Framer Motion is handled by MotionProvider) */
+html[data-perf="low"] *,
+html[data-perf="low"] *::before,
+html[data-perf="low"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
 .skip-link {
   position: absolute;
   width: 1px;

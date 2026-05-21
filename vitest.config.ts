@@ -33,6 +33,7 @@ export default defineConfig({
         'src/components/ui/VenueModel.tsx',
         'src/components/ui/BackgroundFXClient.tsx',
         'src/components/ui/CountdownTimer.tsx',
+        'src/components/ui/MotionProvider.tsx',
         'src/components/sections/WhatIsGoalfest.tsx',
         'src/components/sections/WhatIsGoalfestAnimations.tsx',
         'src/components/sections/NewsletterSection.tsx',
