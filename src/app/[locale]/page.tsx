@@ -114,26 +114,16 @@ export default async function LandingPage({
       />
       <div className="relative z-10">
         <Hero />
-        <div style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 1000px' }}>
-          <Divider />
-          <WhatIsGoalfest />
-        </div>
-        <div style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 1400px' }}>
-          <Divider />
-          <Venue />
-        </div>
-        <div style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 700px' }}>
-          <Divider />
-          <Sponsors data={sponsors} />
-        </div>
-        <div style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 900px' }}>
-          <Divider />
-          <FaqSection />
-        </div>
-        <div style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 500px' }}>
-          <Divider />
-          <NewsletterSection />
-        </div>
+        <Divider />
+        <WhatIsGoalfest />
+        <Divider />
+        <Venue />
+        <Divider />
+        <Sponsors data={sponsors} />
+        <Divider />
+        <FaqSection />
+        <Divider />
+        <NewsletterSection />
       </div>
     </>
   )
