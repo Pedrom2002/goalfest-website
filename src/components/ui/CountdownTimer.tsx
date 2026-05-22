@@ -40,30 +40,23 @@ export default function CountdownTimer() {
 
   useEffect(() => {
     let last: TimeLeft | 'started' | null = null
-    let rafId = 0
-    let lastSecondTick = 0
-
-    const tick = (now: number) => {
-      // Throttle to ~1s
-      if (now - lastSecondTick >= 1000) {
-        lastSecondTick = now
-        const next = calcTimeLeft()
-        // Skip setState if identical (eliminates wasted reconcile)
-        const changed =
-          next === 'started'
-            ? last !== 'started'
-            : last === null || last === 'started' ||
-              next.days !== last.days || next.hours !== last.hours ||
-              next.minutes !== last.minutes || next.seconds !== last.seconds
-        if (changed) {
-          last = next
-          setTime(next)
-        }
+    const update = () => {
+      const next = calcTimeLeft()
+      const changed =
+        next === 'started'
+          ? last !== 'started'
+          : last === null || last === 'started' ||
+            next.days !== last.days || next.hours !== last.hours ||
+            next.minutes !== last.minutes || next.seconds !== last.seconds
+      if (changed) {
+        last = next
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setTime(next)
       }
-      rafId = requestAnimationFrame(tick)
     }
-    rafId = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(rafId)
+    update()
+    const id = setInterval(update, 1000)
+    return () => clearInterval(id)
   }, [])
 
   if (!time) return (
