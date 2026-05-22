@@ -67,7 +67,12 @@ export default function BackgroundFX() {
   }
 
   return (
-    <div data-bgfx className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden>
+    <div
+      data-bgfx
+      className="fixed inset-0 pointer-events-none overflow-hidden z-0"
+      aria-hidden
+      style={{ transform: 'translateZ(0)', willChange: 'transform', isolation: 'isolate', contain: 'layout paint' }}
+    >
       <style>{`
         @media (prefers-reduced-motion: reduce) {
           [data-bgfx] * { animation: none !important; }
@@ -121,8 +126,7 @@ export default function BackgroundFX() {
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'radial-gradient(ellipse 70% 50% at 15% 80%, rgba(0,51,160,0.10) 0%, transparent 60%), radial-gradient(ellipse 70% 50% at 85% 80%, rgba(200,16,46,0.08) 0%, transparent 60%), radial-gradient(ellipse 90% 55% at 50% 100%, rgba(67,176,42,0.12) 0%, transparent 65%)',
-        mixBlendMode: 'screen',
+        background: 'radial-gradient(ellipse 70% 50% at 15% 80%, rgba(0,51,160,0.13) 0%, transparent 60%), radial-gradient(ellipse 70% 50% at 85% 80%, rgba(200,16,46,0.11) 0%, transparent 60%), radial-gradient(ellipse 90% 55% at 50% 100%, rgba(67,176,42,0.16) 0%, transparent 65%)',
         pointerEvents: 'none',
         animation: 'hazeShift 24s ease-in-out infinite',
       }} />
@@ -174,7 +178,6 @@ export default function BackgroundFX() {
               transformOrigin: 'bottom center',
               background: 'linear-gradient(to top, transparent 0%, rgba(67,176,42,0.30) 25%, rgba(67,176,42,0.18) 60%, transparent 100%)',
               filter: 'blur(16px)',
-              mixBlendMode: 'screen',
             }} />
             {/* Cone interior (luz focada) */}
             <div style={{
@@ -183,7 +186,6 @@ export default function BackgroundFX() {
               transformOrigin: 'bottom center',
               background: 'linear-gradient(to top, transparent 0%, rgba(67,176,42,0.65) 18%, rgba(67,176,42,0.6) 78%, transparent 100%)',
               filter: 'blur(14px)',
-              mixBlendMode: 'screen',
               animation: `beamPulse ${b.duration} ${b.delay} ease-in-out infinite`,
             }} />
             {/* Fonte de luz na base */}
@@ -197,7 +199,6 @@ export default function BackgroundFX() {
               borderRadius: '50%',
               background: 'radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(67,176,42,0.95) 30%, rgba(67,176,42,0.35) 65%, transparent 100%)',
               filter: 'blur(1.5px)',
-              mixBlendMode: 'screen',
               boxShadow: '0 0 32px rgba(67,176,42,0.7)',
             }} />
           </div>
@@ -211,9 +212,8 @@ export default function BackgroundFX() {
         right: '-15%',
         bottom: 0,
         height: '40vh',
-        background: 'radial-gradient(ellipse 60% 100% at 30% 100%, rgba(67,176,42,0.18) 0%, transparent 70%), radial-gradient(ellipse 70% 100% at 70% 100%, rgba(67,176,42,0.14) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse 60% 100% at 30% 100%, rgba(67,176,42,0.24) 0%, transparent 70%), radial-gradient(ellipse 70% 100% at 70% 100%, rgba(67,176,42,0.18) 0%, transparent 70%)',
         filter: 'blur(14px)',
-        mixBlendMode: 'screen',
         pointerEvents: 'none',
         animation: 'fogDrift 22s ease-in-out infinite',
       }} />
@@ -225,9 +225,8 @@ export default function BackgroundFX() {
         right: '-15%',
         bottom: 0,
         height: '32vh',
-        background: 'radial-gradient(ellipse 55% 100% at 50% 100%, rgba(0,51,160,0.12) 0%, transparent 70%), radial-gradient(ellipse 40% 100% at 85% 100%, rgba(200,16,46,0.08) 0%, transparent 75%)',
+        background: 'radial-gradient(ellipse 55% 100% at 50% 100%, rgba(0,51,160,0.16) 0%, transparent 70%), radial-gradient(ellipse 40% 100% at 85% 100%, rgba(200,16,46,0.11) 0%, transparent 75%)',
         filter: 'blur(16px)',
-        mixBlendMode: 'screen',
         pointerEvents: 'none',
         animation: 'fogDriftAlt 28s ease-in-out infinite',
       }} />
@@ -236,8 +235,7 @@ export default function BackgroundFX() {
       <div style={{
         position: 'absolute',
         inset: 0,
-        opacity: 0.08,
-        mixBlendMode: 'overlay',
+        opacity: 0.05,
         backgroundImage: 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\'><filter id=\'n\'><feTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'2\' stitchTiles=\'stitch\'/></filter><rect width=\'100%\' height=\'100%\' filter=\'url(%23n)\'/></svg>")',
         backgroundSize: '200px 200px',
         pointerEvents: 'none',
