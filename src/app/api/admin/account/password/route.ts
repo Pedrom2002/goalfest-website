@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     data: { user },
   } = await supa.auth.getUser();
 
-  if (!user?.email) {
+  if (!user?.id) {
     return NextResponse.json({ error: "Não autenticado." }, { status: 401 });
   }
 
@@ -31,8 +31,8 @@ export async function POST(req: NextRequest) {
   const admin = supabaseAdmin();
   const { data: isAdmin } = await admin
     .from("admins")
-    .select("email")
-    .eq("email", user.email)
+    .select("user_id")
+    .eq("user_id", user.id)
     .maybeSingle();
   if (!isAdmin) {
     return NextResponse.json({ error: "Sem permissões." }, { status: 403 });

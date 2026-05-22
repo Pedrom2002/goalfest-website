@@ -19,8 +19,8 @@ export async function requireAdmin(): Promise<AdminCheck> {
   const admin = supabaseAdmin();
   const { data: row } = await admin
     .from("admins")
-    .select("email")
-    .eq("email", user.email)
+    .select("user_id")
+    .eq("user_id", user.id)
     .maybeSingle();
 
   if (!row) {

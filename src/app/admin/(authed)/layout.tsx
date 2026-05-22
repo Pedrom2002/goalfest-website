@@ -16,13 +16,13 @@ export default async function AdminLayout({
     data: { user },
   } = await supa.auth.getUser();
 
-  if (!user?.email) redirect("/admin/login");
+  if (!user?.id) redirect("/admin/login");
 
   const admin = supabaseAdmin();
   const { data: isAdmin } = await admin
     .from("admins")
-    .select("email")
-    .eq("email", user.email)
+    .select("user_id")
+    .eq("user_id", user.id)
     .maybeSingle();
 
   if (!isAdmin) redirect("/admin/login?err=forbidden");
