@@ -19,6 +19,7 @@ const BEAMS = [
 export default function BackgroundFX() {
   const [isLowPerf, setIsLowPerf] = useState(false)
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLowPerf(document.documentElement.getAttribute('data-perf') === 'low')
   }, [])
 

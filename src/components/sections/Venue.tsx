@@ -36,6 +36,7 @@ export default function Venue() {
   const [load3D, setLoad3D] = useState(false)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobile(window.matchMedia('(max-width: 768px)').matches)
   }, [])
 
