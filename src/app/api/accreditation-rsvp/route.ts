@@ -1,12 +1,15 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { accreditationRsvpSchema } from "@/lib/validators";
-import { audit, ipFromHeaders } from "@/lib/audit";
+import { audit, hashEmail, ipFromHeaders } from "@/lib/audit";
+import { verifyTurnstile, isTurnstileEnabled } from "@/lib/turnstile";
 
 export const runtime = "nodejs";
 
 // POST /api/accreditation-rsvp — public: submit media accreditation form.
 export async function POST(req: NextRequest) {
+  const ip = ipFromHeaders(req.headers) ?? "unknown";
+
   const body = await req.json().catch(() => null);
   const parsed = accreditationRsvpSchema.safeParse(body);
   if (!parsed.success) {
@@ -14,6 +17,19 @@ export async function POST(req: NextRequest) {
       { error: "Dados inválidos.", issues: parsed.error.flatten().fieldErrors },
       { status: 400 },
     );
+  }
+
+  if (isTurnstileEnabled()) {
+    const cap = await verifyTurnstile(
+      (body as Record<string, unknown>)?.captchaToken as string | undefined,
+      ip,
+    );
+    if (!cap.ok) {
+      return NextResponse.json(
+        { error: "Captcha inválido. Recarrega a página." },
+        { status: 400 },
+      );
+    }
   }
 
   if (!parsed.data.accreditationCode) {
@@ -87,8 +103,8 @@ export async function POST(req: NextRequest) {
   await audit({
     action: "accreditation.submitted",
     targetId: accreditation_link_id,
-    ip: ipFromHeaders(req.headers),
-    meta: { email: parsed.data.email, media_company: parsed.data.media_company },
+    ip,
+    meta: { email_hash: await hashEmail(parsed.data.email), media_company: parsed.data.media_company },
   });
 
   return NextResponse.json({ token: acc.token }, { status: 201 });

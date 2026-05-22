@@ -1,8 +1,9 @@
 ﻿"use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Turnstile from "@/components/turnstile";
 
 type Mode = "password" | "magic";
 
@@ -16,8 +17,12 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [message, setMessage] = useState<string>("");
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const sitekey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
-  const canSubmit = status !== "sending";
+  const onToken = useCallback((token: string | null) => setCaptchaToken(token), []);
+
+  const canSubmit = status !== "sending" && (mode !== "magic" || !sitekey || !!captchaToken);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -69,6 +74,7 @@ export default function AdminLoginPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email,
+        captchaToken: captchaToken ?? "",
         redirectTo: `${window.location.origin}/auth/callback?next=/admin`,
       }),
     /* v8 ignore next */
@@ -164,8 +170,14 @@ export default function AdminLoginPage() {
           </>
         )}
 
+        {mode === "magic" && sitekey && (
+          <div className="mb-4 flex justify-center">
+            <Turnstile sitekey={sitekey} onToken={onToken} theme="dark" />
+          </div>
+        )}
+
         <button
-          disabled={status === "sending" || !canSubmit}
+          disabled={!canSubmit}
           className="mt-2 w-full rounded-full bg-[#22c55e] text-bg-primary px-4 py-3 font-black tracking-[.14em] uppercase disabled:opacity-50 hover:brightness-110 transition-all"
         >
           {status === "sending"

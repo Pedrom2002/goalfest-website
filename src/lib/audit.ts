@@ -48,6 +48,16 @@ export async function audit(args: {
   }
 }
 
+// SHA-256 with project salt — non-reversible but stable for audit linkability.
+export async function hashEmail(email: string): Promise<string> {
+  const salt = process.env.AUDIT_SALT ?? "quic-audit";
+  const data = new TextEncoder().encode(`${salt}:${email.toLowerCase()}`);
+  const hash = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(hash))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
 export function ipFromHeaders(headers: Headers): string | null {
   return (
     headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
