@@ -1,13 +1,32 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import type { SponsorsData } from '@/types'
+import { useInViewOnce } from '@/lib/useInViewOnce'
+
+function FadeUpHeader({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const { ref, seen } = useInViewOnce<HTMLDivElement>()
+  return (
+    <div
+      ref={ref}
+      className="flex items-center gap-3 justify-center"
+      style={{
+        opacity: seen ? 1 : 0,
+        transform: seen ? 'translateY(0)' : 'translateY(20px)',
+        transition: `opacity 0.6s ease-out ${delay}s, transform 0.6s ease-out ${delay}s`,
+        willChange: seen ? 'auto' : 'opacity, transform',
+      }}
+    >
+      {children}
+    </div>
+  )
+}
 
 function SponsorLogo({ name, logo, url, large, logoScale, index }: { name: string; logo: string | null; url?: string; large?: boolean; logoScale?: number; index: number }) {
   const scale = logoScale ?? 1
   const pct = `${scale * 100}%`
+  const { ref, seen } = useInViewOnce<HTMLDivElement>()
   const inner = (
     <>
       {logo ? (
@@ -26,18 +45,20 @@ function SponsorLogo({ name, logo, url, large, logoScale, index }: { name: strin
   )
 
   const card = (
-    <motion.div
-      initial={{ opacity: 0, scale: large ? 0.8 : 0.9, y: large ? 0 : 10 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      whileHover={{ scale: 1.08, boxShadow: large ? '0 0 24px rgba(255,215,0,0.2)' : '0 0 16px rgba(255,255,255,0.1)' }}
-      className={`bg-white/8 border border-white/14 rounded-xl flex items-center justify-center transition-all duration-300 hover:border-white/35 p-4 overflow-hidden ${
+    <div
+      ref={ref}
+      className={`bg-white/8 border border-white/14 rounded-xl flex items-center justify-center transition-[border-color,transform,box-shadow] duration-300 hover:border-white/35 hover:scale-[1.08] p-4 overflow-hidden ${
         large ? 'w-36 h-16 md:w-48 md:h-24' : 'w-36 h-16 md:w-44 md:h-24'
       }`}
+      style={{
+        opacity: seen ? 1 : 0,
+        transform: seen ? 'scale(1) translateY(0)' : (large ? 'scale(0.8)' : 'scale(0.9) translateY(10px)'),
+        transition: `opacity 0.5s ease-out ${index * 0.08}s, transform 0.5s ease-out ${index * 0.08}s, border-color 0.3s, box-shadow 0.3s`,
+        willChange: seen ? 'auto' : 'opacity, transform',
+      }}
     >
       {inner}
-    </motion.div>
+    </div>
   )
 
   return url ? (
@@ -57,17 +78,11 @@ export default function Sponsors({ data }: { data: SponsorsData }) {
 
         {/* Left: Patrocinadores */}
         <div className="flex flex-col items-center gap-8 px-4 md:px-8 pb-12 md:pb-0 border-b border-white/10 md:border-b-0 md:border-r md:border-white/10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3 justify-center"
-          >
+          <FadeUpHeader>
             <span className="h-px w-12 bg-gold/40" />
             <h2 className="font-display text-3xl md:text-5xl font-black text-center text-text-primary uppercase tracking-wide">{t('title')}</h2>
             <span className="h-px w-12 bg-gold/40" />
-          </motion.div>
+          </FadeUpHeader>
           <div className="flex gap-6 flex-wrap justify-center">
             {data.principal.map((s, i) => (
               <SponsorLogo key={s.id} name={s.name} logo={s.logo} {...(s.url !== undefined && { url: s.url })} {...(s.logoScale !== undefined && { logoScale: s.logoScale })} large index={i} />
@@ -77,17 +92,11 @@ export default function Sponsors({ data }: { data: SponsorsData }) {
 
         {/* Right: Parceiros */}
         <div className="flex flex-col items-center gap-8 px-4 md:px-8 pt-12 md:pt-0">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex items-center gap-3 justify-center"
-          >
+          <FadeUpHeader delay={0.1}>
             <span className="h-px w-12 bg-white/20" />
             <h2 className="font-display text-3xl md:text-5xl font-black text-center text-text-primary uppercase tracking-wide">{t('partners_label')}</h2>
             <span className="h-px w-12 bg-white/20" />
-          </motion.div>
+          </FadeUpHeader>
           <div className="flex gap-4 flex-wrap justify-center">
             {data.parceiros.map((s, i) => (
               <SponsorLogo key={s.id} name={s.name} logo={s.logo} {...(s.url !== undefined && { url: s.url })} {...(s.logoScale !== undefined && { logoScale: s.logoScale })} index={i} />

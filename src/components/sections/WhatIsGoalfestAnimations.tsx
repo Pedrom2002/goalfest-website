@@ -1,26 +1,10 @@
 ﻿'use client'
 
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useInViewOnce } from '@/lib/useInViewOnce'
 
 type Feature = { title: string; body: string; isMatches?: boolean }
 type Stat = { value: string; label: string }
-
-// CSS-only fade-up on viewport enter via IntersectionObserver
-function useInViewOnce<T extends HTMLElement>() {
-  const ref = useRef<T>(null)
-  const [seen, setSeen] = useState(false)
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(([e]) => {
-      if (e?.isIntersecting) { setSeen(true); obs.disconnect() }
-    }, { rootMargin: '0px 0px -10% 0px' })
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [])
-  return { ref, seen }
-}
 
 const FADE_UP_STYLE = (seen: boolean, delay = 0): React.CSSProperties => ({
   opacity: seen ? 1 : 0,
@@ -95,7 +79,7 @@ export function AnimatedFeatureCard({
   return (
     <div
       ref={ref}
-      className="group relative rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1"
+      className="group relative rounded-2xl p-6 hover:-translate-y-1"
       style={{
         background: `linear-gradient(135deg, ${bgBase} 60%, ${bgAccent})`,
         border: `1px solid ${border}77`,

@@ -1,9 +1,9 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import FaqAccordion from '@/components/ui/FaqAccordion'
 import faqData from '@/data/faq.json'
+import { useInViewOnce } from '@/lib/useInViewOnce'
 
 export default function FaqSection() {
   const locale = useLocale()
@@ -11,30 +11,28 @@ export default function FaqSection() {
     q: locale === 'en' ? item.qEn : item.q,
     a: locale === 'en' ? item.aEn : item.a,
   })))
+  const header = useInViewOnce<HTMLDivElement>()
+  const acc = useInViewOnce<HTMLDivElement>()
+
+  const fadeUp = (seen: boolean, delay = 0): React.CSSProperties => ({
+    opacity: seen ? 1 : 0,
+    transform: seen ? 'translateY(0)' : 'translateY(20px)',
+    transition: `opacity 0.6s ease-out ${delay}s, transform 0.6s ease-out ${delay}s`,
+    willChange: seen ? 'auto' : 'opacity, transform',
+  })
 
   return (
     <section id="faq" className="relative py-12 md:py-20 px-4">
       <div className="max-w-3xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex items-center gap-3 justify-center mb-12"
-        >
+        <div ref={header.ref} className="flex items-center gap-3 justify-center mb-12" style={fadeUp(header.seen)}>
           <span className="h-px w-12 bg-[#43B02A]/40" />
           <h2 className="font-display text-3xl md:text-5xl font-black text-center text-text-primary uppercase tracking-wide">FAQ</h2>
           <span className="h-px w-12 bg-[#43B02A]/40" />
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
+        <div ref={acc.ref} style={fadeUp(acc.seen, 0.1)}>
           <FaqAccordion items={allItems} />
-        </motion.div>
+        </div>
       </div>
     </section>
   )

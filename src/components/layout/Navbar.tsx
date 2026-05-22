@@ -4,7 +4,6 @@ import { useTranslations, useLocale } from 'next-intl'
 import { useRouter, usePathname } from '@/i18n/navigation'
 import Image from 'next/image'
 import { useEffect, useState, useRef, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Navbar() {
   const t = useTranslations('nav')
@@ -83,7 +82,7 @@ export default function Navbar() {
   return (
     <>
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow,border-color] duration-300 ${
         scrolled ? 'bg-bg-primary/97 shadow-lg border-b border-[#43B02A]/25' : 'bg-transparent'
       }`}
     >
@@ -93,7 +92,7 @@ export default function Navbar() {
             if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' })
             else router.push('/')
           }}
-          className={`block transition-all duration-300 hover:scale-105 ${pastHero || pathname !== '/' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          className={`block transition-[opacity,transform] duration-300 hover:scale-105 ${pastHero || pathname !== '/' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           aria-label={locale === 'pt' ? 'Ir para página principal' : 'Go to home page'}
         >
           <Image src="/GOALFEST-logo2.webp" alt="Fanzone Lisboa" height={60} width={180} className="object-contain h-9 sm:h-11 md:h-[60px] w-auto" />
@@ -136,29 +135,21 @@ export default function Navbar() {
 
     </header>
 
-    <AnimatePresence>
-      {menuOpen && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 z-40"
-            onClick={closeMenu}
-            aria-hidden="true"
-          />
-          <motion.div
-            ref={menuRef}
-            id="mobile-menu"
-            role="dialog"
-            aria-modal="true"
-            aria-label={locale === 'pt' ? 'Menu de navegação' : 'Navigation menu'}
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed inset-y-0 right-0 w-full sm:w-72 bg-[#0a140a] border-l border-[#43B02A]/20 z-50 flex flex-col"
-          >
+    {menuOpen && (
+      <>
+        <div
+          className="fixed inset-0 bg-black/80 z-40 nav-overlay-in"
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
+        <div
+          ref={menuRef}
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label={locale === 'pt' ? 'Menu de navegação' : 'Navigation menu'}
+          className="fixed inset-y-0 right-0 w-full sm:w-72 bg-[#0a140a] border-l border-[#43B02A]/20 z-50 flex flex-col nav-panel-in"
+        >
               <div className="flex items-center justify-between px-6 h-20 border-b border-white/10">
                 <span className="text-[#43B02A] text-xs uppercase tracking-[0.3em] font-medium" aria-hidden="true">Menu</span>
                 <button onClick={closeMenu} className="text-text-muted hover:text-white transition-colors" aria-label={locale === 'pt' ? 'Fechar menu' : 'Close menu'}>
@@ -170,11 +161,10 @@ export default function Navbar() {
 
               <nav className="flex flex-col flex-1 px-6 py-8 gap-1" aria-label={locale === 'pt' ? 'Navegação mobile' : 'Mobile navigation'}>
                 {navLinks.map((link, i) => (
-                  <motion.div
+                  <div
                     key={link.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.07 }}
+                    className="nav-link-in"
+                    style={{ animationDelay: `${i * 0.07}s` }}
                   >
                     <a
                       href={pathname === '/' ? link.href : `/${locale}/${link.href}`}
@@ -182,11 +172,11 @@ export default function Navbar() {
                       className="flex items-center justify-between py-4 border-b border-white/6 text-text-primary hover:text-[#43B02A] text-xl uppercase tracking-[0.12em] transition-colors group" style={{ fontFamily: 'var(--font-bebas)' }}
                     >
                       {link.label}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className="w-4 h-4 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className="w-4 h-4 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-[opacity,transform]" aria-hidden="true">
                         <path d="M9 18l6-6-6-6"/>
                       </svg>
                     </a>
-                  </motion.div>
+                  </div>
                 ))}
               </nav>
 
@@ -202,10 +192,9 @@ export default function Navbar() {
                   {locale === 'pt' ? 'English' : 'Português'}
                 </button>
               </div>
-            </motion.div>
+            </div>
           </>
         )}
-      </AnimatePresence>
     </>
   )
 }

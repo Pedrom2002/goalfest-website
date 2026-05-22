@@ -217,7 +217,7 @@ export default function Venue() {
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
               className="relative group rounded-2xl overflow-hidden"
             >
-              <div className="absolute inset-0 bg-white/5 backdrop-blur-sm border border-white/12 rounded-2xl transition-all duration-300 group-hover:border-[#C8102E]/30 group-hover:shadow-[0_0_30px_rgba(200,16,46,0.15)]" />
+              <div className="absolute inset-0 bg-white/5 backdrop-blur-sm border border-white/12 rounded-2xl transition-[border-color,box-shadow] duration-300 group-hover:border-[#C8102E]/30 group-hover:shadow-[0_0_30px_rgba(200,16,46,0.15)]" />
               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C8102E]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="relative p-4">

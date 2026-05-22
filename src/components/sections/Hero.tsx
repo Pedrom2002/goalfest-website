@@ -2,7 +2,6 @@
 
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
 import CountdownTimer from '@/components/ui/CountdownTimer'
 import { useEffect, useRef } from 'react'
 
@@ -89,7 +88,7 @@ export default function Hero() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           disablePictureInPicture
           disableRemotePlayback
           src="/mundial.mp4"
@@ -104,11 +103,9 @@ export default function Hero() {
       <div className="absolute inset-0 z-[2]" style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 60%, rgba(13,26,13,0.90) 100%)' }} />
 
       <div className="relative z-10 flex flex-col items-center gap-3">
-        <motion.div
-          initial={{ opacity: 0, scale: 1.06, y: -14 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="relative flex flex-col items-center -mt-32"
+        <div
+          className="relative flex flex-col items-center -mt-32 hero-fade-in"
+          style={{ animationDelay: '0.35s' }}
         >
           <div className="relative">
             <Image
@@ -136,34 +133,23 @@ export default function Hero() {
               style={{ filter: 'drop-shadow(0 0 6px rgba(0,0,0,0.9)) drop-shadow(0 0 14px rgba(0,0,0,0.7))' }}
             />
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.85, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="flex flex-col items-center gap-3 mt-4"
+        <div
+          className="flex flex-col items-center gap-3 mt-4 hero-fade-up"
+          style={{ animationDelay: '0.85s' }}
         >
           <p className="text-white text-sm sm:text-base font-semibold uppercase tracking-[0.25em]" style={{ textShadow: '0 0 12px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,1)' }}>Countdown para o Mundial 2026</p>
           <CountdownTimer />
           <EqualizerBars />
-        </motion.div>
+        </div>
 
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-      >
-        <motion.div
-          className="w-px h-12 bg-gradient-to-b from-[#43B02A] to-transparent"
-          animate={{ scaleY: [0, 1, 0], opacity: [0, 1, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      </motion.div>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hero-scroll-fade">
+        <div className="w-px h-12 bg-gradient-to-b from-[#43B02A] to-transparent hero-scroll-line" />
+      </div>
     </section>
   )
 }
