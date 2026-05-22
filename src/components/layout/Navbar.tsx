@@ -96,7 +96,7 @@ export default function Navbar() {
           className={`block transition-all duration-300 hover:scale-105 ${pastHero || pathname !== '/' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           aria-label={locale === 'pt' ? 'Ir para página principal' : 'Go to home page'}
         >
-          <Image src="/GOALFEST-logo2.png" alt="Fanzone Lisboa" height={60} width={180} className="object-contain h-9 sm:h-11 md:h-[60px] w-auto" />
+          <Image src="/GOALFEST-logo2.webp" alt="Fanzone Lisboa" height={60} width={180} className="object-contain h-9 sm:h-11 md:h-[60px] w-auto" />
         </button>
 
         <nav className="hidden md:flex items-center gap-4 lg:gap-8" aria-label={locale === 'pt' ? 'Navegação principal' : 'Main navigation'}>

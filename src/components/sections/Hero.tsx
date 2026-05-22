@@ -119,7 +119,6 @@ export default function Hero() {
               sizes="(max-width: 640px) 420px, (max-width: 768px) 560px, 700px"
               className="object-contain relative z-10 w-[420px] sm:w-[560px] md:w-[700px]"
               style={{ filter: 'brightness(1.05) saturate(1.05) drop-shadow(0 0 12px rgba(0,0,0,0.9)) drop-shadow(0 0 30px rgba(0,0,0,0.7)) drop-shadow(0 0 60px rgba(0,0,0,0.5))' }}
-              quality={100}
               priority
             />
           </div>
