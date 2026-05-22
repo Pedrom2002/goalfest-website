@@ -15,6 +15,16 @@ const securityHeaders = [
 ]
 
 const nextConfig: NextConfig = {
+  experimental: {
+    optimizePackageImports: [
+      'framer-motion',
+      '@react-three/drei',
+      '@react-three/fiber',
+      'country-flag-icons',
+      '@supabase/ssr',
+      '@supabase/supabase-js',
+    ],
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 100],

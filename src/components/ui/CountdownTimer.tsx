@@ -39,10 +39,31 @@ export default function CountdownTimer() {
   const [time, setTime] = useState<TimeLeft | 'started' | null>(null)
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setTime(calcTimeLeft())
-    const id = setInterval(() => setTime(calcTimeLeft()), 1000)
-    return () => clearInterval(id)
+    let last: TimeLeft | 'started' | null = null
+    let rafId = 0
+    let lastSecondTick = 0
+
+    const tick = (now: number) => {
+      // Throttle to ~1s
+      if (now - lastSecondTick >= 1000) {
+        lastSecondTick = now
+        const next = calcTimeLeft()
+        // Skip setState if identical (eliminates wasted reconcile)
+        const changed =
+          next === 'started'
+            ? last !== 'started'
+            : last === null || last === 'started' ||
+              next.days !== last.days || next.hours !== last.hours ||
+              next.minutes !== last.minutes || next.seconds !== last.seconds
+        if (changed) {
+          last = next
+          setTime(next)
+        }
+      }
+      rafId = requestAnimationFrame(tick)
+    }
+    rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
   }, [])
 
   if (!time) return (

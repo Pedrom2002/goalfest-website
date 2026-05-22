@@ -1,35 +1,52 @@
 ﻿'use client'
 
-import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 
 type Feature = { title: string; body: string; isMatches?: boolean }
 type Stat = { value: string; label: string }
 
+// CSS-only fade-up on viewport enter via IntersectionObserver
+function useInViewOnce<T extends HTMLElement>() {
+  const ref = useRef<T>(null)
+  const [seen, setSeen] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(([e]) => {
+      if (e?.isIntersecting) { setSeen(true); obs.disconnect() }
+    }, { rootMargin: '0px 0px -10% 0px' })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+  return { ref, seen }
+}
+
+const FADE_UP_STYLE = (seen: boolean, delay = 0): React.CSSProperties => ({
+  opacity: seen ? 1 : 0,
+  transform: seen ? 'translateY(0)' : 'translateY(24px)',
+  transition: `opacity 0.75s cubic-bezier(0.25,0.46,0.45,0.94) ${delay}s, transform 0.75s cubic-bezier(0.25,0.46,0.45,0.94) ${delay}s`,
+  willChange: seen ? 'auto' : 'opacity, transform',
+})
+
 export function AnimatedHeader({ children }: { children: React.ReactNode }) {
+  const { ref, seen } = useInViewOnce<HTMLDivElement>()
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.75, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="text-center mb-6"
-    >
+    <div ref={ref} className="text-center mb-6" style={FADE_UP_STYLE(seen)}>
       {children}
-    </motion.div>
+    </div>
   )
 }
 
 const STAT_COLORS = ['#0033A0', '#43B02A', '#C8102E']
 
 export function AnimatedStats({ stats }: { stats: Stat[] }) {
+  const { ref, seen } = useInViewOnce<HTMLDivElement>()
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.75, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+    <div
+      ref={ref}
       className="flex flex-wrap justify-center gap-8 md:gap-12 my-12 md:my-16"
+      style={FADE_UP_STYLE(seen, 0.15)}
     >
       {stats.map((s, i) => (
         <div key={s.label} className="text-center">
@@ -50,7 +67,7 @@ export function AnimatedStats({ stats }: { stats: Stat[] }) {
           )}
         </div>
       ))}
-    </motion.div>
+    </div>
   )
 }
 
@@ -73,19 +90,20 @@ export function AnimatedFeatureCard({
 }) {
   const col = index % 3
   const { border, shadow, bgBase, bgAccent } = CARD_COLORS[col]!
+  const { ref, seen } = useInViewOnce<HTMLDivElement>()
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.65, delay: index * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
-      whileHover={{ y: -4 }}
-      className="group relative rounded-2xl p-6 transition-all duration-300"
+    <div
+      ref={ref}
+      className="group relative rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1"
       style={{
         background: `linear-gradient(135deg, ${bgBase} 60%, ${bgAccent})`,
         border: `1px solid ${border}77`,
         boxShadow: `0 0 24px rgba(${shadow},0.22), inset 0 0 12px rgba(${shadow},0.05)`,
+        opacity: seen ? 1 : 0,
+        transform: seen ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 0.65s cubic-bezier(0.25,0.46,0.45,0.94) ${index * 0.07}s, transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94) ${index * 0.07}s, border 0.3s, box-shadow 0.3s`,
+        willChange: seen ? 'auto' : 'opacity, transform',
       }}
       onMouseEnter={e => {
         const el = e.currentTarget
@@ -109,6 +127,6 @@ export function AnimatedFeatureCard({
           {viewScheduleLabel}
         </Link>
       )}
-    </motion.div>
+    </div>
   )
 }

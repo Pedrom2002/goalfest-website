@@ -2,7 +2,10 @@
 
 import { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, useGLTF, Environment, ContactShadows } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei/core/OrbitControls'
+import { useGLTF } from '@react-three/drei/core/useGLTF'
+import { Environment } from '@react-three/drei/core/Environment'
+import { ContactShadows } from '@react-three/drei/core/ContactShadows'
 import { useInView } from 'framer-motion'
 import { getEnv } from '@/lib/env'
 
