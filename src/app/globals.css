@@ -30,15 +30,6 @@ section[id] {
   scroll-margin-top: 5rem;
 }
 
-/* Skip rendering of offscreen sections with explicit size hint per id (no layout jumps) */
-@media (min-width: 769px) {
-  section#sponsors,
-  section#faq,
-  section#newsletter { content-visibility: auto; contain-intrinsic-size: 1px 900px; }
-  section#venue { content-visibility: auto; contain-intrinsic-size: 1px 1800px; }
-  section#goalfest { content-visibility: auto; contain-intrinsic-size: 1px 1400px; }
-}
-
 body {
   overflow-x: clip; /* clip doesn't create a scroll container — preserves GPU-accelerated momentum scroll on iOS/Android */
   min-width: 320px;
