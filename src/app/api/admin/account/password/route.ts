@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     data: { user },
   } = await supa.auth.getUser();
 
-  if (!user?.id) {
+  if (!user?.id || !user?.email) {
     return NextResponse.json({ error: "Não autenticado." }, { status: 401 });
   }
 
