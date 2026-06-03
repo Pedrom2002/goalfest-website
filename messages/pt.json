@@ -76,7 +76,8 @@
   "sponsors": {
     "title": "Patrocinadores",
     "principal_label": "Patrocinador Principal",
-    "partners_label": "Parceiros"
+    "partners_label": "Parceiros",
+    "accommodation_label": "Accommodation Partners"
   },
   "footer": {
     "copyright": "© 2026 QUIC NATION. Todos os direitos reservados."

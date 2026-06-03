@@ -23,7 +23,7 @@ function FadeUpHeader({ children, delay = 0 }: { children: React.ReactNode; dela
   )
 }
 
-function SponsorLogo({ name, logo, url, large, logoScale, index }: { name: string; logo: string | null; url?: string; large?: boolean; logoScale?: number; index: number }) {
+function SponsorLogo({ name, logo, url, large, logoScale, index, lightBg }: { name: string; logo: string | null; url?: string; large?: boolean; logoScale?: number; index: number; lightBg?: boolean }) {
   const scale = logoScale ?? 1
   const pct = `${scale * 100}%`
   const { ref, seen } = useInViewOnce<HTMLDivElement>()
@@ -39,7 +39,7 @@ function SponsorLogo({ name, logo, url, large, logoScale, index }: { name: strin
           style={{ width: pct, height: pct, maxWidth: scale > 1 ? 'none' : undefined }}
         />
       ) : (
-        <span className="text-text-muted font-semibold uppercase tracking-wide text-xs">{name}</span>
+        <span className={`${lightBg ? 'text-gray-700' : 'text-text-muted'} font-semibold uppercase tracking-wide text-xs`}>{name}</span>
       )}
     </>
   )
@@ -47,7 +47,9 @@ function SponsorLogo({ name, logo, url, large, logoScale, index }: { name: strin
   const card = (
     <div
       ref={ref}
-      className={`bg-white/8 border border-white/14 rounded-xl flex items-center justify-center transition-[border-color,transform,box-shadow] duration-300 hover:border-white/35 hover:scale-[1.08] p-4 overflow-hidden ${
+      className={`rounded-xl flex items-center justify-center transition-[border-color,transform,box-shadow] duration-300 hover:scale-[1.08] p-4 overflow-hidden ${
+        lightBg ? 'bg-white border border-white/60 hover:border-white' : 'bg-white/8 border border-white/14 hover:border-white/35'
+      } ${
         large ? 'w-36 h-16 md:w-48 md:h-24' : 'w-36 h-16 md:w-44 md:h-24'
       }`}
       style={{
@@ -104,6 +106,20 @@ export default function Sponsors({ data }: { data: SponsorsData }) {
           </div>
         </div>
 
+      </div>
+
+      {/* Accommodation Partners */}
+      <div className="flex flex-col items-center gap-8 mt-12 md:mt-20 pt-12 md:pt-16 border-t border-white/10">
+        <FadeUpHeader delay={0.2}>
+          <span className="h-px w-12 bg-white/20" />
+          <h2 className="font-display text-3xl md:text-5xl font-black text-center text-text-primary uppercase tracking-wide">{t('accommodation_label')}</h2>
+          <span className="h-px w-12 bg-white/20" />
+        </FadeUpHeader>
+        <div className="flex gap-6 flex-wrap justify-center">
+          {data.accommodation.map((s, i) => (
+            <SponsorLogo key={s.id} name={s.name} logo={s.logo} {...(s.url !== undefined && { url: s.url })} {...(s.logoScale !== undefined && { logoScale: s.logoScale })} lightBg large index={i} />
+          ))}
+        </div>
       </div>
       </div>
     </section>

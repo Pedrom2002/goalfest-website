@@ -8,5 +8,9 @@
   "parceiros": [
     { "id": "p1", "name": "Junta de Freguesia dos Olivais", "logo": "/parceiros/juntaolivais.png", "url": "https://olivais.pt" },
     { "id": "p2", "name": "Lisboa", "logo": "/parceiros/marca-lisboa.png", "url": "https://www.lisboa.pt" }
+  ],
+  "accommodation": [
+    { "id": "a1", "name": "Hotel Roma", "logo": "/alojamento/hotel_roma.png", "url": "https://www.hotelroma.pt/pt/" },
+    { "id": "a2", "name": "WOT Nomad Social", "logo": "/alojamento/nomad_social.png", "url": "https://www.wotsocial.com/en/units/wot-nomad/" }
   ]
 }

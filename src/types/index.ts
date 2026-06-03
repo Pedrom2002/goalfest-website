@@ -40,4 +40,5 @@ export interface Sponsor {
 export interface SponsorsData {
   principal: Sponsor[]
   parceiros: Sponsor[]
+  accommodation: Sponsor[]
 }

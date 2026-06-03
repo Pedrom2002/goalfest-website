@@ -9,6 +9,7 @@ vi.mock('next-intl', () => ({
     title: 'Patrocinadores',
     principal_label: 'Patrocinador Principal',
     partners_label: 'Parceiros',
+    accommodation_label: 'Accommodation Partners',
   })[key] ?? key,
 }))
 
@@ -32,6 +33,9 @@ const mockData: SponsorsData = {
   ],
   parceiros: [
     { id: 'p1', name: 'Lisboa', logo: '/lisboa.png', url: 'https://lisboa.pt' },
+  ],
+  accommodation: [
+    { id: 'a1', name: 'Hotel Roma', logo: '/hotel_roma.png', url: 'https://hotelroma.pt' },
   ],
 }
 
@@ -57,6 +61,12 @@ describe('Sponsors', () => {
     expect(screen.getByAltText('Lisboa')).toBeInTheDocument()
   })
 
+  it('renders accommodation partners heading and logo', () => {
+    render(<Sponsors data={mockData} />)
+    expect(screen.getByText('Accommodation Partners')).toBeInTheDocument()
+    expect(screen.getByAltText('Hotel Roma')).toBeInTheDocument()
+  })
+
   it('renders sponsor links', () => {
     render(<Sponsors data={mockData} />)
     const links = screen.getAllByRole('link')
@@ -67,6 +77,7 @@ describe('Sponsors', () => {
     const noLogoData: SponsorsData = {
       principal: [{ id: 'x1', name: 'NoLogo Sponsor', logo: null }],
       parceiros: [],
+      accommodation: [],
     }
     render(<Sponsors data={noLogoData} />)
     expect(screen.getByText('NoLogo Sponsor')).toBeInTheDocument()
