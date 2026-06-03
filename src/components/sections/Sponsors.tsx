@@ -23,7 +23,7 @@ function FadeUpHeader({ children, delay = 0 }: { children: React.ReactNode; dela
   )
 }
 
-function SponsorLogo({ name, logo, url, large, logoScale, index, lightBg }: { name: string; logo: string | null; url?: string; large?: boolean; logoScale?: number; index: number; lightBg?: boolean }) {
+function SponsorLogo({ name, logo, url, large, logoScale, index, whiten }: { name: string; logo: string | null; url?: string; large?: boolean; logoScale?: number; index: number; whiten?: boolean }) {
   const scale = logoScale ?? 1
   const pct = `${scale * 100}%`
   const { ref, seen } = useInViewOnce<HTMLDivElement>()
@@ -36,10 +36,14 @@ function SponsorLogo({ name, logo, url, large, logoScale, index, lightBg }: { na
           width={large ? 160 : 100}
           height={large ? 72 : 44}
           className="object-contain"
-          style={{ width: pct, height: pct, maxWidth: scale > 1 ? 'none' : undefined }}
+          // Skip Next's optimizer for whitened logos: AVIF re-encoding flattens
+          // alpha onto a white background, which the brightness/invert filter then
+          // turns into a solid white block.
+          unoptimized={whiten}
+          style={{ width: pct, height: pct, maxWidth: scale > 1 ? 'none' : undefined, filter: whiten ? 'brightness(0) invert(1)' : undefined }}
         />
       ) : (
-        <span className={`${lightBg ? 'text-gray-700' : 'text-text-muted'} font-semibold uppercase tracking-wide text-xs`}>{name}</span>
+        <span className="text-text-muted font-semibold uppercase tracking-wide text-xs">{name}</span>
       )}
     </>
   )
@@ -47,9 +51,7 @@ function SponsorLogo({ name, logo, url, large, logoScale, index, lightBg }: { na
   const card = (
     <div
       ref={ref}
-      className={`rounded-xl flex items-center justify-center transition-[border-color,transform,box-shadow] duration-300 hover:scale-[1.08] p-4 overflow-hidden ${
-        lightBg ? 'bg-white border border-white/60 hover:border-white' : 'bg-white/8 border border-white/14 hover:border-white/35'
-      } ${
+      className={`bg-white/8 border border-white/14 rounded-xl flex items-center justify-center transition-[border-color,transform,box-shadow] duration-300 hover:border-white/35 hover:scale-[1.08] p-4 overflow-hidden ${
         large ? 'w-36 h-16 md:w-48 md:h-24' : 'w-36 h-16 md:w-44 md:h-24'
       }`}
       style={{
@@ -117,7 +119,7 @@ export default function Sponsors({ data }: { data: SponsorsData }) {
         </FadeUpHeader>
         <div className="flex gap-6 flex-wrap justify-center">
           {data.accommodation.map((s, i) => (
-            <SponsorLogo key={s.id} name={s.name} logo={s.logo} {...(s.url !== undefined && { url: s.url })} {...(s.logoScale !== undefined && { logoScale: s.logoScale })} lightBg large index={i} />
+            <SponsorLogo key={s.id} name={s.name} logo={s.logo} {...(s.url !== undefined && { url: s.url })} {...(s.logoScale !== undefined && { logoScale: s.logoScale })} whiten large index={i} />
           ))}
         </div>
       </div>
