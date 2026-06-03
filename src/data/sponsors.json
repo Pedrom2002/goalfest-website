@@ -10,7 +10,7 @@
     { "id": "p2", "name": "Lisboa", "logo": "/parceiros/marca-lisboa.png", "url": "https://www.lisboa.pt" }
   ],
   "accommodation": [
-    { "id": "a1", "name": "Hotel Roma", "logo": "/alojamento/hotel_roma.png", "url": "https://www.hotelroma.pt/pt/" },
+    { "id": "a1", "name": "Hotel Roma", "logo": "/alojamento/hotel_roma.png", "url": "https://www.hotelroma.pt/pt/", "logoScale": 1.25 },
     { "id": "a2", "name": "WOT Nomad Social", "logo": "/alojamento/nomad_social.png", "url": "https://www.wotsocial.com/en/units/wot-nomad/", "logoScale": 0.7 }
   ]
 }
