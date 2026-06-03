@@ -11,6 +11,6 @@
   ],
   "accommodation": [
     { "id": "a1", "name": "Hotel Roma", "logo": "/alojamento/hotel_roma.png", "url": "https://www.hotelroma.pt/pt/" },
-    { "id": "a2", "name": "WOT Nomad Social", "logo": "/alojamento/nomad_social.png", "url": "https://www.wotsocial.com/en/units/wot-nomad/" }
+    { "id": "a2", "name": "WOT Nomad Social", "logo": "/alojamento/nomad_social.png", "url": "https://www.wotsocial.com/en/units/wot-nomad/", "logoScale": 0.7 }
   ]
 }
