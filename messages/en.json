@@ -36,6 +36,16 @@
     "phase_meias": "Semi-Finals",
     "phase_final": "Final"
   },
+  "concertos": {
+    "title": "Concerts",
+    "subtitle": "Line-up",
+    "heading": "Concerts",
+    "count": "+10 live concerts · Goalfest 2026",
+    "back": "Back to home",
+    "stage_default": "Main Stage",
+    "empty_title": "Line-up coming soon",
+    "empty_body": "The confirmed artists will be announced soon. Stay tuned!"
+  },
   "venue": {
     "title": "The Venue",
     "address_label": "Address",
@@ -108,6 +118,7 @@
     "desc_hook": "More than a Fanzone.",
     "desc_body": "Goalfest is Portugal's biggest FIFA World Cup 2026 celebration event, a park in the heart of Lisbon where football, music and culture come together.",
     "view_schedule": "View schedule",
+    "view_concerts": "View concerts",
     "features": {
       "matches_title": "World Cup Matches",
       "matches_body": "+50 FIFA World Cup 2026 matches broadcast live on a giant high-definition screen.",

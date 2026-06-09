@@ -3,7 +3,7 @@ import { AnimatedHeader, AnimatedStats, AnimatedFeatureCard } from './WhatIsGoal
 
 const FEATURE_KEYS = [
   { titleKey: 'features.matches_title', bodyKey: 'features.matches_body', isMatches: true },
-  { titleKey: 'features.concerts_title', bodyKey: 'features.concerts_body' },
+  { titleKey: 'features.concerts_title', bodyKey: 'features.concerts_body', isConcerts: true },
   { titleKey: 'features.gaming_title', bodyKey: 'features.gaming_body' },
   { titleKey: 'features.football_title', bodyKey: 'features.football_body' },
   { titleKey: 'features.kids_title', bodyKey: 'features.kids_body' },
@@ -21,6 +21,7 @@ export default async function WhatIsGoalfest() {
     title: t(f.titleKey),
     body: t(f.bodyKey),
     isMatches: 'isMatches' in f && f.isMatches === true ? true : false,
+    isConcerts: 'isConcerts' in f && f.isConcerts === true ? true : false,
   }))
 
   const stats = ((['matches', 'concerts', 'hours'] as const)).map((key) => ({
@@ -63,6 +64,7 @@ export default async function WhatIsGoalfest() {
               index={i}
               locale={locale}
               viewScheduleLabel={t('view_schedule')}
+              viewConcertsLabel={t('view_concerts')}
             />
           ))}
         </div>

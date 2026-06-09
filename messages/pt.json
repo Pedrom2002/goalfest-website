@@ -36,6 +36,16 @@
     "phase_meias": "Meias-Finais",
     "phase_final": "Final"
   },
+  "concertos": {
+    "title": "Concertos",
+    "subtitle": "Line-up",
+    "heading": "Concertos",
+    "count": "+10 concertos ao vivo · Goalfest 2026",
+    "back": "Voltar ao início",
+    "stage_default": "Palco Principal",
+    "empty_title": "Line-up em breve",
+    "empty_body": "Os artistas confirmados serão anunciados em breve. Fica atento!"
+  },
   "venue": {
     "title": "O Local",
     "address_label": "Morada",
@@ -108,6 +118,7 @@
     "desc_hook": "Mais do que uma Fanzone.",
     "desc_body": "O Goalfest é o maior evento de celebração do Mundial 2026 em Portugal, um parque no coração de Lisboa onde o futebol, a música e a cultura se encontram.",
     "view_schedule": "Ver programação",
+    "view_concerts": "Ver concertos",
     "features": {
       "matches_title": "Jogos do Mundial",
       "matches_body": "+50 jogos da FIFA World Cup 2026 transmitidos ao vivo num ecrã gigante de alta definição.",

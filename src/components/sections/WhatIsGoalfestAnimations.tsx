@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useInViewOnce } from '@/lib/useInViewOnce'
 
-type Feature = { title: string; body: string; isMatches?: boolean }
+type Feature = { title: string; body: string; isMatches?: boolean; isConcerts?: boolean }
 type Stat = { value: string; label: string }
 
 const FADE_UP_STYLE = (seen: boolean, delay = 0): React.CSSProperties => ({
@@ -66,11 +66,13 @@ export function AnimatedFeatureCard({
   index,
   locale,
   viewScheduleLabel,
+  viewConcertsLabel,
 }: {
   feature: Feature
   index: number
   locale: string
   viewScheduleLabel: string
+  viewConcertsLabel: string
 }) {
   const col = index % 3
   const { border, shadow, bgBase, bgAccent } = CARD_COLORS[col]!
@@ -109,6 +111,11 @@ export function AnimatedFeatureCard({
       {feature.isMatches && (
         <Link href={`/${locale}/jogos`} target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs font-semibold hover:underline uppercase tracking-widest" style={{ color: border }}>
           {viewScheduleLabel}
+        </Link>
+      )}
+      {feature.isConcerts && (
+        <Link href={`/${locale}/concertos`} target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs font-semibold hover:underline uppercase tracking-widest" style={{ color: border }}>
+          {viewConcertsLabel}
         </Link>
       )}
     </div>

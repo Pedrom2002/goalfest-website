@@ -18,6 +18,12 @@ test.describe('Smoke', () => {
     await expect(page.locator('#main-content')).toBeVisible()
   })
 
+  test('/pt/concertos renders line-up', async ({ page }) => {
+    await page.goto('/pt/concertos')
+    await expect(page).toHaveTitle(/Concertos/i)
+    await expect(page.locator('#main-content')).toBeVisible()
+  })
+
   test('/pt/faq renders accordion', async ({ page }) => {
     await page.goto('/pt/faq')
     await expect(page).toHaveTitle(/FAQ/i)
