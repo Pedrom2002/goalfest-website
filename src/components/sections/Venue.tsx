@@ -192,6 +192,15 @@ export default function Venue() {
           </div>
           <p className="text-white text-xl md:text-2xl font-bold mb-1">{t('venue_title')}</p>
           <p className="text-white/70 text-sm">{t('addr')}</p>
+
+          <div className="mt-6 inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 rounded-full border border-[#43B02A]/25 bg-[#43B02A]/5 px-6 py-3">
+            <span className="text-[#43B02A] text-xs uppercase tracking-[0.25em] font-semibold">{t('hours_title')}</span>
+            <span className="hidden sm:block h-4 w-px bg-white/15" />
+            <span className="text-white/85 text-sm font-medium">{t('hours_weekday')}</span>
+            <span className="hidden sm:block h-4 w-px bg-white/15" />
+            <span className="text-white/85 text-sm font-medium">{t('hours_weekend')}</span>
+          </div>
+
           <a
             href="https://maps.google.com/?q=38.7659217,-9.1187136"
             target="_blank"

@@ -62,6 +62,8 @@
     "access": "Fully accessible venue. Reserved areas for reduced mobility.",
     "hours_title": "Hours",
     "hours": "Doors open 1h before each match.",
+    "hours_weekday": "Sun–Thu · 12pm–10pm",
+    "hours_weekend": "Fri–Sat · 12pm–2am",
     "model_unavailable": "3D model unavailable",
     "tag": "The Venue",
     "venue_title": "Vale do Silêncio",
