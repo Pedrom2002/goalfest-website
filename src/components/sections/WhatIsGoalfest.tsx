@@ -24,7 +24,7 @@ export default async function WhatIsGoalfest() {
     isConcerts: 'isConcerts' in f && f.isConcerts === true ? true : false,
   }))
 
-  const stats = ((['matches', 'concerts', 'hours'] as const)).map((key) => ({
+  const stats = ((['matches', 'concerts'] as const)).map((key) => ({
     value: t(`stats.${key}_value`),
     label: t(`stats.${key}_label`),
   }))

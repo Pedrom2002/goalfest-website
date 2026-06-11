@@ -143,9 +143,7 @@
       "matches_value": "+50",
       "matches_label": "jogos transmitidos",
       "concerts_value": "+10",
-      "concerts_label": "concertos",
-      "hours_value": "10h–02h",
-      "hours_label": "horário diário"
+      "concerts_label": "concertos"
     }
   }
 }
