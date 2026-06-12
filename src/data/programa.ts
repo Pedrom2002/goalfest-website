@@ -40,7 +40,6 @@ export const PROGRAMA: ProgramaDay[] = [
     dayLabel: { pt: 'Sábado', en: 'Saturday' },
     events: [
       { time: '11H', title: 'Abertura do Recinto', type: 'abertura' },
-      { time: '11H', title: 'Receção Alberto Lopes (Ingleses FC)', type: 'atividade', detail: 'Xadrez e Petanca feitos à mão' },
       { time: '11H', title: 'Jogos Tradicionais', type: 'atividade', detail: 'Zona Kids' },
       { time: '17H', title: 'Live Talk', type: 'atividade' },
       { time: '18H', title: 'DJ Johny', type: 'dj' },
