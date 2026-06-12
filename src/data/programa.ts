@@ -58,7 +58,8 @@ export const PROGRAMA: ProgramaDay[] = [
       { time: '11H', title: 'Jogos Tradicionais', type: 'atividade' },
       { time: '12H', title: 'Troca de Cromos do Mundial', type: 'atividade' },
       { time: '15H', title: 'DJ Johny', type: 'dj' },
-      { time: '18H', title: 'Encerramento do Recinto', type: 'encerramento' },
+      { time: '18H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Alemanha x Curaçao' },
+      { time: '20H', title: 'Encerramento do Recinto', type: 'encerramento' },
     ],
   },
 ]
