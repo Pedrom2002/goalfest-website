@@ -46,6 +46,17 @@
     "empty_title": "Line-up em breve",
     "empty_body": "Os artistas confirmados serão anunciados em breve. Fica atento!"
   },
+  "programa": {
+    "title": "Programa",
+    "subtitle": "O que acontece cada dia",
+    "heading": "Programa Diário",
+    "type_abertura": "Abertura",
+    "type_encerramento": "Encerramento",
+    "type_dj": "DJ Set",
+    "type_concerto": "Concerto",
+    "type_jogo": "Jogo",
+    "type_atividade": "Atividade"
+  },
   "venue": {
     "title": "O Local",
     "address_label": "Morada",

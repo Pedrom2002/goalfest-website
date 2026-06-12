@@ -46,6 +46,17 @@
     "empty_title": "Line-up coming soon",
     "empty_body": "The confirmed artists will be announced soon. Stay tuned!"
   },
+  "programa": {
+    "title": "Programme",
+    "subtitle": "What happens each day",
+    "heading": "Daily Programme",
+    "type_abertura": "Opening",
+    "type_encerramento": "Closing",
+    "type_dj": "DJ Set",
+    "type_concerto": "Concert",
+    "type_jogo": "Match",
+    "type_atividade": "Activity"
+  },
   "venue": {
     "title": "The Venue",
     "address_label": "Address",
