@@ -7,9 +7,11 @@ import Hero from '@/components/sections/Hero'
 import Venue from '@/components/sections/Venue'
 import Sponsors from '@/components/sections/Sponsors'
 import WhatIsGoalfest from '@/components/sections/WhatIsGoalfest'
+import Programa from '@/components/sections/Programa'
 import FaqSection from '@/components/sections/FaqSection'
 import NewsletterSection from '@/components/sections/NewsletterSection'
 import sponsorsData from '@/data/sponsors.json'
+import { PROGRAMA } from '@/data/programa'
 import type { SponsorsData } from '@/types'
 
 export function generateStaticParams() {
@@ -116,6 +118,8 @@ export default async function LandingPage({
         <Hero />
         <Divider />
         <WhatIsGoalfest />
+        <Divider />
+        <Programa days={PROGRAMA} />
         <Divider />
         <Venue />
         <Divider />

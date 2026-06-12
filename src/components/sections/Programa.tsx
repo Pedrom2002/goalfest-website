@@ -15,7 +15,7 @@ import type { ProgramaDay, ProgramaEventType } from '@/data/programa'
 
 const EVENT_CONFIG: Record<
   ProgramaEventType,
-  { icon: React.ComponentType<{ size?: number; className?: string }>; color: string; bg: string }
+  { icon: React.ComponentType<{ size?: number; className?: string; style?: React.CSSProperties }>; color: string; bg: string }
 > = {
   abertura:     { icon: DoorOpen,   color: '#43B02A', bg: 'bg-[#43B02A]/15' },
   encerramento: { icon: DoorClosed, color: '#43B02A', bg: 'bg-[#43B02A]/15' },
@@ -30,6 +30,8 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
   const locale = useLocale()
   const [activeIdx, setActiveIdx] = useState(0)
   const activeDay = days[activeIdx]
+
+  if (!activeDay) return null
 
   return (
     <section className="py-16 px-4 max-w-3xl mx-auto">
