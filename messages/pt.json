@@ -141,18 +141,12 @@
       "concerts_body": "Atuações ao vivo de grandes nomes da música portuguesa e internacional nos dias de jogo.",
       "gaming_title": "Zona Gaming",
       "gaming_body": "Consolas disponíveis para todos. Participa nas competições e mostra quem é o melhor.",
-      "football_title": "Football Park",
-      "football_body": "Competições e torneios de futebol 5vs5 para todos os escalões, com prémios para os melhores.",
       "kids_title": "Zona Kids",
       "kids_body": "Espaço dedicado às crianças com atividades, animação e entretenimento para os mais novos.",
       "food_title": "Food Court",
       "food_body": "Food trucks, bar e restaurante gourmet para todos os gostos.",
       "fun_title": "Fun Activities",
-      "fun_body": "Roda gigante com vista sobre o recinto e parede de escalada para os mais aventureiros. Diversão para toda a família.",
-      "golden_title": "Golden Circle",
-      "golden_body": "Área paga com acesso exclusivo à zona reservada mais próxima do ecrã gigante, com bar exclusivo. A melhor vista garantida.",
-      "vip_title": "VIP Lounge",
-      "vip_body": "Lounge exclusivo por convite. Um espaço reservado para viver o evento de forma única e privilegiada."
+      "fun_body": "Roda gigante com vista sobre o recinto e parede de escalada para os mais aventureiros. Diversão para toda a família."
     },
     "stats": {
       "matches_value": "+50",

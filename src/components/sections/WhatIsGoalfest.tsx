@@ -5,12 +5,9 @@ const FEATURE_KEYS = [
   { titleKey: 'features.matches_title', bodyKey: 'features.matches_body', isMatches: true },
   { titleKey: 'features.concerts_title', bodyKey: 'features.concerts_body', isConcerts: true },
   { titleKey: 'features.gaming_title', bodyKey: 'features.gaming_body' },
-  { titleKey: 'features.football_title', bodyKey: 'features.football_body' },
   { titleKey: 'features.kids_title', bodyKey: 'features.kids_body' },
   { titleKey: 'features.food_title', bodyKey: 'features.food_body' },
   { titleKey: 'features.fun_title', bodyKey: 'features.fun_body' },
-  { titleKey: 'features.golden_title', bodyKey: 'features.golden_body' },
-  { titleKey: 'features.vip_title', bodyKey: 'features.vip_body' },
 ] as const
 
 export default async function WhatIsGoalfest() {

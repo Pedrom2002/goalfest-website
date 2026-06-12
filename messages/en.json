@@ -141,18 +141,12 @@
       "concerts_body": "Live performances by major Portuguese and international music artists on match days.",
       "gaming_title": "Gaming Zone",
       "gaming_body": "Consoles available for everyone. Join the competitions and prove who's the best.",
-      "football_title": "Football Park",
-      "football_body": "5-a-side competitions and tournaments for all age groups, with prizes for the winners.",
       "kids_title": "Kids Zone",
       "kids_body": "A dedicated space for children with activities, entertainment and fun for the little ones.",
       "food_title": "Food Court",
       "food_body": "Food trucks, bar and a gourmet restaurant for every taste.",
       "fun_title": "Fun Activities",
-      "fun_body": "Ferris wheel overlooking the venue and a climbing wall for the more adventurous. Fun for the whole family.",
-      "golden_title": "Golden Circle",
-      "golden_body": "Paid access to the exclusive reserved area closest to the giant screen, with an exclusive bar. The best view, guaranteed.",
-      "vip_title": "VIP Lounge",
-      "vip_body": "Invite-only exclusive lounge. A private space to experience the event in a truly privileged way."
+      "fun_body": "Ferris wheel overlooking the venue and a climbing wall for the more adventurous. Fun for the whole family."
     },
     "stats": {
       "matches_value": "+50",

@@ -94,8 +94,6 @@ export default async function TermosPage({
               title: isPt ? '5. Bilhetes e Acesso ao Evento' : '5. Tickets and Event Access',
               items: [
                 isPt ? 'A entrada geral no recinto Goalfest é gratuita.' : 'General admission to the Goalfest venue is free.',
-                isPt ? 'O acesso ao Golden Circle é pago e sujeito a disponibilidade. A QUIC NATION, Lda reserva-se o direito de alterar condições de acesso.' : 'Access to the Golden Circle is paid and subject to availability. QUIC NATION, Lda reserves the right to change access conditions.',
-                isPt ? 'O VIP Lounge é exclusivo por convite e não está disponível para venda ao público.' : 'The VIP Lounge is invite-only and is not available for public purchase.',
                 isPt ? 'A QUIC NATION, Lda reserva-se o direito de recusar entrada a qualquer pessoa que não cumpra as regras do recinto.' : 'QUIC NATION, Lda reserves the right to refuse entry to anyone who does not comply with venue rules.',
               ],
             },
