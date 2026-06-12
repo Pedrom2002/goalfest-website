@@ -15,7 +15,7 @@ const HEADLINERS: Headliner[] = [
   { name: 'DJ Rúben da Cruz', date: '17 Jun', image: '/headliners/ruben-da-cruz.jpeg' },
   { name: 'DJ Overule',       date: '20 Jun', image: '/headliners/dj_overule137073cedefaultlarge_1024.jpg' },
   { name: 'Ben Colton',       date: '25 Jun', image: '/headliners/bencolton.jpg' },
-  { name: 'DJ Marques',       date: '26 Jun', image: '/headliners/dj_marques.jpg' },
+  { name: 'DJ Marques',       date: '26 Jun', image: '/headliners/dj-marques.jpg' },
   { name: 'Força Suprema',    date: '27 Jun', image: '/headliners/forca-suprema.jpeg' },
 ]
 
