@@ -117,9 +117,9 @@ export default async function LandingPage({
       <div className="relative z-10">
         <Hero />
         <Divider />
-        <WhatIsGoalfest />
-        <Divider />
         <Programa days={PROGRAMA} />
+        <Divider />
+        <WhatIsGoalfest />
         <Divider />
         <Venue />
         <Divider />

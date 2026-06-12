@@ -21,34 +21,34 @@ const HEADLINERS: Headliner[] = [
 
 export default function HeadlinerCarousel() {
   return (
-    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2 mb-10">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 mb-10">
       {HEADLINERS.map((h, i) => (
         <motion.div
           key={h.name}
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35, delay: i * 0.06 }}
-          className="relative aspect-[3/4] rounded-xl overflow-hidden group"
+          transition={{ duration: 0.4, delay: i * 0.07 }}
+          className="relative aspect-[2/3] rounded-2xl overflow-hidden group"
         >
           <Image
             src={h.image}
             alt={h.name}
             fill
-            sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, 14vw"
+            sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 14vw"
             className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
           />
 
           {/* Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
           {/* Date badge */}
-          <div className="absolute top-1.5 right-1.5 bg-[#C8102E] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-tight">
+          <div className="absolute top-2 right-2 bg-[#C8102E] text-white text-[10px] font-bold px-2 py-0.5 rounded-full leading-tight">
             {h.date}
           </div>
 
           {/* Name */}
-          <div className="absolute bottom-0 left-0 right-0 p-2">
-            <p className="text-white text-[10px] font-bold uppercase tracking-wide leading-tight line-clamp-2">
+          <div className="absolute bottom-0 left-0 right-0 p-3">
+            <p className="text-white text-xs font-bold uppercase tracking-wide leading-tight line-clamp-2">
               {h.name}
             </p>
           </div>

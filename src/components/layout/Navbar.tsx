@@ -73,6 +73,7 @@ export default function Navbar() {
   }
 
   const navLinks = [
+    { href: '#programa', label: t('programa') },
     { href: '#goalfest', label: t('goalfest') },
     { href: '#venue', label: t('venue') },
     { href: '#sponsors', label: t('sponsors') },

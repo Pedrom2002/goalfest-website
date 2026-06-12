@@ -35,7 +35,7 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
   if (!activeDay) return null
 
   return (
-    <section className="py-16 px-4 max-w-3xl mx-auto">
+    <section id="programa" className="py-16 px-4 max-w-3xl mx-auto">
       {/* Header */}
       <div className="flex items-center gap-3 justify-center mb-4">
         <span className="h-px w-12 bg-[#43B02A]/40" />
