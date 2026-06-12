@@ -57,7 +57,7 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 mb-8 overflow-x-auto pb-1 justify-center">
+      <div className="flex gap-2 mb-8 overflow-x-auto pb-1 justify-start sm:justify-center px-1">
         {days.map((day, i) => (
           <button
             key={day.date}
