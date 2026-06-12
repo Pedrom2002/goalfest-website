@@ -10,13 +10,13 @@ export interface Headliner {
 }
 
 const HEADLINERS: Headliner[] = [
-  { name: 'Pimba à Bruta',    date: '12 Jun', image: '/headliners/Pimbaaforça.JPG' },
+  { name: 'Pimba à Bruta',    date: '12 Jun', image: '/headliners/pimba-a-bruta.jpg' },
   { name: 'KissCam Party',    date: '13 Jun', image: '/headliners/Kisscamparty.png' },
   { name: 'DJ Rúben da Cruz', date: '17 Jun', image: '/headliners/rubendacruz.webp' },
   { name: 'DJ Overule',       date: '20 Jun', image: '/headliners/dj_overule137073cedefaultlarge_1024.jpg' },
   { name: 'Ben Colton',       date: '25 Jun', image: '/headliners/bencolton.jpg' },
   { name: 'DJ Marques',       date: '26 Jun', image: '/headliners/dj_marques.jpg' },
-  { name: 'Força Suprema',    date: '27 Jun', image: '/headliners/Força suprema.jpeg' },
+  { name: 'Força Suprema',    date: '27 Jun', image: '/headliners/forca-suprema.jpeg' },
 ]
 
 export default function HeadlinerCarousel() {
