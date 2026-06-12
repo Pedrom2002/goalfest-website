@@ -12,6 +12,7 @@ import {
   Star,
 } from 'lucide-react'
 import type { ProgramaDay, ProgramaEventType } from '@/data/programa'
+import HeadlinerCarousel from '@/components/sections/HeadlinerCarousel'
 
 const EVENT_CONFIG: Record<
   ProgramaEventType,
@@ -46,6 +47,14 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
       <h2 className="font-display text-4xl sm:text-5xl font-black text-text-primary uppercase tracking-wide text-center mb-10">
         {t('heading')}
       </h2>
+
+      {/* Headliners */}
+      <div className="relative mb-2">
+        <p className="text-text-muted text-xs uppercase tracking-[0.25em] font-medium mb-3">
+          {t('headliners_label')}
+        </p>
+        <HeadlinerCarousel />
+      </div>
 
       {/* Tabs */}
       <div className="flex gap-2 mb-8 overflow-x-auto pb-1 justify-center">
