@@ -41,9 +41,9 @@ export const PROGRAMA: ProgramaDay[] = [
     events: [
       { time: '11H', title: 'Abertura do Recinto', type: 'abertura' },
       { time: '11H', title: 'Jogos Tradicionais', type: 'atividade', detail: 'Zona Kids' },
-      { time: '17H', title: 'Live Talk', type: 'atividade' },
       { time: '18H', title: 'DJ Johny', type: 'dj' },
-      { time: '21H', title: 'KissCam Project', type: 'concerto' },
+      { time: '20H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Suíça x Catar' },
+      { time: '22H', title: 'KissCam Project', type: 'concerto', detail: '22H - 23H' },
       { time: '23H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Brasil x Marrocos' },
       { time: '01H', title: 'DJ Johny', type: 'dj' },
       { time: '02H', title: 'Encerramento do Recinto', type: 'encerramento' },
