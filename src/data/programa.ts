@@ -22,19 +22,6 @@ export interface ProgramaDay {
 
 export const PROGRAMA: ProgramaDay[] = [
   {
-    date: '2026-06-12',
-    displayDate: '12 Jun',
-    dayLabel: { pt: 'Sexta', en: 'Friday' },
-    events: [
-      { time: '15H', title: 'Abertura do Recinto', type: 'abertura' },
-      { time: '18H', title: 'DJ Macalak', type: 'dj' },
-      { time: '20H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Bósnia x Canadá' },
-      { time: '22H', title: 'Pimba à Bruta', type: 'concerto' },
-      { time: '24H', title: 'DJ Macalak', type: 'dj' },
-      { time: '02H', title: 'Encerramento do Recinto', type: 'encerramento' },
-    ],
-  },
-  {
     date: '2026-06-13',
     displayDate: '13 Jun',
     dayLabel: { pt: 'Sábado', en: 'Saturday' },
