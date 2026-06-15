@@ -27,7 +27,7 @@ export const PROGRAMA: ProgramaDay[] = [
     dayLabel: { pt: 'Segunda', en: 'Monday' },
     events: [
       { time: '11H', title: 'Abertura do Recinto', type: 'abertura' },
-      { time: '15H', title: 'DJ Ricardo Mata', type: 'dj' },
+      { time: '15H30', title: 'DJ Ricardo Mata', type: 'dj' },
       { time: '16H30', title: 'Live Talk com José Váz', type: 'atividade' },
       { time: '17H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Espanha x Cabo Verde' },
       { time: '19H', title: 'DJ Nuno Dji', type: 'dj' },
