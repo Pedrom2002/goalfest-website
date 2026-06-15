@@ -6,20 +6,8 @@
       {
         "q": "A entrada é gratuita?",
         "qEn": "Is entry free?",
-        "a": "A entrada no recinto é totalmente gratuita, qualquer pessoa pode assistir aos jogos no ecrã gigante. Existe ainda o Golden Circle, uma zona reservada com vista privilegiada para o ecrã gigante e acesso a restaurante gourmet, com entrada paga.",
-        "aEn": "Entry to the venue is completely free, everyone can watch the matches on the giant screen. There is also the Golden Circle, a reserved area with a privileged view of the giant screen and access to a gourmet restaurant, with paid entry."
-      },
-      {
-        "q": "O que é o Golden Circle?",
-        "qEn": "What is the Golden Circle?",
-        "a": "O Golden Circle é uma zona reservada com vista privilegiada para o ecrã gigante. Inclui acesso a restaurante gourmet. A entrada é paga e os lugares são limitados.",
-        "aEn": "The Golden Circle is a reserved area with a privileged view of the giant screen. It includes access to a gourmet restaurant. Entry is paid and places are limited."
-      },
-      {
-        "q": "Como posso reservar o Golden Circle?",
-        "qEn": "How do I book the Golden Circle?",
-        "a": "Entra em contacto connosco através do email info@quic.pt para saber mais sobre disponibilidade e reservas.",
-        "aEn": "Contact us at info@quic.pt to find out more about availability and bookings."
+        "a": "A entrada no recinto é totalmente gratuita, qualquer pessoa pode assistir aos jogos no ecrã gigante.",
+        "aEn": "Entry to the venue is completely free, everyone can watch the matches on the giant screen."
       }
     ]
   },
@@ -36,8 +24,8 @@
       {
         "q": "Qual o horário de funcionamento?",
         "qEn": "What are the opening hours?",
-        "a": "O recinto está aberto das 10h00 às 02h00. Os jogos são transmitidos ao vivo conforme o calendário do Mundial 2026.",
-        "aEn": "The venue is open from 10:00 to 02:00. Matches are broadcast live according to the 2026 World Cup schedule."
+        "a": "O recinto está aberto das 15h00 às 22h00 durante a semana e das 12h00 às 02h00 ao fim de semana. Os jogos são transmitidos ao vivo conforme o calendário do Mundial 2026.",
+        "aEn": "The venue is open from 3pm to 10pm on weekdays and 12pm to 2am on weekends. Matches are broadcast live according to the 2026 World Cup schedule."
       },
       {
         "q": "Que transportes posso usar?",
@@ -60,8 +48,8 @@
       {
         "q": "Há comida e bebida disponível?",
         "qEn": "Is food and drink available?",
-        "a": "Sim, existem food trucks e bar no recinto durante todo o evento. O Golden Circle tem acesso exclusivo a restaurante gourmet.",
-        "aEn": "Yes, there are food trucks and a bar on site throughout the event. The Golden Circle has exclusive access to a gourmet restaurant."
+        "a": "Sim, existem food trucks e bar no recinto durante todo o evento.",
+        "aEn": "Yes, there are food trucks and a bar on site throughout the event."
       }
     ]
   },
