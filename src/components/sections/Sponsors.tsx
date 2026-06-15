@@ -1,6 +1,5 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import type { SponsorsData } from '@/types'
 import { useInViewOnce } from '@/lib/useInViewOnce'
@@ -73,18 +72,16 @@ function SponsorLogo({ name, logo, url, large, logoScale, index, whiten }: { nam
 }
 
 export default function Sponsors({ data }: { data: SponsorsData }) {
-  const t = useTranslations('sponsors')
-
   return (
     <section id="sponsors" className="relative py-12 md:py-24 px-4" style={{ background: 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(255,215,0,0.05) 0%, transparent 70%)' }}>
       <div className="max-w-7xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
 
-        {/* Left: Patrocinadores */}
+        {/* Left: Sponsors */}
         <div className="flex flex-col items-center gap-8 px-4 md:px-8 pb-12 md:pb-0 border-b border-white/10 md:border-b-0 md:border-r md:border-white/10">
           <FadeUpHeader>
             <span className="h-px w-12 bg-gold/40" />
-            <h2 className="font-display text-3xl md:text-5xl font-black text-center text-text-primary uppercase tracking-wide">{t('title')}</h2>
+            <h2 className="font-display text-3xl md:text-5xl font-black text-center text-text-primary uppercase tracking-wide">Sponsors</h2>
             <span className="h-px w-12 bg-gold/40" />
           </FadeUpHeader>
           <div className="flex gap-6 flex-wrap justify-center">
@@ -94,11 +91,11 @@ export default function Sponsors({ data }: { data: SponsorsData }) {
           </div>
         </div>
 
-        {/* Right: Parceiros */}
+        {/* Right: Partners */}
         <div className="flex flex-col items-center gap-8 px-4 md:px-8 pt-12 md:pt-0">
           <FadeUpHeader delay={0.1}>
             <span className="h-px w-12 bg-white/20" />
-            <h2 className="font-display text-3xl md:text-5xl font-black text-center text-text-primary uppercase tracking-wide">{t('partners_label')}</h2>
+            <h2 className="font-display text-3xl md:text-5xl font-black text-center text-text-primary uppercase tracking-wide">Partners</h2>
             <span className="h-px w-12 bg-white/20" />
           </FadeUpHeader>
           <div className="flex gap-4 flex-wrap justify-center">
@@ -110,11 +107,11 @@ export default function Sponsors({ data }: { data: SponsorsData }) {
 
       </div>
 
-      {/* Accommodation Partners */}
+      {/* Hospitality Partners */}
       <div className="flex flex-col items-center gap-8 mt-12 md:mt-20 pt-12 md:pt-16 border-t border-white/10">
         <FadeUpHeader delay={0.2}>
           <span className="h-px w-12 bg-white/20" />
-          <h2 className="font-display text-3xl md:text-5xl font-black text-center text-text-primary uppercase tracking-wide">{t('accommodation_label')}</h2>
+          <h2 className="font-display text-3xl md:text-5xl font-black text-center text-text-primary uppercase tracking-wide">Hospitality Partners</h2>
           <span className="h-px w-12 bg-white/20" />
         </FadeUpHeader>
         <div className="flex gap-6 flex-wrap justify-center">
