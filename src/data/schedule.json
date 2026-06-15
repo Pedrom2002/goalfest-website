@@ -2,7 +2,7 @@
   { "date": "2026-06-11", "displayDate": "11 Jun", "matches": [{ "time": "20H", "home": "México", "away": "África do Sul", "score": "2-0" }], "artists": ["Jorge Guerreiro"] },
   { "date": "2026-06-12", "displayDate": "12 Jun", "matches": [{ "time": "20H", "home": "Canadá", "away": "Bósnia", "score": "1-1" }], "artists": ["Primeira Companhia"] },
   { "date": "2026-06-13", "displayDate": "13 Jun", "matches": [{ "time": "22H", "home": "Catar", "away": "Suíça", "score": "1-1" }, { "time": "23H", "home": "Brasil", "away": "Marrocos", "score": "1-1" }], "artists": ["Bruna Lennon"] },
-  { "date": "2026-06-14", "displayDate": "14 Jun", "matches": [{ "time": "18H", "home": "Alemanha", "away": "Curaçao", "score": "7-1" }, { "time": "21H", "home": "Holanda", "away": "Japão", "score": "2-2" }, { "time": "00H", "home": "Costa do Marfim", "away": "Equador", "score": "1-0" }], "artists": ["Silva Lining Band"] },
+  { "date": "2026-06-14", "displayDate": "14 Jun", "matches": [{ "time": "18H", "home": "Alemanha", "away": "Curaçao", "score": "7-1" }, { "time": "21H", "home": "Holanda", "away": "Japão", "score": "2-2" }], "artists": ["Silva Lining Band"] },
   { "date": "2026-06-15", "displayDate": "15 Jun", "matches": [{ "time": "17H", "home": "Espanha", "away": "Cabo Verde" }, { "time": "20H", "home": "Bélgica", "away": "Egito" }], "artists": ["Rony Fuego"] },
   { "date": "2026-06-16", "displayDate": "16 Jun", "matches": [{ "time": "20H", "home": "França", "away": "Senegal" }], "artists": ["Ben Colton"] },
   { "date": "2026-06-17", "displayDate": "17 Jun", "matches": [{ "time": "18H", "home": "Portugal", "away": "R.D. Congo" }, { "time": "21H", "home": "Inglaterra", "away": "Croácia" }], "artists": ["Nonstop"] },
