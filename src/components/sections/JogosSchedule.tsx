@@ -113,7 +113,11 @@ export default function JogosSchedule({ schedule }: { schedule: BroadcastDay[] }
                         <span className="text-text-primary text-sm font-semibold truncate">{teamName(m.home)}</span>
                         <Flag team={m.home} />
                       </div>
-                      <span className="text-text-muted/40 text-xs font-bold shrink-0 w-6 text-center">vs</span>
+                      {m.score ? (
+                        <span className="text-white text-sm font-black shrink-0 w-14 text-center tabular-nums bg-white/8 rounded px-1.5 py-0.5">{m.score}</span>
+                      ) : (
+                        <span className="text-text-muted/40 text-xs font-bold shrink-0 w-6 text-center">vs</span>
+                      )}
                       <div className="flex items-center gap-2 flex-1 min-w-0">
                         <Flag team={m.away} />
                         <span className="text-text-primary text-sm font-semibold truncate">{teamName(m.away)}</span>

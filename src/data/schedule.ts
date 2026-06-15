@@ -4,6 +4,7 @@ export interface BroadcastMatch {
   time: string
   home: string
   away: string
+  score?: string
 }
 
 export interface BroadcastDay {
