@@ -31,7 +31,6 @@ export const PROGRAMA: ProgramaDay[] = [
       { time: '16H30', title: 'Live Talk com José Váz', type: 'atividade' },
       { time: '17H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Espanha x Cabo Verde' },
       { time: '19H', title: 'DJ Nuno Dji', type: 'dj' },
-      { time: '20H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Bélgica x Egito' },
       { time: '23H', title: 'Encerramento do Recinto', type: 'encerramento' },
     ],
   },
