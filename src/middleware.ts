@@ -9,7 +9,7 @@ const MAX_BODY_BYTES = 64 * 1024
 const isProd = process.env.NODE_ENV === 'production'
 
 // Routes that belong to goalfest (outside [locale]) — skip next-intl
-const GOALFEST_ROUTE_PREFIXES = ['/i/', '/a/', '/confirmado/', '/acreditado/', '/admin', '/auth/', '/api/']
+const GOALFEST_ROUTE_PREFIXES = ['/i/', '/a/', '/confirmado/', '/acreditado/', '/admin', '/auth/', '/api/', '/tabela']
 
 function isGoalfestRoute(pathname: string): boolean {
   return GOALFEST_ROUTE_PREFIXES.some(p => pathname.startsWith(p))
@@ -134,6 +134,7 @@ export default async function middleware(request: NextRequest) {
   const isHtmlRoute =
     !pathname.startsWith('/api/') &&
     !pathname.startsWith('/_next/') &&
+    !pathname.startsWith('/tabela') &&
     !pathname.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|css|js|woff2?|ttf|map|txt|xml|mp4|hdr|glb)$/i)
 
   if (isProd && isHtmlRoute) {
