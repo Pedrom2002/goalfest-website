@@ -6,7 +6,7 @@
   { "date": "2026-06-15", "displayDate": "15 Jun", "matches": [{ "time": "17H", "home": "Espanha", "away": "Cabo Verde" }], "artists": ["Rony Fuego"] },
   { "date": "2026-06-17", "displayDate": "17 Jun", "matches": [{ "time": "18H", "home": "Portugal", "away": "R.D. Congo" }, { "time": "21H", "home": "Inglaterra", "away": "Croácia" }], "artists": ["Nonstop"] },
   { "date": "2026-06-20", "displayDate": "20 Jun", "matches": [{ "time": "18H", "home": "Holanda", "away": "Suécia" }, { "time": "21H", "home": "Alemanha", "away": "Costa do Marfim" }], "artists": ["DJ Overule"] },
-  { "date": "2026-06-21", "displayDate": "21 Jun", "matches": [{ "time": "17H", "home": "Espanha", "away": "Arábia Saudita" }, { "time": "20H", "home": "Bélgica", "away": "Irão" }, { "time": "23H", "home": "Uruguai", "away": "Cabo Verde" }], "artists": ["Soraia Ramos"] },
+  { "date": "2026-06-21", "displayDate": "21 Jun", "matches": [{ "time": "17H", "home": "Espanha", "away": "Arábia Saudita" }, { "time": "20H", "home": "Bélgica", "away": "Irão" }], "artists": ["Soraia Ramos"] },
   { "date": "2026-06-22", "displayDate": "22 Jun", "matches": [{ "time": "18H", "home": "Argentina", "away": "Áustria" }], "artists": ["Cumbia"] },
   { "date": "2026-06-23", "displayDate": "23 Jun", "matches": [{ "time": "18H", "home": "Portugal", "away": "Uzbequistão" }, { "time": "21H", "home": "Inglaterra", "away": "Gana" }], "artists": ["Dillaz / Wet Bad Gang"] },
   { "date": "2026-06-27", "displayDate": "27 Jun", "matches": [{ "time": "22H", "home": "Panamá", "away": "Inglaterra" }, { "time": "22H", "home": "Croácia", "away": "Gana" }, { "time": "00H30", "home": "Colômbia", "away": "Portugal" }], "artists": ["Força Suprema"] },
