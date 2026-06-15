@@ -15,7 +15,7 @@
   { "date": "2026-06-24", "displayDate": "24 Jun", "matches": [{ "time": "20H", "home": "Suíça", "away": "Canadá" }, { "time": "20H", "home": "Bósnia", "away": "Catar" }], "artists": ["Roda de Samba"] },
   { "date": "2026-06-25", "displayDate": "25 Jun", "matches": [{ "time": "21H", "home": "Curaçao", "away": "Costa do Marfim" }, { "time": "21H", "home": "Equador", "away": "Alemanha" }], "artists": ["Kiko Is Hot"] },
   { "date": "2026-06-26", "displayDate": "26 Jun", "matches": [{ "time": "20H", "home": "Noruega", "away": "França" }, { "time": "20H", "home": "Senegal", "away": "Iraque" }], "artists": ["DJ Marques"] },
-  { "date": "2026-06-27", "displayDate": "27 Jun", "matches": [{ "time": "22H", "home": "Panamá", "away": "Inglaterra" }, { "time": "22H", "home": "Croácia", "away": "Gana" }, { "time": "00H30", "home": "Colômbia", "away": "Portugal" }, { "time": "00H30", "home": "R.D. Congo", "away": "Uzbequistão" }], "artists": ["Força Suprema"] },
+  { "date": "2026-06-27", "displayDate": "27 Jun", "matches": [{ "time": "22H", "home": "Panamá", "away": "Inglaterra" }, { "time": "22H", "home": "Croácia", "away": "Gana" }, { "time": "00H30", "home": "Colômbia", "away": "Portugal" }], "artists": ["Força Suprema"] },
   { "date": "2026-06-28", "displayDate": "28 Jun", "matches": [{ "time": "20H", "home": "TBA", "away": "TBA" }], "artists": [] },
   { "date": "2026-06-29", "displayDate": "29 Jun", "matches": [{ "time": "18H", "home": "TBA", "away": "TBA" }, { "time": "21H30", "home": "TBA", "away": "TBA" }], "artists": [] },
   { "date": "2026-06-30", "displayDate": "30 Jun", "matches": [{ "time": "18H", "home": "TBA", "away": "TBA" }, { "time": "22H", "home": "TBA", "away": "TBA" }], "artists": [] },
