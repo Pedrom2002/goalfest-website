@@ -4,6 +4,7 @@ const GROUP_END = new Date('2026-06-27').getTime()
 const R16_END = new Date('2026-07-07').getTime()
 const QF_END = new Date('2026-07-11').getTime()
 const SF_END = new Date('2026-07-15').getTime()
+const THIRD_DATE = new Date('2026-07-18').getTime()
 
 export function phaseOf(date: string): PhaseKey {
   return new Date(date).getTime() <= GROUP_END ? 'group' : 'knockout'
@@ -16,5 +17,6 @@ export function phaseLabel(date: string, locale: 'pt' | 'en'): string {
   if (d <= R16_END) return isPt ? 'Oitavos de Final' : 'Round of 16'
   if (d <= QF_END) return isPt ? 'Quartos de Final' : 'Quarter-Finals'
   if (d <= SF_END) return isPt ? 'Meias-Finais' : 'Semi-Finals'
-  return 'Final'
+  if (d <= THIRD_DATE) return isPt ? '3.º / 4.º Lugar' : '3rd Place Play-off'
+  return isPt ? 'Final' : 'Final'
 }
