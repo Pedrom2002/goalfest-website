@@ -22,17 +22,16 @@ export interface ProgramaDay {
 
 export const PROGRAMA: ProgramaDay[] = [
   {
-    date: '2026-06-14',
-    displayDate: '14 Jun',
-    dayLabel: { pt: 'Domingo', en: 'Sunday' },
+    date: '2026-06-15',
+    displayDate: '15 Jun',
+    dayLabel: { pt: 'Segunda', en: 'Monday' },
     events: [
       { time: '11H', title: 'Abertura do Recinto', type: 'abertura' },
-      { time: '11H', title: 'Jogos Tradicionais', type: 'atividade' },
-      { time: '12H', title: 'Troca de Cromos do Mundial', type: 'atividade' },
-      { time: '15H', title: 'DJ Johny', type: 'dj' },
-      { time: '18H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Alemanha x Curaçao' },
-      { time: '20H', title: 'DJ Johny', type: 'dj' },
-      { time: '21H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Holanda x Japão' },
+      { time: '15H', title: 'DJ Ricardo Mata', type: 'dj' },
+      { time: '16H30', title: 'Live Talk com José Váz', type: 'atividade' },
+      { time: '17H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Espanha x Cabo Verde' },
+      { time: '19H', title: 'DJ Nuno Dji', type: 'dj' },
+      { time: '20H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Bélgica x Egito' },
       { time: '23H', title: 'Encerramento do Recinto', type: 'encerramento' },
     ],
   },
