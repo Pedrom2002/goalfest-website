@@ -68,6 +68,12 @@
         "qEn": "Can I bring animals?",
         "a": "Infelizmente não são permitidos animais no recinto.",
         "aEn": "Unfortunately, animals are not permitted in the venue."
+      },
+      {
+        "q": "Posso entrar com bebidas de fora?",
+        "qEn": "Can I bring my own drinks?",
+        "a": "É proibida a entrada de garrafas de vidro e de qualquer tipo de bebidas trazidas de fora do recinto.",
+        "aEn": "Glass bottles and any drinks brought from outside the venue are not allowed."
       }
     ]
   },

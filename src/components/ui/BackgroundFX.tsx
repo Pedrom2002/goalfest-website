@@ -27,7 +27,7 @@ export default function BackgroundFX() {
     () =>
       Array.from({ length: isLowPerf ? 25 : 110 }, (_, i) => ({
         x: seededRandom(i * 11) * 100,
-        y: seededRandom(i * 11 + 1) * 75,
+        y: seededRandom(i * 11 + 1) * 45,
         size: seededRandom(i * 11 + 2) * 2.0 + 0.7,
         duration: `${2 + seededRandom(i * 11 + 3) * 5}s`,
         delay: `-${seededRandom(i * 11 + 4) * 6}s`,
@@ -115,19 +115,19 @@ export default function BackgroundFX() {
         pointerEvents: 'none',
       }} />
 
-      {/* Profundidade vertical base */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        background: 'radial-gradient(ellipse 110% 70% at 50% 100%, rgba(10,30,20,0.65) 0%, rgba(8,15,25,0.3) 45%, transparent 80%)',
-        pointerEvents: 'none',
-      }} />
-
       {/* Glow pôr-do-sol no horizonte (base) */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'radial-gradient(ellipse 90% 35% at 50% 100%, rgba(255,120,60,0.30) 0%, rgba(230,80,90,0.20) 30%, rgba(160,50,90,0.12) 55%, transparent 80%)',
+        background: 'radial-gradient(ellipse 100% 45% at 50% 100%, rgba(255,140,70,0.55) 0%, rgba(255,90,90,0.4) 25%, rgba(200,60,110,0.28) 45%, rgba(120,40,90,0.15) 65%, transparent 85%)',
+        pointerEvents: 'none',
+      }} />
+
+      {/* Profundidade vertical base */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'radial-gradient(ellipse 110% 70% at 50% 100%, rgba(10,30,20,0.45) 0%, rgba(8,15,25,0.2) 45%, transparent 80%)',
         pointerEvents: 'none',
       }} />
 
