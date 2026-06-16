@@ -1,5 +1,5 @@
 import { getTranslations, getLocale } from 'next-intl/server'
-import { AnimatedHeader, AnimatedStats, AnimatedFeatureCard } from './WhatIsGoalfestAnimations'
+import { AnimatedHeader, AnimatedFeatureCard } from './WhatIsGoalfestAnimations'
 
 const FEATURE_KEYS = [
   { titleKey: 'features.matches_title', bodyKey: 'features.matches_body', isMatches: true },
@@ -19,11 +19,6 @@ export default async function WhatIsGoalfest() {
     body: t(f.bodyKey),
     isMatches: 'isMatches' in f && f.isMatches === true ? true : false,
     isConcerts: 'isConcerts' in f && f.isConcerts === true ? true : false,
-  }))
-
-  const stats = ((['matches', 'concerts'] as const)).map((key) => ({
-    value: t(`stats.${key}_value`),
-    label: t(`stats.${key}_label`),
   }))
 
   return (
@@ -51,9 +46,7 @@ export default async function WhatIsGoalfest() {
           </p>
         </AnimatedHeader>
 
-        <AnimatedStats stats={stats} />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
           {features.map((f, i) => (
             <AnimatedFeatureCard
               key={f.title}

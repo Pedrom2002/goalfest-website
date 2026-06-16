@@ -12,6 +12,6 @@
   "accommodation": [
     { "id": "a1", "name": "Hotel Roma", "logo": "/alojamento/hotel_roma.png", "url": "https://www.hotelroma.pt/pt/", "logoScale": 1.25 },
     { "id": "a2", "name": "WOT Nomad Social", "logo": "/alojamento/nomad_social.png", "url": "https://www.wotsocial.com/en/units/wot-nomad/", "logoScale": 0.7 },
-    { "id": "a3", "name": "The Central House", "logo": "/alojamento/Logotipos_Logotipo-Claim-Black.png", "url": "https://www.thecentralhouse.pt", "logoScale": 1.6 }
+    { "id": "a3", "name": "The Central House", "logo": "/alojamento/Logotipos_Logotipo-Claim-Black.png", "url": "https://www.thecentralhouse.pt", "logoScale": 2.0 }
   ]
 }

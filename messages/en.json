@@ -20,7 +20,7 @@
     "countdown_seconds": "Sec",
     "countdown_live": "Event is live!",
     "ticker_tag": "Info",
-    "ticker": "Venue opens 2h before the first match of the day · Free entry · Matches on giant screen"
+    "ticker": "Venue opens 2h before the first match of the day · Free entry · Matches on giant screen · Glass bottles and outside drinks not allowed"
   },
   "jogos": {
     "title": "Match Schedule",
@@ -149,12 +149,6 @@
       "food_body": "Food trucks, bar and a gourmet restaurant for every taste.",
       "fun_title": "Fun Activities",
       "fun_body": "Activities and entertainment for the whole family throughout the day."
-    },
-    "stats": {
-      "matches_value": "26",
-      "matches_label": "matches broadcast",
-      "concerts_value": "Live",
-      "concerts_label": "music on match nights"
     }
   }
 }

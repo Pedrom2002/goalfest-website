@@ -11,6 +11,7 @@ import ScrollRestorer from '@/components/ui/ScrollRestorer'
 import HashScroller from '@/components/ui/HashScroller'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+import InfoTicker from '@/components/ui/InfoTicker'
 import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
@@ -93,8 +94,9 @@ export default async function LocaleLayout({
           <ScrollRestorer />
           <HashScroller />
           <Navbar />
-          <main id="main-content">{children}</main>
+          <main id="main-content" className="pb-8">{children}</main>
           <Footer />
+          <InfoTicker />
         </MotionProvider>
       </NextIntlClientProvider>
     </div>

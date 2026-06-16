@@ -20,7 +20,7 @@
     "countdown_seconds": "Seg",
     "countdown_live": "Evento em curso!",
     "ticker_tag": "Informação",
-    "ticker": "Recinto abre 2h antes do primeiro jogo do dia · Entrada gratuita · Jogos em ecrã gigante"
+    "ticker": "Recinto abre 2h antes do primeiro jogo do dia · Entrada gratuita · Jogos em ecrã gigante · Proibida entrada de garrafas de vidro e bebidas de fora"
   },
   "jogos": {
     "title": "Calendário de Jogos",
@@ -149,12 +149,6 @@
       "food_body": "Food trucks, bar e restaurante gourmet para todos os gostos.",
       "fun_title": "Fun Activities",
       "fun_body": "Atividades e entretenimento para toda a família ao longo do dia."
-    },
-    "stats": {
-      "matches_value": "26",
-      "matches_label": "jogos transmitidos",
-      "concerts_value": "Live",
-      "concerts_label": "música nas noites de jogo"
     }
   }
 }

@@ -35,7 +35,7 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
   if (!activeDay) return null
 
   return (
-    <section id="programa" className="py-16 px-4 max-w-3xl mx-auto">
+    <section id="programa" className="py-20 px-4 max-w-3xl mx-auto">
       {/* Header */}
       <div className="flex items-center gap-3 justify-center mb-4">
         <span className="h-px w-12 bg-[#43B02A]/40" />
@@ -44,28 +44,31 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
         </p>
         <span className="h-px w-12 bg-[#43B02A]/40" />
       </div>
-      <h2 className="font-display text-4xl sm:text-5xl font-black text-text-primary uppercase tracking-wide text-center mb-10">
+      <h2 className="font-display text-4xl sm:text-5xl font-black text-text-primary uppercase tracking-wide text-center mb-12">
         {t('heading')}
       </h2>
 
       {/* Headliners */}
-      <div className="relative mb-2">
-        <p className="text-text-muted text-xs uppercase tracking-[0.25em] font-medium mb-3">
-          {t('headliners_label')}
-        </p>
+      <div className="relative mb-10 rounded-2xl border border-white/8 bg-bg-surface/40 p-4 sm:p-5">
+        <div className="flex items-center gap-2 mb-4">
+          <Star size={12} className="text-[#43B02A]" />
+          <p className="text-text-muted text-xs uppercase tracking-[0.25em] font-medium">
+            {t('headliners_label')}
+          </p>
+        </div>
         <HeadlinerCarousel />
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 mb-8 overflow-x-auto pb-1 justify-start sm:justify-center px-1">
+      <div className="flex gap-2.5 mb-10 overflow-x-auto pb-2 justify-start sm:justify-center px-1">
         {days.map((day, i) => (
           <button
             key={day.date}
             onClick={() => setActiveIdx(i)}
-            className={`relative flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
+            className={`relative flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-semibold border transition-all duration-200 ${
               i === activeIdx
-                ? 'border-[#43B02A] text-[#43B02A] bg-[#43B02A]/10 shadow-[0_0_16px_rgba(67,176,42,0.25)]'
-                : 'border-white/10 text-text-muted hover:border-white/20 hover:text-text-primary'
+                ? 'border-[#43B02A] text-[#43B02A] bg-[#43B02A]/10 shadow-[0_0_20px_rgba(67,176,42,0.3)] scale-105'
+                : 'border-white/10 text-text-muted hover:border-white/25 hover:text-text-primary hover:bg-white/5'
             }`}
           >
             {i === activeIdx && (
@@ -95,7 +98,7 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
             style={{ background: 'linear-gradient(to bottom, rgba(67,176,42,0.5), rgba(255,255,255,0.08) 50%, rgba(67,176,42,0.5))' }}
           />
 
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-2">
             {activeDay.events.map((event, i) => {
               const cfg = EVENT_CONFIG[event.type]
               const Icon = cfg.icon

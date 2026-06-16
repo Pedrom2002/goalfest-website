@@ -8,7 +8,7 @@ export default function InfoTicker() {
 
   return (
     <div
-      className="absolute bottom-0 left-0 right-0 z-20 flex items-center bg-black/70 backdrop-blur-sm border-t border-[#43B02A]/30 overflow-hidden h-9"
+      className="fixed bottom-0 left-0 right-0 z-40 flex items-center bg-black/85 backdrop-blur-sm border-t border-[#43B02A]/30 overflow-hidden h-8"
       aria-label={message}
     >
       <span className="shrink-0 bg-[#43B02A] text-black text-[10px] font-bold uppercase tracking-widest px-3 h-full flex items-center z-10">

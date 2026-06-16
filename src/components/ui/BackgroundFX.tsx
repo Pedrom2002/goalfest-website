@@ -119,23 +119,15 @@ export default function BackgroundFX() {
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'radial-gradient(ellipse 100% 45% at 50% 100%, rgba(255,140,70,0.55) 0%, rgba(255,90,90,0.4) 25%, rgba(200,60,110,0.28) 45%, rgba(120,40,90,0.15) 65%, transparent 85%)',
+        background: 'radial-gradient(ellipse 110% 55% at 50% 100%, rgba(255,170,80,0.75) 0%, rgba(255,110,80,0.55) 20%, rgba(230,70,100,0.4) 40%, rgba(150,50,100,0.22) 60%, transparent 82%)',
         pointerEvents: 'none',
       }} />
 
-      {/* Profundidade vertical base */}
+      {/* Glow difuso azul/vermelho subtil (sem verde, não compete com o pôr-do-sol) */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'radial-gradient(ellipse 110% 70% at 50% 100%, rgba(10,30,20,0.45) 0%, rgba(8,15,25,0.2) 45%, transparent 80%)',
-        pointerEvents: 'none',
-      }} />
-
-      {/* Glow tricolor difuso */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        background: 'radial-gradient(ellipse 70% 50% at 15% 80%, rgba(0,51,160,0.13) 0%, transparent 60%), radial-gradient(ellipse 70% 50% at 85% 80%, rgba(200,16,46,0.11) 0%, transparent 60%), radial-gradient(ellipse 90% 55% at 50% 100%, rgba(67,176,42,0.16) 0%, transparent 65%)',
+        background: 'radial-gradient(ellipse 70% 50% at 15% 85%, rgba(0,51,160,0.10) 0%, transparent 60%), radial-gradient(ellipse 70% 50% at 85% 85%, rgba(200,16,46,0.09) 0%, transparent 60%)',
         pointerEvents: 'none',
         animation: 'hazeShift 24s ease-in-out infinite',
       }} />
@@ -214,14 +206,14 @@ export default function BackgroundFX() {
         )
       })}
 
-      {/* Névoa baixa — camada 1 (verde subtil) */}
+      {/* Névoa baixa — camada 1 (quente, reforça o pôr-do-sol) */}
       <div style={{
         position: 'absolute',
         left: '-15%',
         right: '-15%',
         bottom: 0,
         height: '40vh',
-        background: 'radial-gradient(ellipse 60% 100% at 30% 100%, rgba(67,176,42,0.24) 0%, transparent 70%), radial-gradient(ellipse 70% 100% at 70% 100%, rgba(67,176,42,0.18) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse 60% 100% at 30% 100%, rgba(255,140,70,0.22) 0%, transparent 70%), radial-gradient(ellipse 70% 100% at 70% 100%, rgba(230,80,90,0.18) 0%, transparent 70%)',
         filter: 'blur(14px)',
         pointerEvents: 'none',
         animation: 'fogDrift 22s ease-in-out infinite',

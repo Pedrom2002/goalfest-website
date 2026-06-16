@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useInViewOnce } from '@/lib/useInViewOnce'
 
 type Feature = { title: string; body: string; isMatches?: boolean; isConcerts?: boolean }
-type Stat = { value: string; label: string }
 
 const FADE_UP_STYLE = (seen: boolean, delay = 0): React.CSSProperties => ({
   opacity: seen ? 1 : 0,
@@ -18,39 +17,6 @@ export function AnimatedHeader({ children }: { children: React.ReactNode }) {
   return (
     <div ref={ref} className="text-center mb-6" style={FADE_UP_STYLE(seen)}>
       {children}
-    </div>
-  )
-}
-
-const STAT_COLORS = ['#0033A0', '#43B02A', '#C8102E']
-
-export function AnimatedStats({ stats }: { stats: Stat[] }) {
-  const { ref, seen } = useInViewOnce<HTMLDivElement>()
-  return (
-    <div
-      ref={ref}
-      className="flex flex-wrap justify-center gap-8 md:gap-12 my-12 md:my-16"
-      style={FADE_UP_STYLE(seen, 0.15)}
-    >
-      {stats.map((s, i) => (
-        <div key={s.label} className="text-center">
-          {i === 2 ? (
-            <>
-              <div className="inline-flex items-center gap-1.5 mb-1">
-                <span className="font-display text-3xl md:text-4xl font-black" style={{ color: STAT_COLORS[2] }}>10h</span>
-                <span className="text-text-muted/50 text-xl">–</span>
-                <span className="font-display text-3xl md:text-4xl font-black" style={{ color: STAT_COLORS[2] }}>02h</span>
-              </div>
-              <p className="text-text-muted text-xs uppercase tracking-widest">{s.label}</p>
-            </>
-          ) : (
-            <>
-              <p className="font-display text-3xl md:text-4xl font-black" style={{ color: STAT_COLORS[i % 3] }}>{s.value}</p>
-              <p className="text-text-muted text-xs uppercase tracking-widest mt-1">{s.label}</p>
-            </>
-          )}
-        </div>
-      ))}
     </div>
   )
 }
