@@ -2,7 +2,7 @@ const NEXT_PUBLIC_VIDEO_HERO =
   process.env.NEXT_PUBLIC_VIDEO_HERO ?? "";
 
 const NEXT_PUBLIC_MODEL_VENUE =
-  process.env.NEXT_PUBLIC_MODEL_VENUE ?? "/plantareduzida.glb";
+  process.env.NEXT_PUBLIC_MODEL_VENUE ?? "/glbmaisrecente.glb";
 
 const NEXT_PUBLIC_ENV_VENUE =
   process.env.NEXT_PUBLIC_ENV_VENUE ?? "";

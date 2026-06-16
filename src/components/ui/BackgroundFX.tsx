@@ -44,7 +44,7 @@ export default function BackgroundFX() {
         className="fixed inset-0 pointer-events-none overflow-hidden z-0"
         aria-hidden
         style={{
-          background: 'linear-gradient(to bottom, #0a1525 0%, #0a1220 60%, #050a14 100%)',
+          background: 'linear-gradient(to bottom, #2b1f3d 0%, #281a35 22%, #18182c 50%, #0e1322 75%, #050a14 100%)',
           transform: 'translateZ(0)',
         }}
       >
@@ -111,7 +111,7 @@ export default function BackgroundFX() {
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'linear-gradient(to bottom, #0a1525 0%, #0a1220 60%, #050a14 100%)',
+        background: 'linear-gradient(to bottom, #2b1f3d 0%, #281a35 22%, #18182c 50%, #0e1322 75%, #050a14 100%)',
         pointerEvents: 'none',
       }} />
 
