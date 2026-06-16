@@ -25,7 +25,7 @@ export default function BackgroundFX() {
 
   const stars = useMemo(
     () =>
-      Array.from({ length: isLowPerf ? 40 : 180 }, (_, i) => ({
+      Array.from({ length: isLowPerf ? 25 : 110 }, (_, i) => ({
         x: seededRandom(i * 11) * 100,
         y: seededRandom(i * 11 + 1) * 75,
         size: seededRandom(i * 11 + 2) * 2.0 + 0.7,
@@ -120,6 +120,14 @@ export default function BackgroundFX() {
         position: 'absolute',
         inset: 0,
         background: 'radial-gradient(ellipse 110% 70% at 50% 100%, rgba(10,30,20,0.65) 0%, rgba(8,15,25,0.3) 45%, transparent 80%)',
+        pointerEvents: 'none',
+      }} />
+
+      {/* Glow pôr-do-sol no horizonte (base) */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'radial-gradient(ellipse 90% 35% at 50% 100%, rgba(255,120,60,0.30) 0%, rgba(230,80,90,0.20) 30%, rgba(160,50,90,0.12) 55%, transparent 80%)',
         pointerEvents: 'none',
       }} />
 
