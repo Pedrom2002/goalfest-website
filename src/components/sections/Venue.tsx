@@ -307,7 +307,7 @@ export default function Venue() {
           </div>
           <div className="w-full rounded-2xl overflow-hidden border border-white/8 bg-bg-3d/50 backdrop-blur-sm shadow-[0_0_60px_rgba(0,200,81,0.05)] p-2 sm:p-4">
             <Image
-              src="/versao11_legenda.png"
+              src="/versao11transparente_legenda.png"
               alt={t('map_alt')}
               width={8001}
               height={4500}
