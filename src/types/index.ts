@@ -35,6 +35,7 @@ export interface Sponsor {
   logo: string | null
   url?: string
   logoScale?: number
+  whiten?: boolean
 }
 
 export interface SponsorsData {

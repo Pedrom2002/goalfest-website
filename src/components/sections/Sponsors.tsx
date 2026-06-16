@@ -116,7 +116,7 @@ export default function Sponsors({ data }: { data: SponsorsData }) {
         </FadeUpHeader>
         <div className="flex gap-6 flex-wrap justify-center">
           {data.accommodation.map((s, i) => (
-            <SponsorLogo key={s.id} name={s.name} logo={s.logo} {...(s.url !== undefined && { url: s.url })} {...(s.logoScale !== undefined && { logoScale: s.logoScale })} whiten large index={i} />
+            <SponsorLogo key={s.id} name={s.name} logo={s.logo} {...(s.url !== undefined && { url: s.url })} {...(s.logoScale !== undefined && { logoScale: s.logoScale })} whiten={s.whiten !== false} large index={i} />
           ))}
         </div>
       </div>
