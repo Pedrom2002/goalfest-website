@@ -155,13 +155,13 @@ export default function Venue() {
             transform: 'scaleX(-1) translateZ(0)',
             zIndex: 0,
             filter: isMobile
-              ? 'brightness(0.32) saturate(0.55) hue-rotate(15deg) contrast(1.05)'
+              ? 'brightness(0.45) saturate(0.55) hue-rotate(15deg) contrast(1.05)'
               : undefined,
           }}
         />
         {!isMobile && (
           <div className="absolute inset-0" style={{
-            background: 'linear-gradient(to bottom, rgba(13,26,13,1) 0%, rgba(0,0,0,0.78) 20%, rgba(0,0,0,0.78) 80%, rgba(13,26,13,1) 100%)',
+            background: 'linear-gradient(to bottom, rgba(13,26,13,1) 0%, rgba(0,0,0,0.55) 20%, rgba(0,0,0,0.55) 80%, rgba(13,26,13,1) 100%)',
             transform: 'translate3d(0,0,0)',
             zIndex: 1,
             willChange: 'transform',
