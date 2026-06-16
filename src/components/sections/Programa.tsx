@@ -62,12 +62,15 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
           <button
             key={day.date}
             onClick={() => setActiveIdx(i)}
-            className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
+            className={`relative flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
               i === activeIdx
-                ? 'border-[#43B02A] text-[#43B02A] bg-[#43B02A]/10'
-                : 'border-white/10 text-text-muted hover:border-white/20'
+                ? 'border-[#43B02A] text-[#43B02A] bg-[#43B02A]/10 shadow-[0_0_16px_rgba(67,176,42,0.25)]'
+                : 'border-white/10 text-text-muted hover:border-white/20 hover:text-text-primary'
             }`}
           >
+            {i === activeIdx && (
+              <span className="absolute -top-1.5 -right-1.5 w-2.5 h-2.5 rounded-full bg-[#43B02A] animate-pulse" />
+            )}
             {day.displayDate}
             <span className="ml-1.5 text-xs font-normal opacity-70">
               {locale === 'pt' ? day.dayLabel.pt : day.dayLabel.en}
@@ -87,7 +90,10 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
           className="relative"
         >
           {/* Vertical line */}
-          <div className="absolute left-[2.35rem] top-3 bottom-3 w-px bg-white/8" />
+          <div
+            className="absolute left-[2.35rem] top-3 bottom-3 w-px"
+            style={{ background: 'linear-gradient(to bottom, rgba(67,176,42,0.5), rgba(255,255,255,0.08) 50%, rgba(67,176,42,0.5))' }}
+          />
 
           <div className="flex flex-col gap-1">
             {activeDay.events.map((event, i) => {
@@ -111,12 +117,16 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
                   <div className="flex flex-col items-center flex-shrink-0 pt-2">
                     <div
                       className="w-3 h-3 rounded-full border-2 flex-shrink-0"
-                      style={{ borderColor: cfg.color, backgroundColor: `${cfg.color}33` }}
+                      style={{ borderColor: cfg.color, backgroundColor: `${cfg.color}33`, boxShadow: `0 0 10px ${cfg.color}88` }}
                     />
                   </div>
 
                   {/* Content */}
-                  <div className={`flex items-center gap-3 rounded-xl px-3 py-2 mb-1 flex-1 ${cfg.bg}`}>
+                  <div
+                    className={`flex items-center gap-3 rounded-xl px-3 py-2 mb-1 flex-1 border border-transparent transition-all duration-200 hover:scale-[1.015] ${cfg.bg}`}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${cfg.color}55` }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'transparent' }}
+                  >
                     <div
                       className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
                       style={{ backgroundColor: `${cfg.color}22` }}
