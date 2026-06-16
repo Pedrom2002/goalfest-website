@@ -44,7 +44,7 @@ export default function BackgroundFX() {
         className="fixed inset-0 pointer-events-none overflow-hidden z-0"
         aria-hidden
         style={{
-          background: 'linear-gradient(to bottom, #241b33 0%, #1c1830 25%, #141828 50%, #0c1220 75%, #050a14 100%)',
+          background: 'linear-gradient(to bottom, #0a1228 0%, #101630 35%, #1a1a38 58%, #2a2240 74%, #43314a 86%, #614049 94%, #7a5248 100%)',
           transform: 'translateZ(0)',
         }}
       >
@@ -107,21 +107,21 @@ export default function BackgroundFX() {
         }
       `}</style>
 
-      {/* Base — anoitecer suave (roxo no topo, azul-noite em baixo) */}
+      {/* Céu pôr-do-sol realista — índigo no topo, faixa quente subtil no horizonte */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'linear-gradient(to bottom, #241b33 0%, #1c1830 25%, #141828 50%, #0c1220 75%, #050a14 100%)',
+        background: 'linear-gradient(to bottom, #0a1228 0%, #101630 35%, #1a1a38 58%, #2a2240 74%, #43314a 86%, #614049 94%, #7a5248 100%)',
         pointerEvents: 'none',
       }} />
 
-      {/* Glow difuso azul/vermelho subtil */}
+      {/* Brilho do sol no horizonte (subtil, baixo) */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'radial-gradient(ellipse 70% 50% at 15% 85%, rgba(0,51,160,0.10) 0%, transparent 60%), radial-gradient(ellipse 70% 50% at 85% 85%, rgba(200,16,46,0.09) 0%, transparent 60%)',
+        background: 'radial-gradient(ellipse 70% 22% at 50% 103%, rgba(230,150,90,0.28) 0%, rgba(200,100,80,0.15) 40%, transparent 72%)',
         pointerEvents: 'none',
-        animation: 'hazeShift 24s ease-in-out infinite',
+        animation: 'hazeShift 28s ease-in-out infinite',
       }} />
 
 {/* Estrelas (só metade superior) */}
@@ -198,30 +198,17 @@ export default function BackgroundFX() {
         )
       })}
 
-      {/* Névoa baixa — camada 1 (quente subtil) */}
+      {/* Névoa baixa — brilho quente do horizonte */}
       <div style={{
         position: 'absolute',
         left: '-15%',
         right: '-15%',
         bottom: 0,
-        height: '40vh',
-        background: 'radial-gradient(ellipse 60% 100% at 30% 100%, rgba(255,140,70,0.08) 0%, transparent 70%), radial-gradient(ellipse 70% 100% at 70% 100%, rgba(230,80,90,0.06) 0%, transparent 70%)',
-        filter: 'blur(14px)',
+        height: '42vh',
+        background: 'radial-gradient(ellipse 65% 100% at 35% 100%, rgba(230,150,90,0.08) 0%, transparent 72%), radial-gradient(ellipse 70% 100% at 70% 100%, rgba(200,100,90,0.06) 0%, transparent 72%)',
+        filter: 'blur(18px)',
         pointerEvents: 'none',
         animation: 'fogDrift 22s ease-in-out infinite',
-      }} />
-
-      {/* Névoa baixa — camada 2 (azul subtil) */}
-      <div style={{
-        position: 'absolute',
-        left: '-15%',
-        right: '-15%',
-        bottom: 0,
-        height: '32vh',
-        background: 'radial-gradient(ellipse 55% 100% at 50% 100%, rgba(0,51,160,0.16) 0%, transparent 70%), radial-gradient(ellipse 40% 100% at 85% 100%, rgba(200,16,46,0.11) 0%, transparent 75%)',
-        filter: 'blur(16px)',
-        pointerEvents: 'none',
-        animation: 'fogDriftAlt 28s ease-in-out infinite',
       }} />
 
       {/* Grain/noise texture — coesão cinematográfica */}
@@ -234,11 +221,11 @@ export default function BackgroundFX() {
         pointerEvents: 'none',
       }} />
 
-      {/* Vignette nos cantos */}
+      {/* Vignette no topo/cantos (não escurece o horizonte) */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'radial-gradient(ellipse 90% 80% at 50% 50%, transparent 50%, rgba(0,0,0,0.55) 100%)',
+        background: 'radial-gradient(ellipse 95% 75% at 50% 35%, transparent 55%, rgba(0,0,0,0.45) 100%)',
         pointerEvents: 'none',
       }} />
     </div>

@@ -37,7 +37,7 @@ export const PROGRAMA: ProgramaDay[] = [
     displayDate: '17 Jun',
     dayLabel: { pt: 'Quarta', en: 'Wednesday' },
     events: [
-      { time: '15H', title: 'Abertura do Recinto', type: 'abertura' },
+      { time: '16H', title: 'Abertura do Recinto', type: 'abertura' },
       { time: '18H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Portugal x R.D. Congo' },
       { time: '20H', title: 'DJ Rúben da Cruz', type: 'dj' },
       { time: '21H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Inglaterra x Croácia' },
@@ -61,7 +61,7 @@ export const PROGRAMA: ProgramaDay[] = [
     displayDate: '19 Jun',
     dayLabel: { pt: 'Sexta', en: 'Friday' },
     events: [
-      { time: '15H', title: 'Abertura do Recinto', type: 'abertura' },
+      { time: '18H', title: 'Abertura do Recinto', type: 'abertura' },
       { time: '20H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'EUA x Austrália' },
       { time: '22H', title: 'Concerto a anunciar', type: 'concerto' },
       { time: '23H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Escócia x Marrocos' },
@@ -73,7 +73,7 @@ export const PROGRAMA: ProgramaDay[] = [
     displayDate: '20 Jun',
     dayLabel: { pt: 'Sábado', en: 'Saturday' },
     events: [
-      { time: '11H', title: 'Abertura do Recinto', type: 'abertura' },
+      { time: '16H', title: 'Abertura do Recinto', type: 'abertura' },
       { time: '18H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Holanda x Suécia' },
       { time: '21H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Alemanha x Costa do Marfim' },
       { time: '23H', title: 'DJ Overule', type: 'dj' },
@@ -85,7 +85,7 @@ export const PROGRAMA: ProgramaDay[] = [
     displayDate: '21 Jun',
     dayLabel: { pt: 'Domingo', en: 'Sunday' },
     events: [
-      { time: '11H', title: 'Abertura do Recinto', type: 'abertura' },
+      { time: '15H', title: 'Abertura do Recinto', type: 'abertura' },
       { time: '17H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Espanha x Arábia Saudita' },
       { time: '19H', title: 'DJ Johny', type: 'dj' },
       { time: '20H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Bélgica x Irão' },

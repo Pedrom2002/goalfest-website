@@ -22,9 +22,9 @@ export function AnimatedHeader({ children }: { children: React.ReactNode }) {
 }
 
 const CARD_COLORS = [
-  { border: '#0033A0', linkColor: '#6e9bff', shadow: '0,51,160',  bgBase: '#1c2940', bgAccent: 'rgba(0,51,160,0.22)' },
-  { border: '#43B02A', linkColor: '#43B02A', shadow: '67,176,42', bgBase: '#1d3322', bgAccent: 'rgba(67,176,42,0.22)' },
-  { border: '#C8102E', linkColor: '#ff7a8f', shadow: '200,16,46', bgBase: '#33202a', bgAccent: 'rgba(200,16,46,0.22)' },
+  { border: '#4f74e8', linkColor: '#bcd0ff', shadow: '0,51,160',  bgBase: '#26375e', bgAccent: 'rgba(79,116,232,0.45)' },
+  { border: '#5fce42', linkColor: '#cdf5bc', shadow: '67,176,42', bgBase: '#274d2f', bgAccent: 'rgba(95,206,66,0.42)' },
+  { border: '#f04a63', linkColor: '#ffc6cf', shadow: '200,16,46', bgBase: '#5a2632', bgAccent: 'rgba(240,74,99,0.42)' },
 ]
 
 export function AnimatedFeatureCard({
@@ -49,9 +49,9 @@ export function AnimatedFeatureCard({
       ref={ref}
       className="group relative rounded-2xl p-6 hover:-translate-y-1"
       style={{
-        background: `linear-gradient(135deg, ${bgBase} 60%, ${bgAccent})`,
-        border: `1px solid ${border}77`,
-        boxShadow: `0 0 24px rgba(${shadow},0.22), inset 0 0 12px rgba(${shadow},0.05)`,
+        background: `linear-gradient(145deg, ${bgAccent} 0%, ${bgBase} 60%)`,
+        border: `1px solid ${border}aa`,
+        boxShadow: `0 8px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08)`,
         opacity: seen ? 1 : 0,
         transform: seen ? 'translateY(0)' : 'translateY(24px)',
         transition: `opacity 0.65s cubic-bezier(0.25,0.46,0.45,0.94) ${index * 0.07}s, transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94) ${index * 0.07}s, border 0.3s, box-shadow 0.3s`,
@@ -59,13 +59,13 @@ export function AnimatedFeatureCard({
       }}
       onMouseEnter={e => {
         const el = e.currentTarget
-        el.style.border = `1px solid ${border}cc`
-        el.style.boxShadow = `0 0 50px rgba(${shadow},0.45), inset 0 0 16px rgba(${shadow},0.10)`
+        el.style.border = `1px solid ${border}`
+        el.style.boxShadow = `0 8px 36px rgba(0,0,0,0.55), 0 0 28px rgba(${shadow},0.35), inset 0 1px 0 rgba(255,255,255,0.06)`
       }}
       onMouseLeave={e => {
         const el = e.currentTarget
-        el.style.border = `1px solid ${border}77`
-        el.style.boxShadow = `0 0 24px rgba(${shadow},0.22), inset 0 0 12px rgba(${shadow},0.05)`
+        el.style.border = `1px solid ${border}66`
+        el.style.boxShadow = `0 6px 28px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04)`
       }}
     >
       <div

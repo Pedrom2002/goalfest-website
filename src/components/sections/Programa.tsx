@@ -60,23 +60,17 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
       </div>
 
       {/* Tabs */}
-      <div
-        className="flex gap-2.5 mb-10 overflow-x-auto no-scrollbar pt-2 pb-2 px-4 -mx-4 justify-start sm:justify-center sm:px-1 sm:mx-0"
-        style={{ scrollbarWidth: 'none' }}
-      >
+      <div className="mb-10 flex flex-wrap justify-center gap-2.5">
         {days.map((day, i) => (
           <button
             key={day.date}
             onClick={() => setActiveIdx(i)}
-            className={`relative flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-semibold border transition-all duration-200 ${
+            className={`px-5 py-2.5 rounded-full text-sm font-semibold border transition-all duration-200 ${
               i === activeIdx
                 ? 'border-[#43B02A] text-[#43B02A] bg-[#43B02A]/10 shadow-[0_0_20px_rgba(67,176,42,0.3)]'
                 : 'border-white/10 text-text-muted hover:border-white/25 hover:text-text-primary hover:bg-white/5'
             }`}
           >
-            {i === activeIdx && (
-              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#43B02A] animate-pulse" />
-            )}
             {day.displayDate}
             <span className="ml-1.5 text-xs font-normal opacity-70">
               {locale === 'pt' ? day.dayLabel.pt : day.dayLabel.en}
@@ -95,9 +89,9 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
           transition={{ duration: 0.25 }}
           className="relative"
         >
-          {/* Vertical line */}
+          {/* Vertical line — centrada nos dots (3rem hora + 1rem gap + 0.375rem meia-bola) */}
           <div
-            className="absolute left-[2.35rem] top-3 bottom-3 w-px"
+            className="absolute left-[4.375rem] -translate-x-1/2 top-4 bottom-4 w-px"
             style={{ background: 'linear-gradient(to bottom, rgba(67,176,42,0.5), rgba(255,255,255,0.08) 50%, rgba(67,176,42,0.5))' }}
           />
 
@@ -112,15 +106,15 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2, delay: i * 0.04 }}
-                  className="flex items-start gap-4"
+                  className="flex items-center gap-4"
                 >
                   {/* Time */}
-                  <span className="w-12 text-right text-xs font-mono font-bold text-text-muted tabular-nums pt-2.5 flex-shrink-0">
+                  <span className="w-12 text-right text-xs font-mono font-bold text-text-muted tabular-nums flex-shrink-0">
                     {event.time}
                   </span>
 
                   {/* Dot */}
-                  <div className="flex flex-col items-center flex-shrink-0 pt-2">
+                  <div className="flex items-center justify-center flex-shrink-0">
                     <div
                       className="w-3 h-3 rounded-full border-2 flex-shrink-0"
                       style={{ borderColor: cfg.color, backgroundColor: `${cfg.color}33`, boxShadow: `0 0 10px ${cfg.color}88` }}
@@ -129,15 +123,22 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
 
                   {/* Content */}
                   <div
-                    className={`flex items-center gap-3 rounded-xl px-3 py-2 mb-1 flex-1 border border-transparent transition-all duration-200 hover:scale-[1.015] ${cfg.bg}`}
-                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${cfg.color}55` }}
-                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'transparent' }}
+                    className="group/ev relative flex items-center gap-3 rounded-xl px-3.5 py-2.5 mb-1 flex-1 overflow-hidden transition-all duration-200 hover:scale-[1.012]"
+                    style={{
+                      background: `linear-gradient(135deg, ${cfg.color}3a, ${cfg.color}1a 70%), rgba(28,36,46,0.6)`,
+                      border: `1px solid ${cfg.color}55`,
+                      boxShadow: `0 3px 16px rgba(0,0,0,0.3)`,
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${cfg.color}`; e.currentTarget.style.boxShadow = `0 5px 24px rgba(0,0,0,0.35), 0 0 20px ${cfg.color}44` }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${cfg.color}55`; e.currentTarget.style.boxShadow = `0 3px 16px rgba(0,0,0,0.3)` }}
                   >
+                    {/* Accent bar lateral */}
+                    <span className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={{ backgroundColor: cfg.color }} />
                     <div
-                      className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: `${cfg.color}22` }}
+                      className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ml-1"
+                      style={{ backgroundColor: `${cfg.color}26`, boxShadow: `inset 0 0 0 1px ${cfg.color}44` }}
                     >
-                      <Icon size={14} style={{ color: cfg.color }} />
+                      <Icon size={15} style={{ color: cfg.color }} />
                     </div>
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-text-primary leading-tight">

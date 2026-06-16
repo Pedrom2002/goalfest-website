@@ -20,14 +20,14 @@ const HEADLINERS: Headliner[] = [
 
 export default function HeadlinerCarousel() {
   return (
-    <div className="flex flex-nowrap gap-3 mb-10 overflow-x-auto pb-2 sm:justify-center sm:overflow-visible">
+    <div className="grid grid-cols-3 gap-2.5 sm:flex sm:flex-wrap sm:justify-center sm:gap-3 mb-10">
       {HEADLINERS.map((h, i) => (
         <motion.div
           key={h.name}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: i * 0.07 }}
-          className="relative aspect-[2/3] w-[130px] sm:w-[150px] lg:w-[160px] flex-shrink-0 rounded-2xl overflow-hidden group"
+          className="relative aspect-[2/3] w-full sm:w-[150px] lg:w-[160px] rounded-2xl overflow-hidden group"
         >
           <Image
             src={h.image}
