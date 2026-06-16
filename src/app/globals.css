@@ -21,6 +21,10 @@
   --font-dm-sans: var(--font-dm-sans), sans-serif;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;

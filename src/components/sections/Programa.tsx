@@ -60,14 +60,17 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2.5 mb-10 overflow-x-auto pt-2 pb-2 px-4 -mx-4 justify-start sm:justify-center sm:px-1 sm:mx-0">
+      <div
+        className="flex gap-2.5 mb-10 overflow-x-auto no-scrollbar pt-2 pb-2 px-4 -mx-4 justify-start sm:justify-center sm:px-1 sm:mx-0"
+        style={{ scrollbarWidth: 'none' }}
+      >
         {days.map((day, i) => (
           <button
             key={day.date}
             onClick={() => setActiveIdx(i)}
             className={`relative flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-semibold border transition-all duration-200 ${
               i === activeIdx
-                ? 'border-[#43B02A] text-[#43B02A] bg-[#43B02A]/10 shadow-[0_0_20px_rgba(67,176,42,0.3)] scale-105'
+                ? 'border-[#43B02A] text-[#43B02A] bg-[#43B02A]/10 shadow-[0_0_20px_rgba(67,176,42,0.3)]'
                 : 'border-white/10 text-text-muted hover:border-white/25 hover:text-text-primary hover:bg-white/5'
             }`}
           >

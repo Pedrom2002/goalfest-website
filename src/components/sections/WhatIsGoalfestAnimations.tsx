@@ -22,9 +22,9 @@ export function AnimatedHeader({ children }: { children: React.ReactNode }) {
 }
 
 const CARD_COLORS = [
-  { border: '#0033A0', shadow: '0,51,160',  bgBase: '#1c2940', bgAccent: 'rgba(0,51,160,0.22)' },
-  { border: '#43B02A', shadow: '67,176,42', bgBase: '#1d3322', bgAccent: 'rgba(67,176,42,0.22)' },
-  { border: '#C8102E', shadow: '200,16,46', bgBase: '#33202a', bgAccent: 'rgba(200,16,46,0.22)' },
+  { border: '#0033A0', linkColor: '#6e9bff', shadow: '0,51,160',  bgBase: '#1c2940', bgAccent: 'rgba(0,51,160,0.22)' },
+  { border: '#43B02A', linkColor: '#43B02A', shadow: '67,176,42', bgBase: '#1d3322', bgAccent: 'rgba(67,176,42,0.22)' },
+  { border: '#C8102E', linkColor: '#ff7a8f', shadow: '200,16,46', bgBase: '#33202a', bgAccent: 'rgba(200,16,46,0.22)' },
 ]
 
 export function AnimatedFeatureCard({
@@ -41,7 +41,7 @@ export function AnimatedFeatureCard({
   viewConcertsLabel: string
 }) {
   const col = index % 3
-  const { border, shadow, bgBase, bgAccent } = CARD_COLORS[col]!
+  const { border, linkColor, shadow, bgBase, bgAccent } = CARD_COLORS[col]!
   const { ref, seen } = useInViewOnce<HTMLDivElement>()
 
   return (
@@ -75,12 +75,12 @@ export function AnimatedFeatureCard({
       <h3 className="text-text-primary font-semibold text-sm uppercase tracking-wider mb-2">{feature.title}</h3>
       <p className="text-text-muted text-sm leading-relaxed">{feature.body}</p>
       {feature.isMatches && (
-        <Link href={`/${locale}/jogos`} target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs font-semibold hover:underline uppercase tracking-widest" style={{ color: border }}>
+        <Link href={`/${locale}/jogos`} target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs font-semibold hover:underline uppercase tracking-widest" style={{ color: linkColor }}>
           {viewScheduleLabel}
         </Link>
       )}
       {feature.isConcerts && (
-        <Link href={`/${locale}/concertos`} target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs font-semibold hover:underline uppercase tracking-widest" style={{ color: border }}>
+        <Link href={`/${locale}/concertos`} target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs font-semibold hover:underline uppercase tracking-widest" style={{ color: linkColor }}>
           {viewConcertsLabel}
         </Link>
       )}
