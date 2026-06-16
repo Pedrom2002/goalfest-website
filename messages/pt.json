@@ -26,7 +26,7 @@
     "title": "Calendário de Jogos",
     "subtitle": "Programação",
     "heading": "Jogos Transmitidos",
-    "count": "+50 jogos ao vivo · FIFA World Cup 2026",
+    "count": "26 jogos ao vivo · FIFA World Cup 2026",
     "tba": "A definir",
     "back": "Voltar ao início",
     "filter_all": "Todos",
@@ -43,7 +43,7 @@
     "title": "Concertos",
     "subtitle": "Line-up",
     "heading": "Concertos",
-    "count": "+10 concertos ao vivo · Goalfest 2026",
+    "count": "Música ao vivo nas noites de jogo · Goalfest 2026",
     "back": "Voltar ao início",
     "stage_default": "Palco Principal",
     "empty_title": "Line-up em breve",
@@ -138,9 +138,9 @@
     "view_concerts": "Ver concertos",
     "features": {
       "matches_title": "Jogos do Mundial",
-      "matches_body": "+50 jogos da FIFA World Cup 2026 transmitidos ao vivo num ecrã gigante de alta definição.",
+      "matches_body": "Jogos da FIFA World Cup 2026 transmitidos ao vivo num ecrã gigante de alta definição.",
       "concerts_title": "Concertos",
-      "concerts_body": "Atuações ao vivo de grandes nomes da música portuguesa e internacional nos dias de jogo.",
+      "concerts_body": "DJs e artistas a animar as noites de jogo no Vale do Silêncio.",
       "gaming_title": "Zona Gaming",
       "gaming_body": "Consolas disponíveis para todos.",
       "kids_title": "Zona Kids",
@@ -151,10 +151,10 @@
       "fun_body": "Diversão para toda a família."
     },
     "stats": {
-      "matches_value": "+50",
+      "matches_value": "26",
       "matches_label": "jogos transmitidos",
-      "concerts_value": "+10",
-      "concerts_label": "concertos"
+      "concerts_value": "Live",
+      "concerts_label": "música nas noites de jogo"
     }
   }
 }

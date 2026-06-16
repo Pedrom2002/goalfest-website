@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-primary: #0f1614;
-  --color-bg-surface: #1a2421;
-  --color-bg-card: #1a2f25;
-  --color-bg-3d: #0d1a0d;
+  --color-bg-primary: #16201d;
+  --color-bg-surface: #232f2a;
+  --color-bg-card: #243a2d;
+  --color-bg-3d: #142414;
   --color-gold: #FFD700;
   --color-red-pt: #E63951;
   --color-green-pt: #22c55e;

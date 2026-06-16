@@ -92,7 +92,14 @@ export default function Hero() {
           <h1 className="sr-only">Goalfest Lisboa - Fanzone Oficial do Mundial 2026 no Parque das NaÃ§Ãµes</h1>
           <p className="tracking-[0.2em] text-sm sm:text-base md:text-lg uppercase relative z-20 -mt-28 sm:-mt-36 md:-mt-44" style={{ fontFamily: 'var(--font-bebas)', color: 'rgba(255,255,255,0.75)', textShadow: '0 0 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.6)' }}>{t('dates')}</p>
           <p className="tracking-[0.15em] text-base sm:text-lg md:text-xl uppercase relative z-20 mt-1" style={{ fontFamily: 'var(--font-bebas)', color: 'rgba(255,255,255,0.9)', textShadow: '0 0 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.6)' }}>{t('subtitle')}</p>
-          <div className="flex flex-col items-center gap-0.5 mt-3 relative z-20">
+        </div>
+
+        <div
+          className="flex flex-col items-center gap-3 mt-4 hero-fade-up"
+          style={{ animationDelay: '0.85s' }}
+        >
+          <p className="text-white text-sm sm:text-base font-semibold uppercase tracking-[0.25em]" style={{ textShadow: '0 0 12px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,1)' }}>Vale do Silêncio, Lisboa</p>
+          <div className="flex flex-col items-center gap-0.5 mt-1 relative z-20">
             <span className="text-white text-[9px] uppercase tracking-widest leading-none" style={{ textShadow: '0 0 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.6)' }}>powered by</span>
             <Image
               src="/quicnation-logo.png"
@@ -103,13 +110,6 @@ export default function Hero() {
               style={{ filter: 'drop-shadow(0 0 6px rgba(0,0,0,0.9)) drop-shadow(0 0 14px rgba(0,0,0,0.7))' }}
             />
           </div>
-        </div>
-
-        <div
-          className="flex flex-col items-center gap-3 mt-4 hero-fade-up"
-          style={{ animationDelay: '0.85s' }}
-        >
-          <p className="text-white text-sm sm:text-base font-semibold uppercase tracking-[0.25em]" style={{ textShadow: '0 0 12px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,1)' }}>Vale do Silêncio, Lisboa</p>
         </div>
 
       </div>

@@ -26,7 +26,7 @@
     "title": "Match Schedule",
     "subtitle": "Schedule",
     "heading": "Broadcast Matches",
-    "count": "+50 matches live · FIFA World Cup 2026",
+    "count": "26 matches live · FIFA World Cup 2026",
     "tba": "TBA",
     "back": "Back to home",
     "filter_all": "All",
@@ -43,7 +43,7 @@
     "title": "Concerts",
     "subtitle": "Line-up",
     "heading": "Concerts",
-    "count": "+10 live concerts · Goalfest 2026",
+    "count": "Live music on match nights · Goalfest 2026",
     "back": "Back to home",
     "stage_default": "Main Stage",
     "empty_title": "Line-up coming soon",
@@ -138,9 +138,9 @@
     "view_concerts": "View concerts",
     "features": {
       "matches_title": "World Cup Matches",
-      "matches_body": "+50 FIFA World Cup 2026 matches broadcast live on a giant high-definition screen.",
+      "matches_body": "FIFA World Cup 2026 matches broadcast live on a giant high-definition screen.",
       "concerts_title": "Concerts",
-      "concerts_body": "Live performances by major Portuguese and international music artists on match days.",
+      "concerts_body": "DJs and artists bringing match nights to life at Vale do Silêncio.",
       "gaming_title": "Gaming Zone",
       "gaming_body": "Consoles available for everyone.",
       "kids_title": "Kids Zone",
@@ -151,10 +151,10 @@
       "fun_body": "Fun for the whole family."
     },
     "stats": {
-      "matches_value": "+50",
+      "matches_value": "26",
       "matches_label": "matches broadcast",
-      "concerts_value": "+10",
-      "concerts_label": "concerts"
+      "concerts_value": "Live",
+      "concerts_label": "music on match nights"
     }
   }
 }
