@@ -18,7 +18,9 @@
     "countdown_hours": "Hours",
     "countdown_minutes": "Min",
     "countdown_seconds": "Sec",
-    "countdown_live": "Event is live!"
+    "countdown_live": "Event is live!",
+    "ticker_tag": "Info",
+    "ticker": "Venue opens 2h before the first match of the day · Free entry · Matches on giant screen"
   },
   "jogos": {
     "title": "Match Schedule",

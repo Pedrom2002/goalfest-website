@@ -18,7 +18,9 @@
     "countdown_hours": "Horas",
     "countdown_minutes": "Min",
     "countdown_seconds": "Seg",
-    "countdown_live": "Evento em curso!"
+    "countdown_live": "Evento em curso!",
+    "ticker_tag": "Informação",
+    "ticker": "Recinto abre 2h antes do primeiro jogo do dia · Entrada gratuita · Jogos em ecrã gigante"
   },
   "jogos": {
     "title": "Calendário de Jogos",

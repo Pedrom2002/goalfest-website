@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import CountdownTimer from '@/components/ui/CountdownTimer'
+import InfoTicker from '@/components/ui/InfoTicker'
 import { useEffect, useRef } from 'react'
 
 const EQ_BARS = [
@@ -147,9 +148,11 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hero-scroll-fade">
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hero-scroll-fade">
         <div className="w-px h-12 bg-gradient-to-b from-[#43B02A] to-transparent hero-scroll-line" />
       </div>
+
+      <InfoTicker />
     </section>
   )
 }
