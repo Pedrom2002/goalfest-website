@@ -2,39 +2,8 @@
 
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import CountdownTimer from '@/components/ui/CountdownTimer'
 import InfoTicker from '@/components/ui/InfoTicker'
 import { useEffect, useRef } from 'react'
-
-const EQ_BARS = [
-  { delay: '0s',     dur: '0.6s' },
-  { delay: '0.15s',  dur: '0.5s' },
-  { delay: '0.05s',  dur: '0.7s' },
-  { delay: '0.2s',   dur: '0.55s' },
-  { delay: '0.1s',   dur: '0.65s' },
-  { delay: '0.25s',  dur: '0.5s' },
-  { delay: '0.08s',  dur: '0.6s' },
-]
-
-function EqualizerBars() {
-  return (
-    <div className="flex items-end gap-1 h-8" aria-hidden>
-      {EQ_BARS.map((b, i) => (
-        <div
-          key={i}
-          className="w-1 rounded-full bg-[#43B02A]"
-          style={{
-            opacity: 0.25,
-            height: '100%',
-            willChange: 'transform',
-            animation: `eqBar ${b.dur} ${b.delay} ease-in-out infinite`,
-            transformOrigin: 'bottom',
-          }}
-        />
-      ))}
-    </div>
-  )
-}
 
 export default function Hero() {
   const t = useTranslations('hero')
@@ -140,9 +109,7 @@ export default function Hero() {
           className="flex flex-col items-center gap-3 mt-4 hero-fade-up"
           style={{ animationDelay: '0.85s' }}
         >
-          <p className="text-white text-sm sm:text-base font-semibold uppercase tracking-[0.25em]" style={{ textShadow: '0 0 12px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,1)' }}>Countdown para o Mundial 2026</p>
-          <CountdownTimer />
-          <EqualizerBars />
+          <p className="text-white text-sm sm:text-base font-semibold uppercase tracking-[0.25em]" style={{ textShadow: '0 0 12px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,1)' }}>Vale do Silêncio, Lisboa</p>
         </div>
 
       </div>
