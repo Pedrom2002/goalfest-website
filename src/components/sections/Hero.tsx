@@ -94,7 +94,7 @@ export default function Hero() {
         </div>
 
         <div
-          className="flex flex-col items-center gap-3 mt-4 hero-fade-up"
+          className="flex flex-col items-center gap-3 mt-1 hero-fade-up"
           style={{ animationDelay: '0.85s' }}
         >
           <p className="text-white text-sm sm:text-base font-semibold uppercase tracking-[0.25em]" style={{ textShadow: '0 0 12px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,1)' }}>Vale do Silêncio, Lisboa</p>
