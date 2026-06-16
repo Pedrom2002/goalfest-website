@@ -305,13 +305,13 @@ export default function Venue() {
             <p className="text-[#43B02A] text-xs uppercase tracking-[0.3em] font-medium">{t('map')}</p>
             <span className="h-px w-12 bg-[#43B02A]/40" />
           </div>
-          <div className="w-full rounded-2xl overflow-hidden border border-white/8 bg-bg-3d/50 backdrop-blur-sm shadow-[0_0_60px_rgba(0,200,81,0.05)] p-2 sm:p-4">
+          <div className="w-full max-w-2xl mx-auto rounded-2xl overflow-hidden border border-white/8 bg-bg-3d/50 backdrop-blur-sm shadow-[0_0_60px_rgba(0,200,81,0.05)] p-2 sm:p-4">
             <Image
               src="/versao11transparente_legenda.png"
               alt={t('map_alt')}
               width={8001}
               height={4500}
-              sizes="(max-width: 768px) 100vw, 900px"
+              sizes="(max-width: 768px) 100vw, 700px"
               className="w-full h-auto rounded-lg"
             />
           </div>
