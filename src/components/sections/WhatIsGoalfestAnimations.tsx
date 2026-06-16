@@ -22,9 +22,9 @@ export function AnimatedHeader({ children }: { children: React.ReactNode }) {
 }
 
 const CARD_COLORS = [
-  { border: '#0033A0', shadow: '0,51,160',  bgBase: '#0d1520', bgAccent: 'rgba(0,51,160,0.12)' },
-  { border: '#43B02A', shadow: '67,176,42', bgBase: '#0d1a10', bgAccent: 'rgba(67,176,42,0.12)' },
-  { border: '#C8102E', shadow: '200,16,46', bgBase: '#1a0d10', bgAccent: 'rgba(200,16,46,0.12)' },
+  { border: '#0033A0', shadow: '0,51,160',  bgBase: '#1c2940', bgAccent: 'rgba(0,51,160,0.22)' },
+  { border: '#43B02A', shadow: '67,176,42', bgBase: '#1d3322', bgAccent: 'rgba(67,176,42,0.22)' },
+  { border: '#C8102E', shadow: '200,16,46', bgBase: '#33202a', bgAccent: 'rgba(200,16,46,0.22)' },
 ]
 
 export function AnimatedFeatureCard({

@@ -49,8 +49,8 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
       </h2>
 
       {/* Headliners */}
-      <div className="relative mb-10 rounded-2xl border border-white/8 bg-bg-surface/40 p-4 sm:p-5">
-        <div className="flex items-center gap-2 mb-4">
+      <div className="relative mb-10">
+        <div className="flex items-center gap-2 mb-4 justify-center">
           <Star size={12} className="text-[#43B02A]" />
           <p className="text-text-muted text-xs uppercase tracking-[0.25em] font-medium">
             {t('headliners_label')}
@@ -60,7 +60,7 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2.5 mb-10 overflow-x-auto pt-2 pb-2 px-1 justify-start sm:justify-center">
+      <div className="flex gap-2.5 mb-10 overflow-x-auto pt-2 pb-2 px-4 -mx-4 justify-start sm:justify-center sm:px-1 sm:mx-0">
         {days.map((day, i) => (
           <button
             key={day.date}
