@@ -42,7 +42,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="hero" className="relative h-[100svh] min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-8 bg-black">
+    <section id="hero" className="relative h-[100svh] flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-8 bg-black">
       {/* Video background — mundial.mp4 (primeiros 30s em loop) */}
       <div
         className="absolute inset-0 z-[1]"
