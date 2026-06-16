@@ -98,7 +98,9 @@
     "access_bus_body": "Carris lines 731, 744, 750, 759 and 781 with a stop next to the park.",
     "access_parking_title": "Parking",
     "access_parking_body": "Street parking on surrounding roads: Av. de Berlim and Rua Cidade de Nova Lisboa.",
-    "access_parking_link": "Find nearby car parks"
+    "access_parking_link": "Find nearby car parks",
+    "map": "Venue Map",
+    "map_alt": "Goalfest venue map with labeled zones: stage, giant screen, food trucks, drinks, restrooms, accessible zones and entrances."
   },
   "sponsors": {
     "title": "Sponsors",

@@ -60,7 +60,7 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2.5 mb-10 overflow-x-auto pb-2 justify-start sm:justify-center px-1">
+      <div className="flex gap-2.5 mb-10 overflow-x-auto pt-2 pb-2 px-1 justify-start sm:justify-center">
         {days.map((day, i) => (
           <button
             key={day.date}
@@ -72,7 +72,7 @@ export default function Programa({ days }: { days: ProgramaDay[] }) {
             }`}
           >
             {i === activeIdx && (
-              <span className="absolute -top-1.5 -right-1.5 w-2.5 h-2.5 rounded-full bg-[#43B02A] animate-pulse" />
+              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#43B02A] animate-pulse" />
             )}
             {day.displayDate}
             <span className="ml-1.5 text-xs font-normal opacity-70">

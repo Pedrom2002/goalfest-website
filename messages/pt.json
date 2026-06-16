@@ -98,7 +98,9 @@
     "access_bus_body": "Carris linhas 731, 744, 750, 759 e 781 com paragem junto ao parque.",
     "access_parking_title": "Estacionamento",
     "access_parking_body": "Estacionamento nas ruas envolventes: Av. de Berlim e Rua Cidade de Nova Lisboa.",
-    "access_parking_link": "Ver parques de estacionamento perto"
+    "access_parking_link": "Ver parques de estacionamento perto",
+    "map": "Mapa do Recinto",
+    "map_alt": "Mapa do recinto Goalfest com legenda das zonas: palco, ecrã gigante, food trucks, bebidas, WCs, zonas de mobilidade reduzida e entradas."
   },
   "sponsors": {
     "title": "Patrocinadores",

@@ -299,6 +299,31 @@ export default function Venue() {
           </div>
           <p className="text-text-muted/60 text-xs text-center mt-4 tracking-wide">{t('drag')}</p>
         </motion.div>
+
+        {/* Mapa do recinto */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mt-16"
+        >
+          <div className="flex items-center gap-3 mb-6 justify-center">
+            <span className="h-px w-12 bg-[#43B02A]/40" />
+            <p className="text-[#43B02A] text-xs uppercase tracking-[0.3em] font-medium">{t('map')}</p>
+            <span className="h-px w-12 bg-[#43B02A]/40" />
+          </div>
+          <div className="w-full rounded-2xl overflow-hidden border border-white/8 bg-bg-3d/50 backdrop-blur-sm shadow-[0_0_60px_rgba(0,200,81,0.05)] p-2 sm:p-4">
+            <Image
+              src="/versao11_legenda.png"
+              alt={t('map_alt')}
+              width={8001}
+              height={4500}
+              sizes="(max-width: 768px) 100vw, 900px"
+              className="w-full h-auto rounded-lg"
+            />
+          </div>
+        </motion.div>
       </div>
       </div>
     </section>
