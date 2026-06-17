@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import React from 'react'
-import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { render, screen, fireEvent } from '@testing-library/react'
 
 const mockUseLocale = vi.fn().mockReturnValue('pt')
 
@@ -63,5 +63,39 @@ describe('Footer', () => {
     render(<Footer />)
     expect(screen.getByText('Privacy')).toBeInTheDocument()
     expect(screen.getByText('Terms')).toBeInTheDocument()
+  })
+
+  describe('Instagram deep-link', () => {
+    const realLocation = window.location
+
+    afterEach(() => {
+      Object.defineProperty(window, 'location', { configurable: true, writable: true, value: realLocation })
+      vi.useRealTimers()
+    })
+
+    function stubLocation() {
+      const loc = { href: '' }
+      Object.defineProperty(window, 'location', { configurable: true, writable: true, value: loc })
+      return loc
+    }
+
+    it('falls back to the web URL after the timeout fires', () => {
+      vi.useFakeTimers()
+      const loc = stubLocation()
+      render(<Footer />)
+      fireEvent.click(screen.getByLabelText('Instagram'))
+      vi.advanceTimersByTime(600)
+      expect(loc.href).toBe('https://www.instagram.com/goalfest.26')
+    })
+
+    it('cancels the fallback when the window blurs (app opened)', () => {
+      vi.useFakeTimers()
+      const loc = stubLocation()
+      render(<Footer />)
+      fireEvent.click(screen.getByLabelText('Instagram'))
+      window.dispatchEvent(new Event('blur'))
+      vi.advanceTimersByTime(600)
+      expect(loc.href).toBe('')
+    })
   })
 })
