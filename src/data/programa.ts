@@ -38,6 +38,7 @@ export const PROGRAMA: ProgramaDay[] = [
     dayLabel: { pt: 'Quarta', en: 'Wednesday' },
     events: [
       { time: '16H', title: 'Abertura do Recinto', type: 'abertura' },
+      { time: '17H', title: 'DJ Rúben da Cruz', type: 'dj' },
       { time: '18H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Portugal x R.D. Congo' },
       { time: '20H', title: 'DJ Rúben da Cruz', type: 'dj' },
       { time: '21H', title: 'Transmissão ao Vivo', type: 'jogo', detail: 'Inglaterra x Croácia' },
