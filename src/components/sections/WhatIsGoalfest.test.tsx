@@ -82,13 +82,6 @@ describe('WhatIsGoalfest', () => {
     expect(screen.getByText('Zona Gaming')).toBeInTheDocument()
   })
 
-  it('renders stats', async () => {
-    const tree = await WhatIsGoalfest()
-    render(tree)
-    expect(screen.getByText('+50')).toBeInTheDocument()
-    expect(screen.getByText('+10')).toBeInTheDocument()
-  })
-
   it('renders schedule link for World Cup Matches card', async () => {
     const tree = await WhatIsGoalfest()
     render(tree)

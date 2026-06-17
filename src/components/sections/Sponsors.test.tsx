@@ -47,8 +47,8 @@ describe('Sponsors', () => {
 
   it('renders section headings', () => {
     render(<Sponsors data={mockData} />)
-    expect(screen.getByText('Patrocinadores')).toBeInTheDocument()
-    expect(screen.getByText('Parceiros')).toBeInTheDocument()
+    expect(screen.getByText('Sponsors')).toBeInTheDocument()
+    expect(screen.getByText('Partners')).toBeInTheDocument()
   })
 
   it('renders principal sponsor logo', () => {
@@ -61,9 +61,9 @@ describe('Sponsors', () => {
     expect(screen.getByAltText('Lisboa')).toBeInTheDocument()
   })
 
-  it('renders accommodation partners heading and logo', () => {
+  it('renders hospitality partners heading and logo', () => {
     render(<Sponsors data={mockData} />)
-    expect(screen.getByText('Accommodation Partners')).toBeInTheDocument()
+    expect(screen.getByText('Hospitality Partners')).toBeInTheDocument()
     expect(screen.getByAltText('Hotel Roma')).toBeInTheDocument()
   })
 

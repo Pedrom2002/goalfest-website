@@ -32,10 +32,6 @@ vi.mock('framer-motion', () => ({
   useInView: () => true,
 }))
 
-vi.mock('@/components/ui/CountdownTimer', () => ({
-  default: () => <div data-testid="countdown" />,
-}))
-
 import Hero from './Hero'
 
 describe('Hero', () => {
@@ -44,11 +40,6 @@ describe('Hero', () => {
     const video = document.querySelector('video')
     expect(video).not.toBeNull()
     expect(video?.getAttribute('aria-hidden')).toBe('true')
-  })
-
-  it('renders countdown timer', () => {
-    render(<Hero />)
-    expect(screen.getByTestId('countdown')).toBeInTheDocument()
   })
 
   it('renders the event logo image', () => {

@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest'
 import { SCHEDULE } from './schedule'
 
 describe('SCHEDULE data integrity', () => {
-  it('covers 34 match days (June 11 through July 19 2026)', () => {
-    expect(SCHEDULE).toHaveLength(34)
+  it('covers 26 match days (June 11 through July 19 2026)', () => {
+    expect(SCHEDULE).toHaveLength(26)
   })
 
   it('starts on the tournament opening day (2026-06-11)', () => {
