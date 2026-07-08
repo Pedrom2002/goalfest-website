@@ -8,6 +8,18 @@
         "qEn": "Is entry free?",
         "a": "A entrada no recinto é totalmente gratuita, qualquer pessoa pode assistir aos jogos no ecrã gigante.",
         "aEn": "Entry to the venue is completely free, everyone can watch the matches on the giant screen."
+      },
+      {
+        "q": "Como entrar no ActivoBank?",
+        "qEn": "How do I access the ActivoBank area?",
+        "a": "A entrada é gratuita e os lugares sentados são ocupados por ordem de chegada. Recomendamos que chegues cedo para garantir o teu lugar.",
+        "aEn": "Entry is free and seating is on a first-come, first-served basis. We recommend arriving early to secure your spot."
+      },
+      {
+        "q": "Sou cliente ActivoBank, que vantagens tenho?",
+        "qEn": "I'm an ActivoBank customer — what benefits do I get?",
+        "a": "Sim, os clientes ActivoBank têm uma área reservada dentro do lounge, disponível até 10 minutos antes do início do jogo.",
+        "aEn": "Yes, ActivoBank customers have a reserved area inside the lounge, available until 10 minutes before kick-off."
       }
     ]
   },
